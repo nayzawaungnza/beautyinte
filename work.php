@@ -92,7 +92,7 @@
 							</div>
 							<h3>Makeup</h3>
 						</div>
-					</div>
+					</div>`
 				</a>
 			</div>
 			<div class="col-md-4 ftco-animate">

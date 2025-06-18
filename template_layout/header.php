@@ -63,7 +63,7 @@
                 <span class="oi oi-menu"></span> Menu
             </button>
 
-            <div class="collapse navbar-collapse" id="ftco-nav">
+            <div class="collapse navbar-collapse" bg-dark id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>

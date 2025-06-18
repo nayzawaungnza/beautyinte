@@ -6,7 +6,7 @@
         <div class="img img-about align-self-stretch" style="background-image: url(images/bg_3.jpg); width: 100%;"></div>
       </div>
       <div class="col-md-6 pl-md-5 ftco-animate">
-        <h2 class="mb-4">Welcome to Pretty A Beauty Salon Website</h2>
+        <h2 class="mb-4">Welcome to S&H Beauty Salon Website</h2>
         <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
         <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
       </div>
@@ -14,12 +14,13 @@
   </div>
 </section>
 
-<section class="ftco-section bg-light">
+<section class="ftco-section bg-primary">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 heading-section ftco-animate text-center">
         <h2 class="mb-4">Our Beauty Experts</h2>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+        <p>Our beauty experts are skilled professionals dedicated to providing personalized beauty treatments that enhance your
+          natural look and boost your confidence.</p>
       </div>
     </div>
     <div class="row">

@@ -8,7 +8,8 @@
           <div class="icon d-flex mb-3"><span class="flaticon-facial-treatment"></span></div>
           <div class="media-body">
             <h3 class="heading">Skin &amp; Beauty Care</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+            <p>A beauty salon is a place where professional beauty treatments like hair styling, skincare, makeup, and nail care are
+              provided to enhance a person's appearance.</p>
           </div>
         </div>
       </div>
@@ -17,7 +18,8 @@
           <div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
           <div class="media-body">
             <h3 class="heading">Makeup Pro</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+            <p>Makeup Pro in a beauty salon provides professional makeup services for events, weddings, and photoshoots, enhancing
+              clients’ facial features with expert techniques and high-quality products.</p>
           </div>
         </div>
       </div>
@@ -26,7 +28,8 @@
           <div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
           <div class="media-body">
             <h3 class="heading">Hair Style</h3>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+            <p>Hair styling in a beauty salon involves cutting, coloring, and designing hair to match the client’s personality and
+              preferences, using professional tools and techniques to achieve a stylish and polished look.</p>
           </div>
         </div>
       </div>
@@ -35,7 +38,7 @@
 </section>
 
 
-<section class="ftco-section ftco-discount img" style="background-image: url(images/bg_2.jpg);">
+<!-- <section class="ftco-section ftco-discount img" style="background-image: url(images/bg_2.jpg);">
   <div class="overlay"></div>
   <div class="container">
     <div class="row justify-content-end">
@@ -47,7 +50,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
   <div class="overlay"></div>
