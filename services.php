@@ -37,21 +37,6 @@
   </div>
 </section>
 
-
-<!-- <section class="ftco-section ftco-discount img" style="background-image: url(images/bg_2.jpg);">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row justify-content-end">
-      <div class="col-md-5 discount ftco-animate">
-        <h3>Save up to 25% Off</h3>
-        <h2 class="mb-4">Student Discount</h2>
-        <p class="mb-4">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-        <p><a href="#" class="btn btn-white btn-outline-white px-4 py-3">Book Now</a></p>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
   <div class="overlay"></div>
   <div class="container">

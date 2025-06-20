@@ -25,12 +25,12 @@
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/beauty.jpg');"
+    <div class="hero-wrap js-fullheight" style="background-image: url('images/salon1 (2).jpg');"
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -48,30 +48,31 @@
                             href="#">Colorlib.com</a></p>
 
                     <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
-                            href="https://vimeo.com/45830194" class="btn btn-white btn-outline-white px-4 py-3">View Our
+                            href="./services.php" class="btn btn-white btn-outline-white px-4 py-3">View Our
                             Services</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">S&H Beauty Salon</a>
+            <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H Beauty Salon</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
-            <div class="collapse navbar-collapse" bg-dark id="ftco-nav">
+            <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="work.php" class="nav-link">Work</a></li>
-                    <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+                    <li class="nav-item "><a href="home.php" class="nav-link text-dark">Home</a></li>
+                    <li class="nav-item"><a href="about.php" class="nav-link  text-dark">About</a></li>
+                    <li class="nav-item"><a href="services.php" class="nav-link  text-dark">Services</a></li>
+                    <li class="nav-item"><a href="work.php" class="nav-link  text-dark">Work</a></li>
+                    <li class="nav-item"><a href="contact.php" class="nav-link  text-dark">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <!-- END nav -->
