@@ -7582,19 +7582,27 @@ sub {
 
 .nav-header {
   height: 5rem;
-  width: 15.1875rem;
+  width: 300px;
   display: inline-block;
   text-align: left;
   position: absolute;
   left: 0;
   top: 0;
-  background: #111B27;
+  background: #fff;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
   transition: all .2s ease; }
   .nav-header .logo-abbr {
     display: none; }
   .nav-header .logo-compact {
     display: none; }
+
+  .brand-title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    line-height: 30px;
+  }  
   @media only screen and (min-width: 1200px) and (max-width: 1350px) {
     .nav-header {
       width: 14.375rem; } }

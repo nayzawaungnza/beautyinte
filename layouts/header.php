@@ -23,8 +23,8 @@
 
     <link href="../dashCss/style.css" rel="stylesheet">
     <!-- <link href="./css/style.css" rel="stylesheet"> -->
-    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
 
 </head>
 
@@ -46,12 +46,11 @@
             <!-- Nav header start -->
        
         <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"></span>
+            <div class="brand-logo mb-3">
+                <a href="./dashboard.php">
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="../images/logo.jpg" alt="logo" style="width: 50px; ">
+                        <h3>Salon</h3>
                     </span>
                 </a>
             </div>
@@ -241,83 +240,15 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    
-                    
                    <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-list menu-icon"></i><span class="nav-text">Category</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?= $admin_base_url . 'category_list.php' ?>">List</a></li>
-                            <li><a href="<?= $admin_base_url . 'category_create.php' ?>">Create</a></li>
+                       <ul aria-expanded="false">
+                            <li><a href="">List</a></li>
+                            <li><a href="">Create</a></li>
                         </ul>
                     </li>
-
-                   <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-wallet menu-icon"></i><span class="nav-text">Payment</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?= $admin_base_url . 'payment_list.php' ?>">List</a></li>
-                            <li><a href="<?= $admin_base_url . 'payment_create.php' ?>">Create</a></li>
-                        </ul>
-                    </li>
-
-                   <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-graph menu-icon"></i><span class="nav-text">Discount</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?= $admin_base_url . 'discount_list.php' ?>">List</a></li>
-                            <li><a href="<?= $admin_base_url . 'discount_create.php' ?>">Create</a></li>
-                        </ul>
-                    </li>
-
-                   <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">Product</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?= $admin_base_url . 'product_list.php' ?>">List</a></li>
-                            <li><a href="<?= $admin_base_url . 'product_create.php' ?>">Create</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
-                        </ul>
-                    </li>
-                    
-                    
-                    
-                    <li class="nav-label">Forms</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                           
-                        </ul>
-                    </li>
-                    <li class="nav-label">Table</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
-                        </ul>
-                    </li>
-                    
                 </ul>
             </div>
         </div>
