@@ -30,7 +30,7 @@
 
 <body>
 
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/salon1 (2).jpg');"
+    <div class="hero-wrap js-fullheight" style="background-image: url('images/salon1.jpg');"
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">

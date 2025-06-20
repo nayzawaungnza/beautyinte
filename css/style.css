@@ -455,7 +455,9 @@ pre {
     font-size: inherit;
     color: inherit;
     word-break: normal; }
-
+#ourbeauty-experts{
+  background-color: var(--bg-color);
+}
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll; }
