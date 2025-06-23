@@ -1,7 +1,6 @@
 <?php
-require '../require/check_auth.php';
-require '../layouts/header.php';
 
+require '../layouts/header.php';
 
 ?>
 
@@ -20,7 +19,9 @@ require '../layouts/header.php';
             <!-- row -->
 
             <div class="container-fluid">
-
+                <form action="">
+                    <input type="text">
+                </form>
             </div>
             <!-- #/ container -->
         </div>

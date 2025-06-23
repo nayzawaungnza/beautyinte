@@ -1,5 +1,5 @@
 <?php
-session_start();
+require '../require/check_auth.php';
 require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
@@ -29,16 +29,17 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
             if ($data['password'] === $byscript_password) {
                 $_SESSION['name'] = $data['name'];
                 $_SESSION['email'] = $data['email'];
-               
+                $_SESSION['role'] = $data['role'];
+               header("Location: $admin_base_url".'dashboard.php');
             } else {
                 $error = true;
                 $password_error = "Password is incorrect.";
             }
         }
-        //  else {
-        //     $error = true;
-        //     $email_error = "This email is not register.";
-        // }
+         else {
+            $error = true;
+            $email_error = "This email is not register.";
+        }
     }
 }
 ?>
@@ -68,7 +69,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                         <?php } ?>
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="index.html">
+                                <a class="text-center" href="home.php">
                                     <h1>Login Form</h1>
                                 </a>
 
@@ -86,9 +87,9 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                                         <?php } ?>
                                     </div>
                                     <input type="hidden" name="form_sub" value="1" />
-                                    <button class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button class="btn login-form__btn submit w-100" type="submit">Sign In</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="" class="text-primary">Sign Up</a> now</p>
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="<?= $admin_base_url ?>register.php" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
                     </div>
@@ -105,8 +106,8 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     ***********************************-->
     <script src="../dashJs/common.min.js"></script>
     <script src="../dashJs/custom.min.js"></script>
-   <script src="../dashJs/settings.js"></script>
-   <script src="../dashJs/gleek.js"></script>
+    <script src="../dashJs/settings.js"></script>
+    <script src="../dashJs/gleek.js"></script>
     <script src="../dashJs/styleSwitcher.js"></script>
 </body>
 

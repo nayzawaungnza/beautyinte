@@ -104,7 +104,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 '$gender')";
         // $result  = $mysqli->query($sql);
         // if ($result) {
-        //     $url = $base_url . 'login.php?success=Register Success';
+        //     $url = $admin_base_url . 'login.php?success=Register Success';
         //     header("Location: $url");
         //     exit;
         // }
@@ -133,7 +133,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
 
-                                <a class="text-center" href="index.html">
+                                <a class="text-center" href="home.php">
                                     <h1>Register Form</h1>
                                 </a>
 
@@ -186,10 +186,9 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                                         <?php } ?>
                                     </div>
                                     <input type="hidden" name="form_sub" value="1" />
-                                    <button class="btn login-form__btn submit w-100">Sign in</button>
+                                    <button class="btn login-form__btn submit w-100">Sign In</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Have account <a href="<?= $admin_base_url ?>login.php" class="text-primary">Sign Up </a> now</p>
-                                    </p>
+                               
                             </div>
                         </div>
                     </div>
@@ -207,7 +206,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     ***********************************-->
     <script src="../dashJs/common.min.js"></script>
     <script src="../dashJs/custom.min.js"></script>
-   <script src="../dashJs/settings.js"></script>
+    <script src="../dashJs/settings.js"></script>
    <script src="../dashJs/gleek.js"></script>
     <script src="../dashJs/styleSwitcher.js"></script>
 </body>
