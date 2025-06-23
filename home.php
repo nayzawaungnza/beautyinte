@@ -50,7 +50,7 @@
 				<div class="staff">
 					<div class="img mb-4" style="background-image: url(images/beauty.jpg);"></div>
 					<div class="info text-center">
-						<h3><a href="teacher-single.html"></a>m</h3>
+						<h3><a href="teacher-single.html"></a>Manager</h3>
 						<span class="position mb-4 text-dark">Receptionist</span>
 						<div class="text">
 							<p>Receptionist is the first impression of an organization, responsible for creating a welcoming environment and ensuring smooth communication between visitors and staff.</p>
@@ -62,7 +62,7 @@
 				<div class="staff">
 					<div class="img mb-4" style="background-image: url(images/person_2.jpg);"></div>
 					<div class="info text-center">
-						<h3><a href="teacher-single.html">Marie Mush</a></h3>
+						<h3><a href="teacher-single.html">Yamone</a></h3>
 						<span class="position mb-4 text-dark">Hair Stylist</span>
 						<div class="text">
 							<p>Hair Stylist is a trained professional who specializes in cutting, coloring, styling, and treating hair to enhance a client’s appearance and confidence.</p>

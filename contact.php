@@ -9,13 +9,13 @@
             <h2 class="h4">Contact Information</h2>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+            <p><span>Address:</span>Myanmar Plaza,192 Kabar Aye Pagoda Road</p>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+            <p><span>Phone:</span> <a href="tel://1234567920">+95 9671680901, 09668852876</a></p>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+            <p><span>Email:</span> <a href="mailto:info@yoursite.com">saungwaikhin@gmail.com, htwehtweyee@gmail.com</a></p>
           </div>
           <div class="col-md-12 mb-3">
             <p><span>Website:</span> <a href="#">yoursite.com</a></p>
