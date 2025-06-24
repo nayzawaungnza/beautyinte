@@ -30,45 +30,46 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 $_SESSION['name'] = $data['name'];
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['role'] = $data['role'];
-               header("Location: $admin_base_url".'dashboard.php');
+                header("Location: $admin_base_url" . 'dashboard.php');
             } else {
                 $error = true;
                 $password_error = "Password is incorrect.";
             }
         }
-         else {
-            $error = true;
-            $email_error = "This email is not register.";
-        }
+        //  else {
+        //     $error = true;
+        //     $email_error = "This email is not register.";
+        // }
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Log In</title>
-  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Login</title>
     <!-- Favicon icon -->
-    <!-- <<link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png"> -->
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png"> -->
     <link href="../dashCss/style.css" rel="stylesheet">
 </head>
 
-<body class="h-100" style=" background-color: #f5e4d7;">
+<body class="h-100">
     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
-                    <div class="form-input-content"> 
+                    <div class="form-input-content">
                         <?php if ($success !== '') { ?>
                             <div class="alert alert-success">
                                 <?= $success ?>
                             </div>
                         <?php } ?>
-                        <div class="card login-form mb-0 mt-5" style="background-color: #003366;">
+                        <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="">
+                                <a class="text-center" href="index.html">
                                     <h1>Login Form</h1>
                                 </a>
 
@@ -86,16 +87,16 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                                         <?php } ?>
                                     </div>
                                     <input type="hidden" name="form_sub" value="1" />
-                                   <button class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button class="btn login-form__btn submit w-100">Sign In</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Don't have account? <a href="<?= $admin_base_url ?>register.php" class="text-primary">Sign Up</a> now</p>
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
 
 
