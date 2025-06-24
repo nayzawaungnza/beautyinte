@@ -74,6 +74,7 @@ function create_table($mysqli)
                 name VARCHAR(100) NOT NULL,
                 description TEXT NULL,
                 price INT NOT NULL,
+                stock_quantity INT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )";

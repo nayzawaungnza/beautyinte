@@ -8239,7 +8239,6 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .metismenu .active > .has-arrow:after, .metismenu .has-arrow[aria-expanded=true]:after {
   transform: rotate(225deg) translateY(-50%);
   -webkit-transform: rotate(225deg) translateY(-50%); }
-
 @media (max-width: 767px) {
   .nav-header {
     width: 3.75rem; }
