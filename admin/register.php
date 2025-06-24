@@ -124,13 +124,13 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
    <link href="../dashCss/style.css" rel="stylesheet">
 </head>
 
-<body class="h-100">
+<body class="h-100" style=" background-color: #f5e4d7;">
     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
                     <div class="form-input-content">
-                        <div class="card login-form mb-0">
+                        <div class="card login-form mb-0"  style="background-color: #003366;">
                             <div class="card-body pt-5">
 
                                 <a class="text-center" href="home.php">
