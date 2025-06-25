@@ -59,12 +59,9 @@ require '../layouts/header.php';
                                     <th class="">No.</th>
                                     <th class="">Name</th>
 
-                                    <th class="">Discount</th>
-                                    <th class="">Stock Count</th>
-                                    <th class="">Sale Price</th>
-                                    <th class="">Purchase Price</th>
-                                    <th class="">Expire Date</th>
-                                    <th class="">Created At</th>
+                                    <th class="">Description</th>
+                                    <th class="">Price</th>
+                                    <th class="">Quantity</th>
                                     <th class="">Action</th>
                                 </tr>
                             </thead>

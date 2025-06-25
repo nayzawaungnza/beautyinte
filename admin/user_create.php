@@ -80,6 +80,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `gender`)
          VALUES ('$name','$email','$byScriptPassword','$role','$gender')";
          $mysqli->query($sql);
+         echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php' </script>";
     }
 }
 
@@ -139,12 +140,23 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                             <label class="form-label">Gender</label>
                             <br  />
-                            <label class="form-check-label me-2"> 
+                            <!-- <label class="form-check-label me-2"> 
                                 Male <input type="radio" name="gender" <?= $gender === 'male' ? 'checked' : '' ?> value="male" class="form-check-input"></label>
                             <label class="form-check-label">
                                 Female <input type="radio" name="gender" <?= $gender === 'female' ? 'checked' : '' ?> value="female" class="form-check-input"></label>
-                            
-
+                             -->
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
+  <label class="form-check-label" for="flexRadioDefault1">
+   Male
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
+  <label class="form-check-label" for="flexRadioDefault2">
+    Female
+  </label>
+</div>
                              <?php
                                 if ($gender_err){
                             ?>   
