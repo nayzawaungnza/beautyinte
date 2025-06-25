@@ -98,9 +98,11 @@ function create_table($mysqli)
     $product_qty_sql = "CREATE TABLE IF NOT EXISTS `product_qty`
                   ( 
                    id INT AUTO_INCREMENT PRIMARY KEY,
+                   product_id INT NOT NULL,
                    qty INT NOT NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
                    )";
     if ($mysqli->query($product_qty_sql) === false) return false;
     //Appointment

@@ -1,0 +1,175 @@
+<?php
+require '../layouts/header.php';
+
+$error = false;
+$name_err =
+$email_err =
+$password_err =
+$role_err   = 
+$gender_err = 
+$name = 
+$email = 
+$password = 
+$role = 
+$gender = '';
+if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+    $gender = $_POST['gender'];
+
+    //Name
+    if (empty($name)) {
+        $error = true;
+        $name_err = "Please add name";
+    } else if (strlen($name) < 5) {
+        $error = true;
+        $name_err = "Name must be fill greater than 5.";
+    } else if (strlen($name) >= 10) {
+        $error = true;
+        $name_err = "Name must be fill less than 100.";
+    }
+    //Email
+     $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+    
+    if(strlen($email) === 0){
+        $error = true;
+        $email_err = "Please fill your email";
+
+    }else if(strlen($email) > 20){
+        $error = true;
+        $email_err = "Email must be less than 20.";
+
+    }
+     else if (strlen($email) > 200) {
+        $error = true;
+        $email_err = "Email must be less than 200.";
+    }else if (!preg_match($email_pattern , $email)){
+        $error = true;
+        $email_err = "Email format is wrong.";
+    }
+    //Password
+   if(strlen($password) === 0){
+        $error = true;
+        $password_err = "Please fill Password";
+
+    }else if(strlen($password) < 8){
+        $error = true;
+        $password_err = "Password must be greater than 8.";
+
+    }
+     else if (strlen($password) > 30) {
+        $error = true;
+        $password_err = "Password must be less than 30.";
+    }else{
+        $byScriptPassword = md5($password);
+    }
+    //role
+   if(strlen($role) === 0 || $role === ''){
+        $error = true;
+        $role_err = "Please choose role";
+   }
+   //gender
+   if ($gender === '') {
+        $error = true;
+        $gender_err = "Please choose gender";
+    }
+
+    if (!$error) {
+        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `gender`)
+         VALUES ('$name','$email','$byScriptPassword','$role','$gender')";
+         $mysqli->query($sql);
+    }
+}
+
+
+?>
+
+<!-- Content body start -->
+
+<div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h3>Create User</h3>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control">
+                        <small class="text-danger"><?= $name_err ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control">
+                        <small class="text-danger"><?= $email_err ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control">
+                        <small class="text-danger"><?= $password_err ?></small>
+                    </div>
+                   <div class="form-group">
+                        <label for="role" class="form-label">Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="">Please Choose Role</option>
+                                <option value="admin" <?php echo $role == 'admin' ? 'selected' : ''?>>Admin</option>
+                                <option value="staff" <?= $role == 'staff' ? 'selected' : ''?>>Staff</option>
+                            </select>
+
+                             <?php
+                                if ($role_err){
+                            ?>   
+                             <small class="text-danger"><?php echo $role_err ?></small>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    <div class="form-group">
+                            <label class="form-label">Gender</label>
+                            <br  />
+                            <label class="form-check-label me-2"> 
+                                Male <input type="radio" name="gender" <?= $gender === 'male' ? 'checked' : '' ?> value="male" class="form-check-input"></label>
+                            <label class="form-check-label">
+                                Female <input type="radio" name="gender" <?= $gender === 'female' ? 'checked' : '' ?> value="female" class="form-check-input"></label>
+                            
+
+                             <?php
+                                if ($gender_err){
+                            ?>   
+                            <br  />
+                             <small class="text-danger"><?php echo $gender_err ?></small>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    <div class="my-2">
+                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
+
+<!-- Content body end -->
+
+
+
+<?php
+
+require '../layouts/footer.php';
+
+?>

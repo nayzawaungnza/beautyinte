@@ -1,4 +1,5 @@
 <?php require_once '../require/db.php' ?>
+<?php require_once '../require/common.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -248,7 +249,7 @@
                 <ul class="metismenu">
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class="arrow-right"></i><span class="nav-text">Customer</span>
+                            <i class="arrow-right"></i><span class="nav-text">User</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
                             <li><a href="">List</a></li>

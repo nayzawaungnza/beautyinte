@@ -5,8 +5,8 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = selectData('products', $mysqli, "", "*", "ORDER BY created_at DESC");
-
+$res = "SELECT products.id,products.name, products.description, products.price,product_qty.qty AS quantity FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
+$products = $mysqli->query($res);
 // $sql = "SELECT products.*, categories.name AS category_name, discounts.percent
 //         FROM products
 //         LEFT JOIN categories ON categories.id = products.category_id
@@ -69,19 +69,16 @@ require '../layouts/header.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($res->num_rows > 0) {
-                                    while ($row = $res->fetch_assoc()) { ?>
+                                <?php
+                                if ($products->num_rows > 0) {
+                                    while ($row = $products->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $row['id'] ?></td>
                                             <td><?= $row['name'] ?></td>
-                                            <td><?= isset($row['percent']) ? $row['percent'] . '%' : '-' ?></td>
-
-
-
-                                            <td><?= date("Y-m-d g:i:s A", strtotime($row['updated_at'])) ?></td>
-                                            <td><?= date("Y-m-d g:i:s A", strtotime($row['created_at'])) ?></td>
+                                            <td><?= $row['description'] ?></td>
+                                            <td><?= $row['price'] ?></td>
+                                            <td><?= $row['quantity'] ?></td>
                                             <td>
-
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>

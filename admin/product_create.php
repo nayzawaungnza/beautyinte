@@ -44,7 +44,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $description_err = "Description must be less than 100.";
     }
 
-    //quantity
+    // quantity
     if (empty($quantity)) {
         $error = true;
         $quantity_err = "Please add quantity";
@@ -53,10 +53,16 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $quantity_err  = "Quantity must be number.";
     }
     if (!$error) {
-        $sql = "INSERT INTO `products`(`name`, `description`, `price`, `stock_quantity`)
-         VALUES ('$name','$description','$price','$quantity')";
-        $mysqli->query($sql);
+        $sql = "INSERT INTO `products`(`name`, `description`, `price`)
+        VALUES ('$name','$description','$price')";
+        if($mysqli->query($sql)){
+            $insert_id = $mysqli->insert_id;
+            $qty_sql = "INSERT INTO `product_qty`(`product_id`, `qty`)
+        VALUES ('$insert_id','$quantity')";
+        $mysqli->query($qty_sql);
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/product_list.php' </script>";
     }
+}
 }
 
 
