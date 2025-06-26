@@ -58,7 +58,6 @@ require '../layouts/header.php';
                                 <tr>
                                     <th class="">No.</th>
                                     <th class="">Name</th>
-
                                     <th class="">Description</th>
                                     <th class="">Price</th>
                                     <th class="">Quantity</th>
@@ -68,15 +67,19 @@ require '../layouts/header.php';
                             <tbody>
                                 <?php
                                 if ($products->num_rows > 0) {
+                                    $i =1;
                                     while ($row = $products->fetch_assoc()) { ?>
                                         <tr>
-                                            <td><?= $row['id'] ?></td>
+                                            <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['description'] ?></td>
                                             <td><?= $row['price'] ?></td>
                                             <td><?= $row['quantity'] ?></td>
                                             <td>
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                                <div>
+                                                <a href="./product_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
+                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">Delete</button>
+                                                </div>
                                             </td>
                                         </tr>
                                 <?php }

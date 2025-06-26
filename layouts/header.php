@@ -1,5 +1,6 @@
 <?php require_once '../require/db.php' ?>
 <?php require_once '../require/common.php' ?>
+<?php require_once '../require/common_function.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -278,7 +279,7 @@
                             <i class=""></i><span class="nav-text">Product</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
+                            <li><a href="../admin/product_list.php">List</a></li>
                             <li><a href="">Create</a></li>
                         </ul>
                     </li>
