@@ -5,17 +5,22 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT users.id, users.name, users.email, users.role,users.phone, users.gender FROM `users` ";
-$users = $mysqli->query($res);
+$res = selectData('customers', $mysqli, "", "*", "ORDER BY created_at DESC");
 
+// $sql = "SELECT products.*, categories.name AS category_name, discounts.percent
+//         FROM products
+//         LEFT JOIN categories ON categories.id = products.category_id
+//         LEFT JOIN discounts ON discounts.id = products.discount_id
+//         ";
+// $res = $mysqli->query($sql);
 
 
 
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
 if ($delete_id !== '') {
-    $res = deleteData('users', $mysqli, "id=$delete_id");
+    $res = deleteData('customer', $mysqli, "id=$delete_id");
     if ($res) {
-        $url = $admin_base_url . "user_list.php?success=Delete User Success";
+        $url = $admin_base_url . "customer_list.php?success=Delete customer Success";
         header("Location: $url");
     }
 }
@@ -24,10 +29,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>User List</h3>
+            <h3>Customer List</h3>
             <div class="">
-                <a href="<?= $admin_base_url . 'user_create.php' ?>" class="btn btn-primary">
-                    Create User
+                <a href="<?= $admin_base_url . 'customer_create.php' ?>" class="btn btn-primary">
+                    Customer Create
                 </a>
             </div>
         </div>
@@ -50,30 +55,28 @@ require '../layouts/header.php';
                     <div class="card-body">
                         <table class="table table-hover table-sm">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th class="">No.</th>
                                     <th class="">Name</th>
-                                    <th class="">Email</th>
-                                    <th class="">Role</th>
                                     <th class="">Phone</th>
-                                    <th class="">Gender</th>
+                                    <th class="">Password</th>
                                     <th class="">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                if ($users->num_rows > 0) {
-                                    while ($row = $users->fetch_assoc()) { ?>
-                                        <tr>
+                                <?php if ($res->num_rows > 0) {
+                                    while ($row = $res->fetch_assoc()) { ?>
+                                        <tr class="text-center">
                                             <td><?= $row['id'] ?></td>
                                             <td><?= $row['name'] ?></td>
-                                            <td><?= $row['email'] ?></td>
-                                            <td><?= $row['role'] ?></td>
                                             <td><?= $row['phone'] ?></td>
-                                            <td><?= $row['gender'] ?></td>
+                                            <td><?= $row['password'] ?></td>
+
+
                                             <td>
                                                 <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-primary edit_btn">Edit</button>
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>
                                 <?php }
@@ -104,7 +107,7 @@ require '../layouts/header.php';
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'user_list.php?delete_id=' + id
+                    window.location.href = 'customer_list.php?delete_id=' + id
                 }
             });
         })

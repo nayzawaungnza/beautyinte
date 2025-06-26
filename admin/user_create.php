@@ -3,20 +3,23 @@ require '../layouts/header.php';
 
 $error = false;
 $name_err =
-$email_err =
-$password_err =
-$role_err   = 
-$gender_err = 
-$name = 
-$email = 
-$password = 
-$role = 
-$gender = '';
+    $email_err =
+    $password_err =
+    $role_err   =
+    $phone_err =
+    $gender_err =
+    $name =
+    $email =
+    $password =
+    $role =
+    $phone =
+    $gender = '';
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $role = $_POST['role'];
+    $phone = $_POST['phone'];
     $gender = $_POST['gender'];
 
     //Name
@@ -31,56 +34,58 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $name_err = "Name must be fill less than 100.";
     }
     //Email
-     $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    
-    if(strlen($email) === 0){
+    $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+
+    if (strlen($email) === 0) {
         $error = true;
         $email_err = "Please fill your email";
-
-    }else if(strlen($email) > 20){
+    } else if (strlen($email) > 20) {
         $error = true;
         $email_err = "Email must be less than 20.";
-
-    }
-     else if (strlen($email) > 200) {
+    } else if (strlen($email) > 200) {
         $error = true;
         $email_err = "Email must be less than 200.";
-    }else if (!preg_match($email_pattern , $email)){
+    } else if (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "Email format is wrong.";
     }
     //Password
-   if(strlen($password) === 0){
+    if (strlen($password) === 0) {
         $error = true;
         $password_err = "Please fill Password";
-
-    }else if(strlen($password) < 8){
+    } else if (strlen($password) < 8) {
         $error = true;
         $password_err = "Password must be greater than 8.";
-
-    }
-     else if (strlen($password) > 30) {
+    } else if (strlen($password) > 30) {
         $error = true;
         $password_err = "Password must be less than 30.";
-    }else{
+    } else {
         $byScriptPassword = md5($password);
     }
     //role
-   if(strlen($role) === 0 || $role === ''){
+    if (strlen($role) === 0 || $role === '') {
         $error = true;
         $role_err = "Please choose role";
-   }
-   //gender
-   if ($gender === '') {
+    }
+    //phone
+    if (empty($phone)) {
+        $error = true;
+        $phone_err = "Please add phone";
+    } else if (strlen($phone) < 11) {
+        $error = true;
+        $phone_err = "Phone must be fill greater than 11.";
+    }
+    //gender
+    if ($gender === '') {
         $error = true;
         $gender_err = "Please choose gender";
     }
 
     if (!$error) {
-        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `gender`)
-         VALUES ('$name','$email','$byScriptPassword','$role','$gender')";
-         $mysqli->query($sql);
-         echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php' </script>";
+        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`,`phone`, `gender`)
+         VALUES ('$name','$email','$byScriptPassword','$role','$phone','$gender')";
+        $mysqli->query($sql);
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php' </script>";
     }
 }
 
@@ -121,51 +126,56 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <input type="password" name="password" class="form-control">
                         <small class="text-danger"><?= $password_err ?></small>
                     </div>
-                   <div class="form-group">
-                        <label for="role" class="form-label">Role</label>
-                            <select name="role" id="role" class="form-control">
-                                <option value="">Please Choose Role</option>
-                                <option value="admin" <?php echo $role == 'admin' ? 'selected' : ''?>>Admin</option>
-                                <option value="staff" <?= $role == 'staff' ? 'selected' : ''?>>Staff</option>
-                            </select>
-
-                             <?php
-                                if ($role_err){
-                            ?>   
-                             <small class="text-danger"><?php echo $role_err ?></small>
-                            <?php
-                            }
-                            ?>
-                        </div>
                     <div class="form-group">
-                            <label class="form-label">Gender</label>
-                            <br  />
-                            <!-- <label class="form-check-label me-2"> 
+                        <label for="role" class="form-label">Role</label>
+                        <select name="role" id="role" class="form-control">
+                            <option value="">Please Choose Role</option>
+                            <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>Admin</option>
+                            <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>Staff</option>
+                        </select>
+
+                        <?php
+                        if ($role_err) {
+                        ?>
+                            <small class="text-danger"><?php echo $role_err ?></small>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Phone</label>
+                        <input type="text" name="phone" class="form-control">
+                        <small class="text-danger"><?= $phone_err ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <br />
+                        <!-- <label class="form-check-label me-2"> 
                                 Male <input type="radio" name="gender" <?= $gender === 'male' ? 'checked' : '' ?> value="male" class="form-check-input"></label>
                             <label class="form-check-label">
                                 Female <input type="radio" name="gender" <?= $gender === 'female' ? 'checked' : '' ?> value="female" class="form-check-input"></label>
                              -->
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
-  <label class="form-check-label" for="flexRadioDefault1">
-   Male
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
-  <label class="form-check-label" for="flexRadioDefault2">
-    Female
-  </label>
-</div>
-                             <?php
-                                if ($gender_err){
-                            ?>   
-                            <br  />
-                             <small class="text-danger"><?php echo $gender_err ?></small>
-                            <?php
-                            }
-                            ?>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Male
+                            </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Female
+                            </label>
+                        </div>
+                        <?php
+                        if ($gender_err) {
+                        ?>
+                            <br />
+                            <small class="text-danger"><?php echo $gender_err ?></small>
+                        <?php
+                        }
+                        ?>
+                    </div>
                     <div class="my-2">
                         <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
                     </div>

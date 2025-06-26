@@ -55,7 +55,7 @@ require '../layouts/header.php';
                     <div class="card-body">
                         <table class="table table-hover table-sm">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th class="">No.</th>
                                     <th class="">Name</th>
                                     <th class="">Price</th>
@@ -67,15 +67,16 @@ require '../layouts/header.php';
                             <tbody>
                                 <?php if ($res->num_rows > 0) {
                                     while ($row = $res->fetch_assoc()) { ?>
-                                        <tr>
+                                        <tr class="text-center">
                                             <td><?= $row['id'] ?></td>
                                             <td><?= $row['name'] ?></td>
-                                            <td><?= $row['price'] ?></td>
+                                            <td class="text-right"><?= number_format($row['price']) ?> MMK</td>
                                             <td><?= $row['description'] ?></td>
 
-                                            <td>
 
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                            <td>
+                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-primary edit_btn">Edit</button>
+                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>
                                 <?php }

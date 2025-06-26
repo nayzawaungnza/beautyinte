@@ -258,6 +258,15 @@
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
+                            <i class="arrow-right"></i><span class="nav-text">Customer</span>
+                        </a>
+                        <ul aria-expanded="true" class="pannel" style="display: none;">
+                            <li><a href="">List</a></li>
+                            <li><a href="">Create</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-click">
+                        <a class="has-arrow arrow">
                             <i class=""></i><span class="nav-text">Services</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
