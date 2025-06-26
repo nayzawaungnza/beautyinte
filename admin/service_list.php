@@ -18,7 +18,7 @@ $res = selectData('services', $mysqli, "", "*", "ORDER BY created_at DESC");
 
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
 if ($delete_id !== '') {
-    $res = deleteData('service', $mysqli, "id=$delete_id");
+    $res = deleteData('services', $mysqli, "id=$delete_id");
     if ($res) {
         $url = $admin_base_url . "service_list.php?success=Delete service Success";
         header("Location: $url");

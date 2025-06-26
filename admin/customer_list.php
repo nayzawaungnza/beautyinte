@@ -18,7 +18,7 @@ $res = selectData('customers', $mysqli, "", "*", "ORDER BY created_at DESC");
 
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
 if ($delete_id !== '') {
-    $res = deleteData('customer', $mysqli, "id=$delete_id");
+    $res = deleteData('customers', $mysqli, "id=$delete_id");
     if ($res) {
         $url = $admin_base_url . "customer_list.php?success=Delete customer Success";
         header("Location: $url");

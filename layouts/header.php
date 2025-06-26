@@ -23,9 +23,8 @@
     <link href="../dashCss/jquery-clockpicker.min.css" rel="stylesheet">
 
     <link href="../dashCss/style.css" rel="stylesheet">
-    <!-- <link href="./css/style.css" rel="stylesheet"> -->
-    <!-- <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
+    <script src="../dashJs/sweetalert2.all.min.js"></script>
+    <script src="../dashJs/jquery.min.js"></script>
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"

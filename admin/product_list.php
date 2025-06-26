@@ -96,6 +96,7 @@ require '../layouts/header.php';
 <script>
     $(document).ready(function() {
         $('.delete_btn').click(function() {
+            console.log('click');
             const id = $(this).data('id')
             Swal.fire({
                 title: 'Are you sure?',
