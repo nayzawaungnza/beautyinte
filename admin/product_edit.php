@@ -68,7 +68,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         `products`.`name` = '$nameEdit', `products`.`description` = '$descEdit' , `products`.`price` = '$priceEdit', `product_qty`.`qty` = '$quantityEdit'
         WHERE `products`.`id` = '$id'";
         $mysqli->query($edit_sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/product_list.php' </script>";
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/product_list.php? success=Update Success' </script>";
     }
 }
 

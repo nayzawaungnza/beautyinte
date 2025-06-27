@@ -64,7 +64,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         `customers`.`name` = '$name', `customers`.`phone` = '$phone', `customers`.`password` = '$password'
         WHERE `customers`.`id` = '$id'";
         $mysqli->query($sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/customer_list.php' </script>";
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/customer_list.php? success=Update Success' </script>";
     }
 }
 

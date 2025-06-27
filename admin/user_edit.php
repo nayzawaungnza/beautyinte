@@ -101,7 +101,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         `users`.`name` = '$name', `users`.`email` = '$email', `users`.`password` = '$password', `users`.`role` = '$role', `users`.`phone` = '$phone', `users`.`gender` = '$gender'
         WHERE `users`.`id` = '$id'";
         $mysqli->query($sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php' </script>";
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php? success=Update Success' </script>";
     }
 }
 

@@ -69,7 +69,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                         <?php } ?>
                         <div class="card login-form mb-0" style="background-color: #003366;">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="index.html">
+                                <a class="text-center" href="home.php">
                                     <h1>Login Form</h1>
                                 </a>
 

@@ -59,7 +59,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         `services`.`name` = '$name', `services`.`price` = '$price', `services`.`description` = '$description'
         WHERE `services`.`id` = '$id'";
         $mysqli->query($sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/service_list.php' </script>";
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/service_list.php? success=Update Success' </script>";
     }
 }
 
