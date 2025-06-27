@@ -252,8 +252,8 @@
                             <i class="arrow-right"></i><span class="nav-text">User</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="../admin/user_list.php">List</a></li>
+                            <li><a href="../admin/user_create.php">Create</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
@@ -261,8 +261,8 @@
                             <i class="arrow-right"></i><span class="nav-text">Customer</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="../admin/customer_list.php">List</a></li>
+                            <li><a href="../admin/customer_create.php">Create</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
@@ -270,8 +270,8 @@
                             <i class=""></i><span class="nav-text">Services</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="../admin/service_list.php">List</a></li>
+                            <li><a href="../admin/service_create.php">Create</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
@@ -280,7 +280,7 @@
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
                             <li><a href="../admin/product_list.php">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="../admin/product_create.php">Create</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">

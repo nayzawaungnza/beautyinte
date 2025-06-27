@@ -93,7 +93,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>Edit Product</h3>
+                <h3>Product Update</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">Name</label>

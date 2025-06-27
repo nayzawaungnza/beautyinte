@@ -63,16 +63,17 @@ require '../layouts/header.php';
                             <tbody>
                                 <?php
                                 if ($users->num_rows > 0) {
+                                     $i =1;
                                     while ($row = $users->fetch_assoc()) { ?>
                                         <tr>
-                                            <td><?= $row['id'] ?></td>
+                                             <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td><?= $row['role'] ?></td>
                                             <td><?= $row['phone'] ?></td>
                                             <td><?= $row['gender'] ?></td>
                                             <td>
-                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-primary edit_btn">Edit</button>
+                                               <a href="./user_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>

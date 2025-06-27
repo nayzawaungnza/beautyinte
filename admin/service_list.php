@@ -29,7 +29,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>Services List</h3>
+            <h3>Service List</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'service_create.php' ?>" class="btn btn-primary">
                     Services Create
@@ -66,16 +66,17 @@ require '../layouts/header.php';
                             </thead>
                             <tbody>
                                 <?php if ($res->num_rows > 0) {
+                                    $i =1;
                                     while ($row = $res->fetch_assoc()) { ?>
                                         <tr class="text-center">
-                                            <td><?= $row['id'] ?></td>
+                                            <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
                                             <td class="text-right"><?= number_format($row['price']) ?> MMK</td>
                                             <td><?= $row['description'] ?></td>
 
 
-                                            <td>
-                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-primary edit_btn">Edit</button>
+                                            <td>     
+                                                <a href="./service_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
                                                 <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>

@@ -7,12 +7,6 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = selectData('customers', $mysqli, "", "*", "ORDER BY created_at DESC");
 
-// $sql = "SELECT products.*, categories.name AS category_name, discounts.percent
-//         FROM products
-//         LEFT JOIN categories ON categories.id = products.category_id
-//         LEFT JOIN discounts ON discounts.id = products.discount_id
-//         ";
-// $res = $mysqli->query($sql);
 
 
 
@@ -66,16 +60,17 @@ require '../layouts/header.php';
                             </thead>
                             <tbody>
                                 <?php if ($res->num_rows > 0) {
+                                     $i =1;
                                     while ($row = $res->fetch_assoc()) { ?>
                                         <tr class="text-center">
-                                            <td><?= $row['id'] ?></td>
+                                            <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['phone'] ?></td>
                                             <td><?= $row['password'] ?></td>
 
 
                                             <td>
-                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-primary edit_btn">Edit</button>
+                                                <a href="./customer_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
                                                 <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>
