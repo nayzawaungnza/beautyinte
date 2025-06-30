@@ -38,11 +38,12 @@ function create_table($mysqli)
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(200) NOT NULL,
                 role ENUM('admin','staff') NOT NULL,
+                description TEXT NULL,
                 phone VARCHAR(50) NOT NULL,
                 gender ENUM('male','female') NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )";
+                )"; 
     if ($mysqli->query($user_sql) === false) return false;
     //Customer
     $customer_sql = "CREATE TABLE IF NOT EXISTS `customers`
