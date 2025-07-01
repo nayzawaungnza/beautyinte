@@ -8,7 +8,6 @@
                     <ul class="list-unstyled">
                         <li><a href="#" class="py-2 d-block">Hair cutting & styling</a></li>
                         <li><a href="#" class="py-2 d-block">Makeup</a></li>
-                        <li><a href="#" class="py-2 d-block">Lip</a></li>
                         <li><a href="#" class="py-2 d-block">Nail</a></li>
                         <li><a href="#" class="py-2 d-block">Product</a></li>
                     </ul>
@@ -22,6 +21,7 @@
             <div class="col-md-3">
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Have a Questions?</h2>
+
                     <div class="block-23 mb-3">
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">Myanmar Plaza,192 Kabar Aye Pagoda Road</span></li>
@@ -30,6 +30,7 @@
                                         class="text">saungwaikhin@gmail.com,htwehtweyee@gmail.com</span></a></li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
