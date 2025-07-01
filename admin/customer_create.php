@@ -9,6 +9,16 @@ $name_err =
     $phone =
     $password = '';
 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT customers.id, customers.name, customers.phone, customers.password FROM  `customers`";
+     
+    $oldData = $mysqli->query($sql)->fetch_assoc();
+    $name = $oldData['name'];
+    $phone = $oldData['phone'];
+    $password = $oldData['password'];
+}
+
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
     $phone = $_POST['phone'];
@@ -81,17 +91,17 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control" value="<?= $name ?>">
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Phone</label>
-                        <input type="text" name="phone" class="form-control">
+                        <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                         <small class="text-danger"><?= $phone_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" name="password" class="form-control" value="<?= $password ?>">
                         <small class="text-danger"><?= $password_err ?></small>
                     </div>
 

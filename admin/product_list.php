@@ -77,7 +77,9 @@ require '../layouts/header.php';
                                             <td><?= $row['quantity'] ?></td>
                                             <td>
                                                 <div>
+                                                <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>"  class="btn btn-sm btn-primary mx-2">Details</a>
                                                 <a href="./product_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
+                                                <a href="./product_image_update.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success mx-2">Image</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">Delete</button>
                                                 </div>
                                             </td>

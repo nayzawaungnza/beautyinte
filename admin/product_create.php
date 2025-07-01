@@ -3,16 +3,34 @@ require '../layouts/header.php';
 
 $error = false;
 $name = 
+$price = 
+$desc = 
+$quantity = 
 $name_err =
     $price_err =
     $description_err =
-    $quantity_err   = '';
+    $quantity_err   = 
+    $file_err =  '';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT products.id as id, product_qty.qty, products.name, products.description, products.price 
+    FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id WHERE products.id = '$id'";
+    $oldData = $mysqli->query($sql)->fetch_assoc();
+    $name = $oldData['name'];
+    $price = $oldData['price'];
+    $desc = $oldData['description'];
+    $quantity = $oldData['qty'];
+}
 
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
     $quantity = $_POST['quantity'];
+    $profile = $_FILES['file_name'];
+    $tmp_name = $profile['tmp_name'];
+
     //Name
     if (empty($name)) {
         $error = true;
@@ -53,6 +71,18 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $error = true;
         $quantity_err  = "Quantity must be number.";
     }
+
+   $folder = __DIR__ . "/uplode";
+
+if (!file_exists($folder)) {
+    mkdir($folder, 0777, true);
+}
+
+
+    $fileName = uniqid() . $profile['name']; 
+    
+    move_uploaded_file($tmp_name, $folder);
+
     if (!$error) {
         $sql = "INSERT INTO `products`(`name`, `description`, `price`)
         VALUES ('$name','$description','$price')";
@@ -87,7 +117,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         <div class="card">
             <div class="card-body">
                 <h3>Create Product</h3>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
@@ -95,18 +125,23 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Price</label>
-                        <input type="text" name="price" class="form-control">
+                        <input type="text" name="price" class="form-control" value="<?= $price ?>">
                         <small class="text-danger"><?= $price_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Description</label>
-                        <input type="text" name="description" class="form-control">
+                        <input type="text" name="description" class="form-control" value="<?= $desc ?>">
                         <small class="text-danger"><?= $description_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Quantity</label>
-                        <input type="text" name="quantity" class="form-control">
+                        <input type="text" name="quantity" class="form-control" value="<?= $quantity ?>">
                         <small class="text-danger"><?= $quantity_err ?></small>
+                    </div>
+                     <div class="form-group">
+                        <label for="file" class="form-label">Files</label>
+                        <input type="file" name="file_name" class="form-control">
+                        <small class="text-danger"><?= $file_err ?></small>
                     </div>
                     <div class="my-2">
                         <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
