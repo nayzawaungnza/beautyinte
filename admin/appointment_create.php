@@ -1,0 +1,195 @@
+<?php
+require '../layouts/header.php';
+
+$error = false;
+$name = 
+$appointment_date_err =
+$appointment_time_err =
+$status_err =
+$request_err =
+$customer_name = 
+$service_name = 
+$staff_name = 
+$appointment_date = 
+$appointment_time = 
+$status = 
+$comment = 
+$request = '';
+date_default_timezone_set('Asia/Yangon');
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
+     
+    $oldData = $mysqli->query($sql)->fetch_assoc();
+    $name = $oldData['name'];
+}
+    $sql = "SELECT services.name,services.id FROM  `services`";   
+    $services = $mysqli->query($sql);
+
+    $res = "SELECT * FROM  `users`";   
+    $users = $mysqli->query($res);
+
+if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
+
+    $appointment_date = $_POST['app_date'];
+    $appointment_time = $_POST['app_time'];
+    $status = $_POST['status'];
+    $today = date('Y-m-d');
+    $current_time = date('H:i:s');
+
+
+    if ($appointment_date < $today) {
+    $appointment_date_err = "Appointment date must not be in the past.";
+    $error = true;
+    }
+
+    if (empty($appointment_date)) {
+        $error = true;
+        $appointment_date_err = "Please add appointment date";
+    }
+
+    if (empty($appointment_time)) {
+        $error = true;
+        $appointment_time_err = "Please add appointment time";
+    }
+
+    if ($appointment_time <= $current_time ) {
+        $error = true;
+        $appointment_time_err = "unavailable appointment time";
+    }
+
+    if (empty($status)) {
+        $error = true;
+        $status_err = "Please select status";
+    }
+
+
+
+
+
+    
+
+
+    if (!$error) {
+        $sql = "INSERT INTO `customers`(`name`, `phone`, `password`)
+         VALUES ('$name','$phone','$byScriptPassword')";
+        $mysqli->query($sql);
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_create.php' </script>";
+    }
+
+
+}
+?>
+
+<!-- Content body start -->
+
+<div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h3>Create Appointment</h3>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Customer Name</label>
+                        <input type="text" name="name" class="form-control" value="<?= $name ?>">
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Service Name</label>
+                        <?php
+                       if ($services && $services->num_rows > 0) {
+                            while ($row = $services->fetch_assoc()) {  ?>
+                                <div class="form-check">
+                <input class="form-check-input" type="checkbox" 
+                       name="services[]" 
+                       value="<?= $row['id'] ?>" 
+                       id="service<?= $row['id'] ?>">
+                <label class="form-check-label" for="service<?= $row['id'] ?>">
+                    <?= $row['name'] ?>
+                </label>
+            </div>
+                            
+                           <?php }
+                        } 
+                        ?>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="name" class="form-label">Staff Name</label>
+                        <select name="staff_id" id="staff_id" class="form-control">
+                            <option value="">Please Choose Staff</option>
+                            <?php
+                            if ($users && $users->num_rows > 0) {
+                                while ($row = $users->fetch_assoc()) { ?>
+                                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                <?php }
+                            } else {
+                                echo "<option value=''>No staff available</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                 
+                    <div class="form-group">
+                        <label for="name" class="form-label">Appointment Date</label>
+                        <input type="date" name="app_date" class="form-control" value="<?= $appointment_date ?>">
+                        <small class="text-danger"><?= $appointment_date_err ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Appointment Time</label>
+                        <input type="time" name="app_time" class="form-control" value="<?= $appointment_time ?>">
+                        <small class="text-danger"><?= $appointment_time_err ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Status</label>
+                        <br>
+                       <select name="status" id="status" class="form-control">
+                        <option value="pending">Pending</option>
+                        <option value="complete">Complete</option>
+                        <option value="reject">Reject</option>
+                       </select>
+                        <small class="text-danger"><?= $status_err ?></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Comment</label>
+                        <input type="text" name="comment" class="form-control" value="<?= $comment ?>">
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Request</label>
+                        <input type="text" name="request" class="form-control" value="<?= $request ?>">
+                        <small class="text-danger"><?= $request_err ?></small>
+                    </div>
+
+                    <div class="my-2">
+                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
+
+<!-- Content body end -->
+
+
+
+<?php
+
+require '../layouts/footer.php';
+
+?>
