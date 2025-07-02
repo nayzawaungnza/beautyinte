@@ -55,7 +55,7 @@
                 <a href="./dashboard.php">
                     <span class="brand-title">
                         <img src="../images/logo.jpg" alt="logo" style="width: 50px; ">
-                        <h3>Salon</h3>
+                        <h3>အလှပြင်ဆိုင်</h3>
                     </span>
                 </a>
             </div>
@@ -78,10 +78,10 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <input type="search" class="form-control" placeholder="ရှာရန်" aria-label="Search Dashboard">
                         <div class="drop-down   d-md-none">
                             <form action="#">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" placeholder="ရှာရန်">
                             </form>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                             <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><a href="javascript:void()">English</a></li>
+                                        <li><a href="javascript:void()">မြန်မာ</a></li>
                                         <li><a href="javascript:void()">Dutch</a></li>
                                     </ul>
                                 </div>
@@ -218,7 +218,7 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span>ပရိုဖိုင်</span></a>
                                         </li>
                                         <li>
                                             <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
@@ -230,7 +230,7 @@
                                         <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="<?= $admin_base_url . 'logout.php' ?>"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="<?= $admin_base_url . 'logout.php' ?>"><i class="icon-key"></i> <span>အကောင့်ထွက်ရန်</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -249,56 +249,56 @@
                 <ul class="metismenu">
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class="arrow-right"></i><span class="nav-text">User</span>
+                            <i class="arrow-right"></i><span class="nav-text">အသုံးပြုသူများ</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/user_list.php">List</a></li>
-                            <li><a href="../admin/user_create.php">Create</a></li>
+                            <li><a href="../admin/user_list.php">စာရင်း</a></li>
+                            <li><a href="../admin/user_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class="arrow-right"></i><span class="nav-text">Customer</span>
+                            <i class="arrow-right"></i><span class="nav-text">ဖောက်သည်</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/customer_list.php">List</a></li>
-                            <li><a href="../admin/customer_create.php">Create</a></li>
+                            <li><a href="../admin/customer_list.php">စာရင်း</a></li>
+                            <li><a href="../admin/customer_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">Services</span>
+                            <i class=""></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/service_list.php">List</a></li>
-                            <li><a href="../admin/service_create.php">Create</a></li>
+                            <li><a href="../admin/service_list.php">စာရင်း</a></li>
+                            <li><a href="../admin/service_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">Product</span>
+                            <i class=""></i><span class="nav-text">ထုတ်ကုန်များ</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/product_list.php">List</a></li>
-                            <li><a href="../admin/product_create.php">Create</a></li>
+                            <li><a href="../admin/product_list.php">စာရင်း</a></li>
+                            <li><a href="../admin/product_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">Appointment</span>
+                            <i class=""></i><span class="nav-text">အချိန်ချိန်းစာရင်း</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="">စာရင်း</a></li>
+                            <li><a href="">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">Payment</span>
+                            <i class=""></i><span class="nav-text">ငွေပေးချေမှု</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="">စာရင်း</a></li>
+                            <li><a href="">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                 </ul>

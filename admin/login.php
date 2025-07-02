@@ -50,7 +50,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Login</title>
+    <title>အကောင့်ဝင်ရန်</title>
     <!-- Favicon icon -->
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png"> -->
     <link href="../dashCss/style.css" rel="stylesheet">
@@ -70,26 +70,27 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                         <div class="card login-form mb-0" style="background-color: #003366;">
                             <div class="card-body pt-5">
                                 <a class="text-center" href="home.php">
-                                    <h1>Login Form</h1>
+                                    <h1>အကောင့်ဝင်ရန်ဖောင်</h1>
                                 </a>
 
                                 <form class="mt-5 mb-5 login-input" method="POST">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $email ?>" />
+                                        <label for="name" class="form-label">အမည်</label>
+                                        <input type="email" class="form-control" placeholder="အီးမေးလ်ဖြင့်ဝင်ရောက်ရန်" name="email" value="<?= $email ?>" />
                                         <?php if ($error && $email_error) { ?>
                                             <span class="text-danger"><?= $email_error ?></span>
                                         <?php } ?>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password" name="password" value="<?= $password ?>" />
+                                        <input type="password" class="form-control" placeholder="စကားဝှက်" name="password" value="<?= $password ?>" />
                                         <?php if ($error && $password_error) { ?>
                                             <span class="text-danger"><?= $password_error ?></span>
                                         <?php } ?>
                                     </div>
                                     <input type="hidden" name="form_sub" value="1" />
-                                    <button class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button class="btn login-form__btn submit w-100">ဝင်မည်</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="" class="text-primary">Sign Up</a> now</p>
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="" class="text-primary">အကောင့်ဖွင့်မည်</a> now</p>
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ $name_err =
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT customers.id, customers.name, customers.phone, customers.password FROM  `customers`";
-     
+
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
     $phone = $oldData['phone'];
@@ -77,8 +77,8 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
     </div>
@@ -87,26 +87,26 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>Create Customer</h3>
+                <h3>ဖောက်သည်အသစ်ဖန်တီးရန်</h3>
                 <form method="POST">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Phone</label>
+                        <label for="name" class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>
                         <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                         <small class="text-danger"><?= $phone_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Password</label>
+                        <label for="name" class="form-label">စကားဝှက်</label>
                         <input type="password" name="password" class="form-control" value="<?= $password ?>">
                         <small class="text-danger"><?= $password_err ?></small>
                     </div>
 
                     <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                     </div>
                 </form>
             </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Beauty Salon</title>
+    <title>အလှပြင်ဆိုင်</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -40,10 +40,10 @@
                     <div class="icon">
                         <a href="index.html" class="logo">
                             <span class="flaticon-flower"></span>
-                            <h1>Beauty Salon Manament System</h1>
+                            <h1>အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
                         </a>
                     </div>
-                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H Beauty Salon</h1>
+                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အလှပြင်ဆိုင်</h1>
                     <p class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Created by <a
                             href="#">Colorlib.com</a></p>
 
@@ -57,7 +57,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H Beauty Salon</a>
+            <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H အလှပြင်ဆိုင်</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
@@ -65,12 +65,12 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item "><a href="home.php" class="nav-link text-dark">Home</a></li>
-                    <li class="nav-item "><a href="product.php" class="nav-link text-dark">Product</a></li>
-                    <li class="nav-item"><a href="about.php" class="nav-link  text-dark">About</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link  text-dark">Services</a></li>
-                    <li class="nav-item"><a href="work.php" class="nav-link  text-dark">Work</a></li>
-                    <li class="nav-item"><a href="contact.php" class="nav-link  text-dark">Contact</a></li>
+                    <li class="nav-item "><a href="home.php" class="nav-link text-dark">ပင်မစာမျက်နှာ</a></li>
+                    <li class="nav-item "><a href="product.php" class="nav-link text-dark">ထုတ်ကုန်များ</a></li>
+                    <li class="nav-item"><a href="about.php" class="nav-link  text-dark">အကြောင်းအရာ</a></li>
+                    <li class="nav-item"><a href="services.php" class="nav-link  text-dark">ဝန်ဆောင်မှုများ</a></li>
+                    <li class="nav-item"><a href="work.php" class="nav-link  text-dark">လုပ်ငန်းများ</a></li>
+                    <li class="nav-item"><a href="contact.php" class="nav-link  text-dark">ဆက်သွယ်ရန်</a></li>
                 </ul>
             </div>
         </div>
