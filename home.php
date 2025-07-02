@@ -3,7 +3,6 @@ require './template_layout/header.php';
 require './require/db.php';
 require "./require/common.php";
 require './require/common_function.php';
-// require '../require/check_auth.php'
 
 $user_res = selectData("users", $mysqli, "","*","ORDER BY role DESC");
 // $new_user_sql = "SELECT 
@@ -97,19 +96,6 @@ $service_res = selectData("services", $mysqli, "","*");
 		<div class="row">
 			<div class="col-md-4 ftco-animate">
 				<a href="#" class="work-entry">
-					<img src="images/work-1.jpg" class="img-fluid" alt="Colorlib Template">
-					<div class="info d-flex align-items-center">
-						<div>
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-								<span class="icon-search"></span>
-							</div>
-							<h3>Lips Makeover</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4 ftco-animate">
-				<a href="#" class="work-entry">
 					<img src="images/work-2.jpg" class="img-fluid" alt="Colorlib Template">
 					<div class="info d-flex align-items-center">
 						<div>
@@ -117,6 +103,19 @@ $service_res = selectData("services", $mysqli, "","*");
 								<span class="icon-search"></span>
 							</div>
 							<h3>Hair Style</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-4 ftco-animate">
+				<a href="#" class="work-entry">
+					<img src="images/work-1.jpg" class="img-fluid" alt="Colorlib Template">
+					<div class="info d-flex align-items-center">
+						<div>
+							<div class="icon mb-4 d-flex align-items-center justify-content-center">
+								<span class="icon-search"></span>
+							</div>
+							<h3>Nail Style</h3>
 						</div>
 					</div>
 				</a>
@@ -210,57 +209,6 @@ $service_res = selectData("services", $mysqli, "","*");
 			</div>
 		</div>
 	
-			<!-- <div class="col-md-3 ftco-animate">
-				<div class="pricing-entry pb-5 text-center">
-					<div>
-						<h3 class="mb-4">Standard</h3>
-						<p><span class="price">72500MMK</span> <span class="per">/ one trip</span></p>
-					</div>
-					<ul>
-						<li>Nail Cutting &amp; Styling</li>
-						<li>Hair Trimming</li>
-						<li>Makeup</li>
-						<li>Lip</li>
-						<li>Product</li>
-					</ul>
-					<p class="button text-center"><a href="#"
-							class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-				</div>
-			</div>
-			<div class="col-md-3 ftco-animate">
-				<div class="pricing-entry active pb-5 text-center">
-					<div>
-						<h3 class="mb-4">Premium</h3>
-						<p><span class="price">114500MMK</span> <span class="per">/ one trip</span></p>
-					</div>
-					<ul>
-						<li>Nail Cutting &amp; Styling</li>
-						<li>Hair Trimming</li>
-						<li>Makeup</li>
-						<li>Lip</li>
-						<li>Product</li>
-					</ul>
-					<p class="button text-center"><a href="#"
-							class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-				</div>
-			</div>
-			<div class="col-md-3 ftco-animate">
-				<div class="pricing-entry pb-5 text-center">
-					<div>
-						<h3 class="mb-4">Platinum</h3>
-						<p><span class="price">188000MMK</span> <span class="per">/ one trip</span></p>
-					</div>
-					<ul>
-						<li>Nail Cutting &amp; Styling</li>
-						<li>Hair Trimming</li>
-						<li>Makeup</li>
-						<li>Lip</li>
-						<li>Product</li>
-					</ul>
-					<p class="button text-center"><a href="#"
-							class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-				</div>
-			</div> -->
 		</div>
 	</div>
 </section>

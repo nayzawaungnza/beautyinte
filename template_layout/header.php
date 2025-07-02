@@ -66,6 +66,7 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item "><a href="home.php" class="nav-link text-dark">Home</a></li>
+                    <li class="nav-item "><a href="product.php" class="nav-link text-dark">Product</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link  text-dark">About</a></li>
                     <li class="nav-item"><a href="services.php" class="nav-link  text-dark">Services</a></li>
                     <li class="nav-item"><a href="work.php" class="nav-link  text-dark">Work</a></li>

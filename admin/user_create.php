@@ -14,6 +14,18 @@ $name_err =
     $role =
     $phone =
     $gender = '';
+
+    if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users`";
+    $oldData = $mysqli->query($sql)->fetch_assoc();
+    $name = $oldData['name'];
+    $email = $oldData['email'];
+    $password = $oldData['password'];
+    $role = $oldData['role'];
+    $phone = $oldData['phone'];
+    }
+
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -21,6 +33,8 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $role = $_POST['role'];
     $phone = $_POST['phone'];
     $gender = $_POST['gender'];
+
+    
 
     //Name
     if (empty($name)) {
@@ -113,22 +127,22 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control"  value="<?= $name ?>">
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control">
+                        <input type="text" name="email" class="form-control"  value="<?= $email ?>">
                         <small class="text-danger"><?= $email_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" name="password" class="form-control"  value="<?= $password ?>">
                         <small class="text-danger"><?= $password_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="role" class="form-label">Role</label>
-                        <select name="role" id="role" class="form-control">
+                        <select name="role" id="role" class="form-control"  value="<?= $role ?>">
                             <option value="">Please Choose Role</option>
                             <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>Admin</option>
                             <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>Staff</option>
@@ -144,17 +158,12 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Phone</label>
-                        <input type="text" name="phone" class="form-control">
+                        <input type="text" name="phone" class="form-control"  value="<?= $phone ?>">
                         <small class="text-danger"><?= $phone_err ?></small>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Gender</label>
                         <br />
-                        <!-- <label class="form-check-label me-2"> 
-                                Male <input type="radio" name="gender" <?= $gender === 'male' ? 'checked' : '' ?> value="male" class="form-check-input"></label>
-                            <label class="form-check-label">
-                                Female <input type="radio" name="gender" <?= $gender === 'female' ? 'checked' : '' ?> value="female" class="form-check-input"></label>
-                             -->
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
                             <label class="form-check-label" for="flexRadioDefault1">
@@ -176,6 +185,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         }
                         ?>
                     </div>
+                    
                     <div class="my-2">
                         <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
                     </div>
