@@ -288,8 +288,8 @@
                             <i class=""></i><span class="nav-text">Appointment</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="../admin/appointment_list.php">List</a></li>
+                            <li><a href="../admin/appointment_create.php">Create</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
@@ -297,8 +297,8 @@
                             <i class=""></i><span class="nav-text">Payment</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">List</a></li>
-                            <li><a href="">Create</a></li>
+                            <li><a href="../admin/payment_list.php">List</a></li>
+                            <li><a href="../admin/payment_create.php">Create</a></li>
                         </ul>
                     </li>
                 </ul>

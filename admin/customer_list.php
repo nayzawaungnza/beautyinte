@@ -71,6 +71,7 @@ require '../layouts/header.php';
 
                                             <td>
                                                 <a href="./customer_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
+                                                <a href="./appointment_create.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-primary appointment_btn mx-2">Appointment</a>
                                                 <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
                                             </td>
                                         </tr>

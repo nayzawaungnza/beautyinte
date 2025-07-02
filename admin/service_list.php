@@ -7,12 +7,6 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = selectData('services', $mysqli, "", "*", "ORDER BY created_at DESC");
 
-// $sql = "SELECT products.*, categories.name AS category_name, discounts.percent
-//         FROM products
-//         LEFT JOIN categories ON categories.id = products.category_id
-//         LEFT JOIN discounts ON discounts.id = products.discount_id
-//         ";
-// $res = $mysqli->query($sql);
 
 
 
