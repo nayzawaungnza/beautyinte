@@ -244,7 +244,7 @@
 
 
         <!-- Sidebar start -->
-        <div class="nk-sidebar">
+         <div class="nk-sidebar"> 
             <div class="nk-nav-scroll">
                 <ul class="metismenu">
                     <li class="sidebar-click">
@@ -288,8 +288,8 @@
                             <i class=""></i><span class="nav-text">အချိန်ချိန်းစာရင်း</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">စာရင်း</a></li>
-                            <li><a href="">ဖန်တီးမည်</a></li>
+                            <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
+                            <li><a href="../admin/appointment_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-click">
@@ -297,8 +297,8 @@
                             <i class=""></i><span class="nav-text">ငွေပေးချေမှု</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="">စာရင်း</a></li>
-                            <li><a href="">ဖန်တီးမည်</a></li>
+                            <li><a href="../admin/payment_list.php">စာရင်း</a></li>
+                            <li><a href="../admin/payment_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
                 </ul>

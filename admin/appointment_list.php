@@ -1,0 +1,127 @@
+<?php
+
+require "../require/common_function.php";
+require '../require/db.php';
+require '../require/common.php';
+$success = isset($_GET['success']) ? $_GET['success'] : '';
+$error = isset($_GET['error']) ? $_GET['error'] : '';
+$res = "SELECT appointments.id, customers.name as customer_name, services.name AS `service_name`, users.name AS staff_name,
+        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As value,appointments.comment, appointments.request
+        FROM `appointments` Inner JOIN customers ON appointments.customer_id = customers.id
+        INNER JOIN services ON appointments.service_id = services.id inner join users on appointments.staff_id = users.id
+        ORDER BY appointments.id DESC";
+$appointments = $mysqli->query($res);
+
+
+$delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
+if ($delete_id !== '') {
+    $res = deleteData('appointments', $mysqli, "id=$delete_id");
+    if ($res) {
+        $url = $admin_base_url . "appointment_list.php?success=Delete Appointment Success";
+        header("Location: $url");
+    }
+}
+require '../layouts/header.php';
+?>
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+            <h1>Appointment List</h1>
+            <div class="">
+                <a href="<?= $admin_base_url . 'appointment_create.php' ?>" class="btn btn-primary">
+                    Create Appointment
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
+                <?php if ($success !== '') { ?>
+                    <div class="alert alert-success">
+                        <?= $success ?>
+                    </div>
+                <?php } ?>
+                <?php if ($error !== '') { ?>
+                    <div class="alert alert-danger">
+                        <?= $error ?>
+                    </div>
+                <?php } ?>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="">No.</th>
+                                    <th class="">Customer Name</th>
+                                    <th class="">Service Name</th>
+                                    <th class="">Staff Name</th>
+                                    <th class="">Appointment Date</th>
+                                    <th class="">Appointment Time</th>
+                                    <th class="">Status</th>
+                                    <th class="">Comment</th>
+                                    <th class="">Request</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($appointments->num_rows > 0) {
+                                    $i =1;
+                                    while ($row = $appointments->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td><?= $i++ ?></td>
+                                            <td><?= $row['customer_name'] ?></td>
+                                            <td><?= $row['service_name'] ?></td>
+                                            <td><?= $row['staff_name'] ?></td>
+                                            <td><?= $row['app_date'] ?></td>
+                                            <td><?= $row['app_time'] ?></td>
+                                            <td><?= $row['value'] ?></td>
+                                            <td><?= $row['comment'] ?></td>
+                                            <td><?= $row['request'] ?></td>
+                                            <td>
+                                                <div>
+                                                
+                                                <a href="./appointment_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
+                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">Delete</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
+<!--**********************************
+            Content body end
+        ***********************************-->
+<script>
+    $(document).ready(function() {
+        $('.delete_btn').click(function() {
+            console.log('click');
+            const id = $(this).data('id')
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action cannot be undone.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'product_list.php?delete_id=' + id
+                }
+            });
+        })
+    })
+</script>
+<?php
+require '../layouts/footer.php';
+?>

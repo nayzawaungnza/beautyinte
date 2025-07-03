@@ -1,6 +1,6 @@
 <?php
-require '../layouts/header.php';
 
+require '../layouts/header.php';
 $error = false;
 $name = 
 $appointment_date_err =
@@ -14,7 +14,8 @@ $appointment_date =
 $appointment_time = 
 $status = 
 $comment = 
-$request = '';
+$request = 
+$serid = '';
 date_default_timezone_set('Asia/Yangon');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -30,14 +31,16 @@ if (isset($_GET['id'])) {
     $users = $mysqli->query($res);
 
 if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
-
+    $cName = $_POST['customer_id'];
+    $serid = $_POST['services'];
+    $sttid = $_POST['staff_id'];
     $appointment_date = $_POST['app_date'];
     $appointment_time = $_POST['app_time'];
     $status = $_POST['status'];
+    $comment = $_POST['comment'];
+    $request = $_POST['request'];
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
-
-
     if ($appointment_date < $today) {
     $appointment_date_err = "Appointment date must not be in the past.";
     $error = true;
@@ -63,21 +66,15 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
         $status_err = "Please select status";
     }
 
-
-
-
-
-    
-
-
     if (!$error) {
-        $sql = "INSERT INTO `customers`(`name`, `phone`, `password`)
-         VALUES ('$name','$phone','$byScriptPassword')";
-        $mysqli->query($sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_create.php' </script>";
+        foreach ($serid as $ser) {
+            $sql = "INSERT INTO `appointments`(`customer_id`, `service_id`, `staff_id`, `appointment_date`, `appointment_time`, `status`, `comment`, `request`)
+            VALUES ('$cName','$ser','$sttid','$appointment_date','$appointment_time','$status','$comment','$request')";
+            $mysqli->query($sql);
+        }
+       
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
     }
-
-
 }
 ?>
 
@@ -103,8 +100,10 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">Customer Name</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
-                    
+                        <input type="hidden" name="customer_id" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">
                     </div>
+
+
                     <div class="form-group">
                         <label for="name" class="form-label">Service Name</label>
                         <?php
@@ -112,8 +111,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                             while ($row = $services->fetch_assoc()) {  ?>
                                 <div class="form-check">
                 <input class="form-check-input" type="checkbox" 
-                       name="services[]" 
-                       value="<?= $row['id'] ?>" 
+                       name="services[]" value="<?= $row['id'] ?>"
                        id="service<?= $row['id'] ?>">
                 <label class="form-check-label" for="service<?= $row['id'] ?>">
                     <?= $row['name'] ?>
@@ -157,9 +155,9 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         <label for="name" class="form-label">Status</label>
                         <br>
                        <select name="status" id="status" class="form-control">
-                        <option value="pending">Pending</option>
-                        <option value="complete">Complete</option>
-                        <option value="reject">Reject</option>
+                        <option value="0">Pending</option>
+                        <option value="1">Complete</option>
+                        <option value="2">Reject</option>
                        </select>
                         <small class="text-danger"><?= $status_err ?></small>
                     </div>
