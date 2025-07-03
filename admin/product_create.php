@@ -134,7 +134,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <small class="text-danger"><?= $description_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">ပစ္စည်းအရည်အသွေး</label>
+                        <label for="name" class="form-label">အရေအတွက်</label>
                         <input type="text" name="quantity" class="form-control" value="<?= $quantity ?>">
                         <small class="text-danger"><?= $quantity_err ?></small>
                     </div>
