@@ -155,7 +155,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
                        <select name="status" id="status" class="form-control">
-                        <option value="0">Pending</option>
+                        <option value="0" selected>Pending</option>
                         <option value="1">Complete</option>
                         <option value="2">Reject</option>
                        </select>

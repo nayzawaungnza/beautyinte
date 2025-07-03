@@ -244,7 +244,7 @@
 
 
         <!-- Sidebar start -->
-         <div class="nk-sidebar"> 
+         <!-- <div class="nk-sidebar"> 
             <div class="nk-nav-scroll">
                 <ul class="metismenu">
                     <li class="sidebar-click">
@@ -303,6 +303,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
 
         <!-- Sidebar end -->

@@ -20,15 +20,29 @@ $serid = '';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-   $sql = "SELECT appointments.id, customers.name as customer_name, services.name AS `service_name`, users.name AS staff_name,
-        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status,appointments.comment, appointments.request
-        FROM `appointments` Inner JOIN customers ON appointments.customer_id = customers.id
-        INNER JOIN services ON appointments.service_id = services.id inner join users on appointments.staff_id = users.id
+   $sql = "SELECT   appointments.id,
+                    customers.name as customer_name, 
+                    customers.id as customer_id,
+                    services.name AS `service_name`,
+                    users.name AS staff_name,
+                    users.id AS staff_id,
+                    appointments.appointment_date AS app_date,
+                    appointments.appointment_time AS app_time,
+                    appointments.status As status,
+                    appointments.comment,
+                    appointments.request
+        FROM `appointments`
+        Inner JOIN customers ON appointments.customer_id = customers.id
+        INNER JOIN services ON appointments.service_id = services.id
+        inner join users on appointments.staff_id = users.id
         WHERE appointments.id = '$id'";
-    $oldData = $mysqli->query($sql)->fetch_assoc();
+    $oldData1 = $mysqli->query($sql);
+    $oldData = $oldData1->fetch_assoc();    
     $name = $oldData['customer_name'];
+    $customer_id = $oldData['customer_id'];
     $serid = $oldData['service_name'];
     $sttname = $oldData['staff_name'];
+    $staff_id = $oldData['staff_id'];
     $appointment_date = $oldData['app_date'];
     $appointment_time = $oldData['app_time'];
     $status = $oldData['status'];
@@ -38,13 +52,13 @@ if (isset($_GET['id'])) {
 
 
 date_default_timezone_set('Asia/Yangon');
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];  
-    $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
+// if (isset($_GET['id'])) {
+//     $id = $_GET['id'];  
+//     $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
 
-    // $oldData = $mysqli->query($sql)->fetch_assoc();
-    // $name = $oldData['name'];
-}
+//     // $oldData = $mysqli->query($sql)->fetch_assoc();
+//     // $name = $oldData['name'];
+// }
 $sql = "SELECT services.name,services.id FROM  `services`";
 $services = $mysqli->query($sql);
 
@@ -54,6 +68,8 @@ $users = $mysqli->query($res);
 if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $cName = $_POST['customer_id'];
     $serid = $_POST['services'];
+    // var_dump($serid);
+    // die();
     $sttid = $_POST['staff_id'];
     $appointment_date = $_POST['app_date'];
     $appointment_time = $_POST['app_time'];
@@ -88,13 +104,18 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     }
 
     if (!$error) {
-        foreach ($serid as $ser) {
+        // foreach ($serid as $ser) {
             $sql = "UPDATE `appointments`SET 
-            `customer_id` = '$cName', `service_id` = '$ser', `staff_id` = '$sttid', `appointment_date` = '$appointment_date', `appointment_time` = '$appointment_time', `status` = '$status', `comment` = '$comment', `request` = '$request'
+            `customer_id` = '$cName', `service_id` = ' $serid', `staff_id` = '$sttid', `appointment_date` = '$appointment_date', `appointment_time` = '$appointment_time', `status` = '$status', `comment` = '$comment', `request` = '$request'
             WHERE `appointments`.`id` = '$id'";
-            $mysqli->query($sql);
+           $result = $mysqli->query($sql);
+        
+        if($result){
+             echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
         }
-        echo "<script>window.location.href = $admin_base_url . appointment_list.php? success=Update Success' </script>";
+        var_dump("hi");
+        die();
+        
 }
 }
 // }
@@ -121,7 +142,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                    <div class="form-group">
                         <label for="name" class="form-label">ဖောက်သည်အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
-                        <input type="hidden" name="customer_id" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">
+                        <input type="hidden" name="customer_id" value="<?= $customer_id ?>">
                     </div>
 
 
@@ -131,8 +152,8 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         if ($services && $services->num_rows > 0) {
                             while ($row = $services->fetch_assoc()) {  ?>
                                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" 
-                       name="services[]" value="<?= $row['id'] ?>"
+                <input class="form-check-input" type="radio" 
+                       name="services" value="<?= $row['id'] ?>"
                        id="service<?= $row['id'] ?>">
                 <label class="form-check-label" for="service<?= $row['id'] ?>">
                     <?= $row['name'] ?>
@@ -152,7 +173,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                             <?php
                             if ($users && $users->num_rows > 0) {
                                 while ($row = $users->fetch_assoc()) { ?>
-                                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                    <option value="<?= $row['id'] ?>" <?php if($staff_id == $row['id'] ) echo 'selected'; ?>><?= $row['name'] ?></option>
                             <?php }
                             } else {
                                 echo "<option value=''>No staff available</option>";
@@ -175,10 +196,10 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
-                       <select name="status" id="status" class="form-control" value="<?= $status ?>">
-                        <option value="0">Pending</option>
-                        <option value="1">Complete</option>
-                        <option value="2">Reject</option>
+                       <select name="status" id="status" class="form-control">
+                        <option value="0" <?php if($status == 0) echo 'selected'; ?>>Pending</option>
+                        <option value="1" <?php if($status == 1) echo 'selected'; ?>>Complete</option>
+                        <option value="2" <?php if($status == 2) echo 'selected'; ?>>Reject</option>
                        </select>
                         <small class="text-danger"><?= $status_err ?></small>
                     </div>
