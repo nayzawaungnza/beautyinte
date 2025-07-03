@@ -6,7 +6,7 @@ require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = "SELECT appointments.id, customers.name as customer_name, services.name AS `service_name`, users.name AS staff_name,
-        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As value,appointments.comment, appointments.request
+        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status,appointments.comment, appointments.request
         FROM `appointments` Inner JOIN customers ON appointments.customer_id = customers.id
         INNER JOIN services ON appointments.service_id = services.id inner join users on appointments.staff_id = users.id
         ORDER BY appointments.id DESC";
@@ -76,7 +76,15 @@ require '../layouts/header.php';
                                             <td><?= $row['staff_name'] ?></td>
                                             <td><?= $row['app_date'] ?></td>
                                             <td><?= $row['app_time'] ?></td>
-                                            <td><?= $row['value'] ?></td>
+                                            <td><?php 
+                                            if($row['status']==0){
+                                                echo "<span class='badge bg-warning text-light'>Pending</span>";
+                                            } elseif($row['status']==1){
+                                                echo "<span class='badge bg-success text-light'>Complete</span>";
+                                            } else {
+                                                echo "<span class='badge bg-danger text-light'>Reject</span>";;
+                                            }
+                                             ?></td>
                                             <td><?= $row['comment'] ?></td>
                                             <td><?= $row['request'] ?></td>
                                             <td>

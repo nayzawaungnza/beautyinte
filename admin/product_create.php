@@ -2,14 +2,14 @@
 require '../layouts/header.php';
 
 $error = false;
-$name = 
-$price = 
-$desc = 
-$quantity = 
-$name_err =
+$name =
+    $price =
+    $desc =
+    $quantity =
+    $name_err =
     $price_err =
     $description_err =
-    $quantity_err   = 
+    $quantity_err   =
     $file_err =  '';
 
 if (isset($_GET['id'])) {
@@ -72,15 +72,15 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $quantity_err  = "Quantity must be number.";
     }
 
-   $folder = __DIR__ . "/uplode";
+    $folder = __DIR__ . "/uplode";
 
-if (!file_exists($folder)) {
-    mkdir($folder, 0777, true);
-}
+    if (!file_exists($folder)) {
+        mkdir($folder, 0777, true);
+    }
 
 
-    $fileName = uniqid() . $profile['name']; 
-    
+    $fileName = uniqid() . $profile['name'];
+
     move_uploaded_file($tmp_name, $folder);
 
     if (!$error) {
@@ -106,8 +106,8 @@ if (!file_exists($folder)) {
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
     </div>
@@ -116,35 +116,35 @@ if (!file_exists($folder)) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>Create Product</h3>
+                <h3>‌ရောင်းရန်ပစ္စည်းများ အသစ်ဖန်တီးပါ</h3>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Price</label>
+                        <label for="name" class="form-label">စျေးနှုန်း</label>
                         <input type="text" name="price" class="form-control" value="<?= $price ?>">
                         <small class="text-danger"><?= $price_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Description</label>
+                        <label for="name" class="form-label">အကြောင်းအရာ ဖော်ပြချက်</label>
                         <input type="text" name="description" class="form-control" value="<?= $desc ?>">
                         <small class="text-danger"><?= $description_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Quantity</label>
+                        <label for="name" class="form-label">ပစ္စည်းအရည်အသွေး</label>
                         <input type="text" name="quantity" class="form-control" value="<?= $quantity ?>">
                         <small class="text-danger"><?= $quantity_err ?></small>
                     </div>
-                     <div class="form-group">
-                        <label for="file" class="form-label">Files</label>
+                    <div class="form-group">
+                        <label for="file" class="form-label">ဖိုင်များ</label>
                         <input type="file" name="file_name" class="form-control">
                         <small class="text-danger"><?= $file_err ?></small>
                     </div>
                     <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                     </div>
                 </form>
             </div>

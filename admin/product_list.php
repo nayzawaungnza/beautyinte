@@ -29,10 +29,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>Product List</h1>
+            <h1>‌ရောင်းရန်ပစ္စည်းများ စာရင်း</h1>
             <div class="">
                 <a href="<?= $admin_base_url . 'product_create.php' ?>" class="btn btn-primary">
-                    Create Product
+                    ‌ရောင်းရန်ပစ္စည်းများ အသစ်ဖန်တီးရန်
                 </a>
             </div>
         </div>
@@ -56,18 +56,18 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="">No.</th>
-                                    <th class="">Name</th>
-                                    <th class="">Description</th>
-                                    <th class="">Price</th>
-                                    <th class="">Quantity</th>
-                                    <th class="">Action</th>
+                                    <th class="">နံပါတ်</th>
+                                    <th class="">အမည်</th>
+                                    <th class="">အကြောင်းအရာဖော်ပြချက်</th>
+                                    <th class="">စျေးနှုန်း</th>
+                                    <th class="">ပစ္စည်းအရည်အသွေး</th>
+                                    <th class="">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 if ($products->num_rows > 0) {
-                                    $i =1;
+                                    $i = 1;
                                     while ($row = $products->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
@@ -77,10 +77,10 @@ require '../layouts/header.php';
                                             <td><?= $row['quantity'] ?></td>
                                             <td>
                                                 <div>
-                                                <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>"  class="btn btn-sm btn-primary mx-2">Details</a>
-                                                <a href="./product_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
-                                                <a href="./product_image_update.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success mx-2">Image</a>
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">Delete</button>
+                                                    <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>" class="btn btn-sm btn-primary mx-2">အသေးစိတ်</a>
+                                                    <a href="./product_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                    <a href="./product_image_update.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပုံများ</a>
+                                                    <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
                                                 </div>
                                             </td>
                                         </tr>

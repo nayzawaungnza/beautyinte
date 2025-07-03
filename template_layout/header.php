@@ -66,7 +66,7 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item "><a href="home.php" class="nav-link text-dark">ပင်မစာမျက်နှာ</a></li>
-                    <li class="nav-item "><a href="product.php" class="nav-link text-dark">ထုတ်ကုန်များ</a></li>
+                    <li class="nav-item "><a href="product.php" class="nav-link text-dark">ရောင်းရန်ပစ္စည်းများ</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link  text-dark">အကြောင်းအရာ</a></li>
                     <li class="nav-item"><a href="services.php" class="nav-link  text-dark">ဝန်ဆောင်မှုများ</a></li>
                     <li class="nav-item"><a href="work.php" class="nav-link  text-dark">လုပ်ငန်းများ</a></li>

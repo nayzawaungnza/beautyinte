@@ -18,7 +18,7 @@ $name_err =
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users`";
-     
+
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
     $email = $oldData['email'];
@@ -101,7 +101,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         `users`.`name` = '$name', `users`.`email` = '$email', `users`.`password` = '$password', `users`.`role` = '$role', `users`.`phone` = '$phone', `users`.`gender` = '$gender'
         WHERE `users`.`id` = '$id'";
         $mysqli->query($sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php? success=Update Success' </script>";
+        echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php? success=အသစ်ပြင်ခြင်း အောင်မြင်ပါသည်' </script>";
     }
 }
 
@@ -115,8 +115,8 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
     </div>
@@ -125,29 +125,29 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>User Update</h3>
+                <h3>အသုံးပြုသူစာရင်း အသစ်ပြင်ခြင်း</h3>
                 <form method="POST">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Email</label>
+                        <label for="name" class="form-label">အီးမေးလ်</label>
                         <input type="text" name="email" class="form-control" value="<?= $email ?>">
                         <small class="text-danger"><?= $email_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Password</label>
+                        <label for="name" class="form-label">စကားဝှက်</label>
                         <input type="password" name="password" class="form-control" value="<?= $password ?>">
                         <small class="text-danger"><?= $password_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="role" class="form-label">Role</label>
+                        <label for="role" class="form-label">အခန်းကဏ္ဍ</label>
                         <select name="role" id="role" class="form-control" value="<?= $role ?>">
-                            <option value="">Please Choose Role</option>
-                            <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>Admin</option>
-                            <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>Staff</option>
+                            <option value="">‌ေရွးချယ်ရန် အခန်းကဏ္ဍ</option>
+                            <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
+                            <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
                         </select>
 
                         <?php
@@ -159,23 +159,23 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         ?>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Phone</label>
+                        <label for="name" class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>
                         <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                         <small class="text-danger"><?= $phone_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Gender</label>
+                        <label class="form-label">လိင်</label>
                         <br />
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                Male
+                                ယောကျာ်း
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
                             <label class="form-check-label" for="flexRadioDefault2">
-                                Female
+                                မိန်းမ
                             </label>
                         </div>
                         <?php
@@ -188,7 +188,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         ?>
                     </div>
                     <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                     </div>
                 </form>
             </div>

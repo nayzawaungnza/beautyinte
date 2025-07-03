@@ -43,7 +43,7 @@ function create_table($mysqli)
                 gender ENUM('male','female') NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )"; 
+                )";
     if ($mysqli->query($user_sql) === false) return false;
     //Customer
     $customer_sql = "CREATE TABLE IF NOT EXISTS `customers`
@@ -116,7 +116,6 @@ function create_table($mysqli)
                    appointment_time TIME NULL,
                    status INT NOT NULL,
                    comment TEXT NULL,
-                   rating INT NOT NULL,
                    request TEXT NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

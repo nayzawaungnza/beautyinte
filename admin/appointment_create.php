@@ -2,6 +2,7 @@
 
 require '../layouts/header.php';
 $error = false;
+<<<<<<< HEAD
 $name = 
 $appointment_date_err =
 $appointment_time_err =
@@ -16,19 +17,34 @@ $status =
 $comment = 
 $request = 
 $serid = '';
+=======
+$name =
+    $appointment_date_err =
+    $appointment_time_err =
+    $status_err =
+    $request_err =
+    $customer_name =
+    $service_name =
+    $staff_name =
+    $appointment_date =
+    $appointment_time =
+    $status =
+    $comment =
+    $request = '';
+>>>>>>> 31fc97024dbd20808713724da183f675210d4282
 date_default_timezone_set('Asia/Yangon');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
-     
+
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
 }
-    $sql = "SELECT services.name,services.id FROM  `services`";   
-    $services = $mysqli->query($sql);
+$sql = "SELECT services.name,services.id FROM  `services`";
+$services = $mysqli->query($sql);
 
-    $res = "SELECT * FROM  `users`";   
-    $users = $mysqli->query($res);
+$res = "SELECT * FROM  `users`";
+$users = $mysqli->query($res);
 
 if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $cName = $_POST['customer_id'];
@@ -42,8 +58,8 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
     if ($appointment_date < $today) {
-    $appointment_date_err = "Appointment date must not be in the past.";
-    $error = true;
+        $appointment_date_err = "Appointment date must not be in the past.";
+        $error = true;
     }
 
     if (empty($appointment_date)) {
@@ -56,7 +72,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
         $appointment_time_err = "Please add appointment time";
     }
 
-    if ($appointment_time <= $current_time ) {
+    if ($appointment_time <= $current_time) {
         $error = true;
         $appointment_time_err = "unavailable appointment time";
     }
@@ -66,6 +82,16 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
         $status_err = "Please select status";
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+>>>>>>> 31fc97024dbd20808713724da183f675210d4282
     if (!$error) {
         foreach ($serid as $ser) {
             $sql = "INSERT INTO `appointments`(`customer_id`, `service_id`, `staff_id`, `appointment_date`, `appointment_time`, `status`, `comment`, `request`)
@@ -85,8 +111,8 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
     </div>
@@ -95,21 +121,26 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>Create Appointment</h3>
+                <h3>အချိန်ချိန်းဆိုမှုစာရင်း အသစ်ဖန်တီးပါ</h3>
                 <form method="POST">
                     <div class="form-group">
-                        <label for="name" class="form-label">Customer Name</label>
+                        <label for="name" class="form-label">ဖောက်သည်အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
+<<<<<<< HEAD
                         <input type="hidden" name="customer_id" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">
+=======
+
+>>>>>>> 31fc97024dbd20808713724da183f675210d4282
                     </div>
 
 
                     <div class="form-group">
-                        <label for="name" class="form-label">Service Name</label>
+                        <label for="name" class="form-label">ဝန်ဆောင်မှု အမည်</label>
                         <?php
-                       if ($services && $services->num_rows > 0) {
+                        if ($services && $services->num_rows > 0) {
                             while ($row = $services->fetch_assoc()) {  ?>
                                 <div class="form-check">
+<<<<<<< HEAD
                 <input class="form-check-input" type="checkbox" 
                        name="services[]" value="<?= $row['id'] ?>"
                        id="service<?= $row['id'] ?>">
@@ -120,19 +151,32 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                             
                            <?php }
                         } 
+=======
+                                    <input class="form-check-input" type="checkbox"
+                                        name="services[]"
+                                        value="<?= $row['id'] ?>"
+                                        id="service<?= $row['id'] ?>">
+                                    <label class="form-check-label" for="service<?= $row['id'] ?>">
+                                        <?= $row['name'] ?>
+                                    </label>
+                                </div>
+
+                        <?php }
+                        }
+>>>>>>> 31fc97024dbd20808713724da183f675210d4282
                         ?>
                     </div>
-                    
+
 
                     <div class="form-group">
-                        <label for="name" class="form-label">Staff Name</label>
+                        <label for="name" class="form-label">ဝန်ထမ်း အမည်</label>
                         <select name="staff_id" id="staff_id" class="form-control">
-                            <option value="">Please Choose Staff</option>
+                            <option value="">‌ေရွးချယ်ရန် ဝန်ထမ်း</option>
                             <?php
                             if ($users && $users->num_rows > 0) {
                                 while ($row = $users->fetch_assoc()) { ?>
                                     <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
-                                <?php }
+                            <?php }
                             } else {
                                 echo "<option value=''>No staff available</option>";
                             }
@@ -140,40 +184,48 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         </select>
                     </div>
 
-                 
+
                     <div class="form-group">
-                        <label for="name" class="form-label">Appointment Date</label>
+                        <label for="name" class="form-label">ချိန်းဆိုသည့် ရက်စွဲ</label>
                         <input type="date" name="app_date" class="form-control" value="<?= $appointment_date ?>">
                         <small class="text-danger"><?= $appointment_date_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Appointment Time</label>
+                        <label for="name" class="form-label">ချိန်းဆိုသည့် အချိန်</label>
                         <input type="time" name="app_time" class="form-control" value="<?= $appointment_time ?>">
                         <small class="text-danger"><?= $appointment_time_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Status</label>
+                        <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
+<<<<<<< HEAD
                        <select name="status" id="status" class="form-control">
                         <option value="0">Pending</option>
                         <option value="1">Complete</option>
                         <option value="2">Reject</option>
                        </select>
+=======
+                        <select name="status" id="status" class="form-control">
+                            <optinn value="pending">ဆိုင်းငံ့နေသည်</optinn>
+                            <option value="complete">ပြီးဆုံးသည်</option>
+                            <option value="reject">ငြင်းဆိုသည်</option>
+                        </select>
+>>>>>>> 31fc97024dbd20808713724da183f675210d4282
                         <small class="text-danger"><?= $status_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Comment</label>
+                        <label for="name" class="form-label">မှတ်ချက်</label>
                         <input type="text" name="comment" class="form-control" value="<?= $comment ?>">
-                        
+
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Request</label>
+                        <label for="name" class="form-label">တောင်းဆိုမှု</label>
                         <input type="text" name="request" class="form-control" value="<?= $request ?>">
                         <small class="text-danger"><?= $request_err ?></small>
                     </div>
 
                     <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                     </div>
                 </form>
             </div>

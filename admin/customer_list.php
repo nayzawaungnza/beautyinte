@@ -23,10 +23,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>Customer List</h3>
+            <h3>ဖောက်သည်စာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'customer_create.php' ?>" class="btn btn-primary">
-                    Customer Create
+                    ဖောက်သည်အသစ်ဖန်တီးရန်
                 </a>
             </div>
         </div>
@@ -50,17 +50,17 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="">No.</th>
-                                    <th class="">Name</th>
-                                    <th class="">Phone</th>
-                                    <th class="">Password</th>
-                                    <th class="">Action</th>
+                                    <th class="">နံပါတ်</th>
+                                    <th class="">အမည်</th>
+                                    <th class="">ဆက်သွယ်ရန်ဖုန်း</th>
+                                    <th class="">စကားဝှက်</th>
+                                    <th class="">လုပ်ဆောင်မှု</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if ($res->num_rows > 0) {
-                                     $i =1;
+                                    $i = 1;
                                     while ($row = $res->fetch_assoc()) { ?>
                                         <tr class="text-center">
                                             <td><?= $i++ ?></td>
@@ -70,9 +70,9 @@ require '../layouts/header.php';
 
 
                                             <td>
-                                                <a href="./customer_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
-                                                <a href="./appointment_create.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-primary appointment_btn mx-2">Appointment</a>
-                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                                <a href="./customer_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                <a href="./appointment_create.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary appointment_btn mx-2">အချိန်ချိန်းဆိုမှုစာရင်း</a>
+                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
                                             </td>
                                         </tr>
                                 <?php }

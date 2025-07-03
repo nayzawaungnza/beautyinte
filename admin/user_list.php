@@ -24,10 +24,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>User List</h3>
+            <h3>အသုံးပြုသူ စာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'user_create.php' ?>" class="btn btn-primary">
-                    Create User
+                    အသုံးပြုသူ အသစ်ဖန်တီးရန်
                 </a>
             </div>
         </div>
@@ -51,30 +51,30 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="">No.</th>
-                                    <th class="">Name</th>
-                                    <th class="">Email</th>
-                                    <th class="">Role</th>
-                                    <th class="">Phone</th>
-                                    <th class="">Gender</th>
-                                    <th class="">Action</th>
+                                    <th class="">နံပါတ်</th>
+                                    <th class="">အမည်</th>
+                                    <th class="">အီးမေးလ်</th>
+                                    <th class="">အခန်းကဏ္ဍ</th>
+                                    <th class="">ဆက်သွယ်ရန်ဖုန်း</th>
+                                    <th class="">လိင်</th>
+                                    <th class="">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 if ($users->num_rows > 0) {
-                                     $i =1;
+                                    $i = 1;
                                     while ($row = $users->fetch_assoc()) { ?>
                                         <tr>
-                                             <td><?= $i++ ?></td>
+                                            <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td><?= $row['role'] ?></td>
                                             <td><?= $row['phone'] ?></td>
                                             <td><?= $row['gender'] ?></td>
                                             <td>
-                                               <a href="./user_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                                <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
                                             </td>
                                         </tr>
                                 <?php }
