@@ -26,10 +26,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>Appointment List</h1>
+            <h1>အချိန်ချိန်းဆိုမှု စာရင်း</h1>
             <div class="">
                 <a href="<?= $admin_base_url . 'appointment_create.php' ?>" class="btn btn-primary">
-                    Create Appointment
+                    အချိန်ချိန်းဆိုမှု အသစ်ဖန်တီးရန်
                 </a>
             </div>
         </div>
@@ -53,21 +53,21 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="">No.</th>
-                                    <th class="">Customer Name</th>
-                                    <th class="">Service Name</th>
-                                    <th class="">Staff Name</th>
-                                    <th class="">Appointment Date</th>
-                                    <th class="">Appointment Time</th>
-                                    <th class="">Status</th>
-                                    <th class="">Comment</th>
-                                    <th class="">Request</th>
+                                    <th class="">နံပါတ်</th>
+                                    <th class="">ဖောက်သည်အမည်</th>
+                                    <th class="">ဝန်ဆောင်မှု အမည်</th>
+                                    <th class="">ဝန်ထမ်း အမည်</th>
+                                    <th class="">ချိန်းဆိုသည့် ရက်စွဲ</th>
+                                    <th class="">ချိန်းဆိုသည့် အချိန်</th>
+                                    <th class="">အခြေအနေ</th>
+                                    <th class="">မှတ်ချက်</th>
+                                    <th class="">တောင်းဆိုမှု</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 if ($appointments->num_rows > 0) {
-                                    $i =1;
+                                    $i = 1;
                                     while ($row = $appointments->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
@@ -76,22 +76,22 @@ require '../layouts/header.php';
                                             <td><?= $row['staff_name'] ?></td>
                                             <td><?= $row['app_date'] ?></td>
                                             <td><?= $row['app_time'] ?></td>
-                                            <td><?php 
-                                            if($row['status']==0){
-                                                echo "<span class='badge bg-warning text-light'>Pending</span>";
-                                            } elseif($row['status']==1){
-                                                echo "<span class='badge bg-success text-light'>Complete</span>";
-                                            } else {
-                                                echo "<span class='badge bg-danger text-light'>Reject</span>";;
-                                            }
-                                             ?></td>
+                                            <td><?php
+                                                if ($row['status'] == 0) {
+                                                    echo "<span class='badge bg-warning text-light'>Pending</span>";
+                                                } elseif ($row['status'] == 1) {
+                                                    echo "<span class='badge bg-success text-light'>Complete</span>";
+                                                } else {
+                                                    echo "<span class='badge bg-danger text-light'>Reject</span>";;
+                                                }
+                                                ?></td>
                                             <td><?= $row['comment'] ?></td>
                                             <td><?= $row['request'] ?></td>
                                             <td>
                                                 <div>
-                                                
-                                                <a href="./appointment_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">Delete</button>
+
+                                                    <a href="./appointment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                    <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
                                                 </div>
                                             </td>
                                         </tr>

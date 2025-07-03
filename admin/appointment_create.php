@@ -2,20 +2,20 @@
 
 require '../layouts/header.php';
 $error = false;
-$name = 
-$appointment_date_err =
-$appointment_time_err =
-$status_err =
-$request_err =
-$customer_name = 
-$service_name = 
-$staff_name = 
-$appointment_date = 
-$appointment_time = 
-$status = 
-$comment = 
-$request = 
-$serid = '';
+$name =
+    $appointment_date_err =
+    $appointment_time_err =
+    $status_err =
+    $request_err =
+    $customer_name =
+    $service_name =
+    $staff_name =
+    $appointment_date =
+    $appointment_time =
+    $status =
+    $comment =
+    $request =
+    $serid = '';
 date_default_timezone_set('Asia/Yangon');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -72,7 +72,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
             VALUES ('$cName','$ser','$sttid','$appointment_date','$appointment_time','$status','$comment','$request')";
             $mysqli->query($sql);
         }
-       
+
         echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
     }
 }
@@ -110,16 +110,16 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         if ($services && $services->num_rows > 0) {
                             while ($row = $services->fetch_assoc()) {  ?>
                                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" 
-                       name="services[]" value="<?= $row['id'] ?>"
-                       id="service<?= $row['id'] ?>">
-                <label class="form-check-label" for="service<?= $row['id'] ?>">
-                    <?= $row['name'] ?>
-                </label>
-            </div>
-                            
-                           <?php }
-                        } 
+                                    <input class="form-check-input" type="checkbox"
+                                        name="services[]" value="<?= $row['id'] ?>"
+                                        id="service<?= $row['id'] ?>">
+                                    <label class="form-check-label" for="service<?= $row['id'] ?>">
+                                        <?= $row['name'] ?>
+                                    </label>
+                                </div>
+
+                        <?php }
+                        }
                         ?>
                     </div>
 
@@ -127,7 +127,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">ဝန်ထမ်း အမည်</label>
                         <select name="staff_id" id="staff_id" class="form-control">
-                            <option value="">‌ေရွးချယ်ရန် ဝန်ထမ်း</option>
+                            <option value="">‌ရွေးချယ်ရန် ဝန်ထမ်း</option>
                             <?php
                             if ($users && $users->num_rows > 0) {
                                 while ($row = $users->fetch_assoc()) { ?>
@@ -154,11 +154,11 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
-                       <select name="status" id="status" class="form-control">
-                        <option value="0">Pending</option>
-                        <option value="1">Complete</option>
-                        <option value="2">Reject</option>
-                       </select>
+                        <select name="status" id="status" class="form-control">
+                            <option value="0">ဆိုင်းငံ့သည်</option>
+                            <option value="1">ပြီးဆုံးသည်</option>
+                            <option value="2">ငြင်းပယ်သည်</option>
+                        </select>
                         <small class="text-danger"><?= $status_err ?></small>
                     </div>
                     <div class="form-group">
