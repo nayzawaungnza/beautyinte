@@ -2,7 +2,6 @@
 
 require '../layouts/header.php';
 $error = false;
-<<<<<<< HEAD
 $name = 
 $appointment_date_err =
 $appointment_time_err =
@@ -17,21 +16,6 @@ $status =
 $comment = 
 $request = 
 $serid = '';
-=======
-$name =
-    $appointment_date_err =
-    $appointment_time_err =
-    $status_err =
-    $request_err =
-    $customer_name =
-    $service_name =
-    $staff_name =
-    $appointment_date =
-    $appointment_time =
-    $status =
-    $comment =
-    $request = '';
->>>>>>> 31fc97024dbd20808713724da183f675210d4282
 date_default_timezone_set('Asia/Yangon');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -82,16 +66,6 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
         $status_err = "Please select status";
     }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
->>>>>>> 31fc97024dbd20808713724da183f675210d4282
     if (!$error) {
         foreach ($serid as $ser) {
             $sql = "INSERT INTO `appointments`(`customer_id`, `service_id`, `staff_id`, `appointment_date`, `appointment_time`, `status`, `comment`, `request`)
@@ -126,11 +100,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">ဖောက်သည်အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
-<<<<<<< HEAD
                         <input type="hidden" name="customer_id" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">
-=======
-
->>>>>>> 31fc97024dbd20808713724da183f675210d4282
                     </div>
 
 
@@ -140,7 +110,6 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         if ($services && $services->num_rows > 0) {
                             while ($row = $services->fetch_assoc()) {  ?>
                                 <div class="form-check">
-<<<<<<< HEAD
                 <input class="form-check-input" type="checkbox" 
                        name="services[]" value="<?= $row['id'] ?>"
                        id="service<?= $row['id'] ?>">
@@ -151,19 +120,6 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                             
                            <?php }
                         } 
-=======
-                                    <input class="form-check-input" type="checkbox"
-                                        name="services[]"
-                                        value="<?= $row['id'] ?>"
-                                        id="service<?= $row['id'] ?>">
-                                    <label class="form-check-label" for="service<?= $row['id'] ?>">
-                                        <?= $row['name'] ?>
-                                    </label>
-                                </div>
-
-                        <?php }
-                        }
->>>>>>> 31fc97024dbd20808713724da183f675210d4282
                         ?>
                     </div>
 
@@ -198,19 +154,11 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
-<<<<<<< HEAD
                        <select name="status" id="status" class="form-control">
                         <option value="0">Pending</option>
                         <option value="1">Complete</option>
                         <option value="2">Reject</option>
                        </select>
-=======
-                        <select name="status" id="status" class="form-control">
-                            <optinn value="pending">ဆိုင်းငံ့နေသည်</optinn>
-                            <option value="complete">ပြီးဆုံးသည်</option>
-                            <option value="reject">ငြင်းဆိုသည်</option>
-                        </select>
->>>>>>> 31fc97024dbd20808713724da183f675210d4282
                         <small class="text-danger"><?= $status_err ?></small>
                     </div>
                     <div class="form-group">
