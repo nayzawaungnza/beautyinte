@@ -124,7 +124,7 @@ require '../layouts/header.php';
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'product_list.php?delete_id=' + id
+                    window.location.href = 'appointment_list.php?delete_id=' + id
                 }
             });
         })

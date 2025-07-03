@@ -289,7 +289,7 @@
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
                             <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
-                            <li><a href="../admin/appointment_create.php">ဖန်တီးမည်</a></li>
+
                         </ul>
                     </li>
                     <li class="sidebar-click">
