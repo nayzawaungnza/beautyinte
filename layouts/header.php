@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Beauty Salon</title>
+    <title>အလှပြင်ဆိုင်</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -55,7 +55,7 @@
                 <a href="./dashboard.php">
                     <span class="brand-title">
                         <img src="../images/logo.jpg" alt="logo" style="width: 50px; ">
-                        <h3>အလှပြင်ဆိုင်</h3>
+                        <h3>S&H အလှပြင်ဆိုင်</h3>
                     </span>
                 </a>
             </div>
@@ -276,7 +276,7 @@
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">ထုတ်ကုန်များ</span>
+                            <i class=""></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
                             <li><a href="../admin/product_list.php">စာရင်း</a></li>
@@ -285,7 +285,7 @@
                     </li>
                     <li class="sidebar-click">
                         <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">အချိန်ချိန်းစာရင်း</span>
+                            <i class=""></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
                         </a>
                         <ul aria-expanded="true" class="pannel" style="display: none;">
                             <li><a href="">စာရင်း</a></li>

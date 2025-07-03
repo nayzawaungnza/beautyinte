@@ -2,17 +2,17 @@
 require '../layouts/header.php';
 
 $error = false;
-$name = 
-$price = 
-$description = 
-$name_err =
-$price_err =
-$description_err = '';
+$name =
+    $price =
+    $description =
+    $name_err =
+    $price_err =
+    $description_err = '';
 
-    if (isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT services.id, services.name, services.price, services.description FROM  `services`";
-     
+
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
     $price = $oldData['price'];
@@ -76,8 +76,8 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
     </div>
@@ -86,25 +86,25 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>Service Create</h3>
+                <h3>ဝန်ဆောင်မှု အသစ်ဖန်တီးရန်</h3>
                 <form method="POST">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Price</label>
+                        <label for="name" class="form-label">စျေးနှုန်း</label>
                         <input type="text" name="price" class="form-control" value="<?= $price ?>">
                         <small class="text-danger"><?= $price_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Description</label>
+                        <label for="name" class="form-label">အကြောင်းအရာ ဖော်ပြချက်</label>
                         <input type="text" name="description" class="form-control" value="<?= $description ?>">
                         <small class="text-danger"><?= $description_err ?></small>
                     </div>
                     <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">Submit</button>
+                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                     </div>
                 </form>
             </div>

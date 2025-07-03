@@ -23,10 +23,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>Service List</h3>
+            <h3>ဝန်ဆောင်မှုစာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'service_create.php' ?>" class="btn btn-primary">
-                    Services Create
+                    ဝန်ဆောင်မှု အသစ်ဖန်တီးရန်
                 </a>
             </div>
         </div>
@@ -50,28 +50,28 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="">No.</th>
-                                    <th class="">Name</th>
-                                    <th class="">Price</th>
-                                    <th class="">Description</th>
-                                    <th class="">Action</th>
+                                    <th class="">နံပါတ်</th>
+                                    <th class="">အမည်</th>
+                                    <th class="">စျေးနှုန်း</th>
+                                    <th class="">အကြောင်းအရာ ဖော်ပြချက်</th>
+                                    <th class="">လုပ်ဆောင်မှု</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if ($res->num_rows > 0) {
-                                    $i =1;
+                                    $i = 1;
                                     while ($row = $res->fetch_assoc()) { ?>
                                         <tr class="text-center">
                                             <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
-                                            <td class="text-right"><?= number_format($row['price']) ?> MMK</td>
+                                            <td class="text-right"><?= number_format($row['price']) ?> ကျပ်</td>
                                             <td><?= $row['description'] ?></td>
 
 
-                                            <td>     
-                                                <a href="./service_edit.php?id=<?= $row['id'] ?>"  class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
-                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                            <td>
+                                                <a href="./service_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
                                             </td>
                                         </tr>
                                 <?php }
