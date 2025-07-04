@@ -4,13 +4,24 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = selectData('payments', $mysqli, "", "*", "ORDER BY created_at DESC");
-$delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
+
+// Fetch all payments with appointment, customer, and service info
+$sql = "SELECT p.id, p.amount, p.payment_method, p.payment_date, a.id as appointment_id, c.name as customer_name, s.name as service_name, a.appointment_date
+        FROM payments p
+        INNER JOIN appointments a ON p.appointment_id = a.id
+        INNER JOIN customers c ON a.customer_id = c.id
+        INNER JOIN services s ON a.service_id = s.id
+        ORDER BY p.id DESC";
+$payments = $mysqli->query($sql);
+
+// Handle delete
+$delete_id = isset($_GET['delete_id']) ? $_GET['delete_id'] : '';
 if ($delete_id !== '') {
-    $res = deleteData('payments', $mysqli, "id=$delete_id");
+    $res = $mysqli->query("DELETE FROM payments WHERE id = $delete_id");
     if ($res) {
         $url = $admin_base_url . "payment_list.php?success=Delete Payment Success";
         header("Location: $url");
+        exit;
     }
 }
 require '../layouts/header.php';
@@ -18,14 +29,13 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>Payment List</h3>
+            <h1>ငွေပေး‌ချေမှု စာရင်း</h1>
             <div class="">
                 <a href="<?= $admin_base_url . 'payment_create.php' ?>" class="btn btn-primary">
-                    Create Payment
+                    ငွေပေး‌ချေမှုအသစ်ဖန်တီးရန်
                 </a>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
                 <?php if ($success !== '') { ?>
@@ -45,28 +55,41 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="col-2">No.</th>
-                                    <th class="col-4">Name</th>
-                                    <th class="col-2">Updated At</th>
-                                    <th class="col-2">Created At</th>
-                                    <th class="col-2">Action</th>
+                                    <th>နံပါတ်</th>
+                                    <th>အချိန်ချိန်းဆိုမှု</th>
+                                    <th>ဖောက်သည်</th>
+                                    <th>ဝန်ဆောင်မှု</th>
+                                    <th>ငွေပမာဏ</th>
+                                    <th>အမျိုးအစား</th>
+                                    <th>ရက်စွဲ</th>
+                                    <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($res->num_rows > 0) {
-                                    while ($row = $res->fetch_assoc()) { ?>
+                                <?php
+                                if ($payments && $payments->num_rows > 0) {
+                                    $i = 1;
+                                    while ($row = $payments->fetch_assoc()) { ?>
                                         <tr>
-                                            <td><?= $row['id'] ?></td>
-                                            <td><?= $row['name'] ?></td>
-                                            <td><?= date("Y-m-d g:i:s A", strtotime($row['updated_at'])) ?></td>
-                                            <td><?= date("Y-m-d g:i:s A", strtotime($row['created_at'])) ?></td>
+                                            <td><?= $i++ ?></td>
+                                            <td>(<?= $row['appointment_id'] ?>) <?= $row['appointment_date'] ?></td>
+                                            <td><?= htmlspecialchars($row['customer_name']) ?></td>
+                                            <td><?= htmlspecialchars($row['service_name']) ?></td>
+                                            <td><?= htmlspecialchars($row['amount']) ?></td>
+                                            <td><?= htmlspecialchars(ucfirst($row['payment_method'])) ?></td>
+                                            <td><?= htmlspecialchars($row['payment_date']) ?></td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                                <button class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                                <div>
+                                                    <a href="./payment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                </div>
                                             </td>
                                         </tr>
-                                <?php }
-                                } ?>
+                                    <?php }
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="9" class="text-center">ငွေပေး‌ချေမှု မရှိပါ</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -92,8 +115,6 @@ require '../layouts/header.php';
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-
-
                 if (result.isConfirmed) {
                     window.location.href = 'payment_list.php?delete_id=' + id
                 }

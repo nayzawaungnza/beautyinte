@@ -131,7 +131,6 @@ function create_table($mysqli)
                    appointment_id INT NOT NULL,
                    amount INT NOT NULL,
                    payment_method ENUM('k-pay','wave-pay')NOT NULL,
-                   payment_status INT NOT NULL,
                    payment_date DATE NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
