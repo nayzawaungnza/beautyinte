@@ -17,13 +17,13 @@ $name =
     $request =
     $serid = '';
 date_default_timezone_set('Asia/Yangon');
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
+// if (isset($_GET['id'])) {
+//     $id = $_GET['id'];
+//     $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
 
-    $oldData = $mysqli->query($sql)->fetch_assoc();
-    $name = $oldData['name'];
-}
+//     $oldData = $mysqli->query($sql)->fetch_assoc();
+//     $name = $oldData['name'];
+// }
 $sql = "SELECT services.name,services.id FROM  `services`";
 $services = $mysqli->query($sql);
 
@@ -72,7 +72,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
             VALUES ('$cName','$ser','$sttid','$appointment_date','$appointment_time','$status','$comment','$request')";
             $mysqli->query($sql);
         }
-
+    
         echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
     }
 }
@@ -95,11 +95,11 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>အချိန်ချိန်းဆိုမှုစာရင်း အသစ်ဖန်တီးပါ</h3>
+                <h3>အချိန်ချိန်းဆိုမှုစာရင်းဖန်တီးပါ</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">ဖောက်သည်အမည်</label>
-                        <input type="text" name="name" class="form-control" value="<?= $name ?>">
+                        <input type="text" name="name" class="form-control">
                         <input type="hidden" name="customer_id" value="<?= isset($_GET['id']) ? $_GET['id'] : '' ?>">
                     </div>
 

@@ -29,7 +29,7 @@ require '../layouts/header.php';
             <h1>အချိန်ချိန်းဆိုမှု စာရင်း</h1>
             <div class="">
                 <a href="<?= $admin_base_url . 'appointment_create.php' ?>" class="btn btn-primary">
-                    အချိန်ချိန်းဆိုမှု အသစ်ဖန်တီးရန်
+                    အချိန်ချိန်းဆိုမှု စာရင်းဖန်တီးရန်
                 </a>
             </div>
         </div>
