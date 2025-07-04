@@ -114,7 +114,7 @@
 
 
         <!-- Sidebar start -->
-        <!-- <div class="nk-sidebar">
+        <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu">
                     <li class="sidebar-click">
@@ -171,8 +171,19 @@
                             <li><a href="../admin/payment_create.php">ဖန်တီးမည်</a></li>
                         </ul>
                     </li>
+
+                    <li class="sidebar-click">
+                        <a class="has-arrow arrow">
+                            <i class=""></i><span class="nav-text">Product Sales</span>
+                        </a>
+                        <ul aria-expanded="true" class="pannel" style="display: none;">
+                            <li><a href="../admin/product_sale_list.php">Sale List</a></li>
+                            <li><a href="../admin/product_sale_create.php">Create Sale</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
-        </div> -->
+        </div>
 
         <!-- Sidebar end -->

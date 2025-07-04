@@ -1,26 +1,31 @@
 <?php
 require '../layouts/header.php';
+require '../require/check_auth.php';
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: ../staff/task_list.php");
+    exit;
+}
 
 $error = false;
-$name = 
-$appointment_date_err =
-$appointment_time_err =
-$status_err =
-$request_err =
-$customer_name = 
-$service_name = 
-$staff_name = 
-$appointment_date = 
-$appointment_time = 
-$status = 
-$comment = 
-$request = 
-$serid = '';
+$name =
+    $appointment_date_err =
+    $appointment_time_err =
+    $status_err =
+    $request_err =
+    $customer_name =
+    $service_name =
+    $staff_name =
+    $appointment_date =
+    $appointment_time =
+    $status =
+    $comment =
+    $request =
+    $serid = '';
 
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-   $sql = "SELECT   appointments.id,
+    $sql = "SELECT   appointments.id,
                     customers.name as customer_name, 
                     customers.id as customer_id,
                     services.name AS `service_name`,
@@ -37,7 +42,7 @@ if (isset($_GET['id'])) {
         inner join users on appointments.staff_id = users.id
         WHERE appointments.id = '$id'";
     $oldData1 = $mysqli->query($sql);
-    $oldData = $oldData1->fetch_assoc();    
+    $oldData = $oldData1->fetch_assoc();
     $name = $oldData['customer_name'];
     $customer_id = $oldData['customer_id'];
     $serid = $oldData['service_name'];
@@ -46,7 +51,7 @@ if (isset($_GET['id'])) {
     $appointment_date = $oldData['app_date'];
     $appointment_time = $oldData['app_time'];
     $status = $oldData['status'];
-    $comment = $oldData['comment']; 
+    $comment = $oldData['comment'];
     $request = $oldData['request'];
 }
 
@@ -105,18 +110,17 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
 
     if (!$error) {
         // foreach ($serid as $ser) {
-            $sql = "UPDATE `appointments`SET 
+        $sql = "UPDATE `appointments`SET 
             `customer_id` = '$cName', `service_id` = ' $serid', `staff_id` = '$sttid', `appointment_date` = '$appointment_date', `appointment_time` = '$appointment_time', `status` = '$status', `comment` = '$comment', `request` = '$request'
             WHERE `appointments`.`id` = '$id'";
-           $result = $mysqli->query($sql);
-        
-        if($result){
-             echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
+        $result = $mysqli->query($sql);
+
+        if ($result) {
+            echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
         }
         var_dump("hi");
         die();
-        
-}
+    }
 }
 // }
 ?>
@@ -139,7 +143,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
             <div class="card-body">
                 <h3>‌အချိန်ချိန်းဆိုမှုအသစ်ဖန်တီးရန်</h3>
                 <form method="POST">
-                   <div class="form-group">
+                    <div class="form-group">
                         <label for="name" class="form-label">ဖောက်သည်အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
                         <input type="hidden" name="customer_id" value="<?= $customer_id ?>">
@@ -152,16 +156,16 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         if ($services && $services->num_rows > 0) {
                             while ($row = $services->fetch_assoc()) {  ?>
                                 <div class="form-check">
-                <input class="form-check-input" type="radio" 
-                       name="services" value="<?= $row['id'] ?>"
-                       id="service<?= $row['id'] ?>">
-                <label class="form-check-label" for="service<?= $row['id'] ?>">
-                    <?= $row['name'] ?>
-                </label>
-            </div>
-                            
-                           <?php }
-                        } 
+                                    <input class="form-check-input" type="radio"
+                                        name="services" value="<?= $row['id'] ?>"
+                                        id="service<?= $row['id'] ?>">
+                                    <label class="form-check-label" for="service<?= $row['id'] ?>">
+                                        <?= $row['name'] ?>
+                                    </label>
+                                </div>
+
+                        <?php }
+                        }
                         ?>
                     </div>
 
@@ -173,7 +177,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                             <?php
                             if ($users && $users->num_rows > 0) {
                                 while ($row = $users->fetch_assoc()) { ?>
-                                    <option value="<?= $row['id'] ?>" <?php if($staff_id == $row['id'] ) echo 'selected'; ?>><?= $row['name'] ?></option>
+                                    <option value="<?= $row['id'] ?>" <?php if ($staff_id == $row['id']) echo 'selected'; ?>><?= $row['name'] ?></option>
                             <?php }
                             } else {
                                 echo "<option value=''>No staff available</option>";
@@ -196,11 +200,11 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
-                       <select name="status" id="status" class="form-control">
-                        <option value="0" <?php if($status == 0) echo 'selected'; ?>>Pending</option>
-                        <option value="1" <?php if($status == 1) echo 'selected'; ?>>Complete</option>
-                        <option value="2" <?php if($status == 2) echo 'selected'; ?>>Reject</option>
-                       </select>
+                        <select name="status" id="status" class="form-control">
+                            <option value="0" <?php if ($status == 0) echo 'selected'; ?>>Pending</option>
+                            <option value="1" <?php if ($status == 1) echo 'selected'; ?>>Complete</option>
+                            <option value="2" <?php if ($status == 2) echo 'selected'; ?>>Reject</option>
+                        </select>
                         <small class="text-danger"><?= $status_err ?></small>
                     </div>
                     <div class="form-group">
