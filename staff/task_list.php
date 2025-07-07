@@ -1,7 +1,8 @@
 <?php
+require '../require/check_auth.php';
+checkAuth('staff');
 require '../require/db.php';
 require '../require/common.php';
-require '../require/check_auth.php';
 require '../layouts/header.php';
 
 // Assume staff is logged in and their user id is in session

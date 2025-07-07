@@ -1,4 +1,6 @@
 <?php
+require '../require/check_auth.php';
+checkAuth('admin');
 require '../layouts/header.php';
 require '../require/check_auth.php';
 if ($_SESSION['role'] !== 'admin') {

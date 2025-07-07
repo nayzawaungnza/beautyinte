@@ -1,4 +1,6 @@
 <?php
+require '../require/check_auth.php';
+checkAuth('admin');
 require '../require/db.php';
 require '../require/common.php';
 $error = false;
@@ -121,7 +123,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <title>Register</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-   <link href="../dashCss/style.css" rel="stylesheet">
+    <link href="../dashCss/style.css" rel="stylesheet">
 </head>
 
 <body class="h-100" style=" background-color: #f5e4d7;">
@@ -130,7 +132,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
                     <div class="form-input-content">
-                        <div class="card login-form mb-0"  style="background-color: #003366;">
+                        <div class="card login-form mb-0" style="background-color: #003366;">
                             <div class="card-body pt-5">
 
                                 <a class="text-center" href="home.php">
@@ -188,7 +190,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                                     <input type="hidden" name="form_sub" value="1" />
                                     <button class="btn login-form__btn submit w-100">Sign In</button>
                                 </form>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -207,7 +209,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <script src="../dashJs/common.min.js"></script>
     <script src="../dashJs/custom.min.js"></script>
     <script src="../dashJs/settings.js"></script>
-   <script src="../dashJs/gleek.js"></script>
+    <script src="../dashJs/gleek.js"></script>
     <script src="../dashJs/styleSwitcher.js"></script>
 </body>
 

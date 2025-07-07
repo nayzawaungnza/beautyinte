@@ -1,10 +1,9 @@
 <?php
 require '../require/check_auth.php';
-checkAuth('admin');
+checkAuth('staff');
 require '../layouts/header.php';
 ?>
 
-<!-- Content body start -->
 
 <div class="content-body">
 
@@ -23,10 +22,6 @@ require '../layouts/header.php';
     </div>
     <!-- #/ container -->
 </div>
-
-<!-- Content body end -->
-
-
 
 <?php
 
