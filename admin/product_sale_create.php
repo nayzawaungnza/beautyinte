@@ -10,7 +10,7 @@ $product_id = $customer_id = $qty = $sale_date = '';
 $total_price = 0;
 
 // Fetch products and customers
-$products = $mysqli->query("SELECT id, name, price FROM products ORDER BY name ASC");
+$products = $mysqli->query("SELECT p.id, p.name, p.price FROM products p INNER JOIN product_qty pq ON p.id = pq.product_id WHERE pq.qty > 0 ORDER BY p.name ASC");
 $customers = $mysqli->query("SELECT id, name FROM customers ORDER BY name ASC");
 
 if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
@@ -41,14 +41,24 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     }
 
     if (!$error) {
-        $sql = "INSERT INTO product_sales (product_id, customer_id, qty, total_price, sale_date) VALUES ('$product_id', '$customer_id', '$qty', '$total_price', '$sale_date')";
-        $result = $mysqli->query($sql);
-        if ($result) {
-            echo "<script>window.location.href = 'product_sale_list.php?success=Product Sale Created';</script>";
-            exit;
-        } else {
+        // Check available quantity
+        $qty_row = $mysqli->query("SELECT qty FROM product_qty WHERE product_id='$product_id'")->fetch_assoc();
+        $available_qty = $qty_row ? (int)$qty_row['qty'] : 0;
+        if ($qty > $available_qty) {
             $error = true;
-            $sale_date_error = "Product Sale Create Failed.";
+            $qty_error = "Not enough quantity available. Only $available_qty left.";
+        } else {
+            $sql = "INSERT INTO product_sales (product_id, customer_id, qty, total_price, sale_date) VALUES ('$product_id', '$customer_id', '$qty', '$total_price', '$sale_date')";
+            $result = $mysqli->query($sql);
+            if ($result) {
+                // Subtract sold quantity from product_qty
+                $mysqli->query("UPDATE product_qty SET qty = qty - $qty WHERE product_id = '$product_id'");
+                echo "<script>window.location.href = 'product_sale_list.php?success=Product Sale Created';</script>";
+                exit;
+            } else {
+                $error = true;
+                $sale_date_error = "Product Sale Create Failed.";
+            }
         }
     }
 }

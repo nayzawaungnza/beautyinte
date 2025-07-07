@@ -9,7 +9,7 @@ require '../layouts/header.php';
 $staff_id = $_SESSION['user_id'] ?? 0;
 
 // Handle status update actions
-if (isset($_GET['action']) && isset($_GET['id'])) {
+if (isset($_GET['action'], $_GET['id'])) {
     $id = intval($_GET['id']);
     $action = $_GET['action'];
     if ($action === 'accept') {
@@ -23,8 +23,8 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     exit;
 }
 
-// Fetch appointments for this staff
-$sql = "SELECT a.*, c.name as customer_name, s.name as service_name
+// Fetch appointments assigned to this staff member
+$sql = "SELECT a.*, c.name AS customer_name, s.name AS service_name
         FROM appointments a
         INNER JOIN customers c ON a.customer_id = c.id
         INNER JOIN services s ON a.service_id = s.id
@@ -32,58 +32,72 @@ $sql = "SELECT a.*, c.name as customer_name, s.name as service_name
         ORDER BY a.appointment_date DESC, a.appointment_time DESC";
 $appointments = $mysqli->query($sql);
 ?>
+<div class="content-body">
+    <div class="container-fluid">
 
-<div class="container">
-    <h3>My Appointments</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Customer</th>
-                <th>Service</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if ($appointments && $appointments->num_rows > 0) {
-                while ($row = $appointments->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['customer_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['service_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['appointment_date']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['appointment_time']) . "</td>";
-                    // Status
-                    if ($row['status'] == 0) {
-                        echo "<td><span class='badge bg-warning'>Pending</span></td>";
-                    } elseif ($row['status'] == 1) {
-                        echo "<td><span class='badge bg-success'>Complete</span></td>";
-                    } elseif ($row['status'] == 2) {
-                        echo "<td><span class='badge bg-danger'>Rejected</span></td>";
-                    } else {
-                        echo "<td><span class='badge bg-secondary'>Unknown</span></td>";
-                    }
-                    // Actions
-                    echo "<td>";
-                    if ($row['status'] == 0) {
-                        echo "<a href='?action=accept&id={$row['id']}' class='btn btn-success btn-sm mx-1'>Accept</a>";
-                        echo "<a href='?action=reject&id={$row['id']}' class='btn btn-danger btn-sm mx-1'>Reject</a>";
-                    } elseif ($row['status'] == 1) {
-                        echo "<span class='text-success'>Done</span>";
-                    } elseif ($row['status'] == 2) {
-                        echo "<span class='text-danger'>Rejected</span>";
-                    }
-                    echo "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6' class='text-center'>No appointments found.</td></tr>";
-            } ?>
-        </tbody>
-    </table>
+        <div class="row">
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($appointments && $appointments->num_rows > 0): ?>
+                                    <?php while ($row = $appointments->fetch_assoc()): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($row['customer_name']) ?></td>
+                                            <td><?= htmlspecialchars($row['service_name']) ?></td>
+                                            <td><?= htmlspecialchars($row['appointment_date']) ?></td>
+                                            <td><?= htmlspecialchars($row['appointment_time']) ?></td>
+                                            <td>
+                                                <?php
+                                                if ($row['status'] == 0) {
+                                                    echo "<span class='badge bg-warning'>Pending</span>";
+                                                } elseif ($row['status'] == 1) {
+                                                    echo "<span class='badge bg-success'>Complete</span>";
+                                                } elseif ($row['status'] == 2) {
+                                                    echo "<span class='badge bg-danger'>Rejected</span>";
+                                                } else {
+                                                    echo "<span class='badge bg-secondary'>Unknown</span>";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($row['status'] == 0): ?>
+                                                    <a href="?action=accept&id=<?= $row['id'] ?>" class="btn btn-success btn-sm mx-1">Accept</a>
+                                                    <a href="?action=reject&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm mx-1">Reject</a>
+                                                <?php elseif ($row['status'] == 1): ?>
+                                                    <span class="text-success">Done</span>
+                                                <?php elseif ($row['status'] == 2): ?>
+                                                    <span class="text-danger">Rejected</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">No appointments found.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
 </div>
-
 <?php
 require '../layouts/footer.php';
 ?>
