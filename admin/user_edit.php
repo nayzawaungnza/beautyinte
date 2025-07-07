@@ -171,13 +171,13 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                ယောကျာ်း
+                                ကျား
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
                             <label class="form-check-label" for="flexRadioDefault2">
-                                မိန်းမ
+                                မ
                             </label>
                         </div>
                         <?php

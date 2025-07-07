@@ -30,7 +30,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>‌ရောင်းရန်ပစ္စည်းများ စာရင်း</h1>
+            <h3>‌ရောင်းရန်ပစ္စည်းများ စာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'product_create.php' ?>" class="btn btn-primary">
                     ‌ရောင်းရန်ပစ္စည်းများ အသစ်ဖန်တီးရန်
@@ -57,7 +57,7 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="">နံပါတ်</th>
+                                    <th class="">စဉ်</th>
                                     <th class="">အမည်</th>
                                     <th class="">အကြောင်းအရာဖော်ပြချက်</th>
                                     <th class="">စျေးနှုန်း</th>

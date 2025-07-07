@@ -26,7 +26,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>အချိန်ချိန်းဆိုမှု စာရင်း</h1>
+            <h3>အချိန်ချိန်းဆိုမှု စာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'appointment_create.php' ?>" class="btn btn-primary">
                     အချိန်ချိန်းဆိုမှု စာရင်းဖန်တီးရန်
@@ -53,7 +53,7 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>နံပါတ်</th>
+                                    <th>စဉ်</th>
                                     <th>ဖောက်သည်အမည်</th>
                                     <th>ဝန်ဆောင်မှု အမည်</th>
                                     <th>ဝန်ထမ်း အမည်</th>

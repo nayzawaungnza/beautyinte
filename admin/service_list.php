@@ -51,7 +51,7 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="">နံပါတ်</th>
+                                    <th class="">စဉ်</th>
                                     <th class="">အမည်</th>
                                     <th class="">စျေးနှုန်း</th>
                                     <th class="">အကြောင်းအရာ ဖော်ပြချက်</th>

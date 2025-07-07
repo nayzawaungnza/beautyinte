@@ -25,10 +25,10 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>Product Details</h1>
+            <h1>ပစ္စည်းစျေးနှုန်းများ အသေးစိတ်</h1>
             <div class="">
                 <a href="<?= $admin_base_url . 'product_list.php' ?>" class="btn btn-dark">
-                    Back
+                    ပြန်ရန်
                 </a>
             </div>
         </div>

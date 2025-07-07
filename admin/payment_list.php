@@ -31,7 +31,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>ငွေပေး‌ချေမှု စာရင်း</h1>
+            <h3>ငွေပေး‌ချေမှု စာရင်း</h3>
 
         </div>
         <div class="row">
@@ -53,7 +53,7 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>နံပါတ်</th>
+                                    <th>စဉ်</th>
                                     <th>အချိန်ချိန်းဆိုမှု</th>
                                     <th>ဖောက်သည်</th>
                                     <th>ဝန်ဆောင်မှု</th>
