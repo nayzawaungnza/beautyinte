@@ -51,6 +51,17 @@
                 });
             })
         });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const param1 = urlParams.get('unauthorized_msg');
+        if (param1 != null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: param1,
+                timer: 3000
+            });
+        }
     })
 </script>
 

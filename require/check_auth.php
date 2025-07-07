@@ -1,25 +1,26 @@
 <?php
-ob_start();
-require '../require/common.php';
 session_start();
 
-$current_page = basename($_SERVER['PHP_SELF']);
-
-if (
-    empty($_SESSION['name']) ||
-    empty($_SESSION['email']) ||
-    empty($_SESSION['role'])
-) {
-    if ($current_page !== 'login.php') {
-        header("Location: {$admin_base_url}login.php");
-        exit;
+// Redirect to login if not authenticated
+function checkAuth($requiredRole)
+{
+    // Check if user is logged in
+    if (!isset($_SESSION['email']) || empty($_SESSION['email'])) {
+        header("Location: ../login.php");
+        exit();
     }
-} else {
-    // var_dump($current_page);
-    // // die();
-    if ($current_page === 'login.php') {
-        header("Location: {$admin_base_url}dashboard.php");
-        exit;
+
+    // Check if session has expired (30 minutes inactivity)
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+        session_unset();
+        session_destroy();
+        header("Location: ../login.php?error=session_expired");
+        exit();
+    }
+
+    $_SESSION['last_activity'] = time();
+    if ($requiredRole && (!isset($_SESSION['role']) || $_SESSION['role'] !== $requiredRole)) {
+        header("Location:  http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php?unauthorized_msg=U dont't have access to this acc!");
+        exit();
     }
 }
-ob_end_flush();

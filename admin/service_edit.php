@@ -1,4 +1,6 @@
 <?php
+require '../require/check_auth.php';
+checkAuth('admin');
 require '../layouts/header.php';
 
 $error = false;

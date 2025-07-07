@@ -1,7 +1,11 @@
 <?php
-require '../require/check_auth.php';
-require '../require/db.php';
-require '../require/common.php';
+session_start();
+if (isset($_SESSION['email'])) {
+    header("Location:  http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php");
+    exit();
+}
+require './require/db.php';
+require './require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = false;
 $email =
@@ -27,19 +31,26 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         if ($result->num_rows > 0) {
             $data = $result->fetch_assoc();
             if ($data['password'] === $byscript_password) {
+
                 $_SESSION['name'] = $data['name'];
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['role'] = $data['role'];
+                $_SESSION['user_id'] = $data['id'];
+                $_SESSION['last_activity'] = time();
+                if ($_SESSION['role'] == "staff" && $data['role'] == "staff") {
+                    header("Location: $staff_base_url" . 'dashboard.php');
+                    exit();
+                }
                 header("Location: $admin_base_url" . 'dashboard.php');
+                exit();
             } else {
                 $error = true;
                 $password_error = "Password is incorrect.";
             }
+        } else {
+            $error = true;
+            $email_error = "This email is not register.";
         }
-        //  else {
-        //     $error = true;
-        //     $email_error = "This email is not register.";
-        // }
     }
 }
 ?>
@@ -53,7 +64,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <title>အကောင့်ဝင်ရန်</title>
     <!-- Favicon icon -->
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png"> -->
-    <link href="../dashCss/style.css" rel="stylesheet">
+    <link href="./dashCss/style.css" rel="stylesheet">
 </head>
 
 <body class="h-100" style=" background-color: #f5e4d7;">
@@ -105,11 +116,11 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="../dashJs/common.min.js"></script>
-    <script src="../dashJs/custom.min.js"></script>
-    <script src="../dashJs/settings.js"></script>
-    <script src="../dashJs/gleek.js"></script>
-    <script src="../dashJs/styleSwitcher.js"></script>
+    <script src="./dashJs/common.min.js"></script>
+    <script src="./dashJs/custom.min.js"></script>
+    <script src="./dashJs/settings.js"></script>
+    <script src="./dashJs/gleek.js"></script>
+    <script src="./dashJs/styleSwitcher.js"></script>
 </body>
 
 </html>

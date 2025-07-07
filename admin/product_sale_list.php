@@ -1,5 +1,6 @@
 <?php
-// require '../require/check_auth.php';
+require '../require/check_auth.php';
+checkAuth('admin');
 require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';

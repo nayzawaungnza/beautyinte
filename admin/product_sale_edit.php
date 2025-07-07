@@ -1,5 +1,6 @@
 <?php
-// require '../require/check_auth.php';
+require '../require/check_auth.php';
+checkAuth('admin');
 require '../require/db.php';
 require '../require/common.php';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;

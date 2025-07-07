@@ -1,6 +1,9 @@
-<?php require_once '../require/db.php' ?>
-<?php require_once '../require/common.php' ?>
-<?php require_once '../require/common_function.php' ?>
+<?php
+require_once '../require/db.php';
+require_once '../require/common.php';
+require_once '../require/common_function.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +103,7 @@
                                             <a href="app-profile.html"><i class="icon-user"></i> <span>ပရိုဖိုင်</span></a>
                                         </li>
                                         <hr class="my-2">
-                                        <li><a href="<?= $admin_base_url . 'logout.php' ?>"><i class="icon-key"></i> <span>အကောင့်ထွက်ရန်</span></a></li>
+                                        <li><a href="<?= '../logout.php' ?>"><i class="icon-key"></i> <span>အကောင့်ထွက်ရန်</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -117,71 +120,82 @@
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu">
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class="arrow-right"></i><span class="nav-text">အသုံးပြုသူများ</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/user_list.php">စာရင်း</a></li>
-                            <li><a href="../admin/user_create.php">ဖန်တီးမည်</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class="arrow-right"></i><span class="nav-text">ဖောက်သည်</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/customer_list.php">စာရင်း</a></li>
-                            <li><a href="../admin/customer_create.php">ဖန်တီးမည်</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/service_list.php">စာရင်း</a></li>
-                            <li><a href="../admin/service_create.php">ဖန်တီးမည်</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/product_list.php">စာရင်း</a></li>
-                            <li><a href="../admin/product_create.php">ဖန်တီးမည်</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
+                    <?php
+                    if ($_SESSION['role'] == "staff") { ?>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class="arrow-right"></i><span class="nav-text">Task (For Staff)</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../staff/task_list.php">စာရင်း</a></li>
+                            </ul>
+                        </li>
+                    <?php } else { ?>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class="arrow-right"></i><span class="nav-text">အသုံးပြုသူများ</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/user_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/user_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class="arrow-right"></i><span class="nav-text">ဖောက်သည်</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/customer_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/customer_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class=""></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/service_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/service_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class=""></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/product_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/product_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class=""></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
 
-                        </ul>
-                    </li>
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">ငွေပေးချေမှု</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/payment_list.php">စာရင်း</a></li>
-                            <li><a href="../admin/payment_create.php">ဖန်တီးမည်</a></li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class=""></i><span class="nav-text">ငွေပေးချေမှု</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/payment_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/payment_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
 
-                    <li class="sidebar-click">
-                        <a class="has-arrow arrow">
-                            <i class=""></i><span class="nav-text">Product Sales</span>
-                        </a>
-                        <ul aria-expanded="true" class="pannel" style="display: none;">
-                            <li><a href="../admin/product_sale_list.php">Sale List</a></li>
-                            <li><a href="../admin/product_sale_create.php">Create Sale</a></li>
-                        </ul>
-                    </li>
-
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class=""></i><span class="nav-text">Product Sales</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/product_sale_list.php">Sale List</a></li>
+                                <li><a href="../admin/product_sale_create.php">Create Sale</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
