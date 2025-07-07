@@ -58,7 +58,7 @@ require_once '../require/common_function.php';
                 <a href="./dashboard.php">
                     <span class="brand-title">
                         <img src="../images/logo.jpg" alt="logo" style="width: 50px; ">
-                        <h3>S&H အလှပြင်ဆိုင်</h3>
+                        <h3>S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h3>
                     </span>
                 </a>
             </div>
@@ -182,17 +182,17 @@ require_once '../require/common_function.php';
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/payment_list.php">စာရင်း</a></li>
-                                <li><a href="../admin/payment_create.php">ဖန်တီးမည်</a></li>
+
                             </ul>
                         </li>
 
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><span class="nav-text">Product Sales</span>
+                                <i class=""></i><span class="nav-text">ပစ္စည်းစျေးနှုန်းများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/product_sale_list.php">Sale List</a></li>
-                                <li><a href="../admin/product_sale_create.php">Create Sale</a></li>
+                                <li><a href="../admin/product_sale_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/product_sale_create.php">ဖန်တီးမည်</a></li>
                             </ul>
                         </li>
                     <?php } ?>

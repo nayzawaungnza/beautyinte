@@ -50,9 +50,9 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>Edit Product Sale</h3>
+            <h3>ပစ္စည်းစျေးနှုန်းများ ပြင်ဆင်ရန်</h3>
             <div class="">
-                <a href="product_sale_list.php" class="btn btn-dark">Back</a>
+                <a href="product_sale_list.php" class="btn btn-dark">ပြန်ရန်</a>
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -66,33 +66,33 @@ require '../layouts/header.php';
                     <div class="card-body">
                         <form action="" method="POST">
                             <div class="form-group mb-2">
-                                <label class="form-label">Product</label>
+                                <label class="form-label">ပစ္စည်းများ</label>
                                 <input type="text" class="form-control" value="<?= htmlspecialchars($sale['product_name']) ?>" readonly />
                             </div>
                             <div class="form-group mb-2">
-                                <label class="form-label">Customer</label>
+                                <label class="form-label">ဖောက်သည်များ</label>
                                 <input type="text" class="form-control" value="<?= htmlspecialchars($sale['customer_name']) ?>" readonly />
                             </div>
                             <div class="form-group mb-2">
-                                <label for="qty" class="form-label">Quantity</label>
+                                <label for="qty" class="form-label">အရေအတွက်</label>
                                 <input type="number" name="qty" class="form-control" id="qty" value="<?= htmlspecialchars($qty) ?>" min="1" />
                                 <?php if ($error && $qty_error) { ?>
                                     <span class="text-danger"><?= $qty_error ?></span>
                                 <?php } ?>
                             </div>
                             <div class="form-group mb-2">
-                                <label for="total_price" class="form-label">Total Price</label>
+                                <label for="total_price" class="form-label">စုစုပေါင်း စျေးနှုန်းများ</label>
                                 <input type="number" name="total_price" class="form-control" id="total_price" value="<?= htmlspecialchars($total_price) ?>" readonly />
                             </div>
                             <div class="form-group mb-2">
-                                <label for="sale_date" class="form-label">Sale Date</label>
+                                <label for="sale_date" class="form-label">ရောင်းချသည့် ရက်စွဲ</label>
                                 <input type="date" name="sale_date" class="form-control" id="sale_date" value="<?= htmlspecialchars($sale_date) ?>" />
                                 <?php if ($error && $sale_date_error) { ?>
                                     <span class="text-danger"><?= $sale_date_error ?></span>
                                 <?php } ?>
                             </div>
                             <input type="hidden" name="form_sub" value="1" />
-                            <button type="submit" class="btn btn-primary w-100">Update</button>
+                            <button type="submit" class="btn btn-primary w-100">အသစ်ဖန်တီးရန်</button>
                         </form>
                     </div>
                 </div>

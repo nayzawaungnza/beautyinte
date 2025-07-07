@@ -12,9 +12,9 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>Product Sale List</h3>
+            <h3>ပစ္စည်း‌စျေးနှုန်းများစာရင်း</h3>
             <div class="">
-                <a href="product_sale_create.php" class="btn btn-primary">Create Product Sale</a>
+                <a href="product_sale_create.php" class="btn btn-primary">ပစ္စည်း‌စျေးနှုန်းများစာရင်း ဖန်တီးရန်</a>
             </div>
         </div>
         <div class="row">
@@ -36,13 +36,13 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Product</th>
-                                    <th>Customer</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                    <th>Sale Date</th>
-                                    <th>Actions</th>
+                                    <th>နံပါတ်</th>
+                                    <th>ပစ္စည်း</th>
+                                    <th>ဖောက်သည်</th>
+                                    <th>အရေအတွက်</th>
+                                    <th>ပစ္စည်းစျေးနှုန်းများ</th>
+                                    <th>‌ရောင်းချသည့်ရက်စွဲ</th>
+                                    <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,13 +58,13 @@ require '../layouts/header.php';
                                             <td><?= htmlspecialchars($row['total_price']) ?></td>
                                             <td><?= htmlspecialchars($row['sale_date']) ?></td>
                                             <td>
-                                                <a href="product_sale_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">Edit</a>
+                                                <a href="product_sale_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
                                             </td>
                                         </tr>
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="7" class="text-center">No product sales found.</td>
+                                        <td colspan="7" class="text-center">ပစ္စည်းစျေးနှုန်းများ ရှာမတွေ့ပါ</td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

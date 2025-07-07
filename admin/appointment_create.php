@@ -175,6 +175,7 @@ if (isset($_POST['btn_submit'])) {
                             <option value="0" <?= $status === '0' ? 'selected' : '' ?>>ဆိုင်းငံ့သည်</option>
                             <option value="1" <?= $status === '1' ? 'selected' : '' ?>>ပြီးဆုံးသည်</option>
                             <option value="2" <?= $status === '2' ? 'selected' : '' ?>>ငြင်းပယ်သည်</option>
+                            <option value="3" <?= $status === '3' ? 'selected' : '' ?>>လက်ခံသည်</option>
                         </select>
                         <?php if ($error && $status_err) { ?>
                             <small class="text-danger"><?= $status_err ?></small>

@@ -32,11 +32,7 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
             <h1>ငွေပေး‌ချေမှု စာရင်း</h1>
-            <div class="">
-                <a href="<?= $admin_base_url . 'payment_create.php' ?>" class="btn btn-primary">
-                    ငွေပေး‌ချေမှုအသစ်ဖန်တီးရန်
-                </a>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">

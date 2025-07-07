@@ -61,7 +61,7 @@ require '../layouts/header.php';
                                     <th class="">အမည်</th>
                                     <th class="">အကြောင်းအရာဖော်ပြချက်</th>
                                     <th class="">စျေးနှုန်း</th>
-                                    <th class="">ပစ္စည်းအရည်အသွေး</th>
+                                    <th class="">ပစ္စည်းအရေအတွက်</th>
                                     <th class="">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
