@@ -4,17 +4,17 @@ checkAuth('admin');
 require '../require/db.php';
 require '../require/common.php';
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-if ($id <= 0) {
-    echo '<div class="alert alert-danger">Invalid payment ID.</div>';
-    exit;
-}
+// $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+// if ($id <= 0) {
+//     echo '<div class="alert alert-danger">Invalid payment ID.</div>';
+//     exit;
+// }
 
 // Fetch payment info
-$sql = "SELECT p.*, a.id as appointment_id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE p.id = $id";
+$sql = "SELECT p.*, a.id as appointment_id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id ";
 $result = $mysqli->query($sql);
 if (!$result || $result->num_rows == 0) {
-    echo '<div class="alert alert-danger">Payment not found.</div>';
+    // echo '<div class="alert alert-danger">Payment not found.</div>';
     exit;
 }
 $payment = $result->fetch_assoc();
@@ -45,7 +45,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     }
 
     if (!$error) {
-        $sql = "UPDATE payments SET amount='$amount', payment_method='$payment_method', payment_date='$payment_date' WHERE id=$id";
+        $sql = "UPDATE payments SET amount='$amount', payment_method='$payment_method', payment_date='$payment_date'";
         $result = $mysqli->query($sql);
         if ($result) {
             echo "<script>window.location.href = '" . $admin_base_url . "payment_list.php?success=Payment Updated';</script>";
