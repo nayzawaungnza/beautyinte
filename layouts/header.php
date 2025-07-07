@@ -34,6 +34,7 @@ require_once '../require/common_function.php';
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
         crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
 <body>
@@ -58,7 +59,7 @@ require_once '../require/common_function.php';
                 <a href="./dashboard.php">
                     <span class="brand-title">
                         <img src="../images/logo.jpg" alt="logo" style="width: 50px; ">
-                        <h3>S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h3>
+                        <!-- <h3>S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h3> -->
                     </span>
                 </a>
             </div>
@@ -68,47 +69,37 @@ require_once '../require/common_function.php';
 
 
         <!-- Header start -->
-        <div class="header">
-            <div class="header-content clearfix">
-
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="toggle-icon"><i class="icon-menu"></i></span>
-                    </div>
-                </div>
-                <div class="header-left">
-                    <div class="input-group icons">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+        <div class="header" style="background: linear-gradient(90deg,rgb(0, 75, 236) 0%,rgb(103, 143, 252) 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div class="header-content d-flex align-items-center justify-content-between px-4 py-2">
+                <div class="d-flex align-items-center">
+                    <!-- <div class="nav-control mr-3">
+                        <div class="hamburger">
+                            <span class="toggle-icon"><i class="fas fa-bars"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="ရှာရန်" aria-label="Search Dashboard">
-                        <div class="drop-down   d-md-none">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="ရှာရန်">
-                            </form>
+                    </div> -->
+                    <span class="brand-title d-flex align-items-center">
+                        <img src="../images/logo.jpg" alt="logo" style="width: 40px; border-radius: 8px; margin-right: 10px;">
+                        <h4 class="mb-0" style="font-weight: 600; color:white;">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h4>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="input-group icons mr-3" style="max-width: 250px;">
+                        <input type="search" class="form-control border-0 shadow-none" placeholder="ရှာရန်" aria-label="Search Dashboard" style="background: #f5f6fa; border-radius: 20px;">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent border-0"><i class="fas fa-search"></i></span>
                         </div>
                     </div>
-                </div>
-                <div class="header-right">
-                    <ul class="clearfix">
-                        <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
-                            </div>
-                            <div class="drop-down dropdown-profile   dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>ပရိုဖိုင်</span></a>
-                                        </li>
-                                        <hr class="my-2">
-                                        <li><a href="<?= '../logout.php' ?>"><i class="icon-key"></i> <span>အကောင့်ထွက်ရန်</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-toggle="dropdown">
+                            <img src="images/user/1.png" height="40" width="40" class="rounded-circle mr-2" alt="">
+                            <span class="d-none d-md-inline">Profile</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow">
+                            <a class="dropdown-item" href="app-profile.html"><i class="fas fa-user mr-2"></i> ပရိုဖိုင်</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?= '../logout.php' ?>"><i class="fas fa-sign-out-alt mr-2"></i> အကောင့်ထွက်ရန်</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,7 +124,7 @@ require_once '../require/common_function.php';
                     <?php } else { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="arrow-right"></i><span class="nav-text">အသုံးပြုသူများ</span>
+                                <i class="arrow-right"></i><i class="fa-solid fa-user"></i><span class="nav-text">အသုံးပြုသူများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/user_list.php">စာရင်း</a></li>
@@ -142,7 +133,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="arrow-right"></i><span class="nav-text">ဖောက်သည်</span>
+                                <i class="arrow-right"></i><i class="fa-solid fa-circle-user"></i><span class="nav-text">ဖောက်သည်</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/customer_list.php">စာရင်း</a></li>
@@ -151,7 +142,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
+                                <i class=""></i><i class="fa-solid fa-bell-concierge"></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/service_list.php">စာရင်း</a></li>
@@ -160,7 +151,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
+                                <i class=""></i><i class="icon-grid menu-icon"></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/product_list.php">စာရင်း</a></li>
@@ -169,23 +160,20 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
+                                <i class=""></i><i class="fa-regular fa-calendar-check"></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
-
                             </ul>
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><span class="nav-text">ငွေပေးချေမှု</span>
+                                <i class=""></i><i class="fa-solid fa-credit-card"></i><span class="nav-text">ငွေပေးချေမှု</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/payment_list.php">စာရင်း</a></li>
-
                             </ul>
                         </li>
-
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
                                 <i class=""></i><span class="nav-text">ပစ္စည်းစျေးနှုန်းများ</span>
