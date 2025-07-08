@@ -17,6 +17,9 @@ $name_err =
     $phone =
     $gender = '';
 
+$image_err = '';
+$image = '';
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users`";
@@ -97,9 +100,31 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $gender_err = "Please choose gender";
     }
 
+    // Image
+    if (isset($_FILES['image'])) {
+        $target_dir = "uplode/";
+        $file_name = basename($_FILES['image']['name']);
+        $target_file = $target_dir . time() . '_' . $file_name;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+        if (in_array($imageFileType, $allowed)) {
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                $image = $target_file;
+            } else {
+                $error = true;
+                $image_err = "Image upload failed.";
+            }
+        } else {
+            $error = true;
+            $image_err = "Invalid image type.";
+        }
+    } else {
+        $image = '';
+    }
+
     if (!$error) {
-        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`,`phone`, `gender`)
-         VALUES ('$name','$email','$byScriptPassword','$role','$phone','$gender')";
+        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `phone`, `gender`, `image`)
+     VALUES ('$name','$email','$byScriptPassword','$role','$phone','$gender','$image')";
         $mysqli->query($sql);
         echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php' </script>";
     }
@@ -126,7 +151,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         <div class="card">
             <div class="card-body">
                 <h3>အသုံးပြုသူ အသစ်ဖန်တီးပါ</h3>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name" class="form-label">အမည်</label>
                         <input type="text" name="name" class="form-control" value="<?= $name ?>">
@@ -186,6 +211,11 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <?php
                         }
                         ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="image" class="form-label">ပုံထည့်ပါ</label>
+                        <input type="file" name="image" class="form-control">
+                        <small class="text-danger"><?= isset($image_err) ? $image_err : '' ?></small>
                     </div>
 
                     <div class="my-2">

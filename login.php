@@ -31,7 +31,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         if ($result->num_rows > 0) {
             $data = $result->fetch_assoc();
             if ($data['password'] === $byscript_password) {
-
+                $_SESSION['id'] = $data['id'];
                 $_SESSION['name'] = $data['name'];
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['role'] = $data['role'];
