@@ -48,7 +48,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if (strlen($name) < 5) {
         $error = true;
         $name_err = "Name must be fill greater than 5.";
-    } else if (strlen($name) >= 10) {
+    } else if (strlen($name) >= 100) {
         $error = true;
         $name_err = "Name must be fill less than 100.";
     }

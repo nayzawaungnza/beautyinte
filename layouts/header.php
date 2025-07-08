@@ -97,6 +97,7 @@ require_once '../require/common_function.php';
                             <a class="dropdown-item" href="<?= '../logout.php' ?>"><i class="fas fa-sign-out-alt mr-2"></i> အကောင့်ထွက်ရန်</a>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
