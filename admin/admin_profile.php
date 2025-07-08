@@ -88,16 +88,18 @@ require '../layouts/header.php';
 <div class="content-body p-5">
     <h2>Admin Profile</h2>
     <div class="row">
-        <div class="col-md-4 text-center">
-            <img src="<?php echo $admin['image'] ? $admin['image'] : 'https://via.placeholder.com/150'; ?>" class="profile-img mb-3" alt="Profile Image">
-            <form method="post" enctype="multipart/form-data">
+        <div class="col-md-6 col-sm-6 text-center">
+            <div style="width: 200px; margin: auto; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.3);">
+                <img  src="<?php echo $admin['image'] ? $admin['image'] : 'https://via.placeholder.com/150'; ?>" class="img-fluid profile-img mb-3" alt="Profile Image">
+            </div>
+            <form method="post" enctype="multipart/form-data" class="mt-3">
                 <div class="form-group">
                     <input type="file" name="image" class="form-control-file">
                 </div>
                 <button type="submit" name="update_profile" class="btn btn-primary btn-block mt-2">Update Image</button>
             </form>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6 col-sm-6">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Name</label>
@@ -118,22 +120,6 @@ require '../layouts/header.php';
                 <button type="submit" name="update_profile" class="btn btn-success">Save Changes</button>
             </form>
             <hr>
-            <h4>Change Password</h4>
-            <form method="post">
-                <div class="form-group">
-                    <label>Old Password</label>
-                    <input type="password" name="old_password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>New Password</label>
-                    <input type="password" name="new_password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Confirm New Password</label>
-                    <input type="password" name="confirm_password" class="form-control" required>
-                </div>
-                <button type="submit" name="change_password" class="btn btn-warning">Change Password</button>
-            </form>
         </div>
     </div>
 </div>

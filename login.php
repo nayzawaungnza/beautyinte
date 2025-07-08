@@ -4,7 +4,16 @@ if (isset($_SESSION['email'])) {
     header("Location:  http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php");
     exit();
 }
+
 require './require/db.php';
+
+$userSelect = "SELECT * FROM `users`";
+$result = $mysqli->query($userSelect);
+if ($result->num_rows == 0) {
+    $admin_password = md5('admin');
+    $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`) VALUES ('Admin', 'admin@gmail.com', '$admin_password', 'admin')";
+    $mysqli->query($sql);
+}
 require './require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = false;
@@ -36,6 +45,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['role'] = $data['role'];
                 $_SESSION['user_id'] = $data['id'];
+                $_SESSION['image'] = $data['image'];
                 $_SESSION['last_activity'] = time();
                 if ($_SESSION['role'] == "staff" && $data['role'] == "staff") {
                     header("Location: $staff_base_url" . 'dashboard.php');

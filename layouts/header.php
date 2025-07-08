@@ -88,7 +88,7 @@ require_once '../require/common_function.php';
                     </div>
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-toggle="dropdown">
-                            <img src="images/user/1.png" height="40" width="40" class="rounded-circle mr-2" alt="">
+                            <img src="<?= $_SESSION['image'] ?>" height="40" width="40" class="rounded-circle mr-2" alt="">
                             <span class="d-none d-md-inline">Profile</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow">
@@ -105,7 +105,7 @@ require_once '../require/common_function.php';
 
 
         <!-- Sidebar start -->
-        <!-- <div class="nk-sidebar">
+        <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu">
                     <?php
@@ -183,7 +183,7 @@ require_once '../require/common_function.php';
                     <?php } ?>
                 </ul>
             </div>
-        </div> -->
+        </div>
 
         <!-- Sidebar end -->
 
