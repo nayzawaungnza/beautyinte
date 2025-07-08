@@ -19,7 +19,7 @@ if (isset($_POST['update_profile'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $role = $staff['role']; // Staff role should not be changed
+    $role = $_POST['role']; // Staff role should not be changed
     $image = $staff['image'];
 
     // Handle image upload
