@@ -13,7 +13,7 @@ if (isset($_GET['action'], $_GET['id'])) {
     $id = intval($_GET['id']);
     $action = $_GET['action'];
     if ($action === 'accept') {
-        $mysqli->query("UPDATE appointments SET status=1 WHERE id=$id AND staff_id=$staff_id");
+        $mysqli->query("UPDATE appointments SET status=3 WHERE id=$id AND staff_id=$staff_id");
     } elseif ($action === 'reject') {
         $mysqli->query("UPDATE appointments SET status=2 WHERE id=$id AND staff_id=$staff_id");
     } elseif ($action === 'complete') {
@@ -63,6 +63,8 @@ $appointments = $mysqli->query($sql);
                                                 <?php
                                                 if ($row['status'] == 0) {
                                                     echo "<span class='badge bg-warning'>Pending</span>";
+                                                } elseif ($row['status'] == 3) {
+                                                    echo "<span class='badge bg-info'>Accepted</span>";
                                                 } elseif ($row['status'] == 1) {
                                                     echo "<span class='badge bg-success'>Complete</span>";
                                                 } elseif ($row['status'] == 2) {
@@ -73,13 +75,23 @@ $appointments = $mysqli->query($sql);
                                                 ?>
                                             </td>
                                             <td>
-                                                <?php if ($row['status'] == 0): ?>
+                                                <?php if ($row['status'] == 0): // Pending 
+                                                ?>
                                                     <a href="?action=accept&id=<?= $row['id'] ?>" class="btn btn-success btn-sm mx-1">Accept</a>
-                                                    <a href="?action=reject&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm mx-1">Reject</a>
-                                                <?php elseif ($row['status'] == 1): ?>
+                                                    <a href="?action=reject&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm mx-1 reject-btn">Reject</a>
+                                                    <!-- Complete button not shown -->
+                                                <?php elseif ($row['status'] == 3): // Accepted 
+                                                ?>
+                                                    <a href="?action=complete&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm mx-1">Complete</a>
+                                                    <!-- Accept/Reject not shown -->
+                                                <?php elseif ($row['status'] == 1): // Completed 
+                                                ?>
                                                     <span class="text-success">Done</span>
-                                                <?php elseif ($row['status'] == 2): ?>
+                                                    <!-- No buttons shown -->
+                                                <?php elseif ($row['status'] == 2): // Rejected 
+                                                ?>
                                                     <span class="text-danger">Rejected</span>
+                                                    <!-- No buttons shown -->
                                                 <?php endif; ?>
                                             </td>
                                         </tr>
@@ -101,3 +113,25 @@ $appointments = $mysqli->query($sql);
 <?php
 require '../layouts/footer.php';
 ?>
+<script>
+    $(document).ready(function() {
+        $('.reject-btn').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to reject this appointment?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, reject it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        });
+    });
+</script>

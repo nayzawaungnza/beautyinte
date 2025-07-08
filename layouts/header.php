@@ -55,13 +55,10 @@ require_once '../require/common_function.php';
         <!-- Nav header start -->
 
         <div class="nav-header">
-            <div class="brand-logo mb-3">
-                <a href="./dashboard.php">
-                    <span class="brand-title">
-                        <img src="../images/logo.jpg" alt="logo" style="width: 50px; ">
-                        <!-- <h3>S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h3> -->
-                    </span>
-                </a>
+            <div class="d-flex justify-content-center align-items-center " style="height: 100%;">
+                <button id="sidebarToggle" style="background:none; border:none; font-size:24px; cursor:pointer;">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
 
@@ -151,7 +148,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><i class="icon-grid menu-icon"></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
+                                <i class="fa-solid fa-boxes-packing"></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/product_list.php">စာရင်း</a></li>
@@ -168,7 +165,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><i class="fa-solid fa-credit-card"></i><span class="nav-text">ငွေပေးချေမှု</span>
+                                <i class="fa-solid fa-credit-card"></i><span class="nav-text">ငွေပေးချေမှု</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/payment_list.php">စာရင်း</a></li>
@@ -176,7 +173,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><span class="nav-text">ပစ္စည်းစျေးနှုန်းများ</span>
+                                <i class="fa-solid fa-coins"></i><span class="nav-text">ပစ္စည်းစျေးနှုန်းများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/product_sale_list.php">စာရင်း</a></li>
@@ -189,3 +186,11 @@ require_once '../require/common_function.php';
         </div>
 
         <!-- Sidebar end -->
+
+        <script>
+            $(document).ready(function() {
+                $('#sidebarToggle').on('click', function() {
+                    $('.nk-sidebar').toggle();
+                });
+            });
+        </script>

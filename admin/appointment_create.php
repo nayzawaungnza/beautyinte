@@ -44,20 +44,66 @@ if (isset($_POST['btn_submit'])) {
     if (empty($appointment_date)) {
         $error = true;
         $appointment_date_err = "Please add appointment date.";
-    } elseif ($appointment_date < $today) {
-        $appointment_date_err = "Appointment date must not be in the past.";
+    } elseif (strtotime($appointment_date) < strtotime($today)) {
         $error = true;
+        $appointment_date_err = "Appointment date must not be in the past.";
     }
     if (empty($appointment_time)) {
         $error = true;
         $appointment_time_err = "Please add appointment time.";
-    } elseif ($appointment_date == $today && $appointment_time <= $current_time) {
-        $error = true;
-        $appointment_time_err = "Unavailable appointment time.";
+    } else {
+        // Convert to seconds for easy comparison
+        $time = strtotime($appointment_time);
+        $start = strtotime('09:00');
+        $end = strtotime('21:00');
+        $lunch_start = strtotime('12:00');
+        $lunch_end = strtotime('13:00');
+
+        if ($time < $start || $time > $end) {
+            $error = true;
+            $appointment_time_err = "Appointment time must be between 9:00 AM and 9:00 PM.";
+        } elseif ($time >= $lunch_start && $time < $lunch_end) {
+            $error = true;
+            $appointment_time_err = "Appointment time cannot be between 12:00 PM and 1:00 PM.";
+        } elseif ($appointment_date == $today && $appointment_time <= $current_time) {
+            $error = true;
+            $appointment_time_err = "Unavailable appointment time.";
+        }
     }
     if ($status === '' || !in_array($status, ['0', '1', '2'])) {
         $error = true;
         $status_err = "Please select status.";
+    }
+
+    // Check if staff is already assigned at the same date and time
+    if (!$error) {
+        $staff_id_esc = $mysqli->real_escape_string($staff_id);
+        $appointment_date_esc = $mysqli->real_escape_string($appointment_date);
+        $appointment_time_esc = $mysqli->real_escape_string($appointment_time);
+
+        // Check for same date and time
+        $conflict_sql = "SELECT id FROM appointments 
+                         WHERE staff_id = '$staff_id_esc' 
+                         AND status = '3'";
+        $conflict_result = $mysqli->query($conflict_sql);
+
+        if ($conflict_result && $conflict_result->num_rows > 0) {
+            $error = true;
+            $staff_id_error = "This staff member already has task.";
+        }
+
+        // (Optional) If you want to block the whole day, use this instead:
+        /*
+        $conflict_sql = "SELECT id FROM appointments 
+                         WHERE staff_id = '$staff_id_esc' 
+                         AND appointment_date = '$appointment_date_esc'";
+        $conflict_result = $mysqli->query($conflict_sql);
+
+        if ($conflict_result && $conflict_result->num_rows > 0) {
+            $error = true;
+            $staff_id_error = "This staff member already has an appointment on this day.";
+        }
+        */
     }
 
     if (!$error) {

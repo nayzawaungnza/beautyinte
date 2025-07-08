@@ -79,11 +79,13 @@ require '../layouts/header.php';
                                             <td><?= htmlspecialchars($row['app_time']) ?></td>
                                             <td><?php
                                                 if ($row['status'] == 0) {
-                                                    echo "<span class='badge bg-warning text-light'>Pending</span>";
+                                                    echo "<span class='badge bg-warning text-dark'>Pending</span>";
                                                 } elseif ($row['status'] == 1) {
-                                                    echo "<span class='badge bg-success text-light'>Complete</span>";
+                                                    echo "<span class='badge bg-success text-dark'>Complete</span>";
+                                                } elseif ($row['status'] == 3) {
+                                                    echo "<span class='badge bg-primary text-dark'>Accept</span>";
                                                 } else {
-                                                    echo "<span class='badge bg-danger text-light'>Reject</span>";
+                                                    echo "<span class='badge bg-danger text-dark'>Reject</span>";
                                                 }
                                                 ?></td>
                                             <td><?= htmlspecialchars($row['comment']) ?></td>
