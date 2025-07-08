@@ -93,7 +93,9 @@ require '../layouts/header.php';
                                             <td>
                                                 <div>
                                                     <a href="./appointment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
-                                                    <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
+                                                    <a href="./payment_create.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-secondary edit_btn mx-2">ငွေပေးချေရန်</a>
+                                                     <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
+                                            
                                                 </div>
                                             </td>
                                         </tr>

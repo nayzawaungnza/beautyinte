@@ -75,14 +75,14 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-    <div class="row page-titles mx-0">
+    <!-- <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
-    </div>
+    </div> -->
     <!-- row -->
 
     <div class="container">

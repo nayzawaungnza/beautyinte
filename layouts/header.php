@@ -112,7 +112,7 @@ require_once '../require/common_function.php';
                     if ($_SESSION['role'] == "staff") { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="arrow-right"></i><span class="nav-text">Task (For Staff)</span>
+                                <i class="arrow-right"></i><span class="nav-text">ဝန်ထမ်းတာဝန်များ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../staff/task_list.php">စာရင်း</a></li>

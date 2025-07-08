@@ -112,14 +112,14 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-    <div class="row page-titles mx-0">
+    <!-- <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
-    </div>
+    </div> -->
     <!-- row -->
 
     <div class="container">
@@ -133,7 +133,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <small class="text-danger"><?= $name_err ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">အီးမေးလ်ဖြင့်ဝင်ရောက်ရန်</label>
+                        <label for="name" class="form-label">အီးမေးလ်</label>
                         <input type="text" name="email" class="form-control" value="<?= $email ?>">
                         <small class="text-danger"><?= $email_err ?></small>
                     </div>
@@ -169,13 +169,13 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                ယောကျာ်း
+                                ကျား
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
                             <label class="form-check-label" for="flexRadioDefault2">
-                                မိန်းမ
+                                မ
                             </label>
                         </div>
                         <?php

@@ -43,12 +43,12 @@ $appointments = $mysqli->query($sql);
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>Customer</th>
-                                    <th>Service</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>ဖောက်သည်</th>
+                                    <th>ဝန်ဆောင်မှု</th>
+                                    <th>ရက်စွဲ</th>
+                                    <th>အချိန်</th>
+                                    <th>အခြေအနေ</th>
+                                    <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,12 +77,12 @@ $appointments = $mysqli->query($sql);
                                             <td>
                                                 <?php if ($row['status'] == 0): // Pending 
                                                 ?>
-                                                    <a href="?action=accept&id=<?= $row['id'] ?>" class="btn btn-success btn-sm mx-1">Accept</a>
-                                                    <a href="?action=reject&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm mx-1 reject-btn">Reject</a>
+                                                    <a href="?action=accept&id=<?= $row['id'] ?>" class="btn btn-success btn-sm mx-1">လက်ခံသည်</a>
+                                                    <a href="?action=reject&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm mx-1 reject-btn">ငြင်းပယ်သည်</a>
                                                     <!-- Complete button not shown -->
                                                 <?php elseif ($row['status'] == 3): // Accepted 
                                                 ?>
-                                                    <a href="?action=complete&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm mx-1">Complete</a>
+                                                    <a href="?action=complete&id=<?= $row['id'] ?>" class="btn btn-primary btn-sm mx-1">ပြီးဆုံးသည်</a>
                                                     <!-- Accept/Reject not shown -->
                                                 <?php elseif ($row['status'] == 1): // Completed 
                                                 ?>

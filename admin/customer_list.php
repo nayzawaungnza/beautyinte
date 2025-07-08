@@ -54,7 +54,6 @@ require '../layouts/header.php';
                                     <th class="">စဉ်</th>
                                     <th class="">အမည်</th>
                                     <th class="">ဆက်သွယ်ရန်ဖုန်း</th>
-                                    <th class="">စကားဝှက်</th>
                                     <th class="">လုပ်ဆောင်မှု</th>
 
                                 </tr>
@@ -67,7 +66,6 @@ require '../layouts/header.php';
                                             <td><?= $i++ ?></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['phone'] ?></td>
-                                            <td><?= $row['password'] ?></td>
 
 
                                             <td>
