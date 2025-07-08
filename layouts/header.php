@@ -92,7 +92,7 @@ require_once '../require/common_function.php';
                             <span class="d-none d-md-inline">Profile</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow">
-                            <a class="dropdown-item" href="app-profile.html"><i class="fas fa-user mr-2"></i> ပရိုဖိုင်</a>
+                            <a class="dropdown-item" href="http://localhost/Beauty/admin/admin_profile.php"><i class="fas fa-user mr-2"></i> ပရိုဖိုင်</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?= '../logout.php' ?>"><i class="fas fa-sign-out-alt mr-2"></i> အကောင့်ထွက်ရန်</a>
                         </div>
@@ -105,7 +105,7 @@ require_once '../require/common_function.php';
 
 
         <!-- Sidebar start -->
-        <div class="nk-sidebar">
+        <!-- <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu">
                     <?php
@@ -183,7 +183,7 @@ require_once '../require/common_function.php';
                     <?php } ?>
                 </ul>
             </div>
-        </div>
+        </div> -->
 
         <!-- Sidebar end -->
 

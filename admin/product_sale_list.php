@@ -36,7 +36,7 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>နံပါတ်</th>
+                                    <th>စဉ်</th>
                                     <th>ပစ္စည်း</th>
                                     <th>ဖောက်သည်</th>
                                     <th>အရေအတွက်</th>
