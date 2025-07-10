@@ -23,7 +23,7 @@ if (isset($_POST['btn_submit'])) {
     $staff_id = $_POST['staff_id'];
     $appointment_date = $_POST['app_date'];
     $appointment_time = $_POST['app_time'];
-    $status = $_POST['status'];
+    // $status = $_POST['status'];
     $comment = $_POST['comment'];
     $request = $_POST['request'];
     $today = date('Y-m-d');
@@ -70,10 +70,10 @@ if (isset($_POST['btn_submit'])) {
             $appointment_time_err = "Unavailable appointment time.";
         }
     }
-    if ($status === '' || !in_array($status, ['0', '1', '2'])) {
-        $error = true;
-        $status_err = "Please select status.";
-    }
+    // if ($status === '' || !in_array($status, ['0', '1', '2'])) {
+    //     $error = true;
+    //     $status_err = "Please select status.";
+    // }
 
     // Check if staff is already assigned at the same date and time
     if (!$error) {
@@ -91,19 +91,6 @@ if (isset($_POST['btn_submit'])) {
             $error = true;
             $staff_id_error = "This staff member already has task.";
         }
-
-        // (Optional) If you want to block the whole day, use this instead:
-        /*
-        $conflict_sql = "SELECT id FROM appointments 
-                         WHERE staff_id = '$staff_id_esc' 
-                         AND appointment_date = '$appointment_date_esc'";
-        $conflict_result = $mysqli->query($conflict_sql);
-
-        if ($conflict_result && $conflict_result->num_rows > 0) {
-            $error = true;
-            $staff_id_error = "This staff member already has an appointment on this day.";
-        }
-        */
     }
 
     if (!$error) {
@@ -115,7 +102,7 @@ if (isset($_POST['btn_submit'])) {
         $status = $mysqli->real_escape_string($status);
         $comment = $mysqli->real_escape_string($comment);
         $request = $mysqli->real_escape_string($request);
-        $sql = "INSERT INTO appointments (customer_id, service_id, staff_id, appointment_date, appointment_time, status, comment, request) VALUES ('$customer_id', '$service_id', '$staff_id', '$appointment_date', '$appointment_time', '$status', '$comment', '$request')";
+        $sql = "INSERT INTO appointments (customer_id, service_id, staff_id, appointment_date, appointment_time, status, comment, request) VALUES ('$customer_id', '$service_id', '$staff_id', '$appointment_date', '$appointment_time', '0', '$comment', '$request')";
         $mysqli->query($sql);
         echo "<script>window.location.href = '" . $admin_base_url . "appointment_list.php?success=Appointment Created';</script>";
         exit;
@@ -129,7 +116,7 @@ if (isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-   
+
     <!-- row -->
 
     <div class="container">
@@ -207,7 +194,7 @@ if (isset($_POST['btn_submit'])) {
                             <small class="text-danger"><?= $appointment_time_err ?></small>
                         <?php } ?>
                     </div>
-                    <div class="form-group mb-2">
+                    <!-- <div class="form-group mb-2">
                         <label for="status" class="form-label">အခြေအနေ</label>
                         <select name="status" class="form-control" id="status">
                             <option value="">အခြေအနေရွေးချယ်ရန်</option>
@@ -219,7 +206,7 @@ if (isset($_POST['btn_submit'])) {
                         <?php if ($error && $status_err) { ?>
                             <small class="text-danger"><?= $status_err ?></small>
                         <?php } ?>
-                    </div>
+                    </div> -->
                     <div class="form-group mb-2">
                         <label for="comment" class="form-label">မှတ်ချက်</label>
                         <input type="text" name="comment" class="form-control" value="<?= htmlspecialchars($comment) ?>">

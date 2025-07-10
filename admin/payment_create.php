@@ -14,13 +14,15 @@ $error_message = '';
 $appointment_id_error = $amount_error = $payment_method_error = $payment_date_error = '';
 $appointment_id = $amount = $payment_method = $payment_date = '';
 
+// Check if appointment ID is passed via GET
 $filter_appointment_id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : '';
 
+// Always fetch all available appointments for the dropdown
+$appointments = $mysqli->query("SELECT a.id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time, s.price as service_price FROM appointments a INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE a.status = 1 AND a.id NOT IN (SELECT appointment_id FROM payments)");
+
+// Pre-select the appointment if ID is passed
 if ($filter_appointment_id) {
-    $appointments = $mysqli->query("SELECT a.id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time, s.price as service_price FROM appointments a INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE a.status = 1 AND a.id = $filter_appointment_id AND a.id NOT IN (SELECT appointment_id FROM payments)");
     $appointment_id = $filter_appointment_id;
-} else {
-    $appointments = $mysqli->query("SELECT a.id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time, s.price as service_price FROM appointments a INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE a.status = 1 AND a.id NOT IN (SELECT appointment_id FROM payments)");
 }
 
 if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
@@ -78,7 +80,9 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         unset($_SESSION['payment_form_token']);
     } else {
         $error = true;
-        $error_message = "Invalid form submission. Please try again.";
+        $url = $admin_base_url . 'payment_list.php?success';
+        header("Location: $url");
+        exit;
     }
 }
 require '../layouts/header.php';
@@ -109,7 +113,7 @@ require '../layouts/header.php';
                         <form action="<?= $admin_base_url ?>payment_create.php" method="POST">
                             <div class="form-group mb-2">
                                 <label for="appointment_id" class="form-label">အချိန်ချိန်းဆိုမှု</label>
-                                <select name="appointment_id" class="form-control" id="appointment_id" <?php if ($filter_appointment_id) echo ' disabled'; ?>>
+                                <select name="appointment_id" class="form-control" id="appointment_id">
                                     <option value="">အချိန်ချိန်းဆိုမှု ရွေးချယ်ရန်</option>
                                     <?php
                                     if ($appointments && $appointments->num_rows > 0) {
@@ -126,9 +130,6 @@ require '../layouts/header.php';
                                         echo '<option value="">No appointments available</option>';
                                     } ?>
                                 </select>
-                                <?php if ($filter_appointment_id) { ?>
-                                    <input type="hidden" name="appointment_id" value="<?= htmlspecialchars($appointment_id) ?>" />
-                                <?php } ?>
                                 <?php if ($error && $appointment_id_error) { ?>
                                     <span class="text-danger"><?= $appointment_id_error ?></span>
                                 <?php } ?>
@@ -143,7 +144,7 @@ require '../layouts/header.php';
                                                                                                             } else {
                                                                                                                 echo htmlspecialchars($amount);
                                                                                                             }
-                                                                                                            ?>" min="1" <?php if ($filter_appointment_id) echo 'readonly'; ?> />
+                                                                                                            ?>" min="1" />
                                 <?php if ($error && $amount_error) { ?>
                                     <span class="text-danger"><?= $amount_error ?></span>
                                 <?php } ?>

@@ -52,6 +52,6 @@
   </div>
 </section>
 
-<div id="map"></div>
+<!-- <div id="map"></div> -->
 
 <?php require_once './template_layout/footer.php' ?>

@@ -12,9 +12,9 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>ပစ္စည်း‌စျေးနှုန်းများစာရင်း</h3>
+            <h3>ပစ္စည်းအရောင်းများစာရင်း</h3>
             <div class="">
-                <a href="product_sale_create.php" class="btn btn-primary">ပစ္စည်း‌စျေးနှုန်းများစာရင်း ဖန်တီးရန်</a>
+                <a href="product_sale_create.php" class="btn btn-primary">ပစ္စည်းအရောင်းများစာရင်း ဖန်တီးရန်</a>
             </div>
         </div>
         <div class="row">
@@ -64,7 +64,7 @@ require '../layouts/header.php';
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="7" class="text-center">ပစ္စည်းစျေးနှုန်းများ ရှာမတွေ့ပါ</td>
+                                        <td colspan="7" class="text-center">ပစ္စည်းအရောင်းများ ရှာမတွေ့ပါ</td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

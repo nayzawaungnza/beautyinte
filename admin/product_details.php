@@ -24,7 +24,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h1>ပစ္စည်းစျေးနှုန်းများ အသေးစိတ်</h1>
+            <h3>ပစ္စည်းစျေးနှုန်းများ အသေးစိတ်</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'product_list.php' ?>" class="btn btn-dark">
                     ပြန်ရန်
@@ -42,8 +42,8 @@ require '../layouts/header.php';
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h1><?= $res['name'] ?></h1>
-                        <small><?= $res['price'] ?></small>
+                        <h3><?= $res['name'] ?></h3>
+                        <h4><?= $res['price'] ?></h4>
                         <p><b>Description: </b><?= $res['description'] ?></p>
                     </div>
                 </div>

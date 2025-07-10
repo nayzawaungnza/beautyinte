@@ -91,12 +91,12 @@ require_once '../require/common_function.php';
                             <img src="<?= $_SESSION['image'] ?>" height="40" width="40" class="rounded-circle mr-2" alt="">
                             <span class="d-none d-md-inline">Profile</span>
                         </a>
-                        <?php  
-                            if ($_SESSION['role'] == "staff") {
-                                $profile_link = "http://localhost/Beauty/staff/staff_profile.php";
-                            } else {
-                                $profile_link = "http://localhost/Beauty/admin/admin_profile.php";
-                            }
+                        <?php
+                        if ($_SESSION['role'] == "staff") {
+                            $profile_link = "http://localhost/Beauty/staff/staff_profile.php";
+                        } else {
+                            $profile_link = "http://localhost/Beauty/admin/admin_profile.php";
+                        }
                         ?>
                         <div class="dropdown-menu dropdown-menu-right shadow">
                             <a class="dropdown-item" href="<?= $profile_link ?>"><i class="fas fa-user mr-2"></i> ပရိုဖိုင်</a>
@@ -104,7 +104,7 @@ require_once '../require/common_function.php';
                             <a class="dropdown-item" href="<?= '../logout.php' ?>"><i class="fas fa-sign-out-alt mr-2"></i> အကောင့်ထွက်ရန်</a>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -181,7 +181,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="fa-solid fa-coins"></i><span class="nav-text">ပစ္စည်းစျေးနှုန်းများ</span>
+                                <i class="fa-solid fa-coins"></i><span class="nav-text">ပစ္စည်းအရောင်း</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/product_sale_list.php">စာရင်း</a></li>

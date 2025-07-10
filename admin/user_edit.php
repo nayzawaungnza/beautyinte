@@ -100,14 +100,14 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-    <div class="row page-titles mx-0">
+    <!-- <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
             </ol>
         </div>
-    </div>
+    </div> -->
     <!-- row -->
 
     <div class="container">
@@ -150,13 +150,13 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <label class="form-label">လိင်</label>
                         <br />
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="<?= $gender ?>">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 ကျား
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="<?= $gender ?>">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 မ
                             </label>

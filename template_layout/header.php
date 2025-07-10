@@ -43,9 +43,8 @@
                             <h1>အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
                         </a>
                     </div>
-                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အလှပြင်ဆိုင်</h1>
-                    <p class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Created by <a
-                            href="#">Colorlib.com</a></p>
+                    <h2 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
+
 
                     <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
                             href="./services.php" class="btn btn-white btn-outline-white px-4 py-3">View Our
@@ -57,7 +56,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H အလှပြင်ဆိုင်</a>
+            <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu

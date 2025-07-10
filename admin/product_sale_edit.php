@@ -50,7 +50,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>ပစ္စည်းစျေးနှုန်းများ ပြင်ဆင်ရန်</h3>
+            <h3>ပစ္စည်းအရောင်းများ ပြင်ဆင်ရန်</h3>
             <div class="">
                 <a href="product_sale_list.php" class="btn btn-dark">ပြန်ရန်</a>
             </div>

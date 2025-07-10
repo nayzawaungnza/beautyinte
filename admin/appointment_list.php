@@ -7,9 +7,11 @@ require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = "SELECT appointments.id, customers.name as customer_name, services.name AS service_name, users.name AS staff_name,
-        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status, appointments.comment, appointments.request
+        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status, appointments.comment, appointments.request,
+        payments.id as payment_id, payments.amount as payment_amount, payments.payment_method, payments.payment_date
         FROM appointments INNER JOIN customers ON appointments.customer_id = customers.id
-        INNER JOIN services ON appointments.service_id = services.id INNER JOIN users ON appointments.staff_id = users.id";
+        INNER JOIN services ON appointments.service_id = services.id INNER JOIN users ON appointments.staff_id = users.id
+        LEFT JOIN payments ON appointments.id = payments.appointment_id ORDER BY appointments.id DESC ";
 $appointments = $mysqli->query($res);
 
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
@@ -99,7 +101,13 @@ require '../layouts/header.php';
                                                     <?php } else if ($row['status'] == 3) { ?>
 
                                                     <?php } else if ($row['status'] == 1) { ?>
-                                                        <a href="./payment_create.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-secondary edit_btn mx-2">ငွေပေးချေရန်</a>
+                                                        <?php if ($row['payment_id']) { ?>
+                                                            <!-- Payment already exists -->
+                                                            <span class="badge bg-success text-dark mx-2">ငွေပေးချေပြီး</span>
+                                                        <?php } else { ?>
+                                                            <!-- No payment yet -->
+                                                            <a href="./payment_create.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-secondary edit_btn mx-2">ငွေပေးချေရန်</a>
+                                                        <?php } ?>
                                                     <?php } ?>
                                                 </div>
                                             </td>
