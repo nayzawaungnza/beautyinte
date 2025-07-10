@@ -179,11 +179,14 @@ require_once '../require/common_function.php';
                                 <li><a href="../admin/payment_list.php">စာရင်း</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="<?= $admin_base_url . 'promotion_list.php' ?>">
-                                <i class="fa fa-gift"></i>
-                                <span>Promotions</span>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class="fa fa-gift"></i><span class="nav-text">ပရိုမိုးရှင်း</span>
                             </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/promotion_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/promotion_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
