@@ -90,7 +90,7 @@ require '../layouts/header.php';
     <div class="row">
         <div class="col-md-6 col-sm-6 text-center">
             <div style="width: 200px; margin: auto; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.3);">
-                <img  src="<?php echo $admin['image'] ? $admin['image'] : 'https://via.placeholder.com/150'; ?>" class="img-fluid profile-img mb-3" alt="Profile Image">
+                <img src="<?php echo $admin['image'] ? $admin['image'] : 'https://via.placeholder.com/150'; ?>" class="img-fluid profile-img mb-3" alt="Profile Image">
             </div>
             <form method="post" enctype="multipart/form-data" class="mt-3">
                 <div class="form-group">
