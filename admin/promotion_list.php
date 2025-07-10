@@ -26,7 +26,7 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>Promotion List</h3>
-            <a href="promotion_create.php" class="btn btn-primary">Add Promotion</a>
+            <a href="promotion_create.php" class="btn btn-primary">ပရိုမိုးရှင်းထပ်ထည့်ရန်</a>
         </div>
         <?php if ($success) { ?>
             <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
@@ -39,13 +39,13 @@ require '../layouts/header.php';
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Discount (%)</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Actions</th>
+                            <th>စဥ◌်</th>
+                            <th>ခေါင်းစဉ်</th>
+                            <th>အကြောင်းအရာ</th>
+                            <th>လျှော့စေ◌ျး</th>
+                            <th>ပရိုမိုးရှင်းစသည့်ရက်</th>
+                            <th>ပရိုမိုးရှင်းဆုံးသည့်ရက်</th>
+                            <th>လုပ်ဆောင်မှု</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,8 +59,8 @@ require '../layouts/header.php';
                                     <td><?= htmlspecialchars($row['start_date']) ?></td>
                                     <td><?= htmlspecialchars($row['end_date']) ?></td>
                                     <td>
-                                        <a href="promotion_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">Edit</a>
-                                        <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">Delete</a>
+                                        <a href="promotion_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>
+                                        <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>
                                     </td>
                                 </tr>
                             <?php }

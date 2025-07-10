@@ -53,8 +53,8 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
-            <h3>Edit Promotion</h3>
-            <a href="promotion_list.php" class="btn btn-dark">Back to List</a>
+            <h3>ပရိုမိုးရှင်း ပြင်ဆင်ရန်</h3>
+            <a href="promotion_list.php" class="btn btn-dark">ပြန်ရန်</a>
         </div>
         <?php if ($error && $error_message) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
@@ -63,26 +63,26 @@ require '../layouts/header.php';
             <div class="card-body">
                 <form method="POST">
                     <div class="form-group mb-2">
-                        <label for="package_name">Title <span class="text-danger">*</span></label>
+                        <label for="package_name">ခေါင်းစဉ် <span class="text-danger"></span></label>
                         <input type="text" name="package_name" id="package_name" class="form-control" value="<?= htmlspecialchars($package_name) ?>" required />
                     </div>
                     <div class="form-group mb-2">
-                        <label for="description">Description</label>
+                        <label for="description">အကြောင်းအရာ</label>
                         <textarea name="description" id="description" class="form-control"><?= htmlspecialchars($description) ?></textarea>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="percentage">Discount (%) <span class="text-danger">*</span></label>
+                        <label for="percentage">လျှော့စေ◌ျး <span class="text-danger"></span></label>
                         <input type="number" name="percentage" id="percentage" class="form-control" value="<?= htmlspecialchars($percentage) ?>" min="1" required />
                     </div>
                     <div class="form-group mb-2">
-                        <label for="start_date">Start Date <span class="text-danger">*</span></label>
+                        <label for="start_date">ပရိုမိုးရှင်းစသည့်ရက်<span class="text-danger"></span></label>
                         <input type="date" name="start_date" id="start_date" class="form-control" value="<?= htmlspecialchars($start_date) ?>" required />
                     </div>
                     <div class="form-group mb-2">
-                        <label for="end_date">End Date <span class="text-danger">*</span></label>
+                        <label for="end_date">ပရိုမိုးရှင်းဆုံးသည့်ရက် <span class="text-danger"></span></label>
                         <input type="date" name="end_date" id="end_date" class="form-control" value="<?= htmlspecialchars($end_date) ?>" required />
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Promotion</button>
+                    <button type="submit" class="btn btn-primary">ပရိုမိုးရှင်း အသစ်ဖန်တီးရန်</button>
                 </form>
             </div>
         </div>
