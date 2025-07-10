@@ -179,6 +179,12 @@ require_once '../require/common_function.php';
                                 <li><a href="../admin/payment_list.php">စာရင်း</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="<?= $admin_base_url . 'promotion_list.php' ?>">
+                                <i class="fa fa-gift"></i>
+                                <span>Promotions</span>
+                            </a>
+                        </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
                                 <i class="fa-solid fa-coins"></i><span class="nav-text">ပစ္စည်းအရောင်း</span>

@@ -80,18 +80,31 @@ function create_table($mysqli)
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )";
     if ($mysqli->query($product_sql) === false) return false;
+    //Promotion
+    $promotion_sql = "CREATE TABLE IF NOT EXISTS `promotions`
+                   (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                   package_name VARCHAR(200) NOT NULL,
+                   percentage decimal NOT NULL,
+                    description TEXT NULL,
+                   start_date DATETIME,
+                    end_date DATETIME
+                   )";
+    if ($mysqli->query($promotion_sql) === false) return false;
     //Product sales
     $product_sales_sql = "CREATE TABLE IF NOT EXISTS `product_sales`
                      ( 
                      id INT AUTO_INCREMENT PRIMARY KEY,
                      product_id INT NOT NULL,
                      customer_id INT NOT NULL,
+                     promotion_id INT NOT NULL,
                      qty INT NOT NULL,
                      total_price INT NOT NULL,
                      sale_date DATE NULL,
                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                      FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+                     FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
                      FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
                      )";
     if ($mysqli->query($product_sales_sql) === false) return false;
@@ -130,11 +143,13 @@ function create_table($mysqli)
                    (
                    id INT AUTO_INCREMENT PRIMARY KEY,
                    appointment_id INT NOT NULL,
+                   promotion_id INT NOT NULL,
                    amount INT NOT NULL,
                    payment_method ENUM('k-pay','wave-pay')NOT NULL,
                    payment_date DATE NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                   FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
                    FOREIGN KEY (appointment_id) REFERENCES appointments(id) ON DELETE CASCADE
                    )";
     if ($mysqli->query($payment_sql) === false) return false;
