@@ -19,12 +19,11 @@ $name_err =
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users`";
+    $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users` where id = '$id'";
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
     $email = $oldData['email'];
-    $password = $oldData['password'];
     $role = $oldData['role'];
     $phone = $oldData['phone'];
     $gender = $oldData['gender'];
@@ -45,7 +44,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if (strlen($name) < 5) {
         $error = true;
         $name_err = "Name must be fill greater than 5.";
-    } else if (strlen($name) >= 10) {
+    } else if (strlen($name) >= 100) {
         $error = true;
         $name_err = "Name must be fill less than 100.";
     }
@@ -64,19 +63,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "Email format is wrong.";
-    }
-    //Password
-    if (strlen($password) === 0) {
-        $error = true;
-        $password_err = "Please fill Password";
-    } else if (strlen($password) < 8) {
-        $error = true;
-        $password_err = "Password must be greater than 8.";
-    } else if (strlen($password) > 30) {
-        $error = true;
-        $password_err = "Password must be less than 30.";
-    } else {
-        $byScriptPassword = md5($password);
     }
     //role
     if (strlen($role) === 0 || $role === '') {
@@ -138,11 +124,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <label for="name" class="form-label">အီးမေးလ်</label>
                         <input type="text" name="email" class="form-control" value="<?= $email ?>">
                         <small class="text-danger"><?= $email_err ?></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">စကားဝှက်</label>
-                        <input type="password" name="password" class="form-control" value="<?= $password ?>">
-                        <small class="text-danger"><?= $password_err ?></small>
                     </div>
                     <div class="form-group">
                         <label for="role" class="form-label">အခန်းကဏ္ဍ</label>

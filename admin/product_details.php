@@ -4,7 +4,6 @@ checkAuth('admin');
 require "../require/common_function.php";
 require '../require/db.php';
 require '../require/common.php';
-require '../require/check_auth.php';
 if ($_SESSION['role'] !== 'admin') {
     header("Location: ../staff/task_list.php");
     exit;
