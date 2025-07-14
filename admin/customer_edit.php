@@ -12,7 +12,7 @@ $name_err =
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT customers.id, customers.name, customers.phone FROM  `customers`";
+    $sql = "SELECT customers.id, customers.name, customers.phone FROM  `customers` WHERE customers.id = $id ";
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];

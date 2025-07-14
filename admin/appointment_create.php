@@ -70,10 +70,6 @@ if (isset($_POST['btn_submit'])) {
             $appointment_time_err = "Unavailable appointment time.";
         }
     }
-    // if ($status === '' || !in_array($status, ['0', '1', '2'])) {
-    //     $error = true;
-    //     $status_err = "Please select status.";
-    // }
 
     // Check if staff is already assigned at the same date and time
     if (!$error) {
@@ -83,8 +79,8 @@ if (isset($_POST['btn_submit'])) {
 
         // Check for same date and time
         $conflict_sql = "SELECT id FROM appointments 
-                         WHERE staff_id = '$staff_id_esc' 
-                         AND status = '3'";
+                         WHERE staff_id = '$staff_id_esc' AND appointment_date = '$appointment_date' 
+                         AND status = '0' OR status = '3' ";
         $conflict_result = $mysqli->query($conflict_sql);
 
         if ($conflict_result && $conflict_result->num_rows > 0) {
