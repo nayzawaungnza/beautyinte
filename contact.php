@@ -6,19 +6,19 @@
       <div class="col-md-4 contact-info ftco-animate">
         <div class="row">
           <div class="col-md-12 mb-4">
-            <h2 class="h4">Contact Information</h2>
+            <h2 class="h4">သတင်းအချက်အလက်</h2>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Address:</span>Myanmar Plaza,192 Kabar Aye Pagoda Road</p>
+            <p><span>နေရပ်လိပ်စာ:</span>Myanmar Plaza,192 Kabar Aye Pagoda Road</p>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Phone:</span> <a href="tel://1234567920">+95 9671680901, 09668852876</a></p>
+            <p><span>ဆက်သွယ်ရန်ဖုန်း :</span> <a href="tel://1234567920">+၉၅ ၉၆၇၁၆၈၁၉၀၁, ၀၉၆၆၈၈၅၂၈၇၆</a></p>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Email:</span> <a href="mailto:info@yoursite.com">saungwaikhin@gmail.com, htwehtweyee@gmail.com</a></p>
+            <p><span>အီးမေးလ် :</span> <a href="mailto:info@yoursite.com">saungwaikhin@gmail.com, htwehtweyee@gmail.com</a></p>
           </div>
           <div class="col-md-12 mb-3">
-            <p><span>Website:</span> <a href="#">yoursite.com</a></p>
+            <p><span>ဝက်ဘ်ဆိုက်:</span> <a href="#">yoursite.com</a></p>
           </div>
         </div>
       </div>
@@ -28,23 +28,23 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" class="form-control" placeholder="အမည်">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="text" class="form-control" placeholder="အီးမေးလ်">
               </div>
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Subject">
+            <input type="text" class="form-control" placeholder="ဘာသာ">
           </div>
           <div class="form-group">
-            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="မက်ဆေ့"></textarea>
           </div>
           <div class="form-group">
-            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+            <input type="submit" value="မက်ဆေ့ပေးပို့ရန်" class="btn btn-primary py-3 px-5">
           </div>
         </form>
       </div>

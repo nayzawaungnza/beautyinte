@@ -4,12 +4,12 @@
         <div class="row mb-5">
             <div class="col-md-4">
                 <div class="ftco-footer-widget mb-4 ml-md-4">
-                    <h2 class="ftco-heading-2">Services</h2>
+                    <h2 class="ftco-heading-2">ဝန်ဆောင်မှုများ</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Hair cutting & styling</a></li>
-                        <li><a href="#" class="py-2 d-block">Makeup</a></li>
-                        <li><a href="#" class="py-2 d-block">Nail</a></li>
-                        <li><a href="#" class="py-2 d-block">Product</a></li>
+                        <li><a href="#" class="py-2 d-block">ဆံပင်ပုံသွင်းခြင်းနှင့်အရောင်ဆိုးခြင်းအမျိုးမျိုး</a></li>
+                        <li><a href="#" class="py-2 d-block">မိတ်ကပ်</a></li>
+                        <li><a href="#" class="py-2 d-block">လက်သည်း</a></li>
+                        <li><a href="#" class="py-2 d-block">‌ရောင်းရန်ပစ္စည်းများ</a></li>
                     </ul>
                 </div>
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
@@ -20,12 +20,12 @@
             </div>
             <div class="col-md-3">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Have a Questions?</h2>
+                    <h2 class="ftco-heading-2">ဆက်သွယ်ရန်လိပ်စာ</h2>
 
                     <div class="block-23 mb-3">
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">Myanmar Plaza,192 Kabar Aye Pagoda Road</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+95 09671680901, 09668852876</span></a></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+၉၅ ၀၉၆၇၁၆၈၀၉၀၁, ၀၉၆၆၈၈၅၂၈၇၆</span></a></li>
                             <li><a href="#"><span class="icon icon-envelope"></span><span
                                         class="text">saungwaikhin@gmail.com,htwehtweyee@gmail.com</span></a></li>
                         </ul>

@@ -106,9 +106,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 				</a>
 			</div>
 			<div class="col-md-4 ftco-animate">
-				<a href="#" style=" width: 100%;
-					height: 250px;" class="work-entry">
-					<img src="images/nail1.jpg" class="img-fluid" alt="Colorlib Template">
+				<a href="#" class="work-entry">
+					<img src="images/nail2.jpg" class="img-fluid" alt="Colorlib Template">
 					<div class="info d-flex align-items-center">
 						<div>
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
@@ -222,7 +221,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 						<div class="block-18 text-center">
 							<div class="text">
 								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>Makeup Over Done</span>
+								<span>မိတ်ကပ်ပြင်ဆင်မှုမှတ်တမ်းများ</span>
 								<strong class="number" data-number="3500">0</strong>
 							</div>
 						</div>
@@ -231,7 +230,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 						<div class="block-18 text-center">
 							<div class="text">
 								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>Procedure</span>
+								<span>ထုတ်လုပ်သူ</span>
 								<strong class="number" data-number="1000">0</strong>
 							</div>
 						</div>
@@ -240,7 +239,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 						<div class="block-18 text-center">
 							<div class="text">
 								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>Happy Client</span>
+								<span>ဖောက်သည်များ၏ပျော်ရွှင်မှု</span>
 								<strong class="number" data-number="3000">0</strong>
 							</div>
 						</div>
@@ -249,7 +248,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 						<div class="block-18 text-center">
 							<div class="text">
 								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>Skin Treatment</span>
+								<span>အသားအရေကုသမှု</span>
 								<strong class="number" data-number="900">0</strong>
 							</div>
 						</div>

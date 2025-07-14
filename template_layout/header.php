@@ -47,8 +47,8 @@
 
 
                     <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
-                            href="./services.php" class="btn btn-white btn-outline-white px-4 py-3">View Our
-                            Services</a></p>
+                            href="./services.php" class="btn btn-white btn-outline-white px-4 py-3">ဆိုင်၏ ဝန်ဆောင်မှုများ
+                        </a></p>
                 </div>
             </div>
         </div>
