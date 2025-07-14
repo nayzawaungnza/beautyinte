@@ -21,9 +21,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 				<div class="media d-block text-center block-6 services">
 					<div class="icon d-flex mb-3"><span class="flaticon-facial-treatment"></span></div>
 					<div class="media-body">
-						<h3 class="heading">Skin &amp; Beauty Care</h3>
-						<p>A beauty salon is a place where professional beauty treatments like hair styling, skincare, makeup, and nail care are
-							provided to enhance a person's appearance.</p>
+						<h3 class="heading">အသားအရေနှင့် အလှအပ ပြုစုမှု</h3>
+						<p>အလှပြင်ဆိုင်သည် ချောမွှတ်နူးညံ့သော အလှပြင်ဝန်ဆောင်မှုများဖြစ်သော ဆံပင်ညှပ်ခြင်း၊ အသားအရေစောင့်ရှောက်မှု၊ မိတ်ကပ်လုပ်ခြင်းနှင့် လက်သည်းအလှပြင်ခြင်းတို့ကို ပေးဆောင်သောနေရာဖြစ်ပြီး လူတစ်ဦး၏ရုပ်ရည်အလှတရားကို တိုးတက်စေရန်ရည်ရွယ်သည်။</p>
 					</div>
 				</div>
 			</div>
@@ -31,9 +30,9 @@ $service_res = selectData("services", $mysqli, "", "*");
 				<div class="media d-block text-center block-6 services">
 					<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
 					<div class="media-body">
-						<h3 class="heading">Makeup Pro</h3>
-						<p>Makeup Pro in a beauty salon provides professional makeup services for events, weddings, and photoshoots, enhancing
-							clients’ facial features with expert techniques and high-quality products.</p>
+						<h3 class="heading">မိတ်ကပ်ပရို</h3>
+						<p>မိတ်ကပ်ပညာသည် အလှပြင်ဆိုင်အတွင်းတွင် မိတ်ကပ်လုပ်ငန်းအတွေ့အကြုံရှိသူဖြစ်ပြီး၊ အခမ်းအနားများ၊ မင်္ဂလာဆောင်ပွဲများနှင့် ဓာတ်ပုံရိုက်ကွင်းများအတွက် အထူးကျွမ်းကျင်သော မိတ်ကပ်ဝန်ဆောင်မှုများပေးပါသည်။
+							သူမတို့သည် ဖောက်သည်၏ မျက်နှာအလှအပကို အထူးပြုပြင်နိုင်သော နည်းစနစ်များနှင့် အရည်အသွေးမြင့် ထုတ်ကုန်များကို အသုံးပြုပြီး မြှင့်တင်ပြသပေးပါသည်။</p>
 					</div>
 				</div>
 			</div>
@@ -41,9 +40,9 @@ $service_res = selectData("services", $mysqli, "", "*");
 				<div class="media d-block text-center block-6 services">
 					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
 					<div class="media-body">
-						<h3 class="heading">Hair Style</h3>
-						<p>Hair styling in a beauty salon involves cutting, coloring, and designing hair to match the client’s personality and
-							preferences, using professional tools and techniques to achieve a stylish and polished look.</p>
+						<h3 class="heading">ဆံပင်ပုံစံ</h3>
+						<p>အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
+							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
 					</div>
 				</div>
 			</div>
@@ -55,9 +54,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section ftco-animate text-center">
-				<h2 class="mb-6">Our Beauty Experts</h2>
-				<p class="mb-4 text-light">Our beauty experts are skilled professionals dedicated to providing personalized beauty treatments that enhance your
-					natural look and boost your confidence.</p>
+				<h2 class="mb-6">အလှအပပညာရှင်များ</h2>
+				<p class="mb-4 text-light">ကျွန်ုပ်တို့၏ အလှအပအထူးကျွမ်းကျင်သူများသည် သင့်သဘာဝအလှကို မြှင့်တင်ပေးရန်နှင့် သင့်ယုံကြည်မှုကို တိုးတက်စေရန်အတွက် ကိုယ်ပိုင်လိုအပ်ချက်များနှင့် ကိုက်ညီသော အလှပြင်ဝန်ဆောင်မှုများကို ပေးစွမ်းနိုင်သော ကျွမ်းကျင်သော ပညာရှင်များဖြစ်ပါသည်။</p>
 			</div>
 		</div>
 		<div class="row">
@@ -72,7 +70,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 								<h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
 								<span class="position mb-4 text-dark"><?= $data['role'] ?></span>
 								<div class="text">
-									<p>Receptionist is the first impression of an organization, responsible for creating a welcoming environment and ensuring smooth communication between visitors and staff.</p>
+									<p>အကြိုဆိုဝန်ထမ်း သည် အဖွဲ့အစည်းတစ်ခု၏ ပထမဦးဆုံးအမြင်ကိုဖော်ပြသူဖြစ်ပြီး၊ ဧည့်သည်များအား နွေးထွေးစွာကြိုဆိုရန်နှင့် ဧည့်သည်များနှင့် ဝန်ထမ်းများအကြား ဆက်သွယ်ရေး ပြေပြစ်မှုရှိအောင် ထိန်းသိမ်းပေးရသောတာဝန်ရှိသူဖြစ်သည်။</p>
 								</div>
 							</div>
 						</div>
@@ -89,8 +87,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
-				<h2 class="mb-4">Our Work</h2>
-				<p class="position mb-4 text-dark">Enhancing natural beauty through professional hair styling, flawless makeup, and stunning lip makeover.</p>
+				<h2 class="mb-4">ကျွန်ုပ်တို့၏ အလုပ်များ</h2>
+				<p class="position mb-4 text-dark">ပရော်ဖက်ရှင်နယ် ဆံပင်အလှပြင်ခြင်း၊ ပြတ်သားလှပသော မိတ်ကပ်လုပ်ခြင်း၊ နှင့် စွဲမက်ဖွယ်အနီအဖြူဖြင့် နှုတ်ခမ်းအလှပြင်ခြင်းတို့အားဖြင့် သဘာဝအလှကို မြှင့်တင်ပေးခြင်းဖြစ်သည်။</p>
 			</div>
 		</div>
 		<div class="row">
@@ -102,20 +100,21 @@ $service_res = selectData("services", $mysqli, "", "*");
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
 								<span class="icon-search"></span>
 							</div>
-							<h3>Hair Style</h3>
+							<h3>ဆံပင်ပုံစံ</h3>
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col-md-4 ftco-animate">
-				<a href="#" class="work-entry">
-					<img src="images/work-1.jpg" class="img-fluid" alt="Colorlib Template">
+				<a href="#" style=" width: 100%;
+					height: 250px;" class="work-entry">
+					<img src="images/nail1.jpg" class="img-fluid" alt="Colorlib Template">
 					<div class="info d-flex align-items-center">
 						<div>
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
 								<span class="icon-search"></span>
 							</div>
-							<h3>Nail Style</h3>
+							<h3>လက်သည်းပုံစံ</h3>
 						</div>
 					</div>
 				</a>
@@ -128,7 +127,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
 								<span class="icon-search"></span>
 							</div>
-							<h3>Makeup</h3>
+							<h3>မိတ်ကပ်</h3>
 						</div>
 					</div>
 				</a>
@@ -172,8 +171,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
-				<h2 class="mb-4 text-dark">Beauty Pricing</h2>
-				<p>Enhancing beauty without hidden costs—quality services at fair prices.</p>
+				<h2 class="mb-4 text-dark">အလှအပ စျေးနှုန်းများ</h2>
+				<p>လျှို့ဝှက်စရိတ်မရှိဘဲ အရည်အသွေးမြင့် ဝန်ဆောင်မှုများကို တန်ဖိုးကျသော စျေးနှုန်းဖြင့် ပေးဆောင်ခြင်းဖြင့် အလှတိုးတက်စေခြင်း။</p>
 			</div>
 		</div>
 		<div class="row">
@@ -183,8 +182,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 					<div class="col-md-3 ftco-animate">
 						<div class="pricing-entry pb-5 text-center">
 							<div>
-								<h3 class="mb-4">Basic</h3>
-								<span class="per">one trip</span>
+								<h3 class="mb-4">အခြေခံ</h3>
+								<span class="per">တစ်ကြိမ်</span>
 							</div>
 
 							<ul>
@@ -196,7 +195,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 							</ul>
 
 							<p class="button text-center"><a href="#"
-									class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
+									class="btn btn-primary btn-outline-primary px-4 py-3">မှာယူရန်</a></p>
 
 						</div>
 					</div>
