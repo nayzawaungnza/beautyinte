@@ -92,7 +92,7 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
-            <h3>ရောင်းရန်ပစ္စည်း အသစ်ထပ်တိုးရန်</h3>
+            <h3>ပစ္စည်းအရောင်း</h3>
             <div class="">
                 <a href="product_sale_list.php" class="btn btn-dark">ပြန်ရန်</a>
             </div>

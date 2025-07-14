@@ -71,7 +71,7 @@ require '../layouts/header.php';
                         <textarea name="description" id="description" class="form-control"><?= htmlspecialchars($description) ?></textarea>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="percentage">လျှော့စေ◌ျး <span class="text-danger"></span></label>
+                        <label for="percentage">လျှော့စျေး<span class="text-danger"></span></label>
                         <input type="number" name="percentage" id="percentage" class="form-control" value="<?= htmlspecialchars($percentage) ?>" min="1" required />
                     </div>
                     <div class="form-group mb-2">
@@ -79,7 +79,7 @@ require '../layouts/header.php';
                         <input type="date" name="start_date" id="start_date" class="form-control" value="<?= htmlspecialchars($start_date) ?>" required />
                     </div>
                     <div class="form-group mb-2">
-                        <label for="end_date">ပရိုမိုးရှင်းဆုံးသည့်ရက် <span class="text-danger"></span></label>
+                        <label for="end_date">ပရိုမိုးရှင်းပြီးဆုံးသည့်ရက် <span class="text-danger"></span></label>
                         <input type="date" name="end_date" id="end_date" class="form-control" value="<?= htmlspecialchars($end_date) ?>" required />
                     </div>
                     <button type="submit" class="btn btn-primary">ပရိုမိုးရှင်း အသစ်ဖန်တီးရန်</button>

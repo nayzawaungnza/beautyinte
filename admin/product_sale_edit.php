@@ -8,7 +8,7 @@ if ($id <= 0) {
     echo '<div class="alert alert-danger">Invalid sale ID.</div>';
     exit;
 }
-$sql = "SELECT ps.*, p.name as product_name, p.price as product_price, c.name as customer_name FROM product_sales ps INNER JOIN products p ON ps.product_id = p.id INNER JOIN customers c ON ps.customer_id = c.id WHERE ps.id = $id";
+$sql = "SELECT ps.*, p.name as product_name, p.price as product_price FROM product_sales ps INNER JOIN products p ON ps.product_id = p.id WHERE ps.id = $id";
 $result = $mysqli->query($sql);
 if (!$result || $result->num_rows == 0) {
     echo '<div class="alert alert-danger">Product sale not found.</div>';
@@ -68,10 +68,6 @@ require '../layouts/header.php';
                             <div class="form-group mb-2">
                                 <label class="form-label">ပစ္စည်းများ</label>
                                 <input type="text" class="form-control" value="<?= htmlspecialchars($sale['product_name']) ?>" readonly />
-                            </div>
-                            <div class="form-group mb-2">
-                                <label class="form-label">ဖောက်သည်များ</label>
-                                <input type="text" class="form-control" value="<?= htmlspecialchars($sale['customer_name']) ?>" readonly />
                             </div>
                             <div class="form-group mb-2">
                                 <label for="qty" class="form-label">အရေအတွက်</label>

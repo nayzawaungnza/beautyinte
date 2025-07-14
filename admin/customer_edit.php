@@ -6,71 +6,53 @@ require '../layouts/header.php';
 $error = false;
 $name_err =
     $phone_err =
-    $password_err =
     $name =
-    $phone =
-    $password = '';
+    $phone = '';
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT customers.id, customers.name, customers.phone, customers.password FROM  `customers`";
+    $sql = "SELECT customers.id, customers.name, customers.phone FROM  `customers`";
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
     $phone = $oldData['phone'];
-    $password = $oldData['password'];
-}
-
-if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $password = $_POST['password'];
 
 
-    //Name
-    if (empty($name)) {
-        $error = true;
-        $name_err = "Please add name";
-    } else if (strlen($name) < 5) {
-        $error = true;
-        $name_err = "Name must be fill greater than 5.";
-    } else if (strlen($name) >= 10) {
-        $error = true;
-        $name_err = "Name must be fill less than 100.";
-    }
-    //phone
-    if (empty($phone)) {
-        $error = true;
-        $phone_err = "Please add phone";
-    } else if (strlen($phone) < 11) {
-        $error = true;
-        $phone_err = "Phone must be fill greater than 11.";
-    }
-    //Password
-    if (strlen($password) === 0) {
-        $error = true;
-        $password_err = "Please fill Password";
-    } else if (strlen($password) < 8) {
-        $error = true;
-        $password_err = "Password must be greater than 8.";
-    } else if (strlen($password) > 30) {
-        $error = true;
-        $password_err = "Password must be less than 30.";
-    } else {
-        $byScriptPassword = md5($password);
-    }
+    if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
 
 
-    if (!$error) {
-        $sql = "UPDATE `customers` SET 
-        `customers`.`name` = '$name', `customers`.`phone` = '$phone', `customers`.`password` = '$password'
+        //Name
+        if (empty($name)) {
+            $error = true;
+            $name_err = "Please add name";
+        } else if (strlen($name) < 5) {
+            $error = true;
+            $name_err = "Name must be fill greater than 5.";
+        } else if (strlen($name) >= 100) {
+            $error = true;
+            $name_err = "Name must be fill less than 100.";
+        }
+        //phone
+        if (empty($phone)) {
+            $error = true;
+            $phone_err = "Please add phone";
+        } else if (strlen($phone) <  11) {
+            $error = true;
+            $phone_err = "Phone must be fill greater than 11.";
+        }
+
+        if (!$error) {
+            $sql = "UPDATE `customers` SET 
+        `customers`.`name` = '$name', `customers`.`phone` = '$phone'
         WHERE `customers`.`id` = '$id'";
-        $mysqli->query($sql);
-        echo "<script>window.location.href= 'http://localhost/Beauty/admin/customer_list.php? success=အသစ်ပြင်ခြင်း အောင်မြင်ပါသည်' </script>";
+            $mysqli->query($sql);
+            echo "<script>window.location.href= 'http://localhost/Beauty/admin/customer_list.php? success=အသစ်ပြင်ခြင်း အောင်မြင်ပါသည်' </script>";
+        }
     }
 }
-
-
 ?>
 
 <!-- Content body start -->
@@ -95,11 +77,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                         <small class="text-danger"><?= $phone_err ?></small>
                     </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">စကားဝှက်</label>
-                        <input type="password" name="password" class="form-control" value="<?= $password ?>">
-                        <small class="text-danger"><?= $password_err ?></small>
-                    </div>
+
 
                     <div class="my-2">
                         <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>

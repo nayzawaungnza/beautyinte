@@ -32,8 +32,8 @@ require '../layouts/header.php';
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
-            <h3>Add Payment Method</h3>
-            <a href="payment_method_list.php" class="btn btn-dark">Back to List</a>
+            <h3>ငွေပေး‌ချေမှု နည်းလမ်း</h3>
+            <a href="payment_method_list.php" class="btn btn-dark">စာရင်းပြန်ပြုစုရန်</a>
         </div>
         <?php if ($error && $error_message) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
@@ -42,13 +42,13 @@ require '../layouts/header.php';
             <div class="card-body">
                 <form method="POST">
                     <div class="form-group mb-2">
-                        <label for="name">Payment Method Name <span class="text-danger">*</span></label>
+                        <label for="name">ငွေပေး‌ချေမှု နည်းလမ်းအမည်<span class="text-danger">*</span></label>
                         <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($name) ?>" required />
                     </div>
                     <div class="form-group mb-2">
                         <label><input type="checkbox" name="status" value="1" <?= $status ? 'checked' : '' ?> /> Active</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create Payment Method</button>
+                    <button type="submit" class="btn btn-primary">ငွေပေး‌ချေမှု နည်းလမ်းအသစ်ဖန်တီးရန်</button>
                 </form>
             </div>
         </div>
