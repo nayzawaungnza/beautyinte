@@ -27,9 +27,9 @@ if ($delete_id !== '') {
 }
 require '../layouts/header.php';
 ?>
-<div class="content-body">
+<div class="content-body py-3">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mb-3">
             <h3>‌ရောင်းရန်ပစ္စည်းများ စာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'product_create.php' ?>" class="btn btn-primary">
@@ -85,8 +85,12 @@ require '../layouts/header.php';
                                                 </div>
                                             </td>
                                         </tr>
-                                <?php }
-                                } ?>
+                                    <?php }
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center p-4">‌‌ဒေတာ မရှိပါ။</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

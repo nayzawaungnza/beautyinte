@@ -2,7 +2,6 @@
 require_once '../require/db.php';
 require_once '../require/common.php';
 require_once '../require/common_function.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,63 +11,147 @@ require_once '../require/common_function.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>အလှပြင်ဆိုင်</title>
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <!-- Custom Stylesheet -->
     <link href="../dashCss/bootstrap-material-datetimepicker.css" rel="stylesheet">
-    <!-- Page plugins css -->
     <link href="../dashCss/asColorPicker.css" rel="stylesheet">
-    <!-- Color picker plugins css -->
     <link href="../dashCss/bootstrap-datepicker.min.css" rel="stylesheet">
-    <!-- Date picker plugins css -->
     <link href="../dashCss/bootstrap-timepicker.min.css" rel="stylesheet">
-    <!-- Daterange picker plugins css -->
     <link href="../dashCss/daterangepicker.css" rel="stylesheet">
     <link href="../dashCss/jquery-clockpicker.min.css" rel="stylesheet">
-
     <link href="../dashCss/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" />
     <script src="../dashJs/sweetalert2.all.min.js"></script>
     <script src="../dashJs/jquery.min.js"></script>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-        crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        .header {
+            background: #e455bcd1;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(161, 140, 209, 0.10);
+            border-bottom: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+        }
+
+        .header-content {
+            min-height: 64px;
+            color: #fff;
+        }
+
+        .brand-title h4 {
+            color: #fff !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group.icons input {
+            background: #f3eaff;
+            border-radius: 20px 0 0 20px;
+            border: none;
+        }
+
+        .input-group.icons .input-group-text {
+            background: #f3eaff;
+            border-radius: 0 20px 20px 0;
+            border: none;
+        }
+
+        .header .dropdown-toggle {
+            color: #fff !important;
+        }
+
+        .header .dropdown-menu {
+            min-width: 180px;
+        }
+
+        .nk-sidebar {
+            background: #f89cde;
+            min-width: 220px;
+            max-width: 220px;
+            min-height: 100vh;
+            padding-top: 0;
+            border-right: 2px solid #a18cd1;
+        }
+
+        .metismenu {
+            padding-left: 0;
+            background: #f89cde !important;
+        }
+
+        .metismenu>li {
+            margin-bottom: 4px;
+
+        }
+
+        .metismenu a * {
+            color: #fff;
+        }
+
+        .metismenu a {
+            /* color: #fff; */
+            color: #5f4b8b;
+            font-size: 1rem;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s, border-left 0.2s;
+            font-weight: 500;
+            border-left: 4px solid transparent;
+        }
+
+        .metismenu a:hover,
+        .metismenu>li.active>a {
+            background: #e0c3fc;
+            color: #5f4b8b;
+            border-left: 4px solid #a18cd1;
+        }
+
+        .metismenu i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .metismenu .nav-text {
+            font-weight: 500;
+        }
+
+        @media (max-width: 991px) {
+            .nk-sidebar {
+                position: absolute;
+                z-index: 1000;
+                min-height: 100vh;
+                left: 0;
+                top: 0;
+                display: none;
+            }
+        }
+
+        .main-content-with-header {
+            padding-top: 72px;
+        }
+    </style>
 </head>
 
 <body>
-
-
-    <!-- Preloader start -->
-
-
-    <!-- Preloader end -->
-
-
-
-    <!-- Main wrapper start -->
-
-    <div id="main-wrapper">
-
-        <!-- Nav header end -->
-
-
+    <div id="main-wrapper" style="position: relative; min-height: 100vh;">
         <!-- Header start -->
-        <div class="header" style="background: linear-gradient(90deg,rgb(0, 75, 236) 0%,rgb(103, 143, 252) 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <div class="header">
             <div class="header-content d-flex align-items-center justify-content-between px-4 py-2">
                 <div class="d-flex align-items-center">
-                    <button id="sidebarToggle" class="navbar-hamburger mr-3" style="background:none; border:none; font-size:28px; cursor:pointer;">
+                    <button id="sidebarToggle" class="navbar-hamburger mr-3" style="background:none; border:none; font-size:28px; cursor:pointer; color:#2d3748;">
                         <i class="fas fa-bars"></i>
                     </button>
                     <span class="brand-title d-flex align-items-center">
                         <img src="../images/logo.jpg" alt="logo" style="width: 40px; border-radius: 8px; margin-right: 10px;">
-                        <h4 class="mb-0" style="font-weight: 600; color:white;">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h4>
+                        <h4 class="mb-0">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h4>
                     </span>
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="input-group icons mr-3" style="max-width: 250px;">
-                        <input type="search" class="form-control border-0 shadow-none" placeholder="ရှာရန်" aria-label="Search Dashboard" style="background: #f5f6fa; border-radius: 20px;">
+                        <input type="search" class="form-control border-0 shadow-none" placeholder="ရှာရန်" aria-label="Search Dashboard">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent border-0"><i class="fas fa-search"></i></span>
                         </div>
@@ -91,14 +174,10 @@ require_once '../require/common_function.php';
                             <a class="dropdown-item" href="<?= '../logout.php' ?>"><i class="fas fa-sign-out-alt mr-2"></i> အကောင့်ထွက်ရန်</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
-        <!-- Header end ti-comment-alt -->
-
-
+        <!-- Header end -->
         <!-- Sidebar start -->
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
@@ -107,7 +186,7 @@ require_once '../require/common_function.php';
                     if ($_SESSION['role'] == "staff") { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="arrow-right"></i><span class="nav-text">ဝန်ထမ်းတာဝန်များ</span>
+                                <i class="fas fa-tasks"></i><span class="nav-text">ဝန်ထမ်းတာဝန်များ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../staff/task_list.php">စာရင်း</a></li>
@@ -116,7 +195,7 @@ require_once '../require/common_function.php';
                     <?php } else { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="arrow-right"></i><i class="fa-solid fa-user"></i><span class="nav-text">အသုံးပြုသူများ</span>
+                                <i class="fa-solid fa-user"></i><span class="nav-text">အသုံးပြုသူများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/user_list.php">စာရင်း</a></li>
@@ -125,7 +204,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="arrow-right"></i><i class="fa-solid fa-circle-user"></i><span class="nav-text">ဖောက်သည်</span>
+                                <i class="fa-solid fa-circle-user"></i><span class="nav-text">ဖောက်သည်</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/customer_list.php">စာရင်း</a></li>
@@ -134,7 +213,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><i class="fa-solid fa-bell-concierge"></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
+                                <i class="fa-solid fa-bell-concierge"></i><span class="nav-text">ဝန်ဆောင်မှုများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/service_list.php">စာရင်း</a></li>
@@ -161,7 +240,7 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class=""></i><i class="fa-regular fa-calendar-check"></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
+                                <i class="fa-regular fa-calendar-check"></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
@@ -193,18 +272,16 @@ require_once '../require/common_function.php';
                                 <li><a href="../admin/product_sale_create.php">ဖန်တီးမည်</a></li>
                             </ul>
                         </li>
-
                     <?php } ?>
                 </ul>
             </div>
         </div>
-
         <!-- Sidebar end -->
-
-        <script>
-            $(document).ready(function() {
-                $('#sidebarToggle').on('click', function() {
-                    $('.nk-sidebar').toggle();
+        <div class="main-content-with-header">
+            <script>
+                $(document).ready(function() {
+                    $('#sidebarToggle').on('click', function() {
+                        $('.nk-sidebar').toggle();
+                    });
                 });
-            });
-        </script>
+            </script>

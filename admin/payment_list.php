@@ -27,7 +27,6 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
             <h3>ငွေပေး‌ချေမှု စာရင်း</h3>
-
         </div>
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">

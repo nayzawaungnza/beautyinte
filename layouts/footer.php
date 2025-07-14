@@ -23,12 +23,6 @@
 <script src="../dashJs/common.min.js"></script>
 <script src="../dashJs/custom.min.js"></script>
 <script src="../dashJs/daterangepicker.js"></script>
-<!-- <script src="../dashJs/form-pickers-init.js"></script> -->
-<!-- Clock Plugin JavaScript -->
-<!-- <script src="../dashJs/fullcalendar-init.js"></script> -->
-<!-- Color Picker Plugin JavaScript -->
-<!-- <script src="../dashJs/fullcalendar.min.js"></script> -->
-<script src="../dashJs/gleek.js"></script>
 <script src="../dashJs/jquery-asColor.js"></script>
 <!-- Date Picker Plugin JavaScript -->
 <script src="../dashJs/jquery-asColorPicker.min.js"></script>
@@ -38,9 +32,6 @@
 
 <script src="../dashJs/jquery-ui.min.js"></script>
 <script>
-    setTimeout(function() {
-        ($3000, '.alert').hide()
-    });
     $(document).ready(() => {
         sideBtn = document.querySelectorAll('.sidebar-click')
         sideBtn.forEach(element => {

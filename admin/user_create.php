@@ -136,82 +136,95 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 <!-- Content body start -->
 
 <div class="content-body">
-
-   
-
-    <div class="container">
+    <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3>အသုံးပြုသူ အသစ်ဖန်တီးပါ</h3>
+                <h3 class="text-center mb-5 text-info">အသုံးပြုသူ အသစ်ဖန်တီးပါ</h3>
                 <form method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="name" class="form-label">အမည်</label>
-                        <input type="text" name="name" class="form-control" value="<?= $name ?>">
-                        <small class="text-danger"><?= $name_err ?></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">အီးမေးလ်</label>
-                        <input type="text" name="email" class="form-control" value="<?= $email ?>">
-                        <small class="text-danger"><?= $email_err ?></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">စကားဝှက်</label>
-                        <input type="password" name="password" class="form-control" value="<?= $password ?>">
-                        <small class="text-danger"><?= $password_err ?></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="role" class="form-label">အခန်းကဏ္ဍ</label>
-                        <select name="role" id="role" class="form-control" value="<?= $role ?>">
-                            <option value="">‌ေရွးချယ်ရန် အခန်းကဏ္ဍ</option>
-                            <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
-                            <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
-                        </select>
-
-                        <?php
-                        if ($role_err) {
-                        ?>
-                            <small class="text-danger"><?php echo $role_err ?></small>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>
-                        <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
-                        <small class="text-danger"><?= $phone_err ?></small>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">လိင်</label>
-                        <br />
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                ကျား
-                            </label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">အမည်</label>
+                                <input type="text" name="name" class="form-control" value="<?= $name ?>">
+                                <small class="text-danger"><?= $name_err ?></small>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                မ
-                            </label>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">အီးမေးလ်</label>
+                                <input type="text" name="email" class="form-control" value="<?= $email ?>">
+                                <small class="text-danger"><?= $email_err ?></small>
+                            </div>
                         </div>
-                        <?php
-                        if ($gender_err) {
-                        ?>
-                            <br />
-                            <small class="text-danger"><?php echo $gender_err ?></small>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <label for="image" class="form-label">ပုံထည့်ပါ</label>
-                        <input type="file" name="image" class="form-control">
-                        <small class="text-danger"><?= isset($image_err) ? $image_err : '' ?></small>
-                    </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">စကားဝှက်</label>
+                                <input type="password" name="password" class="form-control" value="<?= $password ?>">
+                                <small class="text-danger"><?= $password_err ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="role" class="form-label">အခန်းကဏ္ဍ</label>
+                                <select name="role" id="role" class="form-control" value="<?= $role ?>">
+                                    <option value="">‌ေရွးချယ်ရန် အခန်းကဏ္ဍ</option>
+                                    <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
+                                    <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
+                                </select>
 
-                    <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
+                                <?php
+                                if ($role_err) {
+                                ?>
+                                    <small class="text-danger"><?php echo $role_err ?></small>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>
+                                <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
+                                <small class="text-danger"><?= $phone_err ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">လိင်</label>
+                                <br />
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        ကျား
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        မ
+                                    </label>
+                                </div>
+                                <?php
+                                if ($gender_err) {
+                                ?>
+                                    <br />
+                                    <small class="text-danger"><?php echo $gender_err ?></small>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="image" class="form-label">ပုံထည့်ပါ</label>
+                                <input type="file" name="image" class="form-control">
+                                <small class="text-danger"><?= isset($image_err) ? $image_err : '' ?></small>
+                            </div>
+
+                            <div class="my-2">
+                                <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
