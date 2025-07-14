@@ -5,7 +5,7 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$sql = "SELECT ps.id, p.name as product_name, c.name as customer_name, ps.qty, ps.total_price, ps.sale_date FROM product_sales ps INNER JOIN products p ON ps.product_id = p.id INNER JOIN customers c ON ps.customer_id = c.id ORDER BY ps.id DESC";
+$sql = "SELECT ps.id, p.name as product_name, ps.qty, ps.total_price, ps.sale_date, pr.package_name as promotion_name, pr.percentage as promotion_percent FROM product_sales ps INNER JOIN products p ON ps.product_id = p.id LEFT JOIN promotions pr ON ps.promotion_id = pr.id ORDER BY ps.id DESC";
 $sales = $mysqli->query($sql);
 require '../layouts/header.php';
 ?>
@@ -38,9 +38,9 @@ require '../layouts/header.php';
                                 <tr>
                                     <th>စဉ်</th>
                                     <th>ပစ္စည်း</th>
-                                    <th>ဖောက်သည်</th>
                                     <th>အရေအတွက်</th>
                                     <th>ပစ္စည်းစျေးနှုန်းများ</th>
+                                    <th>ပရိုမိုးရှင်း</th>
                                     <th>‌ရောင်းချသည့်ရက်စွဲ</th>
                                     <th>လုပ်ဆောင်မှု</th>
                                 </tr>
@@ -53,9 +53,15 @@ require '../layouts/header.php';
                                         <tr>
                                             <td><?= $i++ ?></td>
                                             <td><?= htmlspecialchars($row['product_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['customer_name']) ?></td>
                                             <td><?= htmlspecialchars($row['qty']) ?></td>
                                             <td><?= htmlspecialchars($row['total_price']) ?></td>
+                                            <td><?php
+                                                if ($row['promotion_name']) {
+                                                    echo htmlspecialchars($row['promotion_name']) . ' (' . htmlspecialchars($row['promotion_percent']) . '%)';
+                                                } else {
+                                                    echo '-';
+                                                }
+                                                ?></td>
                                             <td><?= htmlspecialchars($row['sale_date']) ?></td>
                                             <td>
                                                 <a href="product_sale_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>

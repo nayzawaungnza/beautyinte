@@ -15,7 +15,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 
 ?>
 <section class="ftco-section">
-	<div class="container">
+	<div class="container glass">
 		<div class="row">
 			<div class="col-md-4 ftco-animate">
 				<div class="media d-block text-center block-6 services">
@@ -52,7 +52,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 </section>
 
 <section class="ftco-section" id="hairstylist">
-	<div class="container">
+	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section ftco-animate text-center">
 				<h2 class="mb-6">Our Beauty Experts</h2>
@@ -86,7 +86,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 </section>
 
 <section class="ftco-section" id="ourwork">
-	<div class="container">
+	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
 				<h2 class="mb-4">Our Work</h2>
@@ -138,7 +138,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 </section>
 
 <section class="ftco-partner bg-light">
-	<div class="container">
+	<div class="container glass">
 		<div class="row partner justify-content-center">
 			<div class="col-md-10">
 				<div class="row">
@@ -169,7 +169,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 </section>
 
 <section class="ftco-section" id="beauty-pricing">
-	<div class="container">
+	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
 				<h2 class="mb-4 text-dark">Beauty Pricing</h2>
@@ -215,7 +215,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 
 <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
 	<div class="overlay"></div>
-	<div class="container">
+	<div class="container glass">
 		<div class="row justify-content-center">
 			<div class="col-md-10">
 				<div class="row">

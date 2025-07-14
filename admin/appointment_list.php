@@ -8,7 +8,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = "SELECT appointments.id, customers.name as customer_name, services.name AS service_name, users.name AS staff_name,
         appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status, appointments.comment, appointments.request,
-        payments.id as payment_id, payments.amount as payment_amount, payments.payment_method, payments.payment_date
+        payments.id as payment_id, payments.amount as payment_amount,  payments.payment_date
         FROM appointments INNER JOIN customers ON appointments.customer_id = customers.id
         INNER JOIN services ON appointments.service_id = services.id INNER JOIN users ON appointments.staff_id = users.id
         LEFT JOIN payments ON appointments.id = payments.appointment_id ORDER BY appointments.id DESC ";

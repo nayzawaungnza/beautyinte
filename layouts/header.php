@@ -165,6 +165,15 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
+                                <i class="fa-solid fa-money-check-dollar"></i><span class="nav-text">ငွေပေးချေမှုနည်းလမ်း</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/payment_method_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/payment_method_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
                                 <i class=""></i><i class="fa-regular fa-calendar-check"></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
@@ -197,6 +206,7 @@ require_once '../require/common_function.php';
                                 <li><a href="../admin/product_sale_create.php">ဖန်တီးမည်</a></li>
                             </ul>
                         </li>
+
                     <?php } ?>
                 </ul>
             </div>

@@ -32,7 +32,6 @@ if (isset($_GET['id'])) {
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
     $role = $_POST['role'];
     $phone = $_POST['phone'];
     $gender = $_POST['gender'];

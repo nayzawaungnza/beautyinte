@@ -9,8 +9,8 @@
 					<span class="px-2"><a href="#" class="active">All</a></span>
 					<span class="px-2"><a href="#">Make Up</a></span>
 					<span class="px-2"><a href="#">Massage</a></span>
-					<span class="px-2"><a href="#">Facial</a></span>
-					<span class="px-2"><a href="#">Spa</a></span>
+					<!-- <span class="px-2"><a href="#">Facial</a></span>
+					<span class="px-2"><a href="#">Spa</a></span> -->
 					<span class="px-2"><a href="#">Hair</a></span>
 					<span class="px-2"><a href="#">Nail</a></span>
 				</p>

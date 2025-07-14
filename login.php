@@ -10,7 +10,7 @@ require './require/db.php';
 $userSelect = "SELECT * FROM `users`";
 $result = $mysqli->query($userSelect);
 if ($result->num_rows == 0) {
-    $admin_password = md5('admin');
+    $admin_password = md5('password');
     $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`) VALUES ('Admin', 'admin@gmail.com', '$admin_password', 'admin')";
     $mysqli->query($sql);
 }
