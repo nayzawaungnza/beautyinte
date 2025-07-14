@@ -22,6 +22,18 @@ insert_if_not_exists(
     "email='staff@example.com'",
     "INSERT INTO users (name, email, password, role, phone, gender) VALUES ('Staff', 'staff@example.com', '" . md5('staff123') . "', 'staff', '0998765432', 'female')"
 );
+insert_if_not_exists(
+    $mysqli,
+    'users',
+    "email='staff1@gmail.com'",
+    "INSERT INTO users (name, email, password, role, phone, gender) VALUES ('staff1', 'staff1@gmail.com', '" . md5('password') . "', 'staff', '0998765432', 'female')"
+);
+insert_if_not_exists(
+    $mysqli,
+    'users',
+    "email='admin1@gmail.com'",
+    "INSERT INTO users (name, email, password, role, phone, gender) VALUES ('admin1', 'admin1@gmail.com', '" . md5('password') . "', 'admin', '0998765432', 'female')"
+);
 
 // Customers
 insert_if_not_exists(
