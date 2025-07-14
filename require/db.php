@@ -96,8 +96,8 @@ function create_table($mysqli)
                      ( 
                      id INT AUTO_INCREMENT PRIMARY KEY,
                      product_id INT NOT NULL,
-                     customer_id INT NOT NULL,
-                     promotion_id INT NOT NULL,
+                     promotion_id INT NULL,
+                     payment_method_id INT NOT NULL, 
                      qty INT NOT NULL,
                      total_price INT NOT NULL,
                      sale_date DATE NULL,
@@ -105,7 +105,7 @@ function create_table($mysqli)
                      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                      FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
                      FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
-                     FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
+                    FOREIGN KEY (payment_method_id) REFERENCES payment_method(id) ON DELETE RESTRICT
                      )";
     if ($mysqli->query($product_sales_sql) === false) return false;
     //Product quantity
@@ -138,19 +138,28 @@ function create_table($mysqli)
                    FOREIGN KEY (staff_id) REFERENCES users(id) ON DELETE CASCADE
                    )";
     if ($mysqli->query($appointment_sql) === false) return false;
-    //Payments
+    // Payment Methods
+    $payment_method_sql = "CREATE TABLE IF NOT EXISTS `payment_method`
+                   (
+                   id INT AUTO_INCREMENT PRIMARY KEY,
+                   name VARCHAR(100) NOT NULL,
+                   status TINYINT(1) NOT NULL DEFAULT 1
+                   )";
+    if ($mysqli->query($payment_method_sql) === false) return false;
+    // Payments
     $payment_sql = "CREATE TABLE IF NOT EXISTS `payments`
                    (
                    id INT AUTO_INCREMENT PRIMARY KEY,
                    appointment_id INT NOT NULL,
-                   promotion_id INT NOT NULL,
+                   promotion_id INT NULL,
                    amount INT NOT NULL,
-                   payment_method ENUM('k-pay','wave-pay')NOT NULL,
+                   payment_method_id INT NOT NULL,
                    payment_date DATE NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
-                   FOREIGN KEY (appointment_id) REFERENCES appointments(id) ON DELETE CASCADE
+                   FOREIGN KEY (appointment_id) REFERENCES appointments(id) ON DELETE CASCADE,
+                   FOREIGN KEY (payment_method_id) REFERENCES payment_method(id) ON DELETE RESTRICT
                    )";
     if ($mysqli->query($payment_sql) === false) return false;
 }

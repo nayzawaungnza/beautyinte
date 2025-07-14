@@ -14,7 +14,6 @@ $name =
     $staff_name =
     $appointment_date =
     $appointment_time =
-    $status =
     $comment =
     $request =
     $serid = '';
@@ -30,7 +29,7 @@ if (isset($_GET['id'])) {
                     users.id AS staff_id,
                     appointments.appointment_date AS app_date,
                     appointments.appointment_time AS app_time,
-                    appointments.status As status,
+                    -- appointments.status As status,
                     appointments.comment,
                     appointments.request
         FROM `appointments`
@@ -47,7 +46,6 @@ if (isset($_GET['id'])) {
     $staff_id = $oldData['staff_id'];
     $appointment_date = $oldData['app_date'];
     $appointment_time = $oldData['app_time'];
-    $status = $oldData['status'];
     $comment = $oldData['comment'];
     $request = $oldData['request'];
 }
@@ -69,13 +67,10 @@ $users = $mysqli->query($res);
 
 if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $cName = $_POST['customer_id'];
-    $serid = $_POST['services'];
-    // var_dump($serid);
-    // die();
+    $serid = $_POST['service_id'];
     $sttid = $_POST['staff_id'];
     $appointment_date = $_POST['app_date'];
     $appointment_time = $_POST['app_time'];
-    $status = $_POST['status'];
     $comment = $_POST['comment'];
     $request = $_POST['request'];
     $today = date('Y-m-d');
@@ -108,7 +103,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     if (!$error) {
         // foreach ($serid as $ser) {
         $sql = "UPDATE `appointments`SET 
-            `customer_id` = '$cName', `service_id` = ' $serid', `staff_id` = '$sttid', `appointment_date` = '$appointment_date', `appointment_time` = '$appointment_time', `status` = '$status', `comment` = '$comment', `request` = '$request'
+            `customer_id` = '$cName', `service_id` = ' $serid', `staff_id` = '$sttid', `appointment_date` = '$appointment_date', `appointment_time` = '$appointment_time', '0', `comment` = '$comment', `request` = '$request'
             WHERE `appointments`.`id` = '$id'";
         $result = $mysqli->query($sql);
 
@@ -125,14 +120,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
-            </ol>
-        </div>
-    </div>
+
     <!-- row -->
 
     <div class="container">
@@ -194,7 +182,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                         <input type="time" name="app_time" class="form-control" value="<?= $appointment_time ?>">
                         <small class="text-danger"><?= $appointment_time_err ?></small>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="name" class="form-label">အခြေအနေ</label>
                         <br>
                         <select name="status" id="status" class="form-control">
@@ -203,7 +191,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                             <option value="2" <?php if ($status == 2) echo 'selected'; ?>>Reject</option>
                         </select>
                         <small class="text-danger"><?= $status_err ?></small>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="name" class="form-label">မှတ်ချက်</label>
                         <input type="text" name="comment" class="form-control" value="<?= $comment ?>">

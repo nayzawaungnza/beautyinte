@@ -8,12 +8,7 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 
 // Fetch all payments with appointment, customer, and service info
-$sql = "SELECT p.id, p.amount, p.payment_method, p.payment_date, a.id as appointment_id, c.name as customer_name, s.name as service_name, a.appointment_date
-        FROM payments p
-        INNER JOIN appointments a ON p.appointment_id = a.id
-        INNER JOIN customers c ON a.customer_id = c.id
-        INNER JOIN services s ON a.service_id = s.id
-        ORDER BY p.id DESC";
+$sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name, p.amount, p.payment_date, pm.name as payment_method_name FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
 $payments = $mysqli->query($sql);
 
 // Handle delete
@@ -54,12 +49,11 @@ require '../layouts/header.php';
                             <thead>
                                 <tr>
                                     <th>စဉ်</th>
-                                    <th>အချိန်ချိန်းဆိုမှု</th>
-                                    <th>ဖောက်သည်</th>
-                                    <th>ဝန်ဆောင်မှု</th>
+                                    <th>ဖောက်သည်အမည်</th>
+                                    <th>ဝန်ဆောင်မှုအမည်</th>
                                     <th>ငွေပမာဏ</th>
-                                    <th>အမျိုးအစား</th>
-                                    <th>ရက်စွဲ</th>
+                                    <th>ငွေပေးချေမှုနည်းလမ်း</th>
+                                    <th>ငွေပေးချေသည့်ရက်စွဲ</th>
                                     <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
@@ -70,22 +64,19 @@ require '../layouts/header.php';
                                     while ($row = $payments->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
-                                            <td>(<?= $row['appointment_id'] ?>) <?= $row['appointment_date'] ?></td>
                                             <td><?= htmlspecialchars($row['customer_name']) ?></td>
                                             <td><?= htmlspecialchars($row['service_name']) ?></td>
                                             <td><?= htmlspecialchars($row['amount']) ?></td>
-                                            <td><?= htmlspecialchars(ucfirst($row['payment_method'])) ?></td>
+                                            <td><?= htmlspecialchars($row['payment_method_name']) ?></td>
                                             <td><?= htmlspecialchars($row['payment_date']) ?></td>
                                             <td>
-                                                <div>
-                                                    <a href="./payment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
-                                                </div>
+                                                <a href="payment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
                                             </td>
                                         </tr>
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="9" class="text-center">ငွေပေး‌ချေမှု မရှိပါ</td>
+                                        <td colspan="7" class="text-center">ငွေပေးချေမှုများ မရှိသေးပါ</td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

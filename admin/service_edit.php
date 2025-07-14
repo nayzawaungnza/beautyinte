@@ -10,7 +10,7 @@ $name_err =
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT services.id, services.name, services.price, services.description FROM  `services`";
+    $sql = "SELECT services.id, services.name, services.price, services.description FROM  `services` WHERE services.id = $id";
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];

@@ -25,12 +25,17 @@ if ($filter_appointment_id) {
     $appointment_id = $filter_appointment_id;
 }
 
+// Fetch payment methods
+$payment_methods = $mysqli->query("SELECT id, name FROM payment_method WHERE status = 1 ORDER BY name ASC");
+$payment_method_id_error = '';
+$payment_method_id = '';
+
 if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     // Check if this form has already been processed
     if (isset($_POST['form_token']) && $_POST['form_token'] === $_SESSION['payment_form_token']) {
         $appointment_id = $mysqli->real_escape_string($_POST['appointment_id']);
         $amount = $mysqli->real_escape_string($_POST['amount']);
-        $payment_method = $mysqli->real_escape_string($_POST['payment_method']);
+        $payment_method_id = isset($_POST['payment_method_id']) ? $mysqli->real_escape_string($_POST['payment_method_id']) : '';
         $payment_date = $mysqli->real_escape_string($_POST['payment_date']);
 
         // Validation
@@ -42,9 +47,9 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
             $error = true;
             $amount_error = "Please enter a valid amount.";
         }
-        if ($payment_method === '' || !in_array($payment_method, ['k-pay', 'wave-pay'])) {
+        if (empty($payment_method_id) || !is_numeric($payment_method_id)) {
             $error = true;
-            $payment_method_error = "Please select a valid payment method.";
+            $payment_method_id_error = "Please select a payment method.";
         }
         if ($payment_date === '') {
             $error = true;
@@ -60,7 +65,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 $error = true;
                 $error_message = "Payment already exists for this appointment.";
             } else {
-                $sql = "INSERT INTO payments (appointment_id, amount, payment_method, payment_date) VALUES ('$appointment_id', '$amount', '$payment_method', '$payment_date')";
+                $sql = "INSERT INTO payments (appointment_id, amount, payment_method_id, payment_date) VALUES ('$appointment_id', '$amount', '$payment_method_id', '$payment_date')";
                 $result = $mysqli->query($sql);
                 if ($result) {
                     // Generate new token to prevent resubmission
@@ -150,14 +155,20 @@ require '../layouts/header.php';
                                 <?php } ?>
                             </div>
                             <div class="form-group mb-2">
-                                <label for="payment_method" class="form-label">ငွေပေးချေမှု အမျိုးအစား</label>
-                                <select name="payment_method" class="form-control" id="payment_method">
-                                    <option value="">အမျိုးအစား ရွေးချယ်ရန်</option>
-                                    <option value="k-pay" <?= $payment_method == 'k-pay' ? 'selected' : '' ?>>K-Pay</option>
-                                    <option value="wave-pay" <?= $payment_method == 'wave-pay' ? 'selected' : '' ?>>Wave-Pay</option>
+                                <label for="payment_method_id" class="form-label">ငွေပေးချေမှုနည်းလမ်း</label>
+                                <select name="payment_method_id" class="form-control" id="payment_method_id" required>
+                                    <option value="">ငွေပေးချေမှုနည်းလမ်း ရွေးချယ်ရန်</option>
+                                    <?php if ($payment_methods && $payment_methods->num_rows > 0) {
+                                        while ($row = $payment_methods->fetch_assoc()) {
+                                            $selected = ($payment_method_id == $row['id']) ? 'selected' : '';
+                                            echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
+                                        }
+                                    } else {
+                                        echo '<option value="">No payment methods available</option>';
+                                    } ?>
                                 </select>
-                                <?php if ($error && $payment_method_error) { ?>
-                                    <span class="text-danger"><?= $payment_method_error ?></span>
+                                <?php if ($error && $payment_method_id_error) { ?>
+                                    <span class="text-danger"><?= $payment_method_id_error ?></span>
                                 <?php } ?>
                             </div>
                             <div class="form-group mb-2">

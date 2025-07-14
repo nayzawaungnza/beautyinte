@@ -51,17 +51,6 @@ require_once '../require/common_function.php';
 
     <div id="main-wrapper">
 
-
-        <!-- Nav header start -->
-
-        <div class="nav-header">
-            <div class="d-flex justify-content-center align-items-center " style="height: 100%;">
-                <button id="sidebarToggle" style="background:none; border:none; font-size:24px; cursor:pointer;">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
         <!-- Nav header end -->
 
 
@@ -69,11 +58,9 @@ require_once '../require/common_function.php';
         <div class="header" style="background: linear-gradient(90deg,rgb(0, 75, 236) 0%,rgb(103, 143, 252) 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
             <div class="header-content d-flex align-items-center justify-content-between px-4 py-2">
                 <div class="d-flex align-items-center">
-                    <!-- <div class="nav-control mr-3">
-                        <div class="hamburger">
-                            <span class="toggle-icon"><i class="fas fa-bars"></i></span>
-                        </div>
-                    </div> -->
+                    <button id="sidebarToggle" class="navbar-hamburger mr-3" style="background:none; border:none; font-size:28px; cursor:pointer;">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     <span class="brand-title d-flex align-items-center">
                         <img src="../images/logo.jpg" alt="logo" style="width: 40px; border-radius: 8px; margin-right: 10px;">
                         <h4 class="mb-0" style="font-weight: 600; color:white;">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h4>
@@ -165,6 +152,15 @@ require_once '../require/common_function.php';
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
+                                <i class="fa-solid fa-money-check-dollar"></i><span class="nav-text">ငွေပေးချေမှုနည်းလမ်း</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/payment_method_list.php">စာရင်း</a></li>
+                                <li><a href="../admin/payment_method_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
                                 <i class=""></i><i class="fa-regular fa-calendar-check"></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
@@ -197,6 +193,7 @@ require_once '../require/common_function.php';
                                 <li><a href="../admin/product_sale_create.php">ဖန်တီးမည်</a></li>
                             </ul>
                         </li>
+
                     <?php } ?>
                 </ul>
             </div>

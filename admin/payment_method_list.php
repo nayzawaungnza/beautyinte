@@ -9,24 +9,24 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 // Handle delete
 if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
-    $res = $mysqli->query("DELETE FROM promotions WHERE id = $delete_id");
+    $res = $mysqli->query("DELETE FROM payment_method WHERE id = $delete_id");
     if ($res) {
-        header('Location: promotion_list.php?success=Promotion deleted successfully');
+        header('Location: payment_method_list.php?success=Payment method deleted successfully');
         exit;
     } else {
-        header('Location: promotion_list.php?error=Failed to delete promotion');
+        header('Location: payment_method_list.php?error=Failed to delete payment method');
         exit;
     }
 }
 
-$promotions = $mysqli->query("SELECT * FROM promotions ORDER BY id DESC");
+$methods = $mysqli->query("SELECT * FROM payment_method ORDER BY id DESC");
 require '../layouts/header.php';
 ?>
 <div class="content-body">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
-            <h3>ပရိုမိုးရှင်း စာရင်း</h3>
-            <a href="promotion_create.php" class="btn btn-primary">ပရိုမိုးရှင်းထပ်ထည့်ရန်</a>
+            <h3>Payment Method List</h3>
+            <a href="payment_method_create.php" class="btn btn-primary">Add Payment Method</a>
         </div>
         <?php if ($success) { ?>
             <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
@@ -39,34 +39,28 @@ require '../layouts/header.php';
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>စဉ်</th>
-                            <th>ခေါင်းစဉ်</th>
-                            <th>အကြောင်းအရာ</th>
-                            <th>လျှော့စျေး</th>
-                            <th>ပရိုမိုးရှင်းစသည့်ရက်</th>
-                            <th>ပရိုမိုးရှင်းပြီးဆုံးသည့်ရက်</th>
-                            <th>လုပ်ဆောင်မှု</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($promotions && $promotions->num_rows > 0) {
-                            while ($row = $promotions->fetch_assoc()) { ?>
+                        <?php if ($methods && $methods->num_rows > 0) {
+                            while ($row = $methods->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?= $row['id'] ?></td>
-                                    <td><?= htmlspecialchars($row['package_name']) ?></td>
-                                    <td><?= htmlspecialchars($row['description']) ?></td>
-                                    <td><?= htmlspecialchars($row['percentage']) ?></td>
-                                    <td><?= htmlspecialchars($row['start_date']) ?></td>
-                                    <td><?= htmlspecialchars($row['end_date']) ?></td>
+                                    <td><?= htmlspecialchars($row['name']) ?></td>
+                                    <td><?= $row['status'] ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-secondary">Inactive</span>' ?></td>
                                     <td>
-                                        <a href="promotion_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>
-                                        <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>
+                                        <a href="payment_method_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">Edit</a>
+                                        <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">Delete</a>
                                     </td>
                                 </tr>
                             <?php }
                         } else { ?>
                             <tr>
-                                <td colspan="8" class="text-center">ပရိုမိုးရှင်း မရှိပါ</td>
+                                <td colspan="4" class="text-center">No payment methods found.</td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -92,7 +86,7 @@ require '../layouts/header.php';
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = 'promotion_list.php?delete_id=' + id;
+                        window.location.href = 'payment_method_list.php?delete_id=' + id;
                     }
                 });
             });

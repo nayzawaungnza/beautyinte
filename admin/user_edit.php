@@ -32,7 +32,6 @@ if (isset($_GET['id'])) {
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
     $role = $_POST['role'];
     $phone = $_POST['phone'];
     $gender = $_POST['gender'];
@@ -150,13 +149,13 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <label class="form-label">လိင်</label>
                         <br />
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="<?= $gender ?>">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male" <?= $gender == 'male' ? 'checked' : '' ?>>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 ကျား
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="<?= $gender ?>">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female" <?= $gender == 'female' ? 'checked' : '' ?>>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 မ
                             </label>
