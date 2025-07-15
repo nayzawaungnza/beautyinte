@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="ဘာသာ">
+            <input type="text" class="form-control" placeholder="subject">
           </div>
           <div class="form-group">
             <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="မက်ဆေ့"></textarea>
