@@ -51,16 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require '../layouts/header.php';
 ?>
 <div class="content-body">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between mb-3">
-            <h3>ပရိုမိုးရှင်း ပြင်ဆင်ရန်</h3>
-            <a href="promotion_list.php" class="btn btn-dark">ပြန်ရန်</a>
-        </div>
+    <div class="container-fluid mt-3">
+       
         <?php if ($error && $error_message) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
         <?php } ?>
         <div class="card">
             <div class="card-body">
+                 <h3 class="text-center mb-5 text-info">ပရိုမိုးရှင်း ပြင်ဆင်ရန်</h3>
                 <form method="POST">
                     <div class="form-group mb-2">
                         <label for="package_name">ခေါင်းစဉ် <span class="text-danger"></span></label>

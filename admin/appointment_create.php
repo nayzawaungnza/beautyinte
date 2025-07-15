@@ -115,16 +115,18 @@ if (isset($_POST['btn_submit'])) {
 
     <!-- row -->
 
-    <div class="container">
+    <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3>အချိန်ချိန်းဆိုမှုစာရင်းဖန်တီးပါ</h3>
+                <h3 class="text-center mb-5 text-info">အချိန်ချိန်းဆိုမှုစာရင်းဖန်တီးပါ</h3>
                 <?php if ($error && $general_error) { ?>
                     <div class="alert alert-danger">
                         <?= $general_error ?>
                     </div>
                 <?php } ?>
                 <form method="POST">
+                    <div class="row">
+                    <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="customer_id" class="form-label">ဖောက်သည်</label>
                         <select name="customer_id" class="form-control" id="customer_id">
@@ -142,6 +144,8 @@ if (isset($_POST['btn_submit'])) {
                             <span class="text-danger"><?= $customer_id_error ?></span>
                         <?php } ?>
                     </div>
+                    </div>
+                     <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="service_id" class="form-label">ဝန်ဆောင်မှု</label>
                         <select name="service_id" class="form-control" id="service_id">
@@ -159,6 +163,8 @@ if (isset($_POST['btn_submit'])) {
                             <span class="text-danger"><?= $service_id_error ?></span>
                         <?php } ?>
                     </div>
+                    </div>
+                     <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="staff_id" class="form-label">ဝန်ထမ်း</label>
                         <select name="staff_id" class="form-control" id="staff_id">
@@ -176,6 +182,8 @@ if (isset($_POST['btn_submit'])) {
                             <span class="text-danger"><?= $staff_id_error ?></span>
                         <?php } ?>
                     </div>
+                    </div>
+                     <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="app_date" class="form-label">ချိန်းဆိုသည့် ရက်စွဲ</label>
                         <input type="date" name="app_date" class="form-control" value="<?= htmlspecialchars($appointment_date) ?>">
@@ -183,12 +191,15 @@ if (isset($_POST['btn_submit'])) {
                             <small class="text-danger"><?= $appointment_date_err ?></small>
                         <?php } ?>
                     </div>
+                    </div>
+                     <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="app_time" class="form-label">ချိန်းဆိုသည့် အချိန်</label>
                         <input type="time" name="app_time" class="form-control" value="<?= htmlspecialchars($appointment_time) ?>">
                         <?php if ($error && $appointment_time_err) { ?>
                             <small class="text-danger"><?= $appointment_time_err ?></small>
                         <?php } ?>
+                    </div>
                     </div>
                     <!-- <div class="form-group mb-2">
                         <label for="status" class="form-label">အခြေအနေ</label>
@@ -203,10 +214,13 @@ if (isset($_POST['btn_submit'])) {
                             <small class="text-danger"><?= $status_err ?></small>
                         <?php } ?>
                     </div> -->
+                     <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="comment" class="form-label">မှတ်ချက်</label>
                         <input type="text" name="comment" class="form-control" value="<?= htmlspecialchars($comment) ?>">
                     </div>
+                    </div>
+                     <div class="col-md-6">
                     <div class="form-group mb-2">
                         <label for="request" class="form-label">တောင်းဆိုမှု</label>
                         <input type="text" name="request" class="form-control" value="<?= htmlspecialchars($request) ?>">
@@ -214,9 +228,13 @@ if (isset($_POST['btn_submit'])) {
                             <small class="text-danger"><?= $request_err ?></small>
                         <?php } ?>
                     </div>
+                    
                     <div class="my-2">
                         <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                     </div>
+                    </div>
+                     </div>
+                </div>
                 </form>
             </div>
         </div>

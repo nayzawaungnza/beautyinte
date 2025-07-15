@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require '../layouts/header.php';
 ?>
 <div class="content-body">
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div class="d-flex justify-content-between mb-3">
             <h3>ငွေပေး‌ချေမှု နည်းလမ်း</h3>
             <a href="payment_method_list.php" class="btn btn-dark">စာရင်းပြန်ပြုစုရန်</a>
@@ -42,7 +42,7 @@ require '../layouts/header.php';
             <div class="card-body">
                 <form method="POST">
                     <div class="form-group mb-2">
-                        <label for="name">ငွေပေး‌ချေမှု နည်းလမ်းအမည်<span class="text-danger">*</span></label>
+                        <label for="name">ငွေပေး‌ချေမှု နည်းလမ်းအမည်<span class="text-danger"></span></label>
                         <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($name) ?>" required />
                     </div>
                     <div class="form-group mb-2">

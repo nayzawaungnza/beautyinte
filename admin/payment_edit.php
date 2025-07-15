@@ -59,12 +59,12 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
 require '../layouts/header.php';
 ?>
 <div class="content-body">
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div class="d-flex justify-content-between">
-            <h3>ငွေပေးချေမှု ပြင်ဆင်ရန်</h3>
+            <h3 class="text-center mb-5 text-info">ငွေပေးချေမှု ပြင်ဆင်ရန်</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'payment_list.php' ?>" class="btn btn-dark">
-                    ပြန်ရန်
+                    နောက်သို့
                 </a>
             </div>
         </div>

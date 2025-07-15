@@ -22,7 +22,7 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
 $promotions = $mysqli->query("SELECT * FROM promotions ORDER BY id DESC");
 require '../layouts/header.php';
 ?>
-<div class="content-body">
+<div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>ပရိုမိုးရှင်း စာရင်း</h3>
@@ -39,12 +39,12 @@ require '../layouts/header.php';
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>စဉ်</th>
+                            <th>စဥ်</th>
                             <th>ခေါင်းစဉ်</th>
                             <th>အကြောင်းအရာ</th>
-                            <th>လျှော့စျေး</th>
+                            <th>လျှော့စေ◌ျး</th>
                             <th>ပရိုမိုးရှင်းစသည့်ရက်</th>
-                            <th>ပရိုမိုးရှင်းပြီးဆုံးသည့်ရက်</th>
+                            <th>ပရိုမိုးရှင်းဆုံးသည့်ရက်</th>
                             <th>လုပ်ဆောင်မှု</th>
                         </tr>
                     </thead>
@@ -66,7 +66,7 @@ require '../layouts/header.php';
                             <?php }
                         } else { ?>
                             <tr>
-                                <td colspan="8" class="text-center">ပရိုမိုးရှင်း မရှိပါ</td>
+                                <td colspan="8" class="text-center">ပရိုမိုးရှင်းများမရှိပါ</td>
                             </tr>
                         <?php } ?>
                     </tbody>

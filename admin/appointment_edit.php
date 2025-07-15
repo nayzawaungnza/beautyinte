@@ -123,10 +123,10 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
 
     <!-- row -->
 
-    <div class="container">
+    <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3>‌အချိန်ချိန်းဆိုမှုအသစ်ဖန်တီးရန်</h3>
+                <h3 class="text-center mb-5 text-info">‌အချိန်ချိန်းဆိုမှုအသစ်ဖန်တီးရန်</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">ဖောက်သည်အမည်</label>

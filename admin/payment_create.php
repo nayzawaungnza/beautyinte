@@ -97,12 +97,12 @@ require '../layouts/header.php';
             Content body start
         ***********************************-->
 <div class="content-body">
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div class="d-flex justify-content-between">
-            <h3>ငွေပေးချေမှုစာရင်း ဖန်တီးရန်</h3>
+            <h3 class="text-center mb-5 text-info">ငွေပေးချေမှုစာရင်း ဖန်တီးရန်</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'payment_list.php' ?>" class="btn btn-dark">
-                    ပြန်ရန်
+                    နောက်သို့
                 </a>
             </div>
         </div>

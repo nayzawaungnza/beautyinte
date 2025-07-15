@@ -99,20 +99,10 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-    <!-- <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">အလှပြင်ဆိုင် စနစ်အနှစ်ချုပ်မျက်နှာပြင်</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">ပင်မစာမျက်နှာ</a></li>
-            </ol>
-        </div>
-    </div> -->
-    <!-- row -->
-
-    <div class="container">
+    <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3>အသုံးပြုသူစာရင်း အသစ်ပြင်ခြင်း</h3>
+                <h3 class="text-center mb-5 text-info">အသုံးပြုသူစာရင်း အသစ်ပြင်ခြင်း</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">အမည်</label>

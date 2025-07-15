@@ -62,10 +62,10 @@ if (isset($_GET['id'])) {
 
     <!-- row -->
 
-    <div class="container">
+    <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3>ဖောက်သည်စာရင်း အသစ်ပြင်ခြင်း</h3>
+                <h3 class="text-center mb-5 text-info">ဖောက်သည်စာရင်း အသစ်ပြင်ခြင်း</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">အမည်</label>

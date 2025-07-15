@@ -22,11 +22,11 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
 $methods = $mysqli->query("SELECT * FROM payment_method ORDER BY id DESC");
 require '../layouts/header.php';
 ?>
-<div class="content-body">
+<div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
-            <h3>Payment Method List</h3>
-            <a href="payment_method_create.php" class="btn btn-primary">Add Payment Method</a>
+            <h3>ငွေပေး‌ချေမှုနည်းလမ်းစာရင်း</h3>
+            <a href="payment_method_create.php" class="btn btn-primary">ငွေပေး‌ချေမှုနည်းလမ်းထပ်ထည့်ရန်</a>
         </div>
         <?php if ($success) { ?>
             <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
@@ -39,28 +39,29 @@ require '../layouts/header.php';
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>စဥ်</th>
+                            <th>အမည်</th>
+                            <th>အခြေအနေ</th>
+                            <th>လုပ်ဆောင်မှု</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if ($methods && $methods->num_rows > 0) {
+                            $i = 1;
                             while ($row = $methods->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?= $row['id'] ?></td>
+                                    <td><?= $i++ ?></td>
                                     <td><?= htmlspecialchars($row['name']) ?></td>
                                     <td><?= $row['status'] ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-secondary">Inactive</span>' ?></td>
                                     <td>
-                                        <a href="payment_method_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">Edit</a>
-                                        <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">Delete</a>
+                                        <a href="payment_method_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>
+                                        <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>
                                     </td>
                                 </tr>
                             <?php }
                         } else { ?>
                             <tr>
-                                <td colspan="4" class="text-center">No payment methods found.</td>
+                                <td colspan="4" class="text-center">ငွေပေး‌ချေမှုနည်းလမ်းများမရှိပါ</td>
                             </tr>
                         <?php } ?>
                     </tbody>

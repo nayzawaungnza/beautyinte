@@ -75,10 +75,10 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
     <!-- row -->
 
-    <div class="container">
+    <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3>ဝန်ဆောင်မှုစာရင်း အသစ်ပြင်ခြင်း</h3>
+                <h3 class="text-center mb-5 text-info">ဝန်ဆောင်မှုစာရင်း အသစ်ပြင်ခြင်း</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">အမည်</label>

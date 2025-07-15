@@ -22,9 +22,9 @@ if ($delete_id !== '') {
 }
 require '../layouts/header.php';
 ?>
-<div class="content-body">
+<div class="content-body py-3">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mb-3">
             <h3>အသုံးပြုသူ စာရင်း</h3>
             <div class="">
                 <a href="<?= $admin_base_url . 'user_create.php' ?>" class="btn btn-primary">

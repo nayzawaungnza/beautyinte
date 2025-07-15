@@ -46,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require '../layouts/header.php';
 ?>
 <div class="content-body">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between mb-3">
-            <h3>Edit Payment Method</h3>
-            <a href="payment_method_list.php" class="btn btn-dark">Back to List</a>
+    <div class="container-fluid mt-3">
+        <div class="card">
+            <div class="card-body">
+            <h3 class="text-center mb-2 text-info">ငွေပေး‌ချေမှုနည်းလမ်း အသစ်ပြင်ခြင်း</h3>
         </div>
         <?php if ($error && $error_message) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
@@ -57,15 +57,17 @@ require '../layouts/header.php';
         <div class="card">
             <div class="card-body">
                 <form method="POST">
-                    <div class="form-group mb-2">
-                        <label for="name">Payment Method Name <span class="text-danger">*</span></label>
+                    <div class="form-group">
+                        <label for="name" class="form-label">အမည်</label>
                         <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($name) ?>" required />
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group">
                         <label><input type="checkbox" name="status" value="1" <?= $status ? 'checked' : '' ?> /> Active</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Payment Method</button>
+                    <button type="submit" class="btn btn-primary">တင်သွင်းပါ</button>
                 </form>
+                </div>
+                </div>
             </div>
         </div>
     </div>

@@ -72,7 +72,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>ဖောက်သည်အသစ်ဖန်တီးရန်</h3>
+                <h3 class="text-center mb-5 text-info">ဖောက်သည်အသစ်ဖန်တီးရန်</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">အမည်</label>
