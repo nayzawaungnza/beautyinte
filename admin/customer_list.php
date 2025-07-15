@@ -6,7 +6,7 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = selectData('customers', $mysqli, "", "*", "ORDER BY created_at DESC");
+$res = selectData('customers', $mysqli, "", "*", "ORDER BY created_at ASC");
 
 
 

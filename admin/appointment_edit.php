@@ -75,26 +75,36 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $request = $_POST['request'];
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
-    if ($appointment_date < $today) {
-        $appointment_date_err = "Appointment date must not be in the past.";
-        $error = true;
-    }
-
     if (empty($appointment_date)) {
         $error = true;
-        $appointment_date_err = "Please add appointment date";
-    }
-
-    if (empty($appointment_time)) {
+        $appointment_date_err = "Please add appointment date.";
+    } elseif (strtotime($appointment_date) < strtotime($today)) {
         $error = true;
-        $appointment_time_err = "Please add appointment time";
+        $appointment_date_err = "Appointment date must not be in the past.";
     }
 
-    if ($appointment_time <= $current_time) {
+   if (empty($appointment_time)) {
         $error = true;
-        $appointment_time_err = "unavailable appointment time";
-    }
+        $appointment_time_err = "Please add appointment time.";
+    } else {
+        // Convert to seconds for easy comparison
+        $time = strtotime($appointment_time);
+        $start = strtotime('09:00');
+        $end = strtotime('21:00');
+        $lunch_start = strtotime('12:00');
+        $lunch_end = strtotime('13:00');
 
+        if ($time < $start || $time > $end) {
+            $error = true;
+            $appointment_time_err = "Appointment time must be between 9:00 AM and 9:00 PM.";
+        } elseif ($time >= $lunch_start && $time < $lunch_end) {
+            $error = true;
+            $appointment_time_err = "Appointment time cannot be between 12:00 PM and 1:00 PM.";
+        } elseif ($appointment_date == $today && $appointment_time <= $current_time) {
+            $error = true;
+            $appointment_time_err = "Unavailable appointment time.";
+        }
+    }
     if (empty($status)) {
         $error = true;
         $status_err = "Please select status";

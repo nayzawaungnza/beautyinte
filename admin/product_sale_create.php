@@ -90,13 +90,8 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
 require '../layouts/header.php';
 ?>
 <div class="content-body">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between">
-            <h3>ပစ္စည်းအရောင်း</h3>
-            <div class="">
-                <a href="product_sale_list.php" class="btn btn-dark">ပြန်ရန်</a>
-            </div>
-        </div>
+    <div class="container-fluid mt-3">
+        
         <div class="d-flex justify-content-center">
             <div class="col-md-6 col-sm-10 col-12">
                 <?php if ($error && $sale_date_error) { ?>
@@ -106,6 +101,7 @@ require '../layouts/header.php';
                 <?php } ?>
                 <div class="card">
                     <div class="card-body">
+                         <h3 class="text-center mb-5 text-info">ပစ္စည်းအရောင်း</h3>
                         <form action="" method="POST">
                             <div class="form-group mb-2">
                                 <label for="product_id" class="form-label">ပစ္စည်းများ</label>

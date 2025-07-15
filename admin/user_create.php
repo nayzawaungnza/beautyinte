@@ -22,7 +22,7 @@ $image = '';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users`";
+    $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users` WHERE users.id = '$id'";
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
     $email = $oldData['email'];
