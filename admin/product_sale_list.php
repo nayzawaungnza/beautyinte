@@ -9,9 +9,9 @@ $sql = "SELECT ps.id, p.name as product_name, ps.qty, ps.total_price, ps.sale_da
 $sales = $mysqli->query($sql);
 require '../layouts/header.php';
 ?>
-<div class="content-body">
+<div class="content-body py-3">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mb-3">
             <h3>ပစ္စည်းအရောင်းများစာရင်း</h3>
             <div class="">
                 <a href="product_sale_create.php" class="btn btn-primary">ပစ္စည်းအရောင်းများစာရင်း ဖန်တီးရန်</a>
