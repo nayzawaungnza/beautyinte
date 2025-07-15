@@ -30,33 +30,33 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     //Name
     if (empty($name)) {
         $error = true;
-        $name_err = "Please add name";
+        $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
     } else if (is_numeric($name)) {
         $error = true;
-        $name_err = "name must be number.";
+        $name_err = "အမည်တွင် ဂဏန်းများသာ ပါဝင်ရပါမည်။";
     } else if (strlen($name) >= 100) {
         $error = true;
-        $name_err = "Name must be fill less than 100.";
+        $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
     //Price
 
     if (empty($price)) {
         $error = true;
-        $price_err = "Please add price";
+        $price_err = "ကျေးဇူးပြု၍ ဈေးနှုန်းထည့်ပါ။";
     } else if (!is_numeric($price)) {
         $error = true;
-        $price_err = "Price must be number.";
+        $price_err = "ဈေးနှုန်းသည် ဂဏန်းဖြစ်ရပါမည်။";
     } else if ($price > 1000000) {
         $error = true;
-        $price_err = "Price must be under 1000000.";
+        $price_err = "ဈေးနှုန်းသည် ၁,၀၀၀,၀၀၀ ကျပ်အောက်ဖြစ်ရပါမည်။";
     }
     //description
     if (empty($description)) {
         $error = true;
-        $description_err = "Please add description";
+        $description_err = "ကျေးဇူးပြု၍ ဖော်ပြချက်ထည့်ပါ။";
     } else if (strlen($description) > 100) {
         $error = true;
-        $description_err = "Description must be less than 100.";
+        $description_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
 
 
@@ -75,7 +75,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
 <div class="content-body">
 
-   
+
 
     <div class="container mt-3">
         <div class="card">

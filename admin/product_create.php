@@ -36,42 +36,42 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     //Name
     if (empty($name)) {
         $error = true;
-        $name_err = "Please add name";
+        $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
     } else if (strlen($name) < 5) {
         $error = true;
-        $name_err = "Name must be fill greater than 5.";
+        $name_err = "အမည်သည် အနည်းဆုံး စာလုံး ၅ လုံး ပြည့်မီရပါမည်။";
     } else if (strlen($name) >= 100) {
         $error = true;
-        $name_err = "Name must be fill less than 100.";
+        $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
     //Price
 
     if (empty($price)) {
         $error = true;
-        $price_err = "Please add price";
+        $price_err = "ကျေးဇူးပြု၍ ဈေးနှုန်းထည့်ပါ။";
     } else if (!is_numeric($price)) {
         $error = true;
-        $price_err = "Price must be number.";
+        $price_err = "ဈေးနှုန်းသည် ဂဏန်းဖြစ်ရပါမည်။";
     } else if ($price > 1000000) {
         $error = true;
-        $price_err = "Price must be under 1000000.";
+        $price_err = "ဈေးနှုန်းသည် ၁,၀၀၀,၀၀၀ ကျပ်အောက်ဖြစ်ရပါမည်။";
     }
     //description
     if (empty($description)) {
         $error = true;
-        $description_err = "Please add description";
+        $description_err = "ကျေးဇူးပြု၍ ဖော်ပြချက်ထည့်ပါ။";
     } else if (strlen($description) > 100) {
         $error = true;
-        $description_err = "Description must be less than 100.";
+        $description_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
 
     // quantity
     if (empty($quantity)) {
         $error = true;
-        $quantity_err = "Please add quantity";
+        $quantity_err = "ကျေးဇူးပြု၍ အရေအတွက်ထည့်ပါ။";
     } else if (!is_numeric($quantity)) {
         $error = true;
-        $quantity_err  = "Quantity must be number.";
+        $quantity_err  = "အရေအတွက်သည် ဂဏန်းဖြစ်ရပါမည်။";
     }
 
     $folder = __DIR__ . "/uplode";
@@ -110,47 +110,47 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
             <div class="card-body">
                 <h3 class="text-center mb-5 text-info">‌ရောင်းရန်ပစ္စည်းများ အသစ်ဖန်တီးပါ</h3>
                 <form method="POST" enctype="multipart/form-data">
-                     <div class="row">
+                    <div class="row">
                         <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name" class="form-label">အမည်</label>
-                        <input type="text" name="name" class="form-control" value="<?= $name ?>">
-                        <small class="text-danger"><?= $name_err ?></small>
+                            <div class="form-group">
+                                <label for="name" class="form-label">အမည်</label>
+                                <input type="text" name="name" class="form-control" value="<?= $name ?>">
+                                <small class="text-danger"><?= $name_err ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">စျေးနှုန်း</label>
+                                <input type="text" name="price" class="form-control" value="<?= $price ?>">
+                                <small class="text-danger"><?= $price_err ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">အကြောင်းအရာ ဖော်ပြချက်</label>
+                                <input type="text" name="description" class="form-control" value="<?= $desc ?>">
+                                <small class="text-danger"><?= $description_err ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">အရေအတွက်</label>
+                                <input type="text" name="quantity" class="form-control" value="<?= $quantity ?>">
+                                <small class="text-danger"><?= $quantity_err ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="file" class="form-label">ဖိုင်များ</label>
+                                <input type="file" name="file_name" class="form-control">
+                                <small class="text-danger"><?= $file_err ?></small>
+                            </div>
+
+                            <div class="my-2">
+                                <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name" class="form-label">စျေးနှုန်း</label>
-                        <input type="text" name="price" class="form-control" value="<?= $price ?>">
-                        <small class="text-danger"><?= $price_err ?></small>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name" class="form-label">အကြောင်းအရာ ဖော်ပြချက်</label>
-                        <input type="text" name="description" class="form-control" value="<?= $desc ?>">
-                        <small class="text-danger"><?= $description_err ?></small>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name" class="form-label">အရေအတွက်</label>
-                        <input type="text" name="quantity" class="form-control" value="<?= $quantity ?>">
-                        <small class="text-danger"><?= $quantity_err ?></small>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="file" class="form-label">ဖိုင်များ</label>
-                        <input type="file" name="file_name" class="form-control">
-                        <small class="text-danger"><?= $file_err ?></small>
-                    </div>
-                  
-                    <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
-                    </div>
-                      </div>
-                </div>      
                 </form>
             </div>
         </div>

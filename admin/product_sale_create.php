@@ -50,19 +50,19 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
 
     if (empty($product_id) || !is_numeric($product_id)) {
         $error = true;
-        $product_id_error = "Please select a product.";
+        $product_id_error = "ကျေးဇူးပြု၍ ထုတ်ကုန်တစ်ခုရွေးချယ်ပါ။";
     }
     if (empty($qty) || !is_numeric($qty) || $qty <= 0) {
         $error = true;
-        $qty_error = "Please enter a valid quantity.";
+        $qty_error = "ကျေးဇူးပြု၍ မှန်ကန်သောအရေအတွက်ထည့်ပါ။";
     }
     if (empty($sale_date)) {
         $error = true;
-        $sale_date_error = "Please select a sale date.";
+        $sale_date_error = "ကျေးဇူးပြု၍ ရောင်းချမည့်ရက်စွဲကို ရွေးချယ်ပါ။";
     }
     if (empty($payment_method_id) || !is_numeric($payment_method_id)) {
         $error = true;
-        $payment_method_id_error = "Please select a payment method.";
+        $payment_method_id_error = "ကျေးဇူးပြု၍ ငွေပေးချေနည်းလမ်းကို ရွေးချယ်ပါ။";
     }
 
     if (!$error) {
@@ -82,7 +82,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 exit;
             } else {
                 $error = true;
-                $sale_date_error = "Product Sale Create Failed.";
+                $sale_date_error = "ထုတ်ကုန်ရောင်းချမှု ဖန်တီးရန် မအောင်မြင်ပါ။";
             }
         }
     }

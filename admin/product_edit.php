@@ -28,42 +28,42 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     //Name
     if (empty($name)) {
         $error = true;
-        $name_err = "Please add name";
+        $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
     } else if (strlen($name) < 5) {
         $error = true;
-        $name_err = "Name must be fill greater than 5.";
+        $name_err = "အမည်သည် အနည်းဆုံး စာလုံး ၅ လုံး ပြည့်မီရပါမည်။";
     } else if (strlen($name) >= 100) {
         $error = true;
-        $name_err = "Name must be fill less than 100.";
+        $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
     //Price
 
     if (empty($price)) {
         $error = true;
-        $price_err = "Please add price";
+        $price_err = "ကျေးဇူးပြု၍ ဈေးနှုန်းထည့်ပါ။";
     } else if (!is_numeric($price)) {
         $error = true;
-        $price_err = "Price must be number.";
+        $price_err = "ဈေးနှုန်းသည် ဂဏန်းဖြစ်ရပါမည်။";
     } else if ($price > 1000000) {
         $error = true;
-        $price_err = "Price must be under 1000000.";
+        $price_err = "ဈေးနှုန်းသည် ၁,၀၀၀,၀၀၀ ကျပ်အောက်ဖြစ်ရပါမည်။";
     }
     //description
     if (empty($desc)) {
         $error = true;
-        $desc_err = "Please add description";
+        $desc_err = "ကျေးဇူးပြု၍ ဖော်ပြချက်ထည့်ပါ။";
     } else if (strlen($desc) > 100) {
         $error = true;
-        $desc_err = "Description must be less than 100.";
+        $desc_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
 
     // quantity
     if (empty($quantity)) {
         $error = true;
-        $quantity_err = "Please add quantity";
+        $quantity_err = "ကျေးဇူးပြု၍ အရေအတွက်ထည့်ပါ။";
     } else if (!is_numeric($quantity)) {
         $error = true;
-        $quantity_err  = "Quantity must be number.";
+        $quantity_err  = "အရေအတွက်တွင် ဂဏန်းများသာ ပါဝင်ရပါမည်။";
     }
     if (!$error) {
         $edit_sql = "UPDATE `product_qty` INNER JOIN `products` ON `products`.`id` = `product_qty`.`product_id` SET 

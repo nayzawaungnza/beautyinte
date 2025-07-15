@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($name === '') {
         $error = true;
-        $error_message = 'Please enter a payment method name.';
+        $error_message = 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းလမ်း အမည်ထည့်ပါ။';
     } else {
         $sql = "UPDATE payment_method SET name='$name', status='$status' WHERE id=$method_id";
         $result = $mysqli->query($sql);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             $error = true;
-            $error_message = 'Failed to update payment method.';
+            $error_message = 'ငွေပေးချေနည်းလမ်း ဖန်တီးရန် မအောင်မြင်ပါ။';
         }
     }
 }
@@ -49,27 +49,27 @@ require '../layouts/header.php';
     <div class="container-fluid mt-3">
         <div class="card">
             <div class="card-body">
-            <h3 class="text-center mb-2 text-info">ငွေပေး‌ချေမှုနည်းလမ်း အသစ်ပြင်ခြင်း</h3>
-        </div>
-        <?php if ($error && $error_message) { ?>
-            <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
-        <?php } ?>
-        <div class="card">
-            <div class="card-body">
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="name" class="form-label">အမည်</label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($name) ?>" required />
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" name="status" value="1" <?= $status ? 'checked' : '' ?> /> Active</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">တင်သွင်းပါ</button>
-                </form>
-                </div>
+                <h3 class="text-center mb-2 text-info">ငွေပေး‌ချေမှုနည်းလမ်း အသစ်ပြင်ခြင်း</h3>
+            </div>
+            <?php if ($error && $error_message) { ?>
+                <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
+            <?php } ?>
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="name" class="form-label">အမည်</label>
+                            <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($name) ?>" required />
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" name="status" value="1" <?= $status ? 'checked' : '' ?> /> Active</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">တင်သွင်းပါ</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <?php require '../layouts/footer.php'; ?>

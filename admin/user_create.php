@@ -44,60 +44,60 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     //Name
     if (empty($name)) {
         $error = true;
-        $name_err = "Please add name";
+        $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
     } else if (strlen($name) < 5) {
         $error = true;
-        $name_err = "Name must be fill greater than 5.";
+        $name_err = "အမည်သည် အနည်းဆုံး စာလုံး ၅ လုံး ပြည့်မီရပါမည်။";
     } else if (strlen($name) >= 100) {
         $error = true;
-        $name_err = "Name must be fill less than 100.";
+        $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
     //Email
     $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
     if (strlen($email) === 0) {
         $error = true;
-        $email_err = "Please fill your email";
-    } else if (strlen($email) > 20) {
+        $email_err = "ကျေးဇူးပြု၍ သင့်အီးမေးလ်ကိုဖြည့်ပါ။";
+    } else if (strlen($email) < 20) {
         $error = true;
-        $email_err = "Email must be less than 20.";
+        $email_err = "အီးမေးလ်သည် ၂၀ ထက်များရပါမည်။";
     } else if (strlen($email) > 200) {
         $error = true;
-        $email_err = "Email must be less than 200.";
+        $email_err = "အီးမေးလ်သည် ၂၀၀ ထက်နည်းရပါမည်။";
     } else if (!preg_match($email_pattern, $email)) {
         $error = true;
-        $email_err = "Email format is wrong.";
+        $email_err = "အီးမေးလ် ဖော်မတ်မှားယွင်းနေပါသည်။";
     }
     //Password
     if (strlen($password) === 0) {
         $error = true;
-        $password_err = "Please fill Password";
+        $password_err = "ကျေးဇူးပြု၍ လျှို့ဝှက်နံပါတ် ဖြည့်ပါ။";
     } else if (strlen($password) < 8) {
         $error = true;
-        $password_err = "Password must be greater than 8.";
+        $password_err = "လျှို့ဝှက်နံပါတ်သည် အနည်းဆုံး ၈ လုံး ရှိရပါမည်။";
     } else if (strlen($password) > 30) {
         $error = true;
-        $password_err = "Password must be less than 30.";
+        $password_err = "လျှို့ဝှက်နံပါတ်သည် စာလုံး ၃၀ ထက်နည်းရပါမည်။";
     } else {
         $byScriptPassword = md5($password);
     }
     //role
     if (strlen($role) === 0 || $role === '') {
         $error = true;
-        $role_err = "Please choose role";
+        $role_err = "ကျေးဇူးပြု၍ အခန်းကဏ္ဍ ရွေးချယ်ပါ။";
     }
     //phone
     if (empty($phone)) {
         $error = true;
-        $phone_err = "Please add phone";
+        $phone_err = "ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ။";
     } else if (strlen($phone) < 11) {
         $error = true;
-        $phone_err = "Phone must be fill greater than 11.";
+        $phone_err = "ဖုန်းနံပါတ်သည် အနည်းဆုံး ဂဏန်း ၁၁ လုံး ရှိရပါမည်။";
     }
     //gender
     if ($gender === '') {
         $error = true;
-        $gender_err = "Please choose gender";
+        $gender_err = "ကျေးဇူးပြု၍ လိင် ရွေးချယ်ပါ။";
     }
 
     // Image
@@ -112,11 +112,11 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                 $image = $target_file;
             } else {
                 $error = true;
-                $image_err = "Image upload failed.";
+                $image_err = "ဓာတ်ပုံတင်ရန် မအောင်မြင်ပါ။";
             }
         } else {
             $error = true;
-            $image_err = "Invalid image type.";
+            $image_err = "ဓာတ်ပုံအမျိုးအစား မမှန်ပါ။";
         }
     } else {
         $image = '';
