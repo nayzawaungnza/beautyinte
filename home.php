@@ -185,7 +185,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 							</div>
 							<ul>
 
-								<li><?= $data['price'] ?></li>
+								<li><?= $data['price'] ?>ကျပ်</li>
 								<li><?= $data['description'] ?></li>
 
 							</ul>

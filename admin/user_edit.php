@@ -57,12 +57,12 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if ($emailDuplicate->num_rows > 0) {
         $error = true;
         $email_err = "ဤအီးမေးလ်သည် မှတ်ပုံတင်ပြီးသားဖြစ်ပါသည်။";
-    } else if (strlen($email) > 20) {
+    } else if (strlen($email) < 10) {
         $error = true;
-        $email_err = "အီးမေးလ်သည် ၂၀ ထက်နည်းရပါမည်။";
-    } else if (strlen($email) > 200) {
+        $email_err = "အီးမေးလ်သည် ၁၀ ထက်များရပါမည်။";
+    } else if (strlen($email) > 30) {
         $error = true;
-        $email_err = "အီးမေးလ်သည် ၂၀၀ ထက်နည်းရပါမည်။";
+        $email_err = "အီးမေးလ်သည် ၃၀ ထက်နည်းရပါမည်။";
     } else if (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "အီးမေးလ် ဖော်မတ်မှားယွင်းနေပါသည်။";
@@ -121,7 +121,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                     <div class="form-group">
                         <label for="role" class="form-label">အခန်းကဏ္ဍ</label>
                         <select name="role" id="role" class="form-control" value="<?= $role ?>">
-                            <option value="">‌ေရွးချယ်ရန် အခန်းကဏ္ဍ</option>
+                            <option value="">ရွေးချယ်ရန် အခန်းကဏ္ဍ</option>
                             <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
                             <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
                         </select>

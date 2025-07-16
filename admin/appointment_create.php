@@ -102,9 +102,10 @@ if (isset($_POST['btn_submit'])) {
         $mysqli->query($sql);
         echo "<script>window.location.href = '" . $admin_base_url . "appointment_list.php?success=Appointment Created';</script>";
         exit;
-    } else {
-        $general_error = "ကျေးဇူးပြုပြီး အောက်ပါအမှားများကို ပြင်ဆင်ပါ။";
     }
+    //  else {
+    // //     $general_error = "ကျေးဇူးပြုပြီး အောက်ပါအမှားများကို ပြင်ဆင်ပါ။";
+    // // }
 }
 ?>
 
