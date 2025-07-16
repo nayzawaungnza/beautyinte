@@ -1,5 +1,5 @@
 <?php
-function selectData($table, $mysqli, $where = '', $select, $order = '')
+function selectData($table, $mysqli, $where = '', $select = '', $order = '')
 {
     $sql = "SELECT $select FROM  $table
             $where $order";

@@ -181,14 +181,11 @@ $service_res = selectData("services", $mysqli, "", "*");
 					<div class="col-md-3 ftco-animate">
 						<div class="pricing-entry pb-5 text-center">
 							<div>
-								<h3 class="mb-4">အခြေခံ</h3>
-								<span class="per">တစ်ကြိမ်</span>
+								<h3><?= $data['name'] ?></h3>
 							</div>
-
 							<ul>
 
-								<li><?= $data['name'] ?></li>
-								<li><?= $data['price'] ?></li>
+								<li><?= $data['price'] ?>ကျပ်</li>
 								<li><?= $data['description'] ?></li>
 
 							</ul>

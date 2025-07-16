@@ -36,16 +36,24 @@
                 <input type="text" class="form-control" placeholder="အီးမေးလ်">
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="ဆက်သွယ်ရန်ဖုန်း">
+              </div>
+            </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <input type="text" class="form-control" placeholder="subject">
-          </div>
+          </div> -->
+
           <div class="form-group">
             <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="မက်ဆေ့"></textarea>
           </div>
-          <div class="form-group">
-            <input type="submit" value="မက်ဆေ့ပေးပို့ရန်" class="btn btn-primary py-3 px-5">
-          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="submit" value="မက်ဆေ့ပေးပို့ရန်" class="btn btn-primary py-3 px-5">
+            </div>
         </form>
       </div>
     </div>

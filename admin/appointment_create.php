@@ -31,26 +31,26 @@ if (isset($_POST['btn_submit'])) {
 
     if (empty($customer_id) || !is_numeric($customer_id)) {
         $error = true;
-        $customer_id_error = "Please select a customer.";
+        $customer_id_error = "ကျေးဇူးပြုပြီး ဖောက်သည်ကို ရွေးချယ်ပါ။";
     }
     if (empty($service_id) || !is_numeric($service_id)) {
         $error = true;
-        $service_id_error = "Please select a service.";
+        $service_id_error = "ကျေးဇူးပြုပြီး ဝန်ဆောင်မှုကို ရွေးချယ်ပါ။";
     }
     if (empty($staff_id) || !is_numeric($staff_id)) {
         $error = true;
-        $staff_id_error = "Please select a staff member.";
+        $staff_id_error = "ကျေးဇူးပြုပြီး ဝန်ထမ်းတစ်ဦးကို ရွေးချယ်ပါ။";
     }
     if (empty($appointment_date)) {
         $error = true;
-        $appointment_date_err = "Please add appointment date.";
+        $appointment_date_err = "ကျေးဇူးပြုပြီး ချိန်းဆိုမည့်ရက်ကို ထည့်သွင်းပါ။";
     } elseif (strtotime($appointment_date) < strtotime($today)) {
         $error = true;
-        $appointment_date_err = "Appointment date must not be in the past.";
+        $appointment_date_err = "ချိန်းဆိုရက်သည် အတိတ်အချိန်မဖြစ်ရပါ။";
     }
     if (empty($appointment_time)) {
         $error = true;
-        $appointment_time_err = "Please add appointment time.";
+        $appointment_time_err = "ကျေးဇူးပြုပြီး ချိန်းဆိုချိန်ကို ထည့်သွင်းပါ။";
     } else {
         // Convert to seconds for easy comparison
         $time = strtotime($appointment_time);
@@ -61,13 +61,13 @@ if (isset($_POST['btn_submit'])) {
 
         if ($time < $start || $time > $end) {
             $error = true;
-            $appointment_time_err = "Appointment time must be between 9:00 AM and 9:00 PM.";
+            $appointment_time_err = "ချိန်းဆိုချိန်သည် မနက် ၉:၀၀ မှ ည ၉:၀၀ အတွင်း ဖြစ်ရမည်။";
         } elseif ($time >= $lunch_start && $time < $lunch_end) {
             $error = true;
-            $appointment_time_err = "Appointment time cannot be between 12:00 PM and 1:00 PM.";
+            $appointment_time_err = "ချိန်းဆိုချိန်သည် နေ့လည် ၁၂:၀၀ မှ ၁:၀၀ အတွင်း မဖြစ်နိုင်ပါ။";
         } elseif ($appointment_date == $today && $appointment_time <= $current_time) {
             $error = true;
-            $appointment_time_err = "Unavailable appointment time.";
+            $appointment_time_err = "ချိန်းဆိုချိန် မရနိုင်ပါ။";
         }
     }
 
@@ -85,7 +85,7 @@ if (isset($_POST['btn_submit'])) {
 
         if ($conflict_result && $conflict_result->num_rows > 0) {
             $error = true;
-            $staff_id_error = "This staff member already has task.";
+            $staff_id_error = "ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။";
         }
     }
 
@@ -102,9 +102,10 @@ if (isset($_POST['btn_submit'])) {
         $mysqli->query($sql);
         echo "<script>window.location.href = '" . $admin_base_url . "appointment_list.php?success=Appointment Created';</script>";
         exit;
-    } else {
-        $general_error = "Please fix the errors below.";
     }
+    //  else {
+    // //     $general_error = "ကျေးဇူးပြုပြီး အောက်ပါအမှားများကို ပြင်ဆင်ပါ။";
+    // // }
 }
 ?>
 
@@ -126,82 +127,82 @@ if (isset($_POST['btn_submit'])) {
                 <?php } ?>
                 <form method="POST">
                     <div class="row">
-                    <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="customer_id" class="form-label">ဖောက်သည်</label>
-                        <select name="customer_id" class="form-control" id="customer_id">
-                            <option value="">ဖောက်သည်ရွေးချယ်ရန်</option>
-                            <?php if ($customers && $customers->num_rows > 0) {
-                                while ($row = $customers->fetch_assoc()) {
-                                    $selected = ($customer_id == $row['id']) ? 'selected' : '';
-                                    echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
-                                }
-                            } else {
-                                echo '<option value="">ဖောက်သည်မရှိပါ</option>';
-                            } ?>
-                        </select>
-                        <?php if ($error && $customer_id_error) { ?>
-                            <span class="text-danger"><?= $customer_id_error ?></span>
-                        <?php } ?>
-                    </div>
-                    </div>
-                     <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="service_id" class="form-label">ဝန်ဆောင်မှု</label>
-                        <select name="service_id" class="form-control" id="service_id">
-                            <option value="">ဝန်ဆောင်မှုရွေးချယ်ရန်</option>
-                            <?php if ($services && $services->num_rows > 0) {
-                                while ($row = $services->fetch_assoc()) {
-                                    $selected = ($service_id == $row['id']) ? 'selected' : '';
-                                    echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
-                                }
-                            } else {
-                                echo '<option value="">ဝန်ဆောင်မှုမရှိပါ</option>';
-                            } ?>
-                        </select>
-                        <?php if ($error && $service_id_error) { ?>
-                            <span class="text-danger"><?= $service_id_error ?></span>
-                        <?php } ?>
-                    </div>
-                    </div>
-                     <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="staff_id" class="form-label">ဝန်ထမ်း</label>
-                        <select name="staff_id" class="form-control" id="staff_id">
-                            <option value="">ဝန်ထမ်းရွေးချယ်ရန်</option>
-                            <?php if ($users && $users->num_rows > 0) {
-                                while ($row = $users->fetch_assoc()) {
-                                    $selected = ($staff_id == $row['id']) ? 'selected' : '';
-                                    echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
-                                }
-                            } else {
-                                echo '<option value="">ဝန်ထမ်းမရှိပါ</option>';
-                            } ?>
-                        </select>
-                        <?php if ($error && $staff_id_error) { ?>
-                            <span class="text-danger"><?= $staff_id_error ?></span>
-                        <?php } ?>
-                    </div>
-                    </div>
-                     <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="app_date" class="form-label">ချိန်းဆိုသည့် ရက်စွဲ</label>
-                        <input type="date" name="app_date" class="form-control" value="<?= htmlspecialchars($appointment_date) ?>">
-                        <?php if ($error && $appointment_date_err) { ?>
-                            <small class="text-danger"><?= $appointment_date_err ?></small>
-                        <?php } ?>
-                    </div>
-                    </div>
-                     <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="app_time" class="form-label">ချိန်းဆိုသည့် အချိန်</label>
-                        <input type="time" name="app_time" class="form-control" value="<?= htmlspecialchars($appointment_time) ?>">
-                        <?php if ($error && $appointment_time_err) { ?>
-                            <small class="text-danger"><?= $appointment_time_err ?></small>
-                        <?php } ?>
-                    </div>
-                    </div>
-                    <!-- <div class="form-group mb-2">
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="customer_id" class="form-label">ဖောက်သည်</label>
+                                <select name="customer_id" class="form-control" id="customer_id">
+                                    <option value="">ဖောက်သည်ရွေးချယ်ရန်</option>
+                                    <?php if ($customers && $customers->num_rows > 0) {
+                                        while ($row = $customers->fetch_assoc()) {
+                                            $selected = ($customer_id == $row['id']) ? 'selected' : '';
+                                            echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
+                                        }
+                                    } else {
+                                        echo '<option value="">ဖောက်သည်မရှိပါ</option>';
+                                    } ?>
+                                </select>
+                                <?php if ($error && $customer_id_error) { ?>
+                                    <span class="text-danger"><?= $customer_id_error ?></span>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="service_id" class="form-label">ဝန်ဆောင်မှု</label>
+                                <select name="service_id" class="form-control" id="service_id">
+                                    <option value="">ဝန်ဆောင်မှုရွေးချယ်ရန်</option>
+                                    <?php if ($services && $services->num_rows > 0) {
+                                        while ($row = $services->fetch_assoc()) {
+                                            $selected = ($service_id == $row['id']) ? 'selected' : '';
+                                            echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
+                                        }
+                                    } else {
+                                        echo '<option value="">ဝန်ဆောင်မှုမရှိပါ</option>';
+                                    } ?>
+                                </select>
+                                <?php if ($error && $service_id_error) { ?>
+                                    <span class="text-danger"><?= $service_id_error ?></span>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="staff_id" class="form-label">ဝန်ထမ်း</label>
+                                <select name="staff_id" class="form-control" id="staff_id">
+                                    <option value="">ဝန်ထမ်းရွေးချယ်ရန်</option>
+                                    <?php if ($users && $users->num_rows > 0) {
+                                        while ($row = $users->fetch_assoc()) {
+                                            $selected = ($staff_id == $row['id']) ? 'selected' : '';
+                                            echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
+                                        }
+                                    } else {
+                                        echo '<option value="">ဝန်ထမ်းမရှိပါ</option>';
+                                    } ?>
+                                </select>
+                                <?php if ($error && $staff_id_error) { ?>
+                                    <span class="text-danger"><?= $staff_id_error ?></span>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="app_date" class="form-label">ချိန်းဆိုသည့် ရက်စွဲ</label>
+                                <input type="date" name="app_date" class="form-control" value="<?= htmlspecialchars($appointment_date) ?>">
+                                <?php if ($error && $appointment_date_err) { ?>
+                                    <small class="text-danger"><?= $appointment_date_err ?></small>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="app_time" class="form-label">ချိန်းဆိုသည့် အချိန်</label>
+                                <input type="time" name="app_time" class="form-control" value="<?= htmlspecialchars($appointment_time) ?>">
+                                <?php if ($error && $appointment_time_err) { ?>
+                                    <small class="text-danger"><?= $appointment_time_err ?></small>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group mb-2">
                         <label for="status" class="form-label">အခြေအနေ</label>
                         <select name="status" class="form-control" id="status">
                             <option value="">အခြေအနေရွေးချယ်ရန်</option>
@@ -214,32 +215,32 @@ if (isset($_POST['btn_submit'])) {
                             <small class="text-danger"><?= $status_err ?></small>
                         <?php } ?>
                     </div> -->
-                     <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="comment" class="form-label">မှတ်ချက်</label>
-                        <input type="text" name="comment" class="form-control" value="<?= htmlspecialchars($comment) ?>">
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="comment" class="form-label">မှတ်ချက်</label>
+                                <input type="text" name="comment" class="form-control" value="<?= htmlspecialchars($comment) ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="request" class="form-label">တောင်းဆိုမှု</label>
+                                <input type="text" name="request" class="form-control" value="<?= htmlspecialchars($request) ?>">
+                                <?php if ($error && $request_err) { ?>
+                                    <small class="text-danger"><?= $request_err ?></small>
+                                <?php } ?>
+                            </div>
+
+                            <div class="my-2">
+                                <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                     <div class="col-md-6">
-                    <div class="form-group mb-2">
-                        <label for="request" class="form-label">တောင်းဆိုမှု</label>
-                        <input type="text" name="request" class="form-control" value="<?= htmlspecialchars($request) ?>">
-                        <?php if ($error && $request_err) { ?>
-                            <small class="text-danger"><?= $request_err ?></small>
-                        <?php } ?>
-                    </div>
-                    
-                    <div class="my-2">
-                        <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
-                    </div>
-                    </div>
-                     </div>
-                </div>
-                </form>
             </div>
+            </form>
         </div>
     </div>
-    <!-- #/ container -->
+</div>
+<!-- #/ container -->
 </div>
 
 <!-- Content body end -->

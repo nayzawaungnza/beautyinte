@@ -35,15 +35,15 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
 
     if ($amount === '' || !is_numeric($amount) || $amount <= 0) {
         $error = true;
-        $amount_error = "Please enter a valid amount.";
+        $amount_error = "ကျေးဇူးပြုပြီး မှန်ကန်သောငွေပမာဏကို ဖြည့်ပါ။";
     }
     if ($payment_method === '' || !in_array($payment_method, ['k-pay', 'wave-pay' , 'cash'])) {
         $error = true;
-        $payment_method_error = "Please select a valid payment method.";
+        $payment_method_error = "ကျေးဇူးပြုပြီး မှန်ကန်သော ငွေပေးချေမှုနည်းလမ်းကို ရွေးချယ်ပါ။";
     }
     if ($payment_date === '') {
         $error = true;
-        $payment_date_error = "Please select a payment date.";
+        $payment_date_error = "ကျေးဇူးပြုပြီး ငွေပေးချေမည့်နေ့ကို ရွေးချယ်ပါ။";
     }
 
     if (!$error) {
@@ -54,7 +54,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
             exit;
         } else {
             $error = true;
-            $error_message = "Payment Update Failed.";
+            $error_message = "ငွေပေးချေမှု ပြင်ဆင်ခြင်း မအောင်မြင်ပါ။";
         }
     }
 }

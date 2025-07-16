@@ -75,6 +75,11 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $request = $_POST['request'];
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
+    if ($appointment_date < $today) {
+        $appointment_date_err = "ချိန်းဆိုရက်သည် အတိတ်အချိန် မဖြစ်ရပါ။";
+        $error = true;
+    }
+
     if (empty($appointment_date)) {
         $error = true;
         $appointment_date_err = "Please add appointment date.";
@@ -104,6 +109,10 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
             $error = true;
             $appointment_time_err = "Unavailable appointment time.";
         }
+    }
+    if (empty($status)) {
+        $error = true;
+        $status_err = "ကျေးဇူးပြုပြီး အခြေအနေကို ရွေးချယ်ပါ။";
     }
 
     if (!$error) {

@@ -41,19 +41,19 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         // Validation
         if ($appointment_id === '' || !is_numeric($appointment_id)) {
             $error = true;
-            $appointment_id_error = "Please select an appointment.";
+            $appointment_id_error = "ချိန်းဆိုချိန်ကို ရွေးချယ်ပါ။";
         }
         if ($amount === '' || !is_numeric($amount) || $amount <= 0) {
             $error = true;
-            $amount_error = "Please enter a valid amount.";
+            $amount_error = "ကျေးဇူးပြုပြီး မှန်ကန်သောငွေပမာဏကို ဖြည့်ပါ။";
         }
         if (empty($payment_method_id) || !is_numeric($payment_method_id)) {
             $error = true;
-            $payment_method_id_error = "Please select a payment method.";
+            $payment_method_id_error = "ကျေးဇူးပြုပြီး ငွေပေးချေမှုနည်းလမ်းကို ရွေးချယ်ပါ။";
         }
         if ($payment_date === '') {
             $error = true;
-            $payment_date_error = "Please select a payment date.";
+            $payment_date_error = "ကျေးဇူးပြုပြီး ငွေပေးချေမည့်နေ့ကို ရွေးချယ်ပါ။";
         }
 
         if (!$error) {
@@ -63,7 +63,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
 
             if ($check_result && $check_result->num_rows > 0) {
                 $error = true;
-                $error_message = "Payment already exists for this appointment.";
+                $error_message = "ဤချိန်းဆိုမှုအတွက် ငွေပေးချေမှု ရှိပြီးဖြစ်ပါသည်။";
             } else {
                 $sql = "INSERT INTO payments (appointment_id, amount, payment_method_id, payment_date) VALUES ('$appointment_id', '$amount', '$payment_method_id', '$payment_date')";
                 $result = $mysqli->query($sql);
@@ -76,7 +76,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                     exit;
                 } else {
                     $error = true;
-                    $error_message = "Payment Create Fail.";
+                    $error_message = "ငွေပေးချေမှု ဖန်တီးခြင်း မအောင်မြင်ပါ။";
                 }
             }
         }

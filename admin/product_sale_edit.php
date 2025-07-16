@@ -27,11 +27,11 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     $total_price = $qty * $product_price;
     if (empty($qty) || !is_numeric($qty) || $qty <= 0) {
         $error = true;
-        $qty_error = "Please enter a valid quantity.";
+        $qty_error = "ကျေးဇူးပြု၍ မှန်ကန်သောအရေအတွက်ထည့်ပါ။";
     }
     if (empty($sale_date)) {
         $error = true;
-        $sale_date_error = "Please select a sale date.";
+        $sale_date_error = "ကျေးဇူးပြု၍ ရောင်းချမည့်ရက်စွဲရွေးချယ်ပါ။";
     }
     if (!$error) {
         $sql = "UPDATE product_sales SET qty='$qty', total_price='$total_price', sale_date='$sale_date' WHERE id=$id";
@@ -41,7 +41,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
             exit;
         } else {
             $error = true;
-            $sale_date_error = "Product Sale Update Failed.";
+            $sale_date_error = "ထုတ်ကုန်ရောင်းချမှုအချက်အလက်မွမ်းမံရန် မအောင်မြင်ပါ။";
         }
     }
 }

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($name === '') {
         $error = true;
-        $error_message = 'Please enter a payment method name.';
+        $error_message = 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းလမ်း အမည်ထည့်ပါ။';
     } else {
         $sql = "INSERT INTO payment_method (name, status) VALUES ('$name', '$status')";
         $result = $mysqli->query($sql);
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             $error = true;
-            $error_message = 'Failed to create payment method.';
+            $error_message = 'ငွေပေးချေနည်းလမ်း ဖန်တီးရန် မအောင်မြင်ပါ။';
         }
     }
 }

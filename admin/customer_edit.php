@@ -27,21 +27,21 @@ if (isset($_GET['id'])) {
         //Name
         if (empty($name)) {
             $error = true;
-            $name_err = "Please add name";
+            $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
         } else if (strlen($name) < 5) {
             $error = true;
-            $name_err = "Name must be fill greater than 5.";
+            $name_err = "အမည်သည် အနည်းဆုံး စာလုံး ၅ လုံး ပြည့်မီရပါမည်။";
         } else if (strlen($name) >= 100) {
             $error = true;
-            $name_err = "Name must be fill less than 100.";
+            $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
         }
         //phone
         if (empty($phone)) {
             $error = true;
-            $phone_err = "Please add phone";
+            $phone_err = "ကျေးဇူးပြုပြီး ဖုန်းနံပါတ် ထည့်ပါ။";
         } else if (strlen($phone) <  11) {
             $error = true;
-            $phone_err = "Phone must be fill greater than 11.";
+            $phone_err = "ဖုန်းနံပါတ်သည် ဂဏန်း (၁၁) လုံးထက် များရမည်။";
         }
 
         if (!$error) {

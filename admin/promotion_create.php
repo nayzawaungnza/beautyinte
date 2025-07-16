@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($title === '' || $discount_percent <= 0 || $start_date === '' || $end_date === '') {
         $error = true;
-        $error_message = 'Please fill all required fields and provide a valid discount.';
+        $error_message = 'ကျေးဇူးပြု၍ လိုအပ်သောအချက်များအားလုံးဖြည့်ပြီး မှန်ကန်သောလျှော့ဈေးကိုထည့်ပါ။';
     } 
     if ($start_date > $end_date) {
         $error = true;
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             $error = true;
-            $error_message = 'Failed to create promotion.';
+            $error_message = 'ပရိုမိုးရှင်းဖန်တီးရန် မအောင်မြင်ပါ။';
         }
     }
 

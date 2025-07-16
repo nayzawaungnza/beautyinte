@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($package_name === '' || $percentage <= 0 || $start_date === '' || $end_date === '') {
         $error = true;
-        $error_message = 'Please fill all required fields and provide a valid discount.';
+        $error_message = 'ကျေးဇူးပြု၍ လိုအပ်သောအချက်များအားလုံးဖြည့်ပြီး မှန်ကန်သောလျှော့ဈေးကိုထည့်ပါ။';
 
     } 
     if ($start_date > $end_date) {
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             $error = true;
-            $error_message = 'Failed to update promotion.';
+            $error_message = 'ပရိုမိုးရှင်းအသစ်ပြုလုပ်၍မရပါ။';
         }
     }
 }
@@ -89,13 +89,13 @@ require '../layouts/header.php';
 ?>
 <div class="content-body">
     <div class="container-fluid mt-3">
-       
+
         <?php if ($error && $error_message) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
         <?php } ?>
         <div class="card">
             <div class="card-body">
-                 <h3 class="text-center mb-5 text-info">ပရိုမိုးရှင်း ပြင်ဆင်ရန်</h3>
+                <h3 class="text-center mb-5 text-info">ပရိုမိုးရှင်း ပြင်ဆင်ရန်</h3>
                 <form method="POST">
                     <div class="form-group mb-2">
                         <label for="package_name">ခေါင်းစဉ် <span class="text-danger"></span></label>
