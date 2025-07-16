@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
-    $email = $oldData['email'];
+    $oldemail = $oldData['email'];
     $role = $oldData['role'];
     $phone = $oldData['phone'];
     $gender = $oldData['gender'];
@@ -54,9 +54,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     if (strlen($email) === 0) {
         $error = true;
         $email_err = "ကျေးဇူးပြု၍ သင့်အီးမေးလ်ကိုဖြည့်ပါ။";
-    } else if ($emailDuplicate->num_rows > 0) {
-        $error = true;
-        $email_err = "ဤအီးမေးလ်သည် မှတ်ပုံတင်ပြီးသားဖြစ်ပါသည်။";
     } else if (strlen($email) < 10) {
         $error = true;
         $email_err = "အီးမေးလ်သည် ၁၀ ထက်များရပါမည်။";
@@ -66,6 +63,13 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "အီးမေးလ် ဖော်မတ်မှားယွင်းနေပါသည်။";
+    }
+    if ($oldemail !== $email) {
+        if ($emailDuplicate->num_rows > 0) {
+            $error = true;
+            $email_err = "ဤအီးမေးလ်သည် မှတ်ပုံတင်ပြီးသားဖြစ်ပါသည်။";
+            $oldemail = $email;
+        }
     }
     //role
     if (strlen($role) === 0 || $role === '') {
@@ -115,7 +119,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">အီးမေးလ်</label>
-                        <input type="text" name="email" class="form-control" value="<?= $email ?>">
+                        <input type="text" name="email" class="form-control" value="<?= $oldemail ?>">
                         <small class="text-danger"><?= $email_err ?></small>
                     </div>
                     <div class="form-group">

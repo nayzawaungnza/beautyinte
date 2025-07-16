@@ -26,7 +26,7 @@ require '../layouts/header.php';
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
-            <h3  class="text-center mb-2 text-info">ငွေပေး‌ချေမှု စာရင်း</h3>
+            <h3 class="text-center mb-2 text-info">ငွေပေး‌ချေမှု စာရင်း</h3>
         </div>
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
@@ -95,13 +95,13 @@ require '../layouts/header.php';
         $('.delete_btn').click(function() {
             const id = $(this).data('id')
             Swal.fire({
-                title: 'Are you sure?',
-                text: "This action cannot be undone.",
+                title: 'ဖျက်မည်ဆိုတာသေချာပြီလား',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'ဖျက်မည်',
+                cancelButtonText: 'မဖျက်ပါ'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = 'payment_list.php?delete_id=' + id
