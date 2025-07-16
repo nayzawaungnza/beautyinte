@@ -45,7 +45,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['role'] = $data['role'];
                 $_SESSION['user_id'] = $data['id'];
-                $_SESSION['image'] = $data['image'];
+                $_SESSION['img'] = $data['image'] ? $data['image'] : 'default.png';
                 $_SESSION['last_activity'] = time();
                 if ($_SESSION['role'] == "staff" && $data['role'] == "staff") {
                     header("Location: $staff_base_url" . 'dashboard.php');

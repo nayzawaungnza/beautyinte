@@ -6,7 +6,7 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT users.id, users.name, users.email, users.role,users.phone, users.gender FROM `users` ";
+$res = "SELECT * FROM `users` ";
 $users = $mysqli->query($res);
 
 
@@ -53,6 +53,7 @@ require '../layouts/header.php';
                             <thead>
                                 <tr>
                                     <th class="">နံပါတ်</th>
+                                    <th class="">ပရိုဖိုင်</th>
                                     <th class="">အမည်</th>
                                     <th class="">အီးမေးလ်</th>
                                     <th class="">အခန်းကဏ္ဍ</th>
@@ -68,11 +69,15 @@ require '../layouts/header.php';
                                     while ($row = $users->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
+                                            <td>
+                                                <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
+                                                 alt="Profile Image" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                            </td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td><?= $row['role'] ?></td>
                                             <td><?= $row['phone'] ?></td>
-                                            <td><?= $row['gender'] ?></td>
+                                            <td><?= $row['gender'] == "male" ? "ကျား": "မ" ?></td>
                                             <td>
                                                 <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>

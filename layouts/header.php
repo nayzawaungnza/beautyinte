@@ -158,7 +158,7 @@ require_once '../require/common_function.php';
                     </div>
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?= $_SESSION['image'] ?>" height="40" width="40" class="rounded-circle mr-2" alt="">
+                            <img src="<?= $_SESSION['img'] ? '../uplode/' . $_SESSION['img'] : '../uplode/default.png' ?>" height="40" width="40" class="rounded-circle mr-2" alt="">
                             <span class="d-none d-md-inline">Profile</span>
                         </a>
                         <?php
