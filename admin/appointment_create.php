@@ -10,8 +10,10 @@ $customer_id = $service_id = $staff_id = $appointment_date = $appointment_time =
 $general_error = '';
 date_default_timezone_set('Asia/Yangon');
 
+$customerIdUrl = isset($_GET['id']) ? $_GET['id'] : '';
+
 // Fetch customers for dropdown
-$customers = $mysqli->query("SELECT id, name FROM customers ORDER BY name ASC");
+$customers = $mysqli->query("SELECT id, name FROM customers WHERE id = '$customerIdUrl'");
 // Fetch services for dropdown
 $services = $mysqli->query("SELECT id, name FROM services ORDER BY name ASC");
 // Fetch staff for dropdown
@@ -29,10 +31,10 @@ if (isset($_POST['btn_submit'])) {
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
 
-    if (empty($customer_id) || !is_numeric($customer_id)) {
-        $error = true;
-        $customer_id_error = "ကျေးဇူးပြုပြီး ဖောက်သည်ကို ရွေးချယ်ပါ။";
-    }
+    // if (empty($customer_id) || !is_numeric($customer_id)) {
+    //     $error = true;
+    //     $customer_id_error = "ကျေးဇူးပြုပြီး ဖောက်သည်ကို ရွေးချယ်ပါ။";
+    // }
     if (empty($service_id) || !is_numeric($service_id)) {
         $error = true;
         $service_id_error = "ကျေးဇူးပြုပြီး ဝန်ဆောင်မှုကို ရွေးချယ်ပါ။";
@@ -131,15 +133,10 @@ if (isset($_POST['btn_submit'])) {
                             <div class="form-group mb-2">
                                 <label for="customer_id" class="form-label">ဖောက်သည်</label>
                                 <select name="customer_id" class="form-control" id="customer_id">
-                                    <option value="">ဖောက်သည်ရွေးချယ်ရန်</option>
                                     <?php if ($customers && $customers->num_rows > 0) {
-                                        while ($row = $customers->fetch_assoc()) {
-                                            $selected = ($customer_id == $row['id']) ? 'selected' : '';
-                                            echo "<option value='{$row['id']}' $selected>{$row['name']}</option>";
-                                        }
-                                    } else {
-                                        echo '<option value="">ဖောက်သည်မရှိပါ</option>';
-                                    } ?>
+                                       $c = $customers->fetch_assoc(); ?>
+                                        <option value="<?= $c['id'] ?>" selected><?= $c['name'] ?> </option>
+                                     <?php }  ?>  
                                 </select>
                                 <?php if ($error && $customer_id_error) { ?>
                                     <span class="text-danger"><?= $customer_id_error ?></span>

@@ -18,8 +18,12 @@ $appointment_id = $amount = $payment_method = $payment_date = '';
 $filter_appointment_id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : '';
 
 // Always fetch all available appointments for the dropdown
-$appointments = $mysqli->query("SELECT a.id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time, s.price as service_price FROM appointments a INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE a.status = 1 AND a.id NOT IN (SELECT appointment_id FROM payments)");
-
+if(isset($_GET['id'])) {
+$appointments = $mysqli->query("SELECT a.id, c.name as customer_name, s.name as service_name,
+ a.appointment_date, a.appointment_time, s.price as service_price FROM appointments a 
+ INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
+ WHERE a.status = 1 AND a.id = $filter_appointment_id");
+} 
 // Pre-select the appointment if ID is passed
 if ($filter_appointment_id) {
     $appointment_id = $filter_appointment_id;
@@ -36,8 +40,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         $appointment_id = $mysqli->real_escape_string($_POST['appointment_id']);
         $amount = $mysqli->real_escape_string($_POST['amount']);
         $payment_method_id = isset($_POST['payment_method_id']) ? $mysqli->real_escape_string($_POST['payment_method_id']) : '';
-        $payment_date = $mysqli->real_escape_string($_POST['payment_date']);
-
+        $payment_date = date("Y-m-d");
         // Validation
         if ($appointment_id === '' || !is_numeric($appointment_id)) {
             $error = true;
@@ -50,10 +53,6 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         if (empty($payment_method_id) || !is_numeric($payment_method_id)) {
             $error = true;
             $payment_method_id_error = "ကျေးဇူးပြုပြီး ငွေပေးချေမှုနည်းလမ်းကို ရွေးချယ်ပါ။";
-        }
-        if ($payment_date === '') {
-            $error = true;
-            $payment_date_error = "ကျေးဇူးပြုပြီး ငွေပေးချေမည့်နေ့ကို ရွေးချယ်ပါ။";
         }
 
         if (!$error) {
@@ -119,7 +118,7 @@ require '../layouts/header.php';
                             <div class="form-group mb-2">
                                 <label for="appointment_id" class="form-label">အချိန်ချိန်းဆိုမှု</label>
                                 <select name="appointment_id" class="form-control" id="appointment_id">
-                                    <option value="">အချိန်ချိန်းဆိုမှု ရွေးချယ်ရန်</option>
+                                    <!-- <option value="">အချိန်ချိန်းဆိုမှု ရွေးချယ်ရန်</option> -->
                                     <?php
                                     if ($appointments && $appointments->num_rows > 0) {
                                         while ($row = $appointments->fetch_assoc()) {
@@ -169,13 +168,6 @@ require '../layouts/header.php';
                                 </select>
                                 <?php if ($error && $payment_method_id_error) { ?>
                                     <span class="text-danger"><?= $payment_method_id_error ?></span>
-                                <?php } ?>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="payment_date" class="form-label">ငွေပေး‌ချေသည့် ရက်စွဲ</label>
-                                <input type="date" name="payment_date" class="form-control" id="payment_date" value="<?= htmlspecialchars($payment_date) ?>" />
-                                <?php if ($error && $payment_date_error) { ?>
-                                    <span class="text-danger"><?= $payment_date_error ?></span>
                                 <?php } ?>
                             </div>
                             <input type="hidden" name="form_sub" value="1" />

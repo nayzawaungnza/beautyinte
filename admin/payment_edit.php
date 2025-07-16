@@ -13,7 +13,7 @@ if ($id <= 0) {
 // Fetch payment info
 $sql = "SELECT p.*, a.id as appointment_id, c.name as customer_name, s.name as service_name,
  a.appointment_date, a.appointment_time FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN
-  customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id ";
+  customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE p.id = $id";
 $result = $mysqli->query($sql);
 if (!$result || $result->num_rows == 0) {
     // echo '<div class="alert alert-danger">Payment not found.</div>';
@@ -37,7 +37,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         $error = true;
         $amount_error = "ကျေးဇူးပြုပြီး မှန်ကန်သောငွေပမာဏကို ဖြည့်ပါ။";
     }
-    if ($payment_method === '' || !in_array($payment_method, ['k-pay', 'wave-pay' , 'cash'])) {
+    if ($payment_method === '' || !in_array($payment_method, ['1', '2' , '3'])) {
         $error = true;
         $payment_method_error = "ကျေးဇူးပြုပြီး မှန်ကန်သော ငွေပေးချေမှုနည်းလမ်းကို ရွေးချယ်ပါ။";
     }
@@ -47,7 +47,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     }
 
     if (!$error) {
-        $sql = "UPDATE payments SET amount='$amount', payment_method='$payment_method', payment_date='$payment_date'";
+        $sql = "UPDATE payments SET amount='$amount', payment_method_id='$payment_method', payment_date='$payment_date' where id = $id";
         $result = $mysqli->query($sql);
         if ($result) {
             echo "<script>window.location.href = '" . $admin_base_url . "payment_list.php?success=Payment Updated';</script>";
@@ -95,9 +95,9 @@ require '../layouts/header.php';
                                 <label for="payment_method" class="form-label">ငွေပေးချေမှု အမျိုးအစား</label>
                                 <select name="payment_method" class="form-control" id="payment_method">
                                     <option value="">အမျိုးအစား ရွေးချယ်ရန်</option>
-                                    <option value="k-pay" <?= $payment_method == '1' ? 'selected' : '' ?>>K-Pay</option>
-                                    <option value="wave-pay" <?= $payment_method == '2' ? 'selected' : '' ?>>Wave-Pay</option>
-                                    <option value="cash" <?= $payment_method == '3' ? 'selected' : '' ?>>Cash</option>
+                                    <option value="1" <?= $payment_method == '1' ? 'selected' : '' ?>>K-Pay</option>
+                                    <option value="2" <?= $payment_method == '2' ? 'selected' : '' ?>>Wave-Pay</option>
+                                    <option value="3" <?= $payment_method == '3' ? 'selected' : '' ?>>Cash</option>
                                 </select>
                                 <?php if ($error && $payment_method_error) { ?>
                                     <span class="text-danger"><?= $payment_method_error ?></span>
