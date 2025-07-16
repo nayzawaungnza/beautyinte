@@ -83,13 +83,13 @@ require '../layouts/header.php';
                 e.preventDefault();
                 var id = this.getAttribute('data-id');
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'This action cannot be undone.',
+                    title: 'ဖျက်မည်ဆိုတာသေချာပြီလား',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'ဖျက်မည်',
+                    cancelButtonText: 'မဖျက်ပါ'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = 'promotion_list.php?delete_id=' + id;
