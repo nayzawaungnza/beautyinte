@@ -50,9 +50,10 @@ require '../layouts/header.php';
                     </thead>
                     <tbody>
                         <?php if ($promotions && $promotions->num_rows > 0) {
+                             $i = 1;
                             while ($row = $promotions->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?= $row['id'] ?></td>
+                                    <td><?= $i++ ?></td>
                                     <td><?= htmlspecialchars($row['package_name']) ?></td>
                                     <td><?= htmlspecialchars($row['description']) ?></td>
                                     <td><?= htmlspecialchars($row['percentage']) ?></td>

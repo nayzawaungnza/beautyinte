@@ -40,40 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($package_name === '' || $percentage <= 0 || $start_date === '' || $end_date === '') {
         $error = true;
-        $error_message = 'ကျေးဇူးပြု၍ လိုအပ်သောအချက်များအားလုံးဖြည့်ပြီး မှန်ကန်သောလျှော့ဈေးကိုထည့်ပါ။';
-
-    } 
-    if ($start_date > $end_date) {
-        $error = true;
-        $start_date_err = 'Start date cannot be later than end date.';
-    }
-    if ($discount_percent < 1 || $discount_percent > 50) {
-        $error = true;
-       $discount_err = 'Discount percentage must be between 1 and 50.';
-    }
-    
-    if ($package_name == "") {
-        $error = true;
-        $title_err = "Please add title.";
-    } elseif (strlen($package_name) < 5) {
-        $error = true;
-        $title_err = "Title must be at least 5 characters.";
-    } elseif (strlen($package_name) > 100) {
-        $error = true;
-        $title_err = "Title must be less than 100 characters.";
-    }
-
-    
-    if (empty($description)) {
-        $error = true;
-        $description_err  = "Please add description";
-    } else if (strlen($description) > 100) {
-        $error = true;
-        $description_err = 'Description must be less than 100 characters.';
-    }
-    
-    
-     if(!$error) {
+        $error_message = 'Please fill all required fields and provide a valid discount.';
+    } else {
         $sql = "UPDATE promotions SET package_name='$package_name', percentage='$percentage', description='$description', start_date='$start_date', end_date='$end_date' WHERE id=$promotion_id";
         $result = $mysqli->query($sql);
         if ($result) {
