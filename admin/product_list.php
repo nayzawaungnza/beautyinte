@@ -6,7 +6,7 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT products.id,products.name, products.description, products.price,product_qty.qty AS quantity FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
+$res = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
 $products = $mysqli->query($res);
 // $sql = "SELECT products.*, categories.name AS category_name, discounts.percent
 //         FROM products
@@ -58,6 +58,7 @@ require '../layouts/header.php';
                             <thead>
                                 <tr>
                                     <th class="">စဉ်</th>
+                                    <th class="">ပုံ</th>
                                     <th class="">အမည်</th>
                                     <th class="">အကြောင်းအရာဖော်ပြချက်</th>
                                     <th class="">စျေးနှုန်း</th>
@@ -72,6 +73,7 @@ require '../layouts/header.php';
                                     while ($row = $products->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
+                                            <td><img src="<?= $row['img'] ? '../uplode/' . $row['img'] : '../uplode/default.png'  ?>" style="width:50px; height:50px;"></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['description'] ?></td>
                                             <td><?= $row['price'] ?></td>
@@ -80,7 +82,6 @@ require '../layouts/header.php';
                                                 <div>
                                                     <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>" class="btn btn-sm btn-primary mx-2">အသေးစိတ်</a>
                                                     <a href="./product_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
-                                                    <a href="./product_image_update.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပုံများ</a>
                                                     <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
                                                 </div>
                                             </td>

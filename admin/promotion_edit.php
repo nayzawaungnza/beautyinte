@@ -11,11 +11,11 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 $promotion_id = intval($_GET['id']);
 
 $error = false;
-$discount_err = 
-$description_err  = 
-$title_err =
-$start_date_err = 
-$error_message = '';
+$discount_err =
+    $description_err  =
+    $title_err =
+    $start_date_err =
+    $error_message = '';
 $title = $description = $discount_percent = $start_date = $end_date = $status = '';
 
 $res = $mysqli->query("SELECT * FROM promotions WHERE id = $promotion_id");
@@ -27,31 +27,30 @@ $row = $res->fetch_assoc();
 
 $package_name = $row['package_name'];
 $description = $row['description'];
-$percentage = $row['percentage'];
-$start_date = $row['start_date'];
-$end_date = $row['end_date'];
+$discount_percent = $row['percentage'];
+$start_date = date("Y-m-d", strtotime($row['start_date']));
+$end_date = date("Y-m-d", strtotime($row['end_date']));
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['package_name']) || !empty($_POST['package_name'])) {
     $package_name = $mysqli->real_escape_string(trim($_POST['package_name']));
     $description = $mysqli->real_escape_string(trim($_POST['description']));
     $discount_percent = $_POST['discount_percent'];
     $start_date = $mysqli->real_escape_string($_POST['start_date']);
     $end_date = $mysqli->real_escape_string($_POST['end_date']);
 
-    if ($package_name === '' || $percentage <= 0 || $start_date === '' || $end_date === '') {
+    if ($package_name === '' || $discount_percent <= 0 || $start_date === '' || $end_date === '') {
         $error = true;
         $error_message = 'ကျေးဇူးပြု၍ လိုအပ်သောအချက်များအားလုံးဖြည့်ပြီး မှန်ကန်သောလျှော့ဈေးကိုထည့်ပါ။';
-
-    } 
+    }
     if ($start_date > $end_date) {
         $error = true;
         $start_date_err = 'Start date cannot be later than end date.';
     }
     if ($discount_percent < 1 || $discount_percent > 50) {
         $error = true;
-       $discount_err = 'Discount percentage must be between 1 and 50.';
+        $discount_err = 'Discount percentage must be between 1 and 50.';
     }
-    
+
     if ($package_name == "") {
         $error = true;
         $title_err = "Please add title.";
@@ -63,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title_err = "Title must be less than 100 characters.";
     }
 
-    
+
     if (empty($description)) {
         $error = true;
         $description_err  = "Please add description";
@@ -71,10 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = true;
         $description_err = 'Description must be less than 100 characters.';
     }
-    
-    
-     if(!$error) {
-        $sql = "UPDATE promotions SET package_name='$package_name', percentage='$percentage', description='$description', start_date='$start_date', end_date='$end_date' WHERE id=$promotion_id";
+
+
+    if (!$error) {
+        $sql = "UPDATE promotions SET package_name='$package_name', percentage='$discount_percent', description='$description', start_date='$start_date', end_date='$end_date' WHERE id=$promotion_id";
         $result = $mysqli->query($sql);
         if ($result) {
             header('Location: promotion_list.php?success=Promotion updated successfully');
@@ -100,7 +99,7 @@ require '../layouts/header.php';
                     <div class="form-group mb-2">
                         <label for="package_name">ခေါင်းစဉ် <span class="text-danger"></span></label>
                         <input type="text" name="package_name" id="package_name" class="form-control" value="<?= htmlspecialchars($package_name) ?>" />
-                         <small class="text-danger"><?= $title_err ?></small>
+                        <small class="text-danger"><?= $title_err ?></small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="description">အကြောင်းအရာ</label>
@@ -109,13 +108,13 @@ require '../layouts/header.php';
                     </div>
                     <div class="form-group mb-2">
                         <label for="percentage">လျှော့စျေး<span class="text-danger"></span></label>
-                         <input type="number" name="discount_percent" id="discount_percent" class="form-control" value="<?= htmlspecialchars($discount_percent) ?>" />
+                        <input type="number" name="discount_percent" id="discount_percent" class="form-control" value="<?= htmlspecialchars($discount_percent) ?>" />
                         <small class="text-danger"><?= $discount_err ?></small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="start_date">ပရိုမိုးရှင်း စသည့်ရက်<span class="text-danger"></span></label>
                         <input type="date" name="start_date" id="start_date" class="form-control" value="<?= htmlspecialchars($start_date) ?>" />
-                         <small class="text-danger"><?= $start_date_err ?></small>
+                        <small class="text-danger"><?= $start_date_err ?></small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="end_date">ပရိုမိုးရှင်း ပြီးဆုံးသည့်ရက်<span class="text-danger"></span></label>

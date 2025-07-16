@@ -72,25 +72,24 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if (!is_numeric($quantity)) {
         $error = true;
         $quantity_err  = "Quantity must be number.";
-    } if($quantity>1000){
+    }
+    if ($quantity > 1000) {
         $error = true;
         $quantity_err  = "Quantity limited.";
     }
-
-    $folder = __DIR__ . "/uplode";
+    $folder = "../uplode/";
 
     if (!file_exists($folder)) {
         mkdir($folder, 0777, true);
     }
 
-
     $fileName = uniqid() . $profile['name'];
 
-    move_uploaded_file($tmp_name, $folder);
+    move_uploaded_file($tmp_name, $folder . $fileName);
 
     if (!$error) {
-        $sql = "INSERT INTO `products`(`name`, `description`, `price`)
-        VALUES ('$name','$description','$price')";
+        $sql = "INSERT INTO `products`(`name`, `description`, `price`, `img`)
+        VALUES ('$name','$description','$price', '$fileName')";
         if ($mysqli->query($sql)) {
             $insert_id = $mysqli->insert_id;
             $qty_sql = "INSERT INTO `product_qty`(`product_id`, `qty`)
@@ -100,8 +99,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         }
     }
 }
-
-
 ?>
 
 <!-- Content body start -->
@@ -148,7 +145,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <input type="file" name="file_name" class="form-control">
                                 <small class="text-danger"><?= $file_err ?></small>
                             </div>
-
                             <div class="my-2">
                                 <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                             </div>

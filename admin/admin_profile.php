@@ -25,8 +25,8 @@ if (isset($_POST['update_profile'])) {
 
     // Handle image upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        if($_FILES['image']['name']==$image){
-            unlink("../uplode/".$image);
+        if ($_FILES['image']['name'] == $image) {
+            unlink("../uplode/" . $image);
         }
         $target_dir = "../uplode/";
         $file_name = basename($_FILES['image']['name']);
@@ -66,33 +66,33 @@ require '../layouts/header.php';
     <div class="row">
         <div class="col-md-6 col-sm-6 text-center">
             <div style="width: 200px; margin: auto; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 2px 5px rgba(0, 0, 0, 0.3);">
-                <img src="./uplode/<?php echo $admin['image'] ? $admin['image'] : 'https://via.placeholder.com/150'; ?>" class="img-fluid profile-img mb-3" alt="Profile Image">
+                <img src="../uplode/<?php echo $admin['image'] ? $admin['image'] : '../uplode/default.png'; ?>" class="img-fluid profile-img mb-3" alt="Profile Image">
             </div>
             <form method="post" enctype="multipart/form-data" class="mt-3">
                 <div class="form-group">
                     <input type="file" name="image" class="form-control-file">
                 </div>
                 <button type="submit" name="update_profile" class="btn btn-primary btn-block mt-2">Update Image</button>
-            
-                </div>
-                <div class="col-md-6 col-sm-6">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($admin['name']); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($admin['email']); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="text" name="phone" class="form-control" value="<?php echo htmlspecialchars($admin['phone']); ?>">
-                </div>
-                <div class="form-group">
-                    <label>Role</label>
-                    <input type="text" name="role" class="form-control" value="<?php echo htmlspecialchars($admin['role']); ?>" readonly>
-                </div>
-                <button type="submit" name="update_profile" class="btn btn-success">Save Changes</button>
+
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($admin['name']); ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($admin['email']); ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" name="phone" class="form-control" value="<?php echo htmlspecialchars($admin['phone']); ?>">
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <input type="text" name="role" class="form-control" value="<?php echo htmlspecialchars($admin['role']); ?>" readonly>
+            </div>
+            <button type="submit" name="update_profile" class="btn btn-success">Save Changes</button>
             </form>
             <hr>
         </div>

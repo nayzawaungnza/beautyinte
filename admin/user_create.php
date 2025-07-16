@@ -102,13 +102,13 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
     // Image
     if (isset($_FILES['image'])) {
-        $target_dir = "uplode/";
+        $target_dir = "../uplode/";
         $file_name = basename($_FILES['image']['name']);
         $target_file =  time() . '_' . $file_name;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
         if (in_array($imageFileType, $allowed)) {
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $target_dir .$target_file)) {
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $target_dir . $target_file)) {
                 $image = $target_file;
             } else {
                 $error = true;

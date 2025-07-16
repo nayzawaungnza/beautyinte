@@ -71,13 +71,13 @@ require '../layouts/header.php';
                                             <td><?= $i++ ?></td>
                                             <td>
                                                 <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
-                                                 alt="Profile Image" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                                    alt="Profile Image" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                                             </td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td><?= $row['role'] ?></td>
                                             <td><?= $row['phone'] ?></td>
-                                            <td><?= $row['gender'] == "male" ? "ကျား": "မ" ?></td>
+                                            <td><?= $row['gender'] == "male" ? "ကျား" : "မ" ?></td>
                                             <td>
                                                 <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
