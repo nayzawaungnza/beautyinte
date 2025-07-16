@@ -4,14 +4,16 @@ checkAuth('admin');
 require '../require/db.php';
 require '../require/common.php';
 
-// $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-// if ($id <= 0) {
-//     echo '<div class="alert alert-danger">Invalid payment ID.</div>';
-//     exit;
-// }
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($id <= 0) {
+    echo '<div class="alert alert-danger">Invalid payment ID.</div>';
+    exit;
+}
 
 // Fetch payment info
-$sql = "SELECT p.*, a.id as appointment_id, c.name as customer_name, s.name as service_name, a.appointment_date, a.appointment_time FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id ";
+$sql = "SELECT p.*, a.id as appointment_id, c.name as customer_name, s.name as service_name,
+ a.appointment_date, a.appointment_time FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN
+  customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id ";
 $result = $mysqli->query($sql);
 if (!$result || $result->num_rows == 0) {
     // echo '<div class="alert alert-danger">Payment not found.</div>';
@@ -21,9 +23,9 @@ $payment = $result->fetch_assoc();
 
 $error = false;
 $error_message = '';
-$amount_error = $payment_method_error = $payment_date_error = '';
+$amount_error = $payment_method = $payment_method_error = $payment_date_error = '';
 $amount = $payment['amount'];
-$payment_method = $payment['payment_method'];
+$payment_method = $payment['payment_method_id'];
 $payment_date = $payment['payment_date'];
 
 if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
@@ -35,7 +37,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         $error = true;
         $amount_error = "Please enter a valid amount.";
     }
-    if ($payment_method === '' || !in_array($payment_method, ['k-pay', 'wave-pay'])) {
+    if ($payment_method === '' || !in_array($payment_method, ['k-pay', 'wave-pay' , 'cash'])) {
         $error = true;
         $payment_method_error = "Please select a valid payment method.";
     }
@@ -93,8 +95,9 @@ require '../layouts/header.php';
                                 <label for="payment_method" class="form-label">ငွေပေးချေမှု အမျိုးအစား</label>
                                 <select name="payment_method" class="form-control" id="payment_method">
                                     <option value="">အမျိုးအစား ရွေးချယ်ရန်</option>
-                                    <option value="k-pay" <?= $payment_method == 'k-pay' ? 'selected' : '' ?>>K-Pay</option>
-                                    <option value="wave-pay" <?= $payment_method == 'wave-pay' ? 'selected' : '' ?>>Wave-Pay</option>
+                                    <option value="k-pay" <?= $payment_method == '1' ? 'selected' : '' ?>>K-Pay</option>
+                                    <option value="wave-pay" <?= $payment_method == '2' ? 'selected' : '' ?>>Wave-Pay</option>
+                                    <option value="cash" <?= $payment_method == '3' ? 'selected' : '' ?>>Cash</option>
                                 </select>
                                 <?php if ($error && $payment_method_error) { ?>
                                     <span class="text-danger"><?= $payment_method_error ?></span>

@@ -72,6 +72,9 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } else if (!is_numeric($quantity)) {
         $error = true;
         $quantity_err  = "Quantity must be number.";
+    } if($quantity>1000){
+        $error = true;
+        $quantity_err  = "Quantity limited.";
     }
 
     $folder = __DIR__ . "/uplode";

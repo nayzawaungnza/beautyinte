@@ -29,11 +29,6 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>အချိန်ချိန်းဆိုမှု စာရင်း</h3>
-            <div class="">
-                <a href="<?= $admin_base_url . 'appointment_create.php' ?>" class="btn btn-primary">
-                    အချိန်ချိန်းဆိုမှု စာရင်းဖန်တီးရန်
-                </a>
-            </div>
         </div>
 
         <div class="row">

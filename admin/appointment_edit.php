@@ -67,7 +67,7 @@ $users = $mysqli->query($res);
 
 if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $cName = $_POST['customer_id'];
-    $serid = $_POST['service_id'];
+    $serid = $_POST['services'];
     $sttid = $_POST['staff_id'];
     $appointment_date = $_POST['app_date'];
     $appointment_time = $_POST['app_time'];
@@ -82,8 +82,8 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
         $error = true;
         $appointment_date_err = "Appointment date must not be in the past.";
     }
-
-   if (empty($appointment_time)) {
+    
+    if (empty($appointment_time)) {
         $error = true;
         $appointment_time_err = "Please add appointment time.";
     } else {
@@ -105,23 +105,20 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
             $appointment_time_err = "Unavailable appointment time.";
         }
     }
-    if (empty($status)) {
-        $error = true;
-        $status_err = "Please select status";
-    }
 
     if (!$error) {
         // foreach ($serid as $ser) {
-        $sql = "UPDATE `appointments`SET 
-            `customer_id` = '$cName', `service_id` = ' $serid', `staff_id` = '$sttid', `appointment_date` = '$appointment_date', `appointment_time` = '$appointment_time', '0', `comment` = '$comment', `request` = '$request'
-            WHERE `appointments`.`id` = '$id'";
+        $sql = "UPDATE `appointments` SET `customer_id`='$cName',
+        `service_id`='$serid',`staff_id`='$sttid',`appointment_date`='$appointment_date',
+        `appointment_time`='$appointment_time',`status`='0',`comment`='$comment',
+        `request`='$request' WHERE `id`='$id'";
         $result = $mysqli->query($sql);
+       
 
         if ($result) {
             echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
         }
-        var_dump("hi");
-        die();
+        
     }
 }
 // }
