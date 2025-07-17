@@ -62,15 +62,15 @@ $service_res = selectData("services", $mysqli, "", "*");
 			<?php
 			if ($user_res->num_rows > 0) {
 				while ($data = $user_res->fetch_assoc()) { ?>
-					<div class="col-lg-3 d-flex mb-sm-4 ftco-animate">
+					<div class="col-md-3 ftco-animate">
 						<div class="staff">
-							<div class="img mb-4" style="background-image: url(images/beauty.jpg);"></div>
+							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
 							<div class="info text-center">
 
 								<h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
-								<span class="position mb-4 text-dark"><?= $data['role'] ?></span>
-								<div class="text">
-									<p>အကြိုဆိုဝန်ထမ်း သည် အဖွဲ့အစည်းတစ်ခု၏ ပထမဦးဆုံးအမြင်ကိုဖော်ပြသူဖြစ်ပြီး၊ ဧည့်သည်များအား နွေးထွေးစွာကြိုဆိုရန်နှင့် ဧည့်သည်များနှင့် ဝန်ထမ်းများအကြား ဆက်သွယ်ရေး ပြေပြစ်မှုရှိအောင် ထိန်းသိမ်းပေးရသောတာဝန်ရှိသူဖြစ်သည်။</p>
+								<strong class="position mb-4 text-dark"><b> <?= $data['role'] ?></b></strong>
+								<div class="text mt-1">
+									<p><?= $data['description'] ?></p>
 								</div>
 							</div>
 						</div>
@@ -191,7 +191,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 							</ul>
 
 							<p class="button text-center"><a href="#"
-									class="btn btn-primary btn-outline-primary px-4 py-3">မှာယူရန်</a></p>
+									class="btn btn-primary btn-outline-primary px-4 py-3">ဝယ်ယူရန်</a></p>
 
 						</div>
 					</div>

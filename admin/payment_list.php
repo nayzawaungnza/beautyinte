@@ -8,9 +8,26 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 
 // Fetch all payments with appointment, customer, and service info
-$sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name, p.amount, p.payment_date, pm.name as payment_method_name FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
+$sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
+ p.amount, p.payment_date, pm.name as payment_method_name FROM payments p
+  INNER JOIN appointments a ON p.appointment_id = a.id
+   INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
+   INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
 $payments = $mysqli->query($sql);
 
+
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
+ p.amount, p.payment_date , pm.name as payment_method_name FROM payments p
+  INNER JOIN appointments a ON p.appointment_id = a.id
+   INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
+   INNER JOIN payment_method pm ON p.payment_method_id = pm.id";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $sql .= " WHERE c.name LIKE '%$search_escaped%'  OR p.payment_date LIKE '%$search_escaped%'
+     OR pm.name LIKE '%$search_escaped%'";
+}
+$payments = $mysqli->query($sql);
 // Handle delete
 $delete_id = isset($_GET['delete_id']) ? $_GET['delete_id'] : '';
 if ($delete_id !== '') {
@@ -27,6 +44,12 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3 class="text-center mb-2 text-info">ငွေပေး‌ချေမှု စာရင်း</h3>
+        </div>
+        <div class="col-12 mb-3">
+            <form method="GET" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or date" value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">

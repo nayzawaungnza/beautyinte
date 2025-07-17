@@ -9,7 +9,13 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = selectData('services', $mysqli, "", "*", "ORDER BY created_at ASC");
 
 
-
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql = "SELECT * FROM `services`";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $sql .= " WHERE name LIKE '%$search_escaped%' OR price LIKE '%$search_escaped%'";
+}
+$res = $mysqli->query($sql);
 
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
 if ($delete_id !== '') {
@@ -31,7 +37,12 @@ require '../layouts/header.php';
                 </a>
             </div>
         </div>
-
+        <div class="col-12 mb-3">
+            <form method="GET" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or phone" value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
                 <?php if ($success !== '') { ?>

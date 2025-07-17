@@ -6,14 +6,19 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
+$res = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity
+ FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
 $products = $mysqli->query($res);
-// $sql = "SELECT products.*, categories.name AS category_name, discounts.percent
-//         FROM products
-//         LEFT JOIN categories ON categories.id = products.category_id
-//         LEFT JOIN discounts ON discounts.id = products.discount_id
-//         ";
-// $res = $mysqli->query($sql);
+
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity
+FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $sql .= " WHERE products.name LIKE '%$search_escaped%'  OR products.description LIKE '%$search_escaped%'
+     OR product_qty.qty LIKE '%$search_escaped%'";
+}
+$products = $mysqli->query($sql);
 
 
 
