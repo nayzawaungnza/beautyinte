@@ -15,8 +15,7 @@ $sql = "SELECT products.id,products.name, products.description,products.img, pro
 FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE products.name LIKE '%$search_escaped%'  OR products.description LIKE '%$search_escaped%'
-     OR product_qty.qty LIKE '%$search_escaped%'";
+    $sql .= " WHERE products.name LIKE '%$search_escaped%'";
 }
 $products = $mysqli->query($sql);
 
@@ -41,6 +40,13 @@ require '../layouts/header.php';
                     ‌ရောင်းရန်ပစ္စည်းများ အသစ်ဖန်တီးရန်
                 </a>
             </div>
+        </div>
+
+        <div class="col-12 mb-3">
+            <form method="GET" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name " value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
 
         <div class="row">

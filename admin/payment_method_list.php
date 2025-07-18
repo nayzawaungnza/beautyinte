@@ -6,6 +6,15 @@ require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 
+
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql = "SELECT * FROM `payment_method`";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $sql .= " WHERE name LIKE '%$search_escaped%'";
+}
+$methods = $mysqli->query($sql);
+
 // Handle delete
 if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
@@ -28,6 +37,14 @@ require '../layouts/header.php';
             <h3>ငွေပေး‌ချေမှုနည်းလမ်းစာရင်း</h3>
             <a href="payment_method_create.php" class="btn btn-primary">ငွေပေး‌ချေမှုနည်းလမ်းထပ်ထည့်ရန်</a>
         </div>
+
+        <div class="col-12 mb-3">
+            <form method="GET" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name " value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
         <?php if ($success) { ?>
             <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
         <?php } ?>

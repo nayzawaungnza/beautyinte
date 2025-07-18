@@ -13,7 +13,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $sql = "SELECT * FROM `services`";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE name LIKE '%$search_escaped%' OR price LIKE '%$search_escaped%'";
+    $sql .= " WHERE name LIKE '%$search_escaped%'";
 }
 $res = $mysqli->query($sql);
 
@@ -39,7 +39,7 @@ require '../layouts/header.php';
         </div>
         <div class="col-12 mb-3">
             <form method="GET" class="form-inline d-flex justify-content-end">
-                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or phone" value="<?= htmlspecialchars($search) ?>">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name" value="<?= htmlspecialchars($search) ?>">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
