@@ -14,6 +14,20 @@ $res = "SELECT appointments.id, customers.name as customer_name, services.name A
         LEFT JOIN payments ON appointments.id = payments.appointment_id ORDER BY appointments.id DESC ";
 $appointments = $mysqli->query($res);
 
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$res = "SELECT appointments.id, customers.name as customer_name, services.name AS service_name, users.name AS staff_name,
+        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status, appointments.comment, appointments.request,
+        payments.id as payment_id, payments.amount as payment_amount,  payments.payment_date
+        FROM appointments INNER JOIN customers ON appointments.customer_id = customers.id
+        INNER JOIN services ON appointments.service_id = services.id INNER JOIN users ON appointments.staff_id = users.id
+        LEFT JOIN payments ON appointments.id = payments.appointment_id";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $res .= " WHERE customers.name LIKE '%$search_escaped%'  OR services.name LIKE '%$search_escaped%'
+     OR users.name LIKE '%$search_escaped%' OR appointments.appointment_date LIKE '%$search_escaped%'";
+}
+$appointments = $mysqli->query($res);
+
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
 if ($delete_id !== '') {
     $res = deleteData('appointments', $mysqli, "id=$delete_id");
@@ -29,6 +43,13 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>အချိန်ချိန်းဆိုမှု စာရင်း</h3>
+        </div>
+
+        <div class="col-12 mb-3">
+            <form method="GET" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or date" value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
 
         <div class="row">

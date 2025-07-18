@@ -5,6 +5,17 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
+$promotions = $mysqli->query("SELECT * FROM promotions ORDER BY id DESC");
+
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql = "SELECT * FROM `promotions`";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $sql .= " WHERE package_name LIKE '%$search_escaped%' OR start_date LIKE '%$search_escaped%' OR end_date LIKE '%$search_escaped%' 
+    OR percentage LIKE '%$search_escaped%'";
+}
+$promotions= $mysqli->query($sql);
+
 
 // Handle delete
 if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
@@ -19,7 +30,6 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
     }
 }
 
-$promotions = $mysqli->query("SELECT * FROM promotions ORDER BY id DESC");
 require '../layouts/header.php';
 ?>
 <div class="content-body py-3">
@@ -28,6 +38,14 @@ require '../layouts/header.php';
             <h3>ပရိုမိုးရှင်း စာရင်း</h3>
             <a href="promotion_create.php" class="btn btn-primary">ပရိုမိုးရှင်းထပ်ထည့်ရန်</a>
         </div>
+
+         <div class="col-12 mb-3">
+            <form method="get" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or date" value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
         <?php if ($success) { ?>
             <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
         <?php } ?>
