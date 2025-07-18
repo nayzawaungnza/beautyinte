@@ -8,7 +8,20 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 $sql = "SELECT ps.id, p.name as product_name, ps.qty, ps.total_price, ps.sale_date, pr.package_name as promotion_name, pr.percentage as promotion_percent FROM product_sales ps INNER JOIN products p ON ps.product_id = p.id LEFT JOIN promotions pr ON ps.promotion_id = pr.id ORDER BY ps.id DESC";
 $sales = $mysqli->query($sql);
 require '../layouts/header.php';
+
+
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql = "SELECT ps.id, p.name as product_name, ps.qty, ps.total_price, ps.sale_date, pr.package_name as promotion_name, pr.percentage as promotion_percent FROM product_sales ps INNER JOIN products p ON ps.product_id = p.id LEFT JOIN promotions pr ON ps.promotion_id = pr.id";
+if ($search !== '') {
+    $search_escaped = $mysqli->real_escape_string($search);
+    $sql .= " WHERE  p.name LIKE '%$search_escaped%' OR ps.sale_date LIKE '%$search_escaped%' OR pr.package_name LIKE '%$search_escaped%'";
+}
+$sales = $mysqli->query($sql);
+
 ?>
+
+
+
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
@@ -17,6 +30,14 @@ require '../layouts/header.php';
                 <a href="product_sale_create.php" class="btn btn-primary">ပစ္စည်းအရောင်းများစာရင်း ဖန်တီးရန်</a>
             </div>
         </div>
+
+        <div class="col-12 mb-3">
+            <form method="GET" class="form-inline d-flex justify-content-end">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or date" value="<?= htmlspecialchars($search) ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
                 <?php if ($success !== '') { ?>
@@ -37,7 +58,7 @@ require '../layouts/header.php';
                             <thead>
                                 <tr>
                                     <th>စဉ်</th>
-                                    <th>ပစ္စည်း</th>
+                                    <th>ပစ္စည်းအမည်</th>
                                     <th>အရေအတွက်</th>
                                     <th>ပစ္စည်းစျေးနှုန်းများ</th>
                                     <th>ပရိုမိုးရှင်း</th>
