@@ -37,7 +37,7 @@ function create_table($mysqli)
                 name VARCHAR(100) NOT NULL,
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(200) NOT NULL,
-                role ENUM('admin','staff') NOT NULL,
+                role ENUM('admin','staff','customer') NOT NULL,
                 image VARCHAR(200) NULL,
                 description TEXT NULL,
                 phone VARCHAR(50) NOT NULL,

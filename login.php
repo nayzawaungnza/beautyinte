@@ -51,6 +51,10 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                     header("Location: $staff_base_url" . 'dashboard.php');
                     exit();
                 }
+                if ($_SESSION['role'] == "customer" && $data['role'] == "customer") {
+                    header("Location: $user_base_url" . 'appointment.php');
+                    exit();
+                }
                 header("Location: $admin_base_url" . 'dashboard.php');
                 exit();
             } else {

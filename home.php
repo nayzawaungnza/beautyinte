@@ -19,10 +19,11 @@ $service_res = selectData("services", $mysqli, "", "*");
 		<div class="row">
 			<div class="col-md-4 ftco-animate">
 				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-facial-treatment"></span></div>
+					<div class="icon d-flex mb-3"><span class=""></span></div>
 					<div class="media-body">
-						<h3 class="heading">အသားအရေနှင့် အလှအပ ပြုစုမှု</h3>
-						<p>အလှပြင်ဆိုင်သည် ချောမွှတ်နူးညံ့သော အလှပြင်ဝန်ဆောင်မှုများဖြစ်သော ဆံပင်ညှပ်ခြင်း၊ အသားအရေစောင့်ရှောက်မှု၊ မိတ်ကပ်လုပ်ခြင်းနှင့် လက်သည်းအလှပြင်ခြင်းတို့ကို ပေးဆောင်သောနေရာဖြစ်ပြီး လူတစ်ဦး၏ရုပ်ရည်အလှတရားကို တိုးတက်စေရန်ရည်ရွယ်သည်။</p>
+						<h3 class="heading">လက်သည်း</h3>
+						<p>လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
+							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</p>
 					</div>
 				</div>
 			</div>
@@ -184,15 +185,13 @@ $service_res = selectData("services", $mysqli, "", "*");
 								<h3><?= $data['name'] ?></h3>
 							</div>
 							<ul>
-
 								<li><?= $data['price'] ?>ကျပ်</li>
 								<li><?= $data['description'] ?></li>
-
 							</ul>
 
-							<p class="button text-center"><a href="#"
-									class="btn btn-primary btn-outline-primary px-4 py-3">ဝယ်ယူရန်</a></p>
-
+							<p class="button text-center">
+								<a href="./user/appointment.php" class="btn btn-primary btn-outline-primary px-4 py-3">ဝယ်ယူရန်</a>
+							</p>
 						</div>
 					</div>
 			<?php

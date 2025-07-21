@@ -32,7 +32,7 @@ insert_if_not_exists(
     $mysqli,
     'users',
     "email='admin1@gmail.com'",
-    "INSERT INTO users (name, email, password, role, phone, gender) VALUES ('admin1', 'admin1@gmail.com', '" . md5('password') . "', 'admin', '0998765432', 'female')"
+    "INSERT INTO users (name, email, password, role, phone, gender) VALUES ('admin1', 'admin1@gmail.com', '" . md5('password') . "', 'customer', '0998765432', 'female')"
 );
 
 // Customers

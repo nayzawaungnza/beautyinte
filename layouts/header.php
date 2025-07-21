@@ -182,8 +182,10 @@ require_once '../require/common_function.php';
                         <?php
                         if ($_SESSION['role'] == "staff") {
                             $profile_link = "http://localhost/Beauty/staff/staff_profile.php";
-                        } else {
+                        } else if ($_SESSION['role'] == "admin") {
                             $profile_link = "http://localhost/Beauty/admin/admin_profile.php";
+                        } else {
+                            $profile_link = "http://localhost/Beauty/customer/customer_profile.php";
                         }
                         ?>
                         <div class="dropdown-menu dropdown-menu-right shadow">
@@ -210,7 +212,7 @@ require_once '../require/common_function.php';
                                 <li><a href="../staff/task_list.php">စာရင်း</a></li>
                             </ul>
                         </li>
-                    <?php } else { ?>
+                    <?php } else if ($_SESSION['role'] == "admin") { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
                                 <i class="fa-solid fa-user"></i><span class="nav-text">အသုံးပြုသူများ</span>
@@ -288,6 +290,16 @@ require_once '../require/common_function.php';
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/product_sale_list.php">စာရင်း</a></li>
                                 <li><a href="../admin/product_sale_create.php">ဖန်တီးမည်</a></li>
+                            </ul>
+                        </li>
+                    <?php } else { ?>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
+                                <i class="fas fa-tasks"></i><span class="nav-text">Dashboard</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../customer/dashboard.php">Home</a></li>
+                                <li><a href="../customer/services.php">Services</a></li>
                             </ul>
                         </li>
                     <?php } ?>

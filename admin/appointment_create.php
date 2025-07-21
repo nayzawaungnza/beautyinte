@@ -134,9 +134,9 @@ if (isset($_POST['btn_submit'])) {
                                 <label for="customer_id" class="form-label">ဖောက်သည်</label>
                                 <select name="customer_id" class="form-control" id="customer_id">
                                     <?php if ($customers && $customers->num_rows > 0) {
-                                       $c = $customers->fetch_assoc(); ?>
+                                        $c = $customers->fetch_assoc(); ?>
                                         <option value="<?= $c['id'] ?>" selected><?= $c['name'] ?> </option>
-                                     <?php }  ?>  
+                                    <?php }  ?>
                                 </select>
                                 <?php if ($error && $customer_id_error) { ?>
                                     <span class="text-danger"><?= $customer_id_error ?></span>
@@ -238,14 +238,9 @@ if (isset($_POST['btn_submit'])) {
     </div>
 </div>
 <!-- #/ container -->
-</div>
-
 <!-- Content body end -->
 
 
-
 <?php
-
 require '../layouts/footer.php';
-
 ?>
