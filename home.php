@@ -108,8 +108,8 @@ $promotions = $mysqli->query($promotions_sql);
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
-				<h2 class="mb-4 text-dark">အလှအပ စျေးနှုန်းများ</h2>
-				<p>လျှို့ဝှက်စရိတ်မရှိဘဲ အရည်အသွေးမြင့် ဝန်ဆောင်မှုများကို တန်ဖိုးကျသော စျေးနှုန်းဖြင့် ပေးဆောင်ခြင်းဖြင့် အလှတိုးတက်စေခြင်း။</p>
+				<h3 class="mb-4 text-dark">ပရိုမိုးရှင်းများ</h3>
+				<!-- <p>လျှို့ဝှက်စရိတ်မရှိဘဲ အရည်အသွေးမြင့် ဝန်ဆောင်မှုများကို တန်ဖိုးကျသော စျေးနှုန်းဖြင့် ပေးဆောင်ခြင်းဖြင့် အလှတိုးတက်စေခြင်း။</p> -->
 			</div>
 		</div>
 		<div class="row" style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">

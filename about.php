@@ -41,7 +41,7 @@ $service_res = selectData("services", $mysqli, "", "*");
       <?php
       if ($user_res->num_rows > 0) {
         while ($data = $user_res->fetch_assoc()) { ?>
-          <div class="col-md-3 ftco-animate">
+          <div class="col-md-3 mb-3 ftco-animate">
             <div class="staff">
               <div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
               <div class="info text-center">

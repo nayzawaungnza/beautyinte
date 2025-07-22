@@ -10,8 +10,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 <section id="beauty-pricing" style="padding: 60px 0; background: linear-gradient(to right, #fdfbfb, #ebedee); font-family: 'Segoe UI', sans-serif;">
   <div class="container" style="max-width: 1140px; margin: auto;">
     <div style="text-align: center; margin-bottom: 50px;">
-      <h2 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">အလှအပ စျေးနှုန်းများ</h2>
-      <p style="font-size: 15px; color: #555;">လျှို့ဝှက်စရိတ်မရှိဘဲ အရည်အသွေးမြင့် ဝန်ဆောင်မှုများကို တန်ဖိုးကျသော စျေးနှုန်းဖြင့် ပေးဆောင်ခြင်းဖြင့် အလှတိုးတက်စေခြင်း။</p>
+      <h5 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">ဝန်ဆောင်မှုများ</h5>
+      <!-- <p style="font-size: 15px; color: #555;">လျှို့ဝှက်စရိတ်မရှိဘဲ အရည်အသွေးမြင့် ဝန်ဆောင်မှုများကို တန်ဖိုးကျသော စျေးနှုန်းဖြင့် ပေးဆောင်ခြင်းဖြင့် အလှတိုးတက်စေခြင်း။</p> -->
     </div>
 
     <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">

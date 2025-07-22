@@ -74,13 +74,13 @@ insert_if_not_exists(
     $mysqli,
     'promotions',
     "package_name='Summer Sale'",
-    "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) VALUES ('Summer Sale', 10, '10% off for summer', '2024-06-01', '2024-06-30')"
+    "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) VALUES ('Summer Sale', 10, '10% off for summer', '2025-06-01', '2025-06-30')"
 );
 insert_if_not_exists(
     $mysqli,
     'promotions',
     "package_name='Rainy Discount'",
-    "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) VALUES ('Rainy Discount', 15, '15% off for rainy season', '2024-07-01', '2024-07-31')"
+    "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) VALUES ('Rainy Discount', 15, '15% off for rainy season', '2025-07-01', '2025-07-31')"
 );
 
 // Products
@@ -102,7 +102,13 @@ insert_if_not_exists(
     "name='Hair Oil'",
     "INSERT INTO products (name, description, price, img) VALUES ('Hair Oil', 'Nourishing hair oil', 7000, 'default.png')"
 );
-
+//Services
+insert_if_not_exists(
+    $mysqli,
+    'products',
+    "name='Hair Oil'",
+    "INSERT INTO products (name, description, price, img) VALUES ('Hair Oil', 'Nourishing hair oil', 7000, 'default.png')"
+);
 // Output
 ?>
 <!DOCTYPE html>
