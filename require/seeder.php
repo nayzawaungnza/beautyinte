@@ -105,10 +105,22 @@ insert_if_not_exists(
 //Services
 insert_if_not_exists(
     $mysqli,
-    'products',
-    "name='Hair Oil'",
-    "INSERT INTO products (name, description, price, img) VALUES ('Hair Oil', 'Nourishing hair oil', 7000, 'default.png')"
+    'services',
+    "name='ဆံပင်ညှပ်ခြင်း'",
+    "INSERT INTO services (name, description, price) VALUES ('ဆံပင်ညှပ်ခြင်း', 'သင့်ဆံပင်အမျိုးအစား၊ မျက်နှာပုံသဏ္ဋန်နှင့် နေထိုင်မှုဘောင်အတိုင်းကိုက်ညီစေရန် သီးသန့်အကြံပေးမှုများနှင့်စတင်ပါသည်။', 7000)"
+);insert_if_not_exists(
+    $mysqli,
+    'services',
+    "name='ဆံပင်အရောင်ဆိုးခြင်း'",
+    "INSERT INTO services (name, description, price) VALUES ('ဆံပင်အရောင်ဆိုးခြင်း', 'ဆံပင်အရောင်ပြောင်းခြင်းဖြင့် သင့်ရဲ့ပုံစံကို သစ်လွင်စွာပြောင်းလဲလိုက်ပါ။', 10000)"
 );
+insert_if_not_exists(
+    $mysqli,
+    'services',
+    "name='ဆံပင်ဖြောင့်ခြင်း'",
+    "INSERT INTO services (name, description, price) VALUES ('ဆံပင်ဖြောင့်ခြင်း', 'သန့်ရှင်းပြီး တောက်ပတည့်တည့်ဖြောင့်ပြောင်တဲ့ ဆံပင်အလှကို ရရှိလိုသူအတွက် ကျွန်ုပ်တို၏ ဆံပင်ဖြောင့်ခြင်း ဝန်ဆောင်မှုသည် အထူးသင့်လျော်ပါသည်။', 80000)"
+);
+
 // Output
 ?>
 <!DOCTYPE html>

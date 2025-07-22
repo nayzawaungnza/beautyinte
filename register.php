@@ -70,7 +70,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $password_err = "လျှို့ဝှက်နံပါတ်သည် စာလုံး ၃၀ ထက်နည်းရပါမည်။";
     } else if ($password != $confirm_password) {
         $error = true;
-        $password_err = $confirm_password_err = "လျှို့ဝှက်နံပါတ်သည်";
+        $password_err = $confirm_password_err = "အတည်ပြုစကားဝှက် မကိုက်ညီပါ။";
     } else {
         $byScriptPassword = md5($password);
     }
@@ -84,15 +84,15 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $phone_err = "ဖုန်းနံပါတ်သည် အနည်းဆုံး ဂဏန်း ၁၁ လုံး ရှိရပါမည်။";
     }
     //gender
-    // if ($gender === '') {
-    //     $error = true;
-    //     $gender_err = "ကျေးဇူးပြု၍ လိင် ရွေးချယ်ပါ။";
-    // }
+    if ($gender === '') {
+        $error = true;
+        $gender_err = "ကျေးဇူးပြု၍ လိင် ရွေးချယ်ပါ။";
+    }
 
 
     if (!$error) {
         $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `phone`, `gender`)
-     VALUES ('$name','$email','$byScriptPassword','customer','$phone','male')";
+     VALUES ('$name','$email','$byScriptPassword','customer','$phone','$gender')";
         $mysqli->query($sql);
         echo "<script>window.location.href= 'http://localhost/Beauty/login.php' </script>";
     }
