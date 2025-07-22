@@ -5,49 +5,40 @@ require "./require/common.php";
 require './require/common_function.php';
 
 $user_res = selectData("users", $mysqli, "", "*", "ORDER BY role DESC");
-// $new_user_sql = "SELECT 
-//                     users.*, 
-//                     users.name AS user_name, 
-//                     FROM users
-//                     ORDER BY users.id DESC";
-// $new_user_res  = $mysqli->query($new_user_sql);
-$service_res = selectData("services", $mysqli, "", "*");
-
+$promotions_sql = "SELECT * FROM `promotions` WHERE start_date <= CURDATE() AND end_date >= CURDATE()";
+$promotions = $mysqli->query($promotions_sql);
 ?>
 <section class="ftco-section">
-	<div class="container glass d-flex justify-content-center">
-		<!-- <div class="row">
-		</div>
-	 -->
-			<div class="card col-md-4 mb-3" style="background-color: pink;">
-				<div class="card-body">
-					<div class="media d-block text-center block-6 services">
-						<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
-						<div class="media-body">
-							<h3 class="heading">လက်သည်း</h3>
-							<p class="mb-4 text-dark">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
+	<div class="container glass d-flex justify-content-around">
+		<div class="card col-md-4 mb-3" style="background-color: pink;">
+			<div class="card-body">
+				<div class="media d-block text-center block-6 services">
+					<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
+					<div class="media-body">
+						<h3 class="heading">လက်သည်း</h3>
+						<p class="mb-4 text-dark">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
 							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</p>
-						</div>
 					</div>
 				</div>
 			</div>
-	
-			<div class="card col-md-4 mb-3" style="background-color: pink;">
-				<div class="card-body">
+		</div>
+
+		<div class="card col-md-4 mb-3" style="background-color: pink;">
+			<div class="card-body">
 				<div class="media d-block text-center block-6 services">
 					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
 					<div class="media-body">
 						<h3 class="heading">ဆံပင်ပုံစံ</h3>
 						<p class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
 							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </section>
 
-                                       
+
 
 <section class="ftco-section" id="hairstylist">
 	<div class="container glass">
@@ -61,7 +52,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 			<?php
 			if ($user_res->num_rows > 0) {
 				while ($data = $user_res->fetch_assoc()) { ?>
-					<div class="col-md-3 ftco-animate">
+					<div class="col-md-3 ftco-animate mb-3">
 						<div class="staff">
 							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
 							<div class="info text-center">
@@ -81,49 +72,6 @@ $service_res = selectData("services", $mysqli, "", "*");
 		</div>
 	</div>
 </section>
-
-<!-- <section class="ftco-section" id="ourwork">
-	<div class="container glass">
-		<div class="row justify-content-center mb-5 pb-3">
-			<div class="col-md-7 heading-section text-center ftco-animate">
-				<h2 class="mb-4">ကျွန်ုပ်တို့၏ အလုပ်များ</h2>
-				<p class="position mb-4 text-dark">ပရော်ဖက်ရှင်နယ် ဆံပင်အလှပြင်ခြင်း၊ ပြတ်သားလှပသော မိတ်ကပ်လုပ်ခြင်း၊ နှင့် စွဲမက်ဖွယ်အနီအဖြူဖြင့် နှုတ်ခမ်းအလှပြင်ခြင်းတို့အားဖြင့် သဘာဝအလှကို မြှင့်တင်ပေးခြင်းဖြစ်သည်။</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 ftco-animate">
-				<a href="#" class="work-entry">
-					<img src="images/work-2.jpg" class="img-fluid" alt="Colorlib Template">
-					<div class="info d-flex align-items-center">
-						<div>
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-								<span class="icon-search"></span>
-							</div>
-							<h3>ဆံပင်ပုံစံ</h3>
-							<p class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
-							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4 ftco-animate">
-				<a href="#" class="work-entry">
-					<img src="images/nail2.jpg" class="img-fluid" alt="Colorlib Template">
-					<div class="info d-flex align-items-center">
-						<div>
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-								<span class="icon-search"></span>
-							</div>
-							<h3>လက်သည်းပုံစံ</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			</div>
-		</div>
-	</div>
-</section> -->
 
 <section class="ftco-partner bg-light">
 	<div class="container glass">
@@ -156,7 +104,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 	</div>
 </section>
 
-<!-- <section class="ftco-section" id="beauty-pricing">
+<section class="ftco-section" id="beauty-pricing">
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
@@ -164,85 +112,38 @@ $service_res = selectData("services", $mysqli, "", "*");
 				<p>လျှို့ဝှက်စရိတ်မရှိဘဲ အရည်အသွေးမြင့် ဝန်ဆောင်မှုများကို တန်ဖိုးကျသော စျေးနှုန်းဖြင့် ပေးဆောင်ခြင်းဖြင့် အလှတိုးတက်စေခြင်း။</p>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">
 			<?php
-			if ($service_res->num_rows > 0) {
-				while ($data = $service_res->fetch_assoc()) { ?>
-					<div class="col-md-3 ftco-animate">
-						<div class="pricing-entry pb-5 text-center">
-							<div>
-								<h3><?= $data['name'] ?></h3>
+			if ($promotions && $promotions->num_rows > 0) {
+				while ($data = $promotions->fetch_assoc()) { ?>
+					<div class="col-md-6" style="flex: 0 0 calc(100% - 25px); max-width: 300px;">
+						<div style="background: linear-gradient(to bottom right, #fceabb, #f8b500); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); padding: 25px; text-align: center; transition: transform 0.3s; cursor: pointer;"
+							onmouseover="this.style.transform='translateY(-10px)'"
+							onmouseout="this.style.transform='translateY(0)'">
+							<div style="font-size: 2rem; font-weight: bold; color: #d32f2f; margin-bottom: 10px;">
+								<?= $data['percentage'] ?>% OFF
 							</div>
-							<ul>
-
-								<li><?= $data['price'] ?>ကျပ်</li>
-								<li><?= $data['description'] ?></li>
-
-							</ul>
-
-							<p class="button text-center"><a href="#"
-									class="btn btn-primary btn-outline-primary px-4 py-3">ဝယ်ယူရန်</a></p>
-
+							<h3 style="font-size: 1.3rem; font-weight: 600; color: #2c3e50; margin-bottom: 10px;">
+								<?= htmlspecialchars($data['package_name']) ?>
+							</h3>
+							<p style="font-size: 0.95rem; color: #333; margin-bottom: 5px;">
+								<?= htmlspecialchars($data['description']) ?>
+							</p>
+							<p style="font-size: 0.85rem; color: #555; margin: 10px 0; background-color: #fff3cd; padding: 5px 12px; border-radius: 15px; display: inline-block; font-weight: 500;">
+								✨ Valid: <?= date('M d', strtotime($data['start_date'])) ?> – <?= date('M d', strtotime($data['end_date'])) ?>
+							</p>
 						</div>
 					</div>
-			<?php
-				}
-			}
-			?>
+			<?php }
+			} ?>
 		</div>
+
+
 	</div>
 	</div>
 	</div>
 
 	</div>
 	</div>
-</section> -->
-
-<!-- <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
-	<div class="overlay"></div>
-	<div class="container glass">
-		<div class="row justify-content-center">
-			<div class="col-md-10">
-				<div class="row">
-					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-						<div class="block-18 text-center">
-							<div class="text">
-								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>မိတ်ကပ်ပြင်ဆင်မှုမှတ်တမ်းများ</span>
-								<strong class="number" data-number="3500">0</strong>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-						<div class="block-18 text-center">
-							<div class="text">
-								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>ထုတ်လုပ်သူ</span>
-								<strong class="number" data-number="1000">0</strong>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-						<div class="block-18 text-center">
-							<div class="text">
-								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>ဖောက်သည်များ၏ပျော်ရွှင်မှု</span>
-								<strong class="number" data-number="3000">0</strong>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-						<div class="block-18 text-center">
-							<div class="text">
-								<div class="icon"><span class="flaticon-flower"></span></div>
-								<span>အသားအရေကုသမှု</span>
-								<strong class="number" data-number="900">0</strong>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
+</section>
 <?php require_once './template_layout/footer.php' ?>

@@ -1,9 +1,9 @@
-<footer class="ftco-footer ftco-section img">
+<footer class="ftco-footer ftco-section" style="padding-bottom: 0 !important;">
     <div class="overlay"></div>
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-4">
-               
+
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                     <li class="ftco-animate"><a href="#"><span class="icon-telegram"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>

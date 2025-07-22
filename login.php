@@ -52,7 +52,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                     exit();
                 }
                 if ($_SESSION['role'] == "customer" && $data['role'] == "customer") {
-                    header("Location: $user_base_url" . 'appointment.php');
+                    header("Location: $customer_base_url" . 'services.php');
                     exit();
                 }
                 header("Location: $admin_base_url" . 'dashboard.php');
@@ -85,39 +85,64 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
-                <div class="col-xl-6">
+                <div class="col-12">
                     <div class="form-input-content">
                         <?php if ($success !== '') { ?>
                             <div class="alert alert-success">
                                 <?= $success ?>
                             </div>
                         <?php } ?>
-                        <div class="card login-form mb-0" style="background-color: gold;">
-                            <div class="card-body pt-5">
-                                <a class="text-center" href="home.php">
-                                    <h2>အကောင့်ဝင်ရန်</h2>
-                                </a>
+                        <div class="login-form-bg h-100">
+                            <div class="container-fluid h-100 d-flex align-items-center justify-content-center">
+                                <div class="col-md-6 col-lg-5">
+                                    <?php if ($success !== '') { ?>
+                                        <div class="alert alert-success">
+                                            <?= $success ?>
+                                        </div>
+                                    <?php } ?>
+                                    <div class="card shadow-lg border-0 rounded-4" style="background: #fffdf8;">
+                                        <div class="card-body p-5">
+                                            <h2 class="text-center mb-4" style="color: #b76e79;">အကောင့်ဝင်ရန်</h2>
 
-                                <form class="mt-5 mb-5 login-input" method="POST">
-                                    <div class="form-group">
-                                        <label for="name" class="form-label">အီးမေးလ်</label>
-                                        <input type="email" class="form-control" placeholder="အီးမေးလ်ဖြင့်ဝင်ရောက်ရန်" name="email" value="<?= $email ?>" />
-                                        <?php if ($error && $email_error) { ?>
-                                            <span class="text-danger"><?= $email_error ?></span>
-                                        <?php } ?>
+                                            <form class="login-input" method="POST">
+                                                <div class="form-group mb-4">
+                                                    <label for="email" class="form-label" style="font-weight: 500;">📧 အီးမေးလ်</label>
+                                                    <input type="email" class="form-control form-control-lg rounded-pill px-4" placeholder="အီးမေးလ်ဖြင့်ဝင်ရောက်ရန်" name="email" value="<?= $email ?>" />
+                                                    <?php if ($error && $email_error) { ?>
+                                                        <small class="text-danger"><?= $email_error ?></small>
+                                                    <?php } ?>
+                                                </div>
+
+                                                <div class="form-group mb-4 position-relative">
+                                                    <label for="password" class="form-label" style="font-weight: 500;">🔒 စကားဝှက်</label>
+                                                    <div class="input-group">
+                                                        <input type="password" id="password" class="form-control form-control-lg rounded-start-pill px-4" placeholder="စကားဝှက်ဖြင့်ဝင်ရောက်ရန်" name="password" value="<?= $password ?>" />
+                                                        <span class="input-group-text bg-white border rounded-end-pill" onclick="togglePassword()" style="cursor: pointer;">
+                                                            <i id="toggleIcon" class="fa-solid fa-eye">👁️ </i>
+                                                        </span>
+                                                    </div>
+                                                    <?php if ($error && $password_error) { ?>
+                                                        <small class="text-danger"><?= $password_error ?></small>
+                                                    <?php } ?>
+                                                </div>
+
+
+                                                <input type="hidden" name="form_sub" value="1" />
+
+                                                <button class="btn w-100 rounded-pill py-2" style="background-color: #b76e79; color: white; font-weight: bold;">
+                                                    ဝင်မည်
+                                                </button>
+                                            </form>
+
+                                            <div class="mt-3 text-center">
+                                                <a href="./home.php" style="text-decoration: none; color: #555;">🏠 ပင်မစာမျက်နှာသို့ ပြန်သွားရန်</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name" class="form-label">စကားဝှက်</label>
-                                        <input type="password" class="form-control" placeholder="စကားဝှက်ဖြင့်ဝင်ရောက်ရန်" name="password" value="<?= $password ?>" />
-                                        <?php if ($error && $password_error) { ?>
-                                            <span class="text-danger"><?= $password_error ?></span>
-                                        <?php } ?>
-                                    </div>
-                                    <input type="hidden" name="form_sub" value="1" />
-                                    <button class="btn login-form__btn submit w-100">ဝင်မည်</button>
-                                </form>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -135,6 +160,16 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
     <script src="./dashJs/settings.js"></script>
     <script src="./dashJs/gleek.js"></script>
     <script src="./dashJs/styleSwitcher.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.getElementById('toggleIcon');
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        }
+    </script>
 </body>
 
 </html>

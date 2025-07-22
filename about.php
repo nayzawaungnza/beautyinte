@@ -49,8 +49,8 @@ $service_res = selectData("services", $mysqli, "", "*");
                 <h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
                 <strong class="position mb-4 text-dark"><?= $data['role'] ?></strong>
                 <div class="text mt-1">
-									<p><?= $data['description'] ?></p>
-								</div>
+                  <p><?= $data['description'] ?></p>
+                </div>
               </div>
             </div>
           </div>

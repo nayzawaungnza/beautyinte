@@ -1,4 +1,8 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -43,18 +47,13 @@
                             <h1 class="text-white font-extrabold">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
                         </a>
                     </div>
-                    <h2 class="mb-4 text-light"  data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
-
-
-                    <!-- <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
-                            href="./services.php" class="btn btn-white btn-outline-white px-4 py-3">ဆိုင်၏ ဝန်ဆောင်မှုများ
-                        </a></p> -->
+                    <h2 class="mb-4 text-light" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar sticky-top" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -67,9 +66,13 @@
                     <li class="nav-item"><a href="home.php" class="nav-link text-dark">ပင်မစာမျက်နှာ</a></li>
                     <li class="nav-item"><a href="product.php" class="nav-link text-dark">ရောင်းရန်ပစ္စည်းများ</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link  text-dark">အကြောင်းအရာ</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link  text-dark">ဝန်ဆောင်မှုများ</a></li>
-                    <li class="nav-item"><a href="work.php" class="nav-link  text-dark">လုပ်ငန်းများ</a></li>
-                    <li class="nav-item"><a href="contact.php" class="nav-link  text-dark">ဆက်သွယ်ရန်</a></li>
+                    <li class="nav-item"><a href="services.php" class="nav-link text-dark">ဝန်ဆောင်မှုများ</a></li>
+                    <?php if (!isset($_SESSION['id'])) { ?>
+                        <li class="nav-item"><a href="login.php" class="nav-link  text-dark">Login</a></li>
+                        <li class="nav-item"><a href="register.php" class="nav-link  text-dark">Register</a></li>
+                    <?php } else { ?>
+                        <li class="nav-item"><a href="<?= "http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php " ?>" class="nav-link  text-dark">Dashboard</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>

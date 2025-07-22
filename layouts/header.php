@@ -150,29 +150,6 @@ require_once '../require/common_function.php';
                     </span>
                 </div>
                 <div class="d-flex align-items-center">
-                    <!-- <div class="input-group icons mr-3" style="max-width: 250px;">
-                        <input type="search" class="form-control border-0 shadow-none" placeholder="ရှာရန်" aria-label="Search Dashboard">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent border-0"><i class="fas fa-search"></i></span>
-                        </div>
-                    </div> -->
-
-                    <!-- <form action="/Beauty/admin/user_list.php" method="get" class="mb-0">
-                        <div class="input-group icons mr-3" style="max-width: 250px;">
-                            <input
-                                type="search"
-                                name="search"
-                                class="form-control border-0 shadow-none"
-                                placeholder="ရှာရန်"
-                                aria-label="Search Dashboard"
-                                value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
-                            <div class="input-group-append">
-                                <button class="input-group-text bg-transparent border-0" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> -->
 
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-toggle="dropdown">

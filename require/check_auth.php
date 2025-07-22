@@ -6,7 +6,7 @@ function checkAuth($requiredRole)
 {
     // Check if user is logged in
     if (!isset($_SESSION['email']) || empty($_SESSION['email'])) {
-        header("Location: ../login.php");
+        header("Location: http://localhost/Beauty/login.php");
         exit();
     }
 
@@ -14,7 +14,7 @@ function checkAuth($requiredRole)
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
         session_unset();
         session_destroy();
-        header("Location: ../login.php?error=session_expired");
+        header("Location: http://localhost/Beauty/login.php?error=session_expired");
         exit();
     }
 

@@ -14,8 +14,14 @@ if ($service_id) {
 }
 
 // Fetch staff for dropdown
-$staff_res = $mysqli->query("SELECT id, name FROM users WHERE role = 'staff' AND id NOT IN (SELECT staff_id FROM appointments WHERE status NOT IN (0, 3)) ORDER BY name ASC");
-
+$staff_sql = "SELECT users.name, users.id
+FROM users
+LEFT JOIN appointments ON appointments.staff_id = users.id 
+  AND DATE(appointments.appointment_date) = CURDATE() 
+  AND (appointments.status = 0 OR appointments.status = 1)
+WHERE users.role = 'staff'
+";
+$staff_res = $mysqli->query($staff_sql);
 // Form variables
 $staff_id = $appointment_date = $appointment_time = $comment = $request = '';
 $staff_id_err = $appointment_date_err = $appointment_time_err = $general_err = '';
