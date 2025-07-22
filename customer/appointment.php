@@ -3,7 +3,6 @@ require '../require/check_auth.php';
 checkAuth('customer');
 require '../layouts/header.php';
 
-
 $customer_id = $_SESSION['id'];
 $service_id = isset($_GET['service_id']) ? intval($_GET['service_id']) : 0;
 
@@ -85,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $request_esc = $mysqli->real_escape_string($request);
         $sql = "INSERT INTO appointments (customer_id, service_id, staff_id, appointment_date, appointment_time, status, comment, request) VALUES ('$customer_id_esc', '$service_id_esc', '$staff_id_esc', '$appointment_date_esc', '$appointment_time_esc', 0, '$comment_esc', '$request_esc')";
         if ($mysqli->query($sql)) {
-            echo "<script>alert('ချိန်းဆိုမှု အောင်မြင်စွာ တင်သွင်းပြီးပါပြီ!'); window.location.href = '../home.php';</script>";
+            echo "<script>alert('ချိန်းဆိုမှု အောင်မြင်စွာ တင်သွင်းပြီးပါပြီ!'); window.location.href = './dashboard.php';</script>";
             exit();
         } else {
             $general_err = 'ချိန်းဆိုမှု မအောင်မြင်ပါ။';
@@ -94,58 +93,161 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- <section class="ftco-section"> -->
-<div class="container-fluid mt-3">
-    <div class="row justify-content-center pb-3">
-        <div class="col-md-8 heading-section ftco-animate text-center">
-            <h2 class="mb-4">ဝန်ဆောင်မှုအတွက် ချိန်းဆိုရန်</h2>
-            <?php if ($service): ?>
-                <h4 class="mb-2">ဝန်ဆောင်မှု: <?= htmlspecialchars($service['name']) ?> (<?= htmlspecialchars($service['price']) ?> Ks)</h4>
-            <?php else: ?>
-                <div class="alert alert-danger">ဝန်ဆောင်မှု မရှိပါ။</div>
-            <?php endif; ?>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-7">
-            <?php if ($general_err): ?>
-                <div class="alert alert-danger"><?= $general_err ?></div>
-            <?php endif; ?>
-            <form method="POST">
-                <div class="form-group mb-3">
-                    <label for="staff_id">ဝန်ထမ်းရွေးချယ်ရန်</label>
-                    <select name="staff_id" id="staff_id" class="form-control">
-                        <option value="">ဝန်ထမ်းရွေးချယ်ရန်</option>
-                        <?php if ($staff_res && $staff_res->num_rows > 0):
-                            while ($row = $staff_res->fetch_assoc()): ?>
-                                <option value="<?= $row['id'] ?>" <?= ($staff_id == $row['id']) ? 'selected' : '' ?>><?= htmlspecialchars($row['name']) ?></option>
-                        <?php endwhile;
-                        endif; ?>
-                    </select>
-                    <?php if ($staff_id_err): ?><small class="text-danger"><?= $staff_id_err ?></small><?php endif; ?>
+<div class="content-body">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h3 class="mb-0 text-center">Book Your Appointment</h3>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <?php if ($service): ?>
+                            <div class="service-summary mb-4 p-3 bg-light rounded">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="mb-0 text-dark"><?= htmlspecialchars($service['name']) ?></h4>
+                                    <span class="badge bg-success fs-6"><?= number_format($service['price'], 0) ?> Ks</span>
+                                </div>
+                                <?php if (!empty($service['description'])): ?>
+                                    <p class="mt-2 mb-0 text-muted"><?= htmlspecialchars($service['description']) ?></p>
+                                <?php endif; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="alert alert-danger text-center">Service not found</div>
+                        <?php endif; ?>
+
+                        <?php if ($general_err): ?>
+                            <div class="alert alert-danger"><?= $general_err ?></div>
+                        <?php endif; ?>
+
+                        <form method="POST" class="needs-validation" novalidate>
+                            <div class="mb-4">
+                                <label for="staff_id" class="form-label fw-bold">Select Staff</label>
+                                <select name="staff_id" id="staff_id" class="form-select <?= $staff_id_err ? 'is-invalid' : '' ?>" required>
+                                    <option value="" selected disabled>Choose your preferred staff</option>
+                                    <?php if ($staff_res && $staff_res->num_rows > 0):
+                                        while ($row = $staff_res->fetch_assoc()): ?>
+                                            <option value="<?= $row['id'] ?>" <?= ($staff_id == $row['id']) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($row['name']) ?>
+                                            </option>
+                                    <?php endwhile;
+                                    endif; ?>
+                                </select>
+                                <?php if ($staff_id_err): ?>
+                                    <div class="invalid-feedback"><?= $staff_id_err ?></div>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="appointment_date" class="form-label fw-bold">Appointment Date</label>
+                                    <input type="date" name="appointment_date" id="appointment_date"
+                                        class="form-control <?= $appointment_date_err ? 'is-invalid' : '' ?>"
+                                        value="<?= htmlspecialchars($appointment_date) ?>" required>
+                                    <?php if ($appointment_date_err): ?>
+                                        <div class="invalid-feedback"><?= $appointment_date_err ?></div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="appointment_time" class="form-label fw-bold">Appointment Time</label>
+                                    <input type="time" name="appointment_time" id="appointment_time"
+                                        class="form-control <?= $appointment_time_err ? 'is-invalid' : '' ?>"
+                                        value="<?= htmlspecialchars($appointment_time) ?>" required>
+                                    <?php if ($appointment_time_err): ?>
+                                        <div class="invalid-feedback"><?= $appointment_time_err ?></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="comment" class="form-label fw-bold">Notes (Optional)</label>
+                                <textarea name="comment" id="comment" class="form-control" rows="2"><?= htmlspecialchars($comment) ?></textarea>
+                                <small class="text-muted">Any special notes for your appointment</small>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="request" class="form-label fw-bold">Special Requests (Optional)</label>
+                                <textarea name="request" id="request" class="form-control" rows="2"><?= htmlspecialchars($request) ?></textarea>
+                                <small class="text-muted">Any special requirements you may have</small>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg py-3">
+                                    <i class="fas fa-calendar-check me-2"></i> Confirm Appointment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="appointment_date">ချိန်းဆိုသည့် ရက်စွဲ</label>
-                    <input type="date" name="appointment_date" id="appointment_date" class="form-control" value="<?= htmlspecialchars($appointment_date) ?>">
-                    <?php if ($appointment_date_err): ?><small class="text-danger"><?= $appointment_date_err ?></small><?php endif; ?>
+
+                <div class="mt-4 text-center">
+                    <p class="text-muted">Need help? <a href="#" class="text-primary">Contact our support team</a></p>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="appointment_time">ချိန်းဆိုသည့် အချိန်</label>
-                    <input type="time" name="appointment_time" id="appointment_time" class="form-control" value="<?= htmlspecialchars($appointment_time) ?>">
-                    <?php if ($appointment_time_err): ?><small class="text-danger"><?= $appointment_time_err ?></small><?php endif; ?>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="comment">မှတ်ချက်</label>
-                    <input type="text" name="comment" id="comment" class="form-control" value="<?= htmlspecialchars($comment) ?>">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="request">တောင်းဆိုချက်</label>
-                    <input type="text" name="request" id="request" class="form-control" value="<?= htmlspecialchars($request) ?>">
-                </div>
-                <button type="submit" class="btn btn-primary w-100">ချိန်းဆိုရန် တင်သွင်းပါ</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
-<!-- </section> -->
+
+<style>
+    .service-summary {
+        border-left: 4px solid #4e54c8;
+        transition: all 0.3s ease;
+    }
+
+    .service-summary:hover {
+        background-color: #f8f9fa !important;
+        transform: translateX(5px);
+    }
+
+    .form-label {
+        color: #495057;
+    }
+
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header {
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    .btn-primary {
+        background-color: #4e54c8;
+        border-color: #4e54c8;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #3a41b5;
+        border-color: #3a41b5;
+        transform: translateY(-2px);
+    }
+
+    .invalid-feedback {
+        display: block;
+    }
+</style>
+
+<script>
+    // Client-side validation example
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 <?php require '../layouts/footer.php'; ?>

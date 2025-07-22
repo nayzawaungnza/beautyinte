@@ -5,6 +5,7 @@ require "./require/common.php";
 require './require/common_function.php';
 
 $user_res = selectData("users", $mysqli, "", "*", "ORDER BY role DESC");
+
 // $new_user_sql = "SELECT 
 //                     users.*, 
 //                     users.name AS user_name, 
@@ -63,7 +64,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 			<?php
 			if ($user_res->num_rows > 0) {
 				while ($data = $user_res->fetch_assoc()) { ?>
-					<div class="col-md-3 ftco-animate">
+					<div class="col-md-3 mb-3 ftco-animate">
 						<div class="staff">
 							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
 							<div class="info text-center">
@@ -190,7 +191,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 							</ul>
 
 							<p class="button text-center">
-								<a href="./user/appointment.php" class="btn btn-primary btn-outline-primary px-4 py-3">ဝယ်ယူရန်</a>
+								<a href="./user/appointment.php" class="btn btn-primary btn-outline-primary px-4 py-3">ဘိုကင်လုပ်ရန်</a>
 							</p>
 						</div>
 					</div>
