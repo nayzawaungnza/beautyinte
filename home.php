@@ -5,7 +5,6 @@ require "./require/common.php";
 require './require/common_function.php';
 
 $user_res = selectData("users", $mysqli, "", "*", "ORDER BY role DESC");
-
 // $new_user_sql = "SELECT 
 //                     users.*, 
 //                     users.name AS user_name, 
@@ -20,37 +19,44 @@ $service_res = selectData("services", $mysqli, "", "*");
 		<div class="row">
 			<div class="col-md-4 ftco-animate">
 				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class=""></span></div>
+					<div class="icon d-flex mb-3"><span class="flaticon-facial-treatment"></span></div>
 					<div class="media-body">
-						<h3 class="heading">လက်သည်း</h3>
-						<p>လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
-							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 ftco-animate">
-				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
-					<div class="media-body">
-						<h3 class="heading">မိတ်ကပ်ပညာ</h3>
-						<p>မိတ်ကပ်ပညာသည် အလှပြင်ဆိုင်အတွင်းတွင် မိတ်ကပ်လုပ်ငန်းအတွေ့အကြုံရှိသူဖြစ်ပြီး၊ အခမ်းအနားများ၊ မင်္ဂလာဆောင်ပွဲများနှင့် ဓာတ်ပုံရိုက်ကွင်းများအတွက် အထူးကျွမ်းကျင်သော မိတ်ကပ်ဝန်ဆောင်မှုများပေးပါသည်။
-							သူမတို့သည် ဖောက်သည်၏ မျက်နှာအလှအပကို အထူးပြုပြင်နိုင်သော နည်းစနစ်များနှင့် အရည်အသွေးမြင့် ထုတ်ကုန်များကို အသုံးပြုပြီး မြှင့်တင်ပြသပေးပါသည်။</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 ftco-animate">
-				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
-					<div class="media-body">
-						<h3 class="heading">ဆံပင်ပုံစံ</h3>
-						<p>အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
-							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
+						<h3 class="heading">အသားအရေနှင့် အလှအပ ပြုစုမှု</h3>
+						<p class="mb-4 text-light">အလှပြင်ဆိုင်သည် ချောမွှတ်နူးညံ့သော အလှပြင်ဝန်ဆောင်မှုများဖြစ်သော ဆံပင်ညှပ်ခြင်း၊ အသားအရေစောင့်ရှောက်မှု၊ မိတ်ကပ်လုပ်ခြင်းနှင့် လက်သည်းအလှပြင်ခြင်းတို့ကို ပေးဆောင်သောနေရာဖြစ်ပြီး လူတစ်ဦး၏ရုပ်ရည်အလှတရားကို တိုးတက်စေရန်ရည်ရွယ်သည်။</p>
 					</div>
 				</div>
 			</div>
 		</div>
+	
+			<div class="card col-md-4 mb-3" style="background-color: pink;">
+				<div class="card-body">
+				<div class="media d-block text-center block-6 services">
+					<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
+					<div class="media-body">
+						<h3 class="heading">မိတ်ကပ်ပညာ</h3>
+						<p class="mb-4 text-light">မိတ်ကပ်ပညာသည် အလှပြင်ဆိုင်အတွင်းတွင် မိတ်ကပ်လုပ်ငန်းအတွေ့အကြုံရှိသူဖြစ်ပြီး၊ အခမ်းအနားများ၊ မင်္ဂလာဆောင်ပွဲများနှင့် ဓာတ်ပုံရိုက်ကွင်းများအတွက် အထူးကျွမ်းကျင်သော မိတ်ကပ်ဝန်ဆောင်မှုများပေးပါသည်။
+							သူမတို့သည် ဖောက်သည်၏ မျက်နှာအလှအပကို အထူးပြုပြင်နိုင်သော နည်းစနစ်များနှင့် အရည်အသွေးမြင့် ထုတ်ကုန်များကို အသုံးပြုပြီး မြှင့်တင်ပြသပေးပါသည်။</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+			<div class="card col-md-4 mb-3" style="background-color: pink;">
+				<div class="card-body">
+				<div class="media d-block text-center block-6 services">
+					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
+					<div class="media-body">
+						<h3 class="heading">ဆံပင်ပုံစံ</h3>
+						<p class="mb-4 text-light">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
+							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
+									</div>
+			</div>
+		</div>
 	</div>
+</div>
 </section>
+
+                                       
 
 <section class="ftco-section" id="hairstylist">
 	<div class="container glass">
@@ -64,7 +70,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 			<?php
 			if ($user_res->num_rows > 0) {
 				while ($data = $user_res->fetch_assoc()) { ?>
-					<div class="col-md-3 mb-3 ftco-animate">
+					<div class="col-md-3 ftco-animate">
 						<div class="staff">
 							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
 							<div class="info text-center">
@@ -186,13 +192,15 @@ $service_res = selectData("services", $mysqli, "", "*");
 								<h3><?= $data['name'] ?></h3>
 							</div>
 							<ul>
+
 								<li><?= $data['price'] ?>ကျပ်</li>
 								<li><?= $data['description'] ?></li>
+
 							</ul>
 
-							<p class="button text-center">
-								<a href="./user/appointment.php" class="btn btn-primary btn-outline-primary px-4 py-3">ဘိုကင်လုပ်ရန်</a>
-							</p>
+							<p class="button text-center"><a href="#"
+									class="btn btn-primary btn-outline-primary px-4 py-3">ဝယ်ယူရန်</a></p>
+
 						</div>
 					</div>
 			<?php

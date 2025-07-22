@@ -40,15 +40,15 @@
                     <div class="icon">
                         <a href="index.html" class="logo">
                             <span class="flaticon-flower"></span>
-                            <h1>အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
+                            <h1 class="text-dark">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
                         </a>
                     </div>
                     <h2 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
 
 
-                    <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
+                    <!-- <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
                             href="./services.php" class="btn btn-white btn-outline-white px-4 py-3">ဆိုင်၏ ဝန်ဆောင်မှုများ
-                        </a></p>
+                        </a></p> -->
                 </div>
             </div>
         </div>
