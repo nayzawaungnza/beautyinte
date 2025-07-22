@@ -5,15 +5,14 @@
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
 				<h2 class="mb-4">ဆိုင်၏ အလုပ်များ</h2>
-				<p class="work-category">
+				<!-- <p class="work-category">
 					<span class="px-2"><a href="#" class="active">အားလုံး</a></span>
 					<span class="px-2"><a href="#">မိတ်ကပ်</a></span>
 					<span class="px-2"><a href="#">မက်ဆေ့</a></span>
-					<!-- <span class="px-2"><a href="#">Facial</a></span>
-					<span class="px-2"><a href="#">Spa</a></span> -->
+
 					<span class="px-2"><a href="#">ဆံပင်</a></span>
 					<span class="px-2"><a href="#">လက်သည်း</a></span>
-				</p>
+				</p> -->
 			</div>
 		</div>
 		<div class="row">
@@ -43,7 +42,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-md-4 ftco-animate">
+			<!-- <div class="col-md-4 ftco-animate">
 				<a href="#" class="work-entry">
 					<img src="images/work-3.jpg" class="img-fluid" alt="Colorlib Template">
 					<div class="info d-flex align-items-center">
@@ -55,7 +54,7 @@
 						</div>
 					</div>
 				</a>
-			</div>
+			</div> -->
 			<div class="col-md-4 ftco-animate">
 				<a href="#" class="work-entry">
 					<img src="images/work-4.jpg" class="img-fluid" alt="Colorlib Template">
@@ -82,7 +81,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-md-4 ftco-animate">
+			<!-- <div class="col-md-4 ftco-animate">
 				<a href="#" class="work-entry">
 					<img src="images/work-6.jpg" class="img-fluid" alt="Colorlib Template">
 					<div class="info d-flex align-items-center">
@@ -94,7 +93,7 @@
 						</div>
 					</div>`
 				</a>
-			</div>
+			</div> -->
 			<div class="col-md-4 ftco-animate">
 				<a href="#" class="work-entry">
 					<img src="images/work-7.jpg" class="img-fluid" alt="Colorlib Template">
@@ -121,7 +120,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="col-md-4 ftco-animate">
+			<!-- <div class="col-md-4 ftco-animate">
 				<a href="#" class="work-entry">
 					<img src="images/work-9.jpg" class="img-fluid" alt="Colorlib Template">
 					<div class="info d-flex align-items-center">
@@ -133,9 +132,9 @@
 						</div>
 					</div>
 				</a>
-			</div>
+			</div> -->
 		</div>
-		<div class="row mt-5">
+		<!-- <div class="row mt-5">
 			<div class="col text-center">
 				<div class="block-27">
 					<ul>
@@ -149,7 +148,7 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </section>
 

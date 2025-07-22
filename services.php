@@ -10,8 +10,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 
 
 
-<section class="ftco-section">
-  <div class="container">
+<!-- <section class="ftco-section"> -->
+  <!-- <div class="container">
     <div class="row">
       <div class="col-md-4 ftco-animate">
         <div class="media d-block text-center block-6 services">
@@ -41,7 +41,7 @@ $service_res = selectData("services", $mysqli, "", "*");
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <section class="ftco-section" id="beauty-pricing">
     <div class="container glass">
@@ -85,7 +85,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 
 
 
-  <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
+  <!-- <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
     <div class="overlay"></div>
     <div class="container">
       <div class="row justify-content-center">
@@ -131,6 +131,6 @@ $service_res = selectData("services", $mysqli, "", "*");
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <?php require_once './template_layout/footer.php' ?>

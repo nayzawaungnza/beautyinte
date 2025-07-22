@@ -34,16 +34,16 @@
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
-            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+            <div class="row no-gutters slider-text js-fullheight justify-content-center"
                 data-scrollax-parent="true">
-                <div class="col-md-8 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <div class="col-md-8 mt-4 ftco-animate  text-center" data-scrollax=" properties: { translateY: '70%' }">
                     <div class="icon">
                         <a href="index.html" class="logo">
                             <span class="flaticon-flower"></span>
-                            <h1 class="text-dark">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
+                            <h1 class="text-white font-extrabold">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
                         </a>
                     </div>
-                    <h2 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
+                    <h2 class="mb-4 text-light"  data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
 
 
                     <!-- <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a
@@ -64,8 +64,8 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item "><a href="home.php" class="nav-link text-dark">ပင်မစာမျက်နှာ</a></li>
-                    <li class="nav-item "><a href="product.php" class="nav-link text-dark">ရောင်းရန်ပစ္စည်းများ</a></li>
+                    <li class="nav-item"><a href="home.php" class="nav-link text-dark">ပင်မစာမျက်နှာ</a></li>
+                    <li class="nav-item"><a href="product.php" class="nav-link text-dark">ရောင်းရန်ပစ္စည်းများ</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link  text-dark">အကြောင်းအရာ</a></li>
                     <li class="nav-item"><a href="services.php" class="nav-link  text-dark">ဝန်ဆောင်မှုများ</a></li>
                     <li class="nav-item"><a href="work.php" class="nav-link  text-dark">လုပ်ငန်းများ</a></li>

@@ -15,31 +15,22 @@ $service_res = selectData("services", $mysqli, "", "*");
 
 ?>
 <section class="ftco-section">
-	<div class="container glass">
-		<div class="row">
-			<div class="col-md-4 ftco-animate">
-				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-facial-treatment"></span></div>
-					<div class="media-body">
-						<h3 class="heading">အသားအရေနှင့် အလှအပ ပြုစုမှု</h3>
-						<p class="mb-4 text-light">အလှပြင်ဆိုင်သည် ချောမွှတ်နူးညံ့သော အလှပြင်ဝန်ဆောင်မှုများဖြစ်သော ဆံပင်ညှပ်ခြင်း၊ အသားအရေစောင့်ရှောက်မှု၊ မိတ်ကပ်လုပ်ခြင်းနှင့် လက်သည်းအလှပြင်ခြင်းတို့ကို ပေးဆောင်သောနေရာဖြစ်ပြီး လူတစ်ဦး၏ရုပ်ရည်အလှတရားကို တိုးတက်စေရန်ရည်ရွယ်သည်။</p>
-					</div>
-				</div>
-			</div>
+	<div class="container glass d-flex justify-content-center">
+		<!-- <div class="row">
 		</div>
-	
+	 -->
 			<div class="card col-md-4 mb-3" style="background-color: pink;">
 				<div class="card-body">
-				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
-					<div class="media-body">
-						<h3 class="heading">မိတ်ကပ်ပညာ</h3>
-						<p class="mb-4 text-light">မိတ်ကပ်ပညာသည် အလှပြင်ဆိုင်အတွင်းတွင် မိတ်ကပ်လုပ်ငန်းအတွေ့အကြုံရှိသူဖြစ်ပြီး၊ အခမ်းအနားများ၊ မင်္ဂလာဆောင်ပွဲများနှင့် ဓာတ်ပုံရိုက်ကွင်းများအတွက် အထူးကျွမ်းကျင်သော မိတ်ကပ်ဝန်ဆောင်မှုများပေးပါသည်။
-							သူမတို့သည် ဖောက်သည်၏ မျက်နှာအလှအပကို အထူးပြုပြင်နိုင်သော နည်းစနစ်များနှင့် အရည်အသွေးမြင့် ထုတ်ကုန်များကို အသုံးပြုပြီး မြှင့်တင်ပြသပေးပါသည်။</p>
+					<div class="media d-block text-center block-6 services">
+						<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
+						<div class="media-body">
+							<h3 class="heading">လက်သည်း</h3>
+							<p class="mb-4 text-dark">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
+							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	
 			<div class="card col-md-4 mb-3" style="background-color: pink;">
 				<div class="card-body">
@@ -47,9 +38,9 @@ $service_res = selectData("services", $mysqli, "", "*");
 					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
 					<div class="media-body">
 						<h3 class="heading">ဆံပင်ပုံစံ</h3>
-						<p class="mb-4 text-light">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
+						<p class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
 							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
-									</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -91,7 +82,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 	</div>
 </section>
 
-<section class="ftco-section" id="ourwork">
+<!-- <section class="ftco-section" id="ourwork">
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
@@ -109,6 +100,8 @@ $service_res = selectData("services", $mysqli, "", "*");
 								<span class="icon-search"></span>
 							</div>
 							<h3>ဆံပင်ပုံစံ</h3>
+							<p class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
+							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
 						</div>
 					</div>
 				</a>
@@ -126,22 +119,11 @@ $service_res = selectData("services", $mysqli, "", "*");
 					</div>
 				</a>
 			</div>
-			<div class="col-md-4 ftco-animate">
-				<a href="#" class="work-entry">
-					<img src="images/work-3.jpg" class="img-fluid" alt="Colorlib Template">
-					<div class="info d-flex align-items-center">
-						<div>
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-								<span class="icon-search"></span>
-							</div>
-							<h3>မိတ်ကပ်</h3>
-						</div>
-					</div>
-				</a>
+			
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 
 <section class="ftco-partner bg-light">
 	<div class="container glass">
@@ -174,7 +156,7 @@ $service_res = selectData("services", $mysqli, "", "*");
 	</div>
 </section>
 
-<section class="ftco-section" id="beauty-pricing">
+<!-- <section class="ftco-section" id="beauty-pricing">
 	<div class="container glass">
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section text-center ftco-animate">
@@ -214,9 +196,9 @@ $service_res = selectData("services", $mysqli, "", "*");
 
 	</div>
 	</div>
-</section>
+</section> -->
 
-<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
+<!-- <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
 	<div class="overlay"></div>
 	<div class="container glass">
 		<div class="row justify-content-center">
@@ -262,6 +244,5 @@ $service_res = selectData("services", $mysqli, "", "*");
 			</div>
 		</div>
 	</div>
-</section>
-
+</section> -->
 <?php require_once './template_layout/footer.php' ?>

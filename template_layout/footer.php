@@ -3,15 +3,7 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-4">
-                <div class="ftco-footer-widget mb-4 ml-md-4">
-                    <h2 class="ftco-heading-2">ဝန်ဆောင်မှုများ</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">ဆံပင်ပုံသွင်းခြင်းနှင့်အရောင်ဆိုးခြင်းအမျိုးမျိုး</a></li>
-                        <li><a href="#" class="py-2 d-block">မိတ်ကပ်</a></li>
-                        <li><a href="#" class="py-2 d-block">လက်သည်း</a></li>
-                        <li><a href="#" class="py-2 d-block">‌ရောင်းရန်ပစ္စည်းများ</a></li>
-                    </ul>
-                </div>
+               
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                     <li class="ftco-animate"><a href="#"><span class="icon-telegram"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
