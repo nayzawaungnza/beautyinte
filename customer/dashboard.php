@@ -44,7 +44,7 @@ $result = $mysqli->query($sql);
     <div class="container py-5">
         <div class="row">
             <div class="col-12">
-                <h2 class="mb-4">My Appointments</h2>
+                <h2 class="mb-4">ချိန်းဆိုမှုများ</h2>
 
                 <?php if (isset($error)): ?>
                     <div class="alert alert-danger"><?= $error ?></div>
@@ -55,12 +55,12 @@ $result = $mysqli->query($sql);
                         <table class="table table-striped table-hover">
                             <thead class="table-primary">
                                 <tr>
-                                    <th>Service</th>
-                                    <th>Staff</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>ဝန်ဆောင်မှု</th>
+                                    <th>ဝန်ထမ်း</th>
+                                    <th>ရက်စွဲ</th>
+                                    <th>အချိန်</th>
+                                    <th>အခြေအနေ</th>
+                                    <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,7 +92,7 @@ $result = $mysqli->query($sql);
                                                     <input type="hidden" name="appointment_id" value="<?= $appointment['id'] ?>">
                                                     <button type="submit" name="cancel_appointment" class="btn btn-sm btn-outline-danger"
                                                         onclick="return confirm('Are you sure you want to cancel this appointment?')">
-                                                        <i class="fas fa-times"></i> Cancel
+                                                        <i class="fas fa-times"></i> ပယ်ဖျက်ပါ
                                                     </button>
                                                 </form>
                                             <?php endif; ?>
@@ -104,7 +104,7 @@ $result = $mysqli->query($sql);
                     </div>
                 <?php else: ?>
                     <div class="alert alert-info">
-                        You don't have any appointments yet. <a href="services.php">Book a service now!</a>
+                        အခုအချိန်ထိ ချိန်းဆိုမှု မရှိသေးပါ <a href="services.php">ဝန်ဆောင်မှုကို ယခုဘဲ ချိန်းလိုက်ပါ!</a>
                     </div>
                 <?php endif; ?>
             </div>
