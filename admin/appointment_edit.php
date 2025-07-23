@@ -7,7 +7,6 @@ $error = false;
 $name =
     $appointment_date_err =
     $appointment_time_err =
-    $status_err =
     $request_err =
     $customer_name =
     $service_name =
@@ -21,21 +20,14 @@ $name =
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT   appointments.id,
-                    customers.name as customer_name, 
-                    customers.id as customer_id,
-                    services.name AS `service_name`,
-                    users.name AS staff_name,
-                    users.id AS staff_id,
-                    appointments.appointment_date AS app_date,
-                    appointments.appointment_time AS app_time,
-                    -- appointments.status As status,
-                    appointments.comment,
-                    appointments.request
-        FROM `appointments`
-        Inner JOIN customers ON appointments.customer_id = customers.id
-        INNER JOIN services ON appointments.service_id = services.id
-        inner join users on appointments.staff_id = users.id
+    $sql = "SELECT appointments.id,customers.id AS customer_id,customers.name AS customer_name, services.name As service_name,
+     staff.name As staff_name, staff.id As staff_id, services.id As service_id,
+appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status,
+appointments.comment, appointments.request  
+FROM `appointments` 
+INNER JOIN users AS customers ON customers.id = appointments.customer_id
+INNER JOIN users AS staff ON staff.id = appointments.staff_id
+INNER JOIN services ON services.id = appointments.service_id
         WHERE appointments.id = '$id'";
     $oldData1 = $mysqli->query($sql);
     $oldData = $oldData1->fetch_assoc();
@@ -48,17 +40,11 @@ if (isset($_GET['id'])) {
     $appointment_time = $oldData['app_time'];
     $comment = $oldData['comment'];
     $request = $oldData['request'];
+    $services_id = $oldData['service_id'];
 }
 
 
 date_default_timezone_set('Asia/Yangon');
-// if (isset($_GET['id'])) {
-//     $id = $_GET['id'];  
-//     $sql = "SELECT customers.name FROM  `customers` where id = '$id'";
-
-//     // $oldData = $mysqli->query($sql)->fetch_assoc();
-//     // $name = $oldData['name'];
-// }
 $sql = "SELECT services.name,services.id FROM  `services`";
 $services = $mysqli->query($sql);
 
@@ -75,6 +61,11 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
     $request = $_POST['request'];
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
+
+    if ($serid == "") {
+        $error = true;
+    }
+
     if ($appointment_date < $today) {
         $appointment_date_err = "ချိန်းဆိုရက်သည် အတိတ်အချိန် မဖြစ်ရပါ။";
         $error = true;
@@ -87,7 +78,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
         $error = true;
         $appointment_date_err = "Appointment date must not be in the past.";
     }
-    
+
     if (empty($appointment_time)) {
         $error = true;
         $appointment_time_err = "Please add appointment time.";
@@ -110,27 +101,20 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
             $appointment_time_err = "Unavailable appointment time.";
         }
     }
-    if (empty($status)) {
-        $error = true;
-        $status_err = "ကျေးဇူးပြုပြီး အခြေအနေကို ရွေးချယ်ပါ။";
-    }
+
 
     if (!$error) {
-        // foreach ($serid as $ser) {
+
         $sql = "UPDATE `appointments` SET `customer_id`='$cName',
         `service_id`='$serid',`staff_id`='$sttid',`appointment_date`='$appointment_date',
         `appointment_time`='$appointment_time',`status`='0',`comment`='$comment',
         `request`='$request' WHERE `id`='$id'";
         $result = $mysqli->query($sql);
-       
-
         if ($result) {
             echo "<script>window.location.href= 'http://localhost/Beauty/admin/appointment_list.php' </script>";
         }
-        
     }
 }
-// }
 ?>
 <!-- Content body start -->
 
@@ -146,7 +130,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                 <form method="POST">
                     <div class="form-group">
                         <label for="name" class="form-label">ဖောက်သည်အမည်</label>
-                        <input type="text" name="name" class="form-control" value="<?= $name ?>">
+                        <input type="text" name="name" class="form-control" value="<?= $name ?>" readonly>
                         <input type="hidden" name="customer_id" value="<?= $customer_id ?>">
                     </div>
 
@@ -159,7 +143,7 @@ if (isset($_POST['app_date']) && isset($_POST['btn_submit'])) {
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio"
                                         name="services" value="<?= $row['id'] ?>"
-                                        id="service<?= $row['id'] ?>">
+                                        id="service<?= $row['id'] ?>" <?= $services_id == $row['id'] ? 'checked' : ""  ?>>
                                     <label class="form-check-label" for="service<?= $row['id'] ?>">
                                         <?= $row['name'] ?>
                                     </label>

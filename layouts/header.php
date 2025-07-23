@@ -272,11 +272,11 @@ require_once '../require/common_function.php';
                     <?php } else { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="fas fa-tasks"></i><span class="nav-text">Dashboard</span>
+                                <i class="fas fa-tasks"></i><span class="nav-text">ဒက်ရှ်ဘုတ်</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../customer/dashboard.php">Home</a></li>
-                                <li><a href="../customer/services.php">Services</a></li>
+                                <li><a href="../customer/dashboard.php">ချိန်းဆိုမှုစာရင်း</a></li>
+                                <li><a href="../customer/services.php">ဝန်ဆောင်မှုများ</a></li>
                             </ul>
                         </li>
                     <?php } ?>

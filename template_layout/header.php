@@ -71,7 +71,7 @@ session_start();
                         <li class="nav-item"><a href="login.php" class="nav-link  text-dark">လော့ဂ်အင်ဝင်ရန်</a></li>
                         <li class="nav-item"><a href="register.php" class="nav-link  text-dark">အကောင့်ဖွင်ရန်</a></li>
                     <?php } else { ?>
-                        <li class="nav-item"><a href="<?= "http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php " ?>" class="nav-link  text-dark">Dashboard</a></li>
+                        <li class="nav-item"><a href="<?= "http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php " ?>" class="nav-link  text-dark">ဒက်ရှ်ဘုတ်</a></li>
                     <?php } ?>
                 </ul>
             </div>

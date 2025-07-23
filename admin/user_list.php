@@ -6,11 +6,11 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT * FROM `users` ";
+$res = "SELECT * FROM `users` WHERE role != 'customer'";
 $users = $mysqli->query($res);
 
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$sql = "SELECT * FROM `users`";
+$sql = "SELECT * FROM `users`  WHERE role != 'customer'";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
     $sql .= " WHERE name LIKE '%$search_escaped%' OR email LIKE '%$search_escaped%' OR phone LIKE '%$search_escaped%'  OR role LIKE '%$search_escaped%'";

@@ -23,7 +23,7 @@ $product_res = selectData("products", $mysqli, "", "*");
 							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['img'] ?>);"></div>
 							<div class="info text-center">
 								<h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
-								<span class="position mb-4 text-dark"><?= $data['price'] ?></span>
+								<span class="position mb-4 text-dark"><?= $data['price'] ?> ကျပ်</span>
 								<span class="position mb-4 text-dark"><?= $data['description'] ?></span>
 
 							</div>

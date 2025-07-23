@@ -14,12 +14,16 @@ if ($service_id) {
 }
 
 // Fetch staff for dropdown
-$staff_sql = "SELECT users.name, users.id
-FROM users
-LEFT JOIN appointments ON appointments.staff_id = users.id 
-  AND DATE(appointments.appointment_date) = CURDATE() 
-  AND (appointments.status = 0 OR appointments.status = 1)
-WHERE users.role = 'staff'
+$staff_sql = "SELECT u.* 
+FROM users u
+WHERE u.role = 'staff'
+  AND u.id NOT IN (
+    SELECT a.staff_id 
+    FROM appointments a
+    WHERE a.appointment_date = CURDATE()
+      AND a.status = 3
+  )
+ORDER BY u.name;
 ";
 $staff_res = $mysqli->query($staff_sql);
 // Form variables

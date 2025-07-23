@@ -2,7 +2,7 @@
 require '../require/check_auth.php';
 checkAuth('admin');
 require '../layouts/header.php';
-$total_customers = $mysqli->query("SELECT COUNT(*) as count FROM customers")->fetch_assoc()['count'];
+$total_customers = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'customer'")->fetch_assoc()['count'];
 $total_appointments = $mysqli->query("SELECT COUNT(*) as count FROM appointments")->fetch_assoc()['count'];
 $total_products = $mysqli->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
 $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->fetch_assoc()['count'];

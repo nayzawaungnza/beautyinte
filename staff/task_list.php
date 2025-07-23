@@ -24,12 +24,15 @@ if (isset($_GET['action'], $_GET['id'])) {
 }
 
 // Fetch appointments assigned to this staff member
-$sql = "SELECT a.*, c.name AS customer_name, s.name AS service_name
-        FROM appointments a
-        INNER JOIN customers c ON a.customer_id = c.id
-        INNER JOIN services s ON a.service_id = s.id
-        WHERE a.staff_id = $staff_id
-        ORDER BY a.appointment_date DESC, a.appointment_time DESC";
+$sql = "SELECT appointments.id,customers.name AS customer_name, services.name As service_name, staff.name As staff_name,
+appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status,
+appointments.comment, appointments.request  
+FROM `appointments` 
+INNER JOIN users AS customers ON customers.id = appointments.customer_id
+INNER JOIN users AS staff ON staff.id = appointments.staff_id
+INNER JOIN services ON services.id = appointments.service_id
+        WHERE staff.id = $staff_id
+        ORDER BY appointments.appointment_date DESC, appointments.appointment_time DESC";
 $appointments = $mysqli->query($sql);
 ?>
 <div class="content-body">
@@ -57,8 +60,8 @@ $appointments = $mysqli->query($sql);
                                         <tr>
                                             <td><?= htmlspecialchars($row['customer_name']) ?></td>
                                             <td><?= htmlspecialchars($row['service_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['appointment_date']) ?></td>
-                                            <td><?= htmlspecialchars($row['appointment_time']) ?></td>
+                                            <td><?= htmlspecialchars($row['app_date']) ?></td>
+                                            <td><?= htmlspecialchars($row['app_time']) ?></td>
                                             <td>
                                                 <?php
                                                 if ($row['status'] == 0) {

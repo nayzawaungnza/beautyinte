@@ -18,12 +18,16 @@ $appointment_id = $amount = $payment_method = $payment_date = '';
 $filter_appointment_id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : '';
 
 // Always fetch all available appointments for the dropdown
-if(isset($_GET['id'])) {
-$appointments = $mysqli->query("SELECT a.id, c.name as customer_name, s.name as service_name,
- a.appointment_date, a.appointment_time, s.price as service_price FROM appointments a 
- INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
- WHERE a.status = 1 AND a.id = $filter_appointment_id");
-} 
+if (isset($_GET['id'])) {
+    $appointments = $mysqli->query("SELECT appointments.id,customers.name AS customer_name, services.name As service_name, staff.name As staff_name,
+appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status,
+appointments.comment, appointments.request , services.price AS service_price 
+FROM `appointments` 
+INNER JOIN users AS customers ON customers.id = appointments.customer_id
+INNER JOIN users AS staff ON staff.id = appointments.staff_id
+INNER JOIN services ON services.id = appointments.service_id 
+WHERE appointments.status = 1 AND appointments.id = $filter_appointment_id");
+}
 // Pre-select the appointment if ID is passed
 if ($filter_appointment_id) {
     $appointment_id = $filter_appointment_id;
@@ -124,11 +128,11 @@ require '../layouts/header.php';
                                         while ($row = $appointments->fetch_assoc()) {
                                             $selected = ($appointment_id == $row['id']) ? 'selected' : '';
                                             $time12 = '';
-                                            if (isset($row['appointment_time'])) {
+                                            if (isset($row['app_time'])) {
                                                 $time12 = date('g:i A', strtotime($row['appointment_time']));
                                             }
                                             $service_price = isset($row['service_price']) ? $row['service_price'] : '';
-                                            echo "<option value='{$row['id']}' $selected data-price='{$service_price}'>({$row['id']}) {$row['customer_name']} - {$row['service_name']} ({$row['appointment_date']} , {$time12})</option>";
+                                            echo "<option value='{$row['id']}' $selected data-price='{$service_price}'> {$row['customer_name']} - {$row['service_name']} ({$row['app_date']} , {$time12})</option>";
                                         }
                                     } else {
                                         echo '<option value="">No appointments available</option>';
