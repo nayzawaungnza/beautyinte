@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $appointment_date_err = 'ကျေးဇူးပြုပြီး ချိန်းဆိုမည့်ရက်ကို ထည့်သွင်းပါ။';
         $error = true;
     } elseif (strtotime($appointment_date) < strtotime($today)) {
-        $appointment_date_err = 'ချိန်းဆိုရက်သည် အတိတ်အချိန်မဖြစ်ရပါ။';
+        $appointment_date_err = 'ရွေးချယ်ထားသောရက်သည် သက်တမ်းကုန်သွားပြီးပါပြီ။';
         $error = true;
     }
     if (empty($appointment_time)) {
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-lg-8">
                 <div class="card shadow-sm border-0">
                     <div class="card-header bg-primary text-white py-3">
-                        <h3 class="mb-0 text-center">Book Your Appointment</h3>
+                        <h3 class="mb-0 text-center">ချိန်းဆိုရန်</h3>
                     </div>
 
                     <div class="card-body p-4">
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php endif; ?>
                             </div>
                         <?php else: ?>
-                            <div class="alert alert-danger text-center">Service not found</div>
+                            <div class="alert alert-danger text-center">ရွေးချယ်ထားသော ဝန်ဆောင်မှုကို မတွေ့ပါ</div>
                         <?php endif; ?>
 
                         <?php if ($general_err): ?>
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="mb-4">
                                 <label for="staff_id" class="form-label fw-bold">Select Staff</label>
                                 <select name="staff_id" id="staff_id" class="form-select <?= $staff_id_err ? 'is-invalid' : '' ?>" required>
-                                    <option value="" selected disabled>Choose your preferred staff</option>
+                                    <option value="" selected disabled>ဝန်ဆောင်မှုပေးမည့် ဝန်ထမ်းကို ရွေးပါ</option>
                                     <?php if ($staff_res && $staff_res->num_rows > 0):
                                         while ($row = $staff_res->fetch_assoc()): ?>
                                             <option value="<?= $row['id'] ?>" <?= ($staff_id == $row['id']) ? 'selected' : '' ?>>
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <label for="appointment_date" class="form-label fw-bold">Appointment Date</label>
+                                    <label for="appointment_date" class="form-label fw-bold">ချိန်းဆိုရက်</label>
                                     <input type="date" name="appointment_date" id="appointment_date"
                                         class="form-control <?= $appointment_date_err ? 'is-invalid' : '' ?>"
                                         value="<?= htmlspecialchars($appointment_date) ?>" required>
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="appointment_time" class="form-label fw-bold">Appointment Time</label>
+                                    <label for="appointment_time" class="form-label fw-bold">ချိန်းဆိုချိန်</label>
                                     <input type="time" name="appointment_time" id="appointment_time"
                                         class="form-control <?= $appointment_time_err ? 'is-invalid' : '' ?>"
                                         value="<?= htmlspecialchars($appointment_time) ?>" required>
@@ -167,20 +167,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
 
                             <div class="mb-4">
-                                <label for="comment" class="form-label fw-bold">Notes (Optional)</label>
+                                <label for="comment" class="form-label fw-bold">မှတ်စု (လိုအပ်ပါက)</label>
                                 <textarea name="comment" id="comment" class="form-control" rows="2"><?= htmlspecialchars($comment) ?></textarea>
-                                <small class="text-muted">Any special notes for your appointment</small>
+                                <!-- <small class="text-muted">Any special notes for your appointment</small> -->
                             </div>
 
                             <div class="mb-4">
-                                <label for="request" class="form-label fw-bold">Special Requests (Optional)</label>
+                                <label for="request" class="form-label fw-bold">အထူးတောင်းဆိုချက်(လိုအပ်ပါက)</label>
                                 <textarea name="request" id="request" class="form-control" rows="2"><?= htmlspecialchars($request) ?></textarea>
-                                <small class="text-muted">Any special requirements you may have</small>
+                                <!-- <small class="text-muted">Any special requirements you may have</small> -->
                             </div>
 
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-lg py-3">
-                                    <i class="fas fa-calendar-check me-2"></i> Confirm Appointment
+                                    <i class="fas fa-calendar-check me-2"></i> ချိန်းဆိုမှု အတည်ပြုရန်
                                 </button>
                             </div>
                         </form>
@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="mt-4 text-center">
-                    <p class="text-muted">Need help? <a href="#" class="text-primary">Contact our support team</a></p>
+                    <p class="text-muted">အကူအညီလိုပါသလား? <a href="#" class="text-primary">ပံ့ပိုးမှုအဖွဲ့ကို ဆက်သွယ်ပါ</a></p>
                 </div>
             </div>
         </div>

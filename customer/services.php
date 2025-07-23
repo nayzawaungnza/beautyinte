@@ -8,7 +8,7 @@ $result = $mysqli->query($sql);
 ?>
 <div class="content-body">
     <div class="container py-5">
-        <h2 class="text-center mb-5 fw-bold text-gradient-primary">Our Services</h2>
+        <h2 class="text-center mb-5 fw-bold text-gradient-primary">ဝန်ဆောင်မှုများ</h2>
         <div class="row g-4">
             <?php if ($result && $result->num_rows > 0): ?>
                 <?php while ($service = $result->fetch_assoc()): ?>
@@ -28,9 +28,9 @@ $result = $mysqli->query($sql);
                             <div class="card-footer bg-transparent border-0 pt-0">
                                 <?php if (!empty($service['price'])): ?>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="price-tag fw-bold text-success"><?= number_format($service['price'], 0) ?> Ks</span>
+                                        <span class="price-tag fw-bold text-success"><?= number_format($service['price'], 0) ?>ကျပ်</span>
                                         <a href="./appointment.php?service_id=<?= $service['id'] ?>" class="btn btn-primary btn-sm rounded-pill px-3">
-                                            Book Now <i class="fas fa-arrow-right ms-1"></i>
+                                            ဘိုကင်လုပ်ရန် <i class="fas fa-arrow-right ms-1"></i>
                                         </a>
                                     </div>
                                 <?php endif; ?>
@@ -42,8 +42,8 @@ $result = $mysqli->query($sql);
                 <div class="col-12">
                     <div class="alert alert-info text-center py-4">
                         <i class="fas fa-info-circle fa-2x mb-3"></i>
-                        <h4 class="fw-bold">No Services Available</h4>
-                        <p class="mb-0">Please check back later for our service offerings.</p>
+                        <h4 class="fw-bold">လက်ရှိတွင် ဝန်ဆောင်မှု မရှိပါ</h4>
+                        <p class="mb-0">ဝန်ဆောင်မှုများအတွက် နောက်မှ ပြန်လာစစ်ဆေးပါ</p>
                     </div>
                 </div>
             <?php endif; ?>

@@ -48,7 +48,7 @@ if (isset($_POST['btn_submit'])) {
         $appointment_date_err = "ကျေးဇူးပြုပြီး ချိန်းဆိုမည့်ရက်ကို ထည့်သွင်းပါ။";
     } elseif (strtotime($appointment_date) < strtotime($today)) {
         $error = true;
-        $appointment_date_err = "ချိန်းဆိုရက်သည် အတိတ်အချိန်မဖြစ်ရပါ။";
+        $appointment_date_err = "ရွေးချယ်ထားသောရက်သည် သက်တမ်းကုန်သွားပြီးပါပြီ။";
     }
     if (empty($appointment_time)) {
         $error = true;

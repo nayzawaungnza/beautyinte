@@ -68,8 +68,8 @@ session_start();
                     <li class="nav-item"><a href="about.php" class="nav-link  text-dark">အကြောင်းအရာ</a></li>
                     <li class="nav-item"><a href="services.php" class="nav-link text-dark">ဝန်ဆောင်မှုများ</a></li>
                     <?php if (!isset($_SESSION['id'])) { ?>
-                        <li class="nav-item"><a href="login.php" class="nav-link  text-dark">Login</a></li>
-                        <li class="nav-item"><a href="register.php" class="nav-link  text-dark">Register</a></li>
+                        <li class="nav-item"><a href="login.php" class="nav-link  text-dark">လော့ဂ်အင်ဝင်ရန်</a></li>
+                        <li class="nav-item"><a href="register.php" class="nav-link  text-dark">အကောင့်ဖွင်ရန်</a></li>
                     <?php } else { ?>
                         <li class="nav-item"><a href="<?= "http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php " ?>" class="nav-link  text-dark">Dashboard</a></li>
                     <?php } ?>

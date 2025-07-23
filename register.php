@@ -22,7 +22,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $phone = $_POST['phone'];
-    // $gender = $_POST['gender'];
+    $gender = $_POST['gender'];
 
     $sql = "SELECT * FROM `users` WHERE `email`= '$email'";
     $result = $mysqli->query($sql);
