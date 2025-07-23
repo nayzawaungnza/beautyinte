@@ -13,11 +13,11 @@ date_default_timezone_set('Asia/Yangon');
 $customerIdUrl = isset($_GET['id']) ? $_GET['id'] : '';
 
 // Fetch customers for dropdown
-$customers = $mysqli->query("SELECT id, name FROM customers WHERE id = '$customerIdUrl'");
+$customers = $mysqli->query("SELECT id, name FROM users WHERE id = '$customerIdUrl'");
 // Fetch services for dropdown
 $services = $mysqli->query("SELECT id, name FROM services ORDER BY name ASC");
 // Fetch staff for dropdown
-$users = $mysqli->query("SELECT id, name FROM users ORDER BY name ASC");
+$users = $mysqli->query("SELECT id, name FROM users WHERE role = 'staff'  ORDER BY name ASC");
 
 if (isset($_POST['btn_submit'])) {
     $customer_id = $_POST['customer_id'];

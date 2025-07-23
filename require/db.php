@@ -47,16 +47,16 @@ function create_table($mysqli)
                 )";
     if ($mysqli->query($user_sql) === false) return false;
     //Customer
-    $customer_sql = "CREATE TABLE IF NOT EXISTS `customers`
-                (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(100) NOT NULL,
-                phone VARCHAR(50) NOT NULL,
-                password VARCHAR(200) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )";
-    if ($mysqli->query($customer_sql) === false) return false;
+    // $customer_sql = "CREATE TABLE IF NOT EXISTS `customers`
+    //             (
+    //             id INT AUTO_INCREMENT PRIMARY KEY,
+    //             name VARCHAR(100) NOT NULL,
+    //             phone VARCHAR(50) NOT NULL,
+    //             password VARCHAR(200) NOT NULL,
+    //             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    //             )";
+    // if ($mysqli->query($customer_sql) === false) return false;
     //Services
     $service_sql = "CREATE TABLE IF NOT EXISTS `services`
                 (
@@ -133,7 +133,7 @@ function create_table($mysqli)
                    request TEXT NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                   FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+                   FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE,
                    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
                    FOREIGN KEY (staff_id) REFERENCES users(id) ON DELETE CASCADE
                    )";

@@ -6,10 +6,10 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = selectData('customers', $mysqli, "", "*", "ORDER BY created_at ASC");
+$res = selectData('users', $mysqli, "WHERE `role` = 'customer'", "*", "ORDER BY created_at ASC");
 
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$sql = "SELECT * FROM `customers`";
+$sql = "SELECT * FROM `users` WHERE role = 'customer'";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
     $sql .= " WHERE name LIKE '%$search_escaped%' OR phone LIKE '%$search_escaped%'";
@@ -32,11 +32,6 @@ require '../layouts/header.php';
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>ဖောက်သည်စာရင်း</h3>
-            <div class="">
-                <a href="<?= $admin_base_url . 'customer_create.php' ?>" class="btn btn-primary">
-                    ဖောက်သည်အသစ်ဖန်တီးရန်
-                </a>
-            </div>
         </div>
         <div class="col-12 mb-3">
             <form method="GET" class="form-inline d-flex justify-content-end">

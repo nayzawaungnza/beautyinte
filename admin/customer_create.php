@@ -11,7 +11,7 @@ $name_err =
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT customers.id, customers.name, customers.phone  FROM  `customers`";
+    $sql = "SELECT users.id, users.name, users.phone  FROM  `users`";
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
@@ -45,7 +45,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
 
     if (!$error) {
-        $sql = "INSERT INTO `customers`(`name`, `phone`)
+        $sql = "INSERT INTO `users`(`name`, `phone`)
          VALUES ('$name','$phone')";
         $mysqli->query($sql);
         echo "<script>window.location.href= 'http://localhost/Beauty/admin/customer_list.php' </script>";

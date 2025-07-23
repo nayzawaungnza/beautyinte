@@ -12,7 +12,7 @@ $name_err =
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT customers.id, customers.name, customers.phone FROM  `customers` WHERE customers.id = $id ";
+    $sql = "SELECT users.id, users.name, users.phone FROM  `users` WHERE users.id = $id ";
 
     $oldData = $mysqli->query($sql)->fetch_assoc();
     $name = $oldData['name'];
@@ -22,7 +22,6 @@ if (isset($_GET['id'])) {
     if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $name = $_POST['name'];
         $phone = $_POST['phone'];
-
 
         //Name
         if (empty($name)) {
@@ -45,9 +44,9 @@ if (isset($_GET['id'])) {
         }
 
         if (!$error) {
-            $sql = "UPDATE `customers` SET 
-        `customers`.`name` = '$name', `customers`.`phone` = '$phone'
-        WHERE `customers`.`id` = '$id'";
+            $sql = "UPDATE `users` SET 
+        `users`.`name` = '$name', `users`.`phone` = '$phone'
+        WHERE `users`.`id` = '$id'";
             $mysqli->query($sql);
             echo "<script>window.location.href= 'http://localhost/Beauty/admin/customer_list.php? success=အသစ်ပြင်ခြင်း အောင်မြင်ပါသည်' </script>";
         }

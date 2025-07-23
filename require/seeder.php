@@ -36,18 +36,18 @@ insert_if_not_exists(
 );
 
 // Customers
-insert_if_not_exists(
-    $mysqli,
-    'customers',
-    "phone='0911111111'",
-    "INSERT INTO customers (name, phone, password) VALUES ('Customer One', '0911111111', '" . md5('cust123') . "')"
-);
-insert_if_not_exists(
-    $mysqli,
-    'customers',
-    "phone='0922222222'",
-    "INSERT INTO customers (name, phone, password) VALUES ('Customer Two', '0922222222', '" . md5('cust456') . "')"
-);
+// insert_if_not_exists(
+//     $mysqli,
+//     'users',
+//     "phone='0911111111'",
+//     "INSERT INTO users (name, phone, password, role) VALUES ('Customer One', 'customer1@gmail.com','0911111111', '" . md5('cust123') . "', 'customer')"
+// );
+// insert_if_not_exists(
+//     $mysqli,
+//     'users',
+//     "phone='0922222222'",
+//     "INSERT INTO users (name, phone, password, role) VALUES ('Customer Two', 'customer2@gmail.com','0922222222', '" . md5('cust456') . "', 'customer')"
+// );
 
 // Payment Methods
 insert_if_not_exists(

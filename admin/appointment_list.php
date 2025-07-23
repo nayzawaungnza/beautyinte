@@ -6,26 +6,31 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT appointments.id, customers.name as customer_name, services.name AS service_name, users.name AS staff_name,
-        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status, appointments.comment, appointments.request,
-        payments.id as payment_id, payments.amount as payment_amount,  payments.payment_date
-        FROM appointments INNER JOIN customers ON appointments.customer_id = customers.id
-        INNER JOIN services ON appointments.service_id = services.id INNER JOIN users ON appointments.staff_id = users.id
-        LEFT JOIN payments ON appointments.id = payments.appointment_id ORDER BY appointments.id DESC ";
+$res = "SELECT payments.id AS payment_id,appointments.id,customers.name AS customer_name, services.name As service_name, staff.name As staff_name,
+appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status,
+appointments.comment, appointments.request  
+FROM `appointments` 
+INNER JOIN users AS customers ON customers.id = appointments.customer_id
+INNER JOIN users AS staff ON staff.id = appointments.staff_id
+INNER JOIN services ON services.id = appointments.service_id
+ LEFT JOIN payments ON appointments.id = payments.appointment_id ORDER BY appointments.id DESC ";
 $appointments = $mysqli->query($res);
 
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$res = "SELECT appointments.id, customers.name as customer_name, services.name AS service_name, users.name AS staff_name,
-        appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status As status, appointments.comment, appointments.request,
-        payments.id as payment_id, payments.amount as payment_amount,  payments.payment_date
-        FROM appointments INNER JOIN customers ON appointments.customer_id = customers.id
-        INNER JOIN services ON appointments.service_id = services.id INNER JOIN users ON appointments.staff_id = users.id
-        LEFT JOIN payments ON appointments.id = payments.appointment_id";
+$res = "SELECT payments.id AS payment_id,appointments.id,customers.name AS customer_name, services.name As service_name, staff.name As staff_name,
+appointments.appointment_date AS app_date, appointments.appointment_time AS app_time, appointments.status,
+appointments.comment, appointments.request  
+FROM `appointments` 
+INNER JOIN users AS customers ON customers.id = appointments.customer_id
+INNER JOIN users AS staff ON staff.id = appointments.staff_id
+INNER JOIN services ON services.id = appointments.service_id
+ LEFT JOIN payments ON appointments.id = payments.appointment_id ORDER BY appointments.id DESC ";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
     $res .= " WHERE customers.name LIKE '%$search_escaped%'  OR services.name LIKE '%$search_escaped%'
-     OR users.name LIKE '%$search_escaped%' OR appointments.appointment_date LIKE '%$search_escaped%'";
+     OR staff.name LIKE '%$search_escaped%' OR appointments.appointment_date LIKE '%$search_escaped%'";
 }
+
 $appointments = $mysqli->query($res);
 
 $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
@@ -117,7 +122,9 @@ require '../layouts/header.php';
                                                     <?php } else if ($row['status'] == 3) { ?>
 
                                                     <?php } else if ($row['status'] == 1) { ?>
-                                                        <?php if ($row['payment_id']) { ?>
+
+                                                        <?php
+                                                        if ($row['payment_id']) { ?>
                                                             <!-- Payment already exists -->
                                                             <span class="badge bg-success text-dark mx-2">ငွေပေးချေပြီး</span>
                                                         <?php } else { ?>

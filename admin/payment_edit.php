@@ -13,10 +13,9 @@ if ($id <= 0) {
 // Fetch payment info
 $sql = "SELECT p.*, a.id as appointment_id, c.name as customer_name, s.name as service_name,
  a.appointment_date, a.appointment_time FROM payments p INNER JOIN appointments a ON p.appointment_id = a.id INNER JOIN
-  customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE p.id = $id";
+  users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id WHERE p.id = $id";
 $result = $mysqli->query($sql);
 if (!$result || $result->num_rows == 0) {
-    // echo '<div class="alert alert-danger">Payment not found.</div>';
     exit;
 }
 $payment = $result->fetch_assoc();
@@ -37,7 +36,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         $error = true;
         $amount_error = "ကျေးဇူးပြုပြီး မှန်ကန်သောငွေပမာဏကို ဖြည့်ပါ။";
     }
-    if ($payment_method === '' || !in_array($payment_method, ['1', '2' , '3'])) {
+    if ($payment_method === '' || !in_array($payment_method, ['1', '2', '3'])) {
         $error = true;
         $payment_method_error = "ကျေးဇူးပြုပြီး မှန်ကန်သော ငွေပေးချေမှုနည်းလမ်းကို ရွေးချယ်ပါ။";
     }

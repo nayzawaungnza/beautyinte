@@ -11,7 +11,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 $sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
  p.amount, p.payment_date, pm.name as payment_method_name FROM payments p
   INNER JOIN appointments a ON p.appointment_id = a.id
-   INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
+   INNER JOIN users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
    INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
 $payments = $mysqli->query($sql);
 
@@ -20,11 +20,11 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
  p.amount, p.payment_date , pm.name as payment_method_name FROM payments p
   INNER JOIN appointments a ON p.appointment_id = a.id
-   INNER JOIN customers c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
+   INNER JOIN users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
    INNER JOIN payment_method pm ON p.payment_method_id = pm.id";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE c.name LIKE '%$search_escaped%'  OR p.payment_date LIKE '%$search_escaped%'
+    $sql .= " WHERE c.name LIKE '%$search_escaped%' OR p.payment_date LIKE '%$search_escaped%'
      OR pm.name LIKE '%$search_escaped%'";
 }
 $payments = $mysqli->query($sql);

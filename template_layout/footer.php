@@ -17,9 +17,9 @@
                     <div class="block-23 mb-3">
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">တာငါးဆယ်တောင်ရပ်ကွက်၊ကရင်ကျောင်းလမ်း</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+၉၅ ၀၉၆၇၁၆၈၀၉၀၁, ၀၉၆၆၈၈၅၂၈၇၆</span></a></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+၉၅ ၉၆၇၁၆၈၀၉၀၁ ၉၆၆၈၈၅၂၈၇၆</span></a></li>
                             <li><a href="#"><span class="icon icon-envelope"></span><span
-                                        class="text">saungwaikhin@gmail.com,htwehtweyee@gmail.com</span></a></li>
+                                        class="text"> saungwaikhin@gmail.com htwehtweyee@gmail.com</span></a></li>
                         </ul>
                     </div>
 
