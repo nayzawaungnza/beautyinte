@@ -62,7 +62,7 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="">နံပါတ်</th>
+                                    <th class="">စဉ်</th>
                                     <th class="">ပရိုဖိုင်</th>
                                     <th class="">အမည်</th>
                                     <th class="">အီးမေးလ်</th>

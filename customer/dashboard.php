@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_appointment'])
     if ($check_result && $check_result->num_rows > 0) {
         $update_sql = "UPDATE appointments SET status = 2 WHERE id = '$appointment_id'"; // Set to rejected (2) when cancelled
         if ($mysqli->query($update_sql)) {
-            echo "<script>alert('Appointment cancelled successfully!'); window.location.href='dashboard.php';</script>";
+            echo "<script>alert('ချိန်းဆိုမှုကိုအောင်မြင်စွာဖျက်လိုက်ပါပြီ!'); window.location.href='dashboard.php';</script>";
         } else {
             $error = "Failed to cancel appointment. Please try again.";
         }

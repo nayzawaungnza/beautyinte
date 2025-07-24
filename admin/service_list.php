@@ -63,6 +63,7 @@ require '../layouts/header.php';
                             <thead>
                                 <tr class="text-center">
                                     <th class="">စဉ်</th>
+                                    <th class="">ပရိုဖိုင်</th>
                                     <th class="">အမည်</th>
                                     <th class="">စျေးနှုန်း</th>
                                     <th class="">အကြောင်းအရာ ဖော်ပြချက်</th>
@@ -76,6 +77,10 @@ require '../layouts/header.php';
                                     while ($row = $res->fetch_assoc()) { ?>
                                         <tr class="text-center">
                                             <td><?= $i++ ?></td>
+                                            <td>
+                                                <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
+                                                    alt="Profile Image" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                            </td>
                                             <td><?= $row['name'] ?></td>
                                             <td class="text-right"><?= number_format($row['price']) ?> ကျပ်</td>
                                             <td><?= $row['description'] ?></td>

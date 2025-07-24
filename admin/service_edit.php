@@ -27,9 +27,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     if (empty($name)) {
         $error = true;
         $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
-    } else if (is_numeric($name)) {
-        $error = true;
-        $name_err = "အမည်တွင် ဂဏန်းများသာ ပါဝင်ရပါမည်။";
     } else if (strlen($name) >= 100) {
         $error = true;
         $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
@@ -50,9 +47,9 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     if (empty($description)) {
         $error = true;
         $description_err = "ကျေးဇူးပြု၍ ဖော်ပြချက်ထည့်ပါ။";
-    } else if (strlen($description) > 100) {
+    } else if (strlen($description) > 1000) {
         $error = true;
-        $description_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
+        $description_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
     }
 
 

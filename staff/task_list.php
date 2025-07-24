@@ -101,7 +101,7 @@ $appointments = $mysqli->query($sql);
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="6" class="text-center">No appointments found.</td>
+                                        <td colspan="6" class="text-center">ချိန်းဆိုမှုများမတွေ့ရှိပါ။</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

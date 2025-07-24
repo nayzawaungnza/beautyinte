@@ -20,21 +20,19 @@ $service_res = selectData("services", $mysqli, "", "*");
       {
         $name = strtolower($name);
         if (strpos($name, 'hair') !== false) return '💇‍♀️';
-        if (strpos($name, 'makeup') !== false) return '💄';
         if (strpos($name, 'nail') !== false) return '💅';
-        if (strpos($name, 'spa') !== false || strpos($name, 'massage') !== false) return '💆‍♀️';
-        if (strpos($name, 'skin') !== false || strpos($name, 'facial') !== false) return '🌸';
         return '✨'; // default
       }
 
       if ($service_res && $service_res->num_rows > 0) {
         while ($data = $service_res->fetch_assoc()) {
-          $icon = getServiceIcon($data['name']);
+
       ?>
           <div style="background-color: #ffffff; border-radius: 20px; padding: 20px 20px; width: 300px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;"
             onmouseover="this.style.transform='translateY(-10px)'"
             onmouseout="this.style.transform='translateY(0)'">
-            <div style="font-size: 2.2rem; margin-bottom: 10px;"><?= $icon ?></div>
+
+            <img class="img mb-4 img-fluid" style="width: 100%; height: 200px;" src="./uplode/<?= $data['image'] ? $data['image'] : 'default.png'  ?>">
             <h3 style="font-size: 1.4rem; color: #e91e63; margin-bottom: 10px;"><?= htmlspecialchars($data['name']) ?></h3>
             <p style="font-size: 1.2rem; color: #2c3e50; font-weight: bold; margin-bottom: 10px;"><?= number_format($data['price']) ?> ကျပ်</p>
             <p style="font-size: 0.95rem; color: #777; line-height: 1.6;"><?= htmlspecialchars($data['description']) ?></p>

@@ -41,23 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $current_time = date('H:i:s');
 
     if (!$service_id) {
-        $general_err = 'ဝန်ဆောင်မှု မရှိပါ။';
         $error = true;
+        $general_err = 'ဝန်ဆောင်မှု မရှိပါ။';
     }
     if (empty($staff_id) || !is_numeric($staff_id)) {
-        $staff_id_err = 'ကျေးဇူးပြုပြီး ဝန်ထမ်းတစ်ဦးကို ရွေးချယ်ပါ။';
         $error = true;
+        $staff_id_err = 'ကျေးဇူးပြုပြီး ဝန်ထမ်းတစ်ဦးကို ရွေးချယ်ပါ။';
     }
     if (empty($appointment_date)) {
+        $error = true;
         $appointment_date_err = 'ကျေးဇူးပြုပြီး ချိန်းဆိုမည့်ရက်ကို ထည့်သွင်းပါ။';
-        $error = true;
     } elseif (strtotime($appointment_date) < strtotime($today)) {
-        $appointment_date_err = 'ရွေးချယ်ထားသောရက်သည် သက်တမ်းကုန်သွားပြီးပါပြီ။';
         $error = true;
+        $appointment_date_err = 'ရွေးချယ်ထားသောရက်သည် သက်တမ်းကုန်သွားပြီးပါပြီ။';
     }
     if (empty($appointment_time)) {
-        $appointment_time_err = 'ကျေးဇူးပြုပြီး ချိန်းဆိုချိန်ကို ထည့်သွင်းပါ။';
         $error = true;
+        $appointment_time_err = 'ကျေးဇူးပြုပြီး ချိန်းဆိုချိန်ကို ထည့်သွင်းပါ။';
     } else {
         $time = strtotime($appointment_time);
         $start = strtotime('09:00');
@@ -65,14 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $lunch_start = strtotime('12:00');
         $lunch_end = strtotime('13:00');
         if ($time < $start || $time > $end) {
+            $error = true;
             $appointment_time_err = 'ချိန်းဆိုချိန်သည် မနက် ၉:၀၀ မှ ည ၉:၀၀ အတွင်း ဖြစ်ရမည်။';
-            $error = true;
         } elseif ($time >= $lunch_start && $time < $lunch_end) {
+            $error = true;
             $appointment_time_err = 'ချိန်းဆိုချိန်သည် နေ့လည် ၁၂:၀၀ မှ ၁:၀၀ အတွင်း မဖြစ်နိုင်ပါ။';
-            $error = true;
         } elseif ($appointment_date == $today && $appointment_time <= $current_time) {
-            $appointment_time_err = 'ချိန်းဆိုချိန် မရနိုင်ပါ။';
             $error = true;
+            $appointment_time_err = 'ချိန်းဆိုချိန် မရနိုင်ပါ။';
         }
     }
     // Check if staff is already assigned at the same date and time
@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conflict_sql = "SELECT id FROM appointments WHERE staff_id = '$staff_id' AND appointment_date = '$appointment_date' AND appointment_time = '$appointment_time' AND (status = 0 OR status = 3)";
         $conflict_result = $mysqli->query($conflict_sql);
         if ($conflict_result && $conflict_result->num_rows > 0) {
-            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။';
             $error = true;
+            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။';
         }
     }
     if (!$error) {

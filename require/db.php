@@ -64,6 +64,7 @@ function create_table($mysqli)
                 name VARCHAR(100) NOT NULL,
                 description TEXT NULL,
                 price INT NOT NULL,
+                image VARCHAR(200) NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )";

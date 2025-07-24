@@ -4,7 +4,7 @@ require './require/db.php';
 require "./require/common.php";
 require './require/common_function.php';
 
-$user_res = selectData("users", $mysqli, "", "*", "ORDER BY role DESC");
+$user_res = selectData("users", $mysqli, "WHERE role != 'customer'", "*", "ORDER BY role ASC");
 $promotions_sql = "SELECT * FROM `promotions` WHERE start_date <= CURDATE() AND end_date >= CURDATE()";
 $promotions = $mysqli->query($promotions_sql);
 ?>
