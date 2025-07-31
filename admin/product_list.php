@@ -87,7 +87,7 @@ require '../layouts/header.php';
                                             <td><img src="<?= $row['img'] ? '../uplode/' . $row['img'] : '../uplode/default.png'  ?>" style="width:50px; height:50px;"></td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['description'] ?></td>
-                                            <td><?= $row['price'] ?></td>
+                                            <td><?= $row['price'] ?>ကျပ်</td>
                                             <td><?= $row['quantity'] ?></td>
                                             <td>
                                                 <div>

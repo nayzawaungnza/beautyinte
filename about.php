@@ -5,7 +5,7 @@ require "./require/common.php";
 require './require/common_function.php';
 // require '../require/check_auth.php'
 
-$user_res = selectData("users", $mysqli, "", "*", "ORDER BY role DESC");
+$user_res = selectData("users", $mysqli, "WHERE role != 'customer' AND role != 'admin'", "*", "ORDER BY role ASC");
 // $new_user_sql = "SELECT 
 //                     users.*, 
 //                     users.name AS user_name, 
@@ -43,8 +43,8 @@ $service_res = selectData("services", $mysqli, "", "*");
         while ($data = $user_res->fetch_assoc()) { ?>
           <div class="col-md-3 mb-3 ftco-animate">
             <div class="staff">
-              <div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
-              <div class="info text-center">
+              <div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>); background-size: cover; background-position: center; height: 200px; border-bottom: 1px solid #eee;"></div>
+              <div class=" info text-center">
 
                 <h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
                 <strong class="position mb-4 text-dark"><?= $data['role'] ?></strong>

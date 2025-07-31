@@ -11,7 +11,9 @@
                     <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
             </div>
-            <div class="col-md-3">
+
+
+            <div class="col-md-4">
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">ဆက်သွယ်ရန်လိပ်စာ</h2>
 
@@ -19,13 +21,19 @@
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">တာငါးဆယ်တောင်ရပ်ကွက်၊ကရင်ကျောင်းလမ်း</span></li>
                             <li><a href="#"><span class="icon icon-phone"></span><span class="text">+၉၅ ၉၆၇၁၆၈၀၉၀၁ ၉၆၆၈၈၅၂၈၇၆</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span
-                                        class="text"> saungwaikhin@gmail.com htwehtweyee@gmail.com</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text"> saungwaikhin@gmail.com htwehtweyee@gmail.com</span></a></li>
+
                         </ul>
                     </div>
-
-
                 </div>
+            </div>
+
+            <div class="col-md-4">
+
+                <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                    <h5 class="text-light ">ABOUT</h5>
+                    <h6 class="text-light ">လာရောက်ရန်ဖိတ်ခေါ်ပါသည်။ Beauty Salon တွင် အကောင်းဆုံး ဆံပင်၊ လက်သည်းအလှပြုပြင်ခြင်း ဝန်ဆောင်မှုများကိုခံယူနိုင်ပါသည်။</h6>
+                </ul>
             </div>
         </div>
     </div>

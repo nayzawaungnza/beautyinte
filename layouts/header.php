@@ -153,8 +153,10 @@ require_once '../require/common_function.php';
 
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?= $_SESSION['img'] ? '../uplode/' . $_SESSION['img'] : '../uplode/default.png' ?>" height="40" width="40" class="rounded-circle mr-2" alt="">
-                            <span class="d-none d-md-inline">Profile</span>
+                            <?php if ($_SESSION['role'] != 'customer') { ?>
+                                <img src="<?= $_SESSION['img'] ? '../uplode/' . $_SESSION['img'] : '../uplode/default.png' ?>" height="40" width="40" class="rounded-circle mr-2" alt="">
+                            <?php } ?>
+                            <span class="d-none d-md-inline"><?= $_SESSION['name'] ?></span>
                         </a>
                         <?php
                         if ($_SESSION['role'] == "staff") {
@@ -166,8 +168,10 @@ require_once '../require/common_function.php';
                         }
                         ?>
                         <div class="dropdown-menu dropdown-menu-right shadow">
-                            <a class="dropdown-item" href="<?= $profile_link ?>"><i class="fas fa-user mr-2"></i> ပရိုဖိုင်</a>
-                            <div class="dropdown-divider"></div>
+                            <?php if ($_SESSION['role'] != 'customer') { ?>
+                                <a class="dropdown-item" href="<?= $profile_link ?>"><i class="fas fa-user mr-2"></i> ပရိုဖိုင်</a>
+                                <div class="dropdown-divider"></div>
+                            <?php } ?>
                             <a class="dropdown-item" href="<?= '../logout.php' ?>"><i class="fas fa-sign-out-alt mr-2"></i> အကောင့်ထွက်ရန်</a>
                         </div>
                     </div>

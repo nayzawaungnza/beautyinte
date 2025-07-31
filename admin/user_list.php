@@ -85,7 +85,7 @@ require '../layouts/header.php';
                                             </td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
-                                            <td><?= $row['role'] ?></td>
+                                            <td><?= $row['role'] == "admin" ? "အုပ်ချုပ်သူ" : "ဝန်ထမ်း" ?></td>
                                             <td><?= $row['phone'] ?></td>
                                             <td><?= $row['gender'] == "male" ? "ကျား" : "မ" ?></td>
                                             <td>

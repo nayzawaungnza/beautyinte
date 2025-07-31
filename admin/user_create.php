@@ -167,7 +167,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                             <div class="form-group">
                                 <label for="role" class="form-label">အခန်းကဏ္ဍ</label>
                                 <select name="role" id="role" class="form-control" value="<?= $role ?>">
-                                    <option value="">ရွေးချယ်ရန် အခန်းကဏ္ဍ</option>
+                                    <!-- <option value="">ရွေးချယ်ရန် အခန်းကဏ္ဍ</option> -->
                                     <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
                                     <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
                                 </select>

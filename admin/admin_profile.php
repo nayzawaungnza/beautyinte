@@ -92,7 +92,7 @@ require '../layouts/header.php';
                 <label>Role</label>
                 <input type="text" name="role" class="form-control" value="<?php echo htmlspecialchars($admin['role']); ?>" readonly>
             </div>
-            <button type="submit" name="update_profile" class="btn btn-success">Save Changes</button>
+            <button type="submit" name="update_profile" class="btn btn-success">သိမ်းမည်</button>
             </form>
             <hr>
         </div>

@@ -19,12 +19,12 @@ $product_res = selectData("products", $mysqli, "", "*");
 			if ($product_res->num_rows > 0) {
 				while ($data = $product_res->fetch_assoc()) { ?>
 					<div class="col-md-3 mb-3 ftco-animate">
-						<div class="staff">
-							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['img'] ?>);"></div>
+						<div class="staff" style="background-color:antiquewhite;">
+							<div class="img mb-4" style=" background-image: url(./uplode/<?= $data['img'] ?>); "></div>
 							<div class="info text-center">
-								<h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
-								<span class="position mb-4 text-dark"><?= $data['price'] ?> ကျပ်</span>
-								<span class="position mb-4 text-dark"><?= $data['description'] ?></span>
+								<h3 style="font-weight: bold;"><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
+								<span class="position mb-4 text-dark" style="font-size:20px;"><?= $data['price'] ?> ကျပ်</span>
+								<span class="position mb-4 text-dark" style="font-size:18px;"><?= $data['description'] ?></span>
 
 							</div>
 						</div>

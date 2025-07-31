@@ -4,7 +4,7 @@ require './require/db.php';
 require "./require/common.php";
 require './require/common_function.php';
 
-$user_res = selectData("users", $mysqli, "WHERE role != 'customer'", "*", "ORDER BY role ASC");
+$user_res = selectData("users", $mysqli, "WHERE role != 'customer' AND role != 'admin'", "*", "ORDER BY role ASC");
 $promotions_sql = "SELECT * FROM `promotions` WHERE start_date <= CURDATE() AND end_date >= CURDATE()";
 $promotions = $mysqli->query($promotions_sql);
 ?>
@@ -53,13 +53,11 @@ $promotions = $mysqli->query($promotions_sql);
 			if ($user_res->num_rows > 0) {
 				while ($data = $user_res->fetch_assoc()) { ?>
 					<div class="col-md-3 ftco-animate mb-3">
-						<div class="staff">
-							<div class="img mb-4" style="background-image: url(./uplode/<?= $data['image'] ?>);"></div>
-							<div class="info text-center">
-
-								<h3><a href="teacher-single.html"></a><?= $data['name'] ?></h3>
-								<strong class="position mb-4 text-dark"><b> <?= $data['role'] ?></b></strong>
-								<div class="text mt-1">
+						<div class="staff" style="border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s; background: #fff;">
+							<div class="img mb-4" style="background-image: url('./uplode/<?= $data['image'] ?>'); background-size: cover; background-position: center; height: 200px; border-bottom: 1px solid #eee;"></div>
+							<div class="info text-center" style="padding: 15px 10px;">
+								<h3 style="margin-bottom: 10px; font-size: 20px; color: #333; font-weight: bold;"> <a href="teacher-single.html" style="text-decoration: none; color: inherit;"><?= $data['name'] ?></a> </h3> <strong class="position mb-2" style="display: block; color: #6c757d; font-weight: 600; font-size: 14px;"><?= $data['role'] ?></strong>
+								<div class="text mt-2" style="font-size: 14px; color: #555;">
 									<p><?= $data['description'] ?></p>
 								</div>
 							</div>
@@ -145,5 +143,18 @@ $promotions = $mysqli->query($promotions_sql);
 
 	</div>
 	</div>
+</section>
+
+<section class="ftco-section bg-white py-4" id="salon-hours">
+	<div class="container glass">
+		<div class="row justify-content-center mb-3">
+			<div class="col-md-8 text-center">
+				<div style="background: linear-gradient(to right, #f45995f6, #eadce0ff); padding: 20px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); font-size: 1rem;">
+					<h3 class="text-dark mb-3" style="font-weight: bold;">ဆိုင်ဖွင့်ချိန်</h3>
+					<p class="mb-2 text-dark" style="font-weight: 500;">⏰ တနင်္လာနေ့ မှ – တနင်္ဂနွေနေ့အထိ: <span class="text-primary">မနက် ၉း၀၀ မှ – ည ၉း၀၀ အထိ</span></p>
+
+				</div>
+			</div>
+		</div>
 </section>
 <?php require_once './template_layout/footer.php' ?>

@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comment = trim($_POST['comment'] ?? '');
     $request = trim($_POST['request'] ?? '');
     $today = date('Y-m-d');
+    date_default_timezone_set('Asia/Yangon');
     $current_time = date('H:i:s');
 
     if (!$service_id) {
@@ -94,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $request_esc = $mysqli->real_escape_string($request);
         $sql = "INSERT INTO appointments (customer_id, service_id, staff_id, appointment_date, appointment_time, status, comment, request) VALUES ('$customer_id_esc', '$service_id_esc', '$staff_id_esc', '$appointment_date_esc', '$appointment_time_esc', 0, '$comment_esc', '$request_esc')";
         if ($mysqli->query($sql)) {
-            echo "<script>alert('ချိန်းဆိုမှု အောင်မြင်စွာ တင်သွင်းပြီးပါပြီ!'); window.location.href = './dashboard.php';</script>";
+            echo "<script>window.location.href = './dashboard.php';</script>";
             exit();
         } else {
             $general_err = 'ချိန်းဆိုမှု မအောင်မြင်ပါ။';

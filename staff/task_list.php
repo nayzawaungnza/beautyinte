@@ -89,11 +89,11 @@ $appointments = $mysqli->query($sql);
                                                     <!-- Accept/Reject not shown -->
                                                 <?php elseif ($row['status'] == 1): // Completed 
                                                 ?>
-                                                    <span class="text-success">Done</span>
+                                                    <span class="text-success">ပြီးဆုံးသည်</span>
                                                     <!-- No buttons shown -->
                                                 <?php elseif ($row['status'] == 2): // Rejected 
                                                 ?>
-                                                    <span class="text-danger">Rejected</span>
+                                                    <span class="text-danger">ငြင်းပယ်သည်</span>
                                                     <!-- No buttons shown -->
                                                 <?php endif; ?>
                                             </td>
@@ -122,14 +122,13 @@ require '../layouts/footer.php';
             e.preventDefault();
             var url = $(this).attr('href');
             Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you really want to reject this appointment?",
+                title: 'ငြင်းပယ်မည်ဆိုတာသေချာပြီလား',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, reject it!',
-                cancelButtonText: 'Cancel'
+                confirmButtonText: 'ငြင်းပယ်သည်',
+                cancelButtonText: 'မငြင်းပယ်ပါ'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = url;

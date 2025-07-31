@@ -117,7 +117,7 @@ require '../layouts/header.php';
                         <div class="col-12 col-md-7">
                             <div class="cool-title"><?= $res['name'] ?></div>
                             <div class="cool-price"><?= $res['price'] ?> ကျပ်</div>
-                            <div class="cool-desc"><b>Description: </b><?= $res['description'] ?></div>
+                            <div class="cool-desc"><b> </b><?= $res['description'] ?></div>
                         </div>
                     </div>
                 </div>

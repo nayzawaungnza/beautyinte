@@ -28,7 +28,7 @@ $service_res = selectData("services", $mysqli, "", "*");
         while ($data = $service_res->fetch_assoc()) {
 
       ?>
-          <div style="background-color: #ffffff; border-radius: 20px; padding: 20px 20px; width: 300px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;"
+          <div style="background-color:lightpink; border-radius: 20px; padding: 20px 20px; width: 300px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease; cursor: pointer;"
             onmouseover="this.style.transform='translateY(-10px)'"
             onmouseout="this.style.transform='translateY(0)'">
 
