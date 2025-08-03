@@ -33,25 +33,26 @@ session_start();
 </head>
 
 <body>
-
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/salon1.jpg');"
-        data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text js-fullheight justify-content-center"
-                data-scrollax-parent="true">
-                <div class="col-md-8 mt-4 ftco-animate  text-center" data-scrollax=" properties: { translateY: '70%' }">
-                    <div class="icon">
-                        <a href="index.html" class="logo">
-                            <span class="flaticon-flower"></span>
-                            <h1 class="text-white font-extrabold">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
-                        </a>
+    <?php if (basename($_SERVER['PHP_SELF']) != "product.php") { ?>
+        <div class="hero-wrap js-fullheight" style="background-image: url('images/salon1.jpg');"
+            data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text js-fullheight justify-content-center"
+                    data-scrollax-parent="true">
+                    <div class="col-md-8 mt-4 ftco-animate  text-center" data-scrollax=" properties: { translateY: '70%' }">
+                        <div class="icon">
+                            <a href="index.html" class="logo">
+                                <span class="flaticon-flower"></span>
+                                <h1 class="text-white font-extrabold">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
+                            </a>
+                        </div>
+                        <h2 class="mb-4 text-light" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
                     </div>
-                    <h2 class="mb-4 text-light" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>
                 </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar sticky-top" id="ftco-navbar">
         <div class="container">

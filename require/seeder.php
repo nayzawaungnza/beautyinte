@@ -35,7 +35,7 @@ function seed_product_categories($mysqli)
 {
     for ($i = 1; $i <= 10; $i++) {
         $desc = "Description for product category $i";
-        insert($mysqli, "INSERT INTO product_categories (name, description) VALUES ('Product Category $i', '$desc')");
+        insert($mysqli, "INSERT INTO product_categories (name) VALUES ('Product Category $i')");
     }
 }
 
