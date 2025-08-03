@@ -2,24 +2,39 @@
 require '../require/check_auth.php';
 checkAuth('admin');
 require '../layouts/header.php';
+
+// Stats
 $total_customers = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'customer'")->fetch_assoc()['count'];
 $total_appointments = $mysqli->query("SELECT COUNT(*) as count FROM appointments")->fetch_assoc()['count'];
 $total_products = $mysqli->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
 $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->fetch_assoc()['count'];
 
+// Bar chart data - Monthly appointments this year
+$year = date('Y');
+$monthly_data = array_fill(1, 12, 0);
+
+$query = "SELECT MONTH(appointment_date) AS month, COUNT(*) AS count 
+          FROM appointments 
+          WHERE YEAR(appointment_date) = $year 
+          GROUP BY MONTH(appointment_date)";
+$result = $mysqli->query($query);
+
+while ($row = $result->fetch_assoc()) {
+    $monthly_data[(int)$row['month']] = (int)$row['count'];
+}
 ?>
 
 <!-- Content body start -->
 <div class="content-body">
     <div class="container-fluid">
         <div class="row mt-4">
-            <!-- Customers Card -->
+            <!-- Dashboard Cards -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-green shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2" style="letter-spacing:1px;">ဖောက်သည်</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ဖောက်သည်</div>
                                 <div class="h3 mb-0 font-weight-bold text-white"><?= $total_customers  ?></div>
                             </div>
                             <div class="col-auto">
@@ -29,13 +44,12 @@ $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->
                     </div>
                 </div>
             </div>
-            <!-- Appointments Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-blue shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2" style="letter-spacing:1px;">အချိန်ချိန်းဆိုမှု</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">အချိန်ချိန်းဆိုမှု</div>
                                 <div class="h3 mb-0 font-weight-bold text-white"><?= $total_appointments  ?></div>
                             </div>
                             <div class="col-auto">
@@ -45,13 +59,12 @@ $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->
                     </div>
                 </div>
             </div>
-            <!-- Sales Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-orange shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2" style="letter-spacing:1px;">အရောင်း</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">အရောင်း</div>
                                 <div class="h3 mb-0 font-weight-bold text-white"><?= $total_products ?></div>
                             </div>
                             <div class="col-auto">
@@ -61,13 +74,12 @@ $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->
                     </div>
                 </div>
             </div>
-            <!-- Promotions Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-red shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2" style="letter-spacing:1px;">ပရိုမိုးရှင်း</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ပရိုမိုးရှင်း</div>
                                 <div class="h3 mb-0 font-weight-bold text-white"><?= $total_promotions  ?></div>
                             </div>
                             <div class="col-auto">
@@ -78,6 +90,19 @@ $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->
                 </div>
             </div>
         </div>
+
+        <!-- Bar Chart Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-dark mb-4">ယခုနှစ်အတွက် လတိုင်း Appointment အရေအတွက်</h5>
+                        <canvas id="appointmentChart" height="120"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <style>
             .dashboard-card {
                 border: none;
@@ -113,10 +138,53 @@ $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->
                 filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
             }
         </style>
+
+        <!-- Chart.js CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Chart Script -->
+        <script>
+            const ctx = document.getElementById('appointmentChart').getContext('2d');
+            const appointmentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                    ],
+                    datasets: [{
+                        label: 'Appointment Count',
+                        data: <?= json_encode(array_values($monthly_data)) ?>,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            });
+        </script>
     </div>
 </div>
 <!-- Content body end -->
 
-<?php
-require '../layouts/footer.php';
-?>
+<?php require '../layouts/footer.php'; ?>

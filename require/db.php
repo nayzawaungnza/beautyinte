@@ -46,41 +46,64 @@ function create_table($mysqli)
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )";
     if ($mysqli->query($user_sql) === false) return false;
-    //Customer
-    // $customer_sql = "CREATE TABLE IF NOT EXISTS `customers`
-    //             (
-    //             id INT AUTO_INCREMENT PRIMARY KEY,
-    //             name VARCHAR(100) NOT NULL,
-    //             phone VARCHAR(50) NOT NULL,
-    //             password VARCHAR(200) NOT NULL,
-    //             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    //             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    //             )";
-    // if ($mysqli->query($customer_sql) === false) return false;
+
+    //Service caregory
+    $service_categories = "CREATE TABLE IF NOT EXISTS `service_categories` (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        name VARCHAR(100) NOT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )";
+
+    if ($mysqli->query($service_categories) === false) return false;
+
+    //product caregory
+    $product_category =  "CREATE TABLE IF NOT EXISTS `product_categories` (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        name VARCHAR(100) NOT NULL,
+                        description TEXT NULL,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )";
+    if ($mysqli->query($product_category) === false) return false;
+
     //Services
     $service_sql = "CREATE TABLE IF NOT EXISTS `services`
                 (
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                category_id INT NULL,
                 name VARCHAR(100) NOT NULL,
                 description TEXT NULL,
                 price INT NOT NULL,
                 image VARCHAR(200) NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (category_id) REFERENCES service_categories(id) ON DELETE SET NULL
                 )";
     if ($mysqli->query($service_sql) === false) return false;
+
     //Products
     $product_sql = "CREATE TABLE IF NOT EXISTS `products`
                 (
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                category_id INT NULL,
                 name VARCHAR(100) NOT NULL,
                 description TEXT NULL,
                 price INT NOT NULL,
                 img TEXT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (category_id) REFERENCES product_categories(id) ON DELETE SET NULL
                 )";
     if ($mysqli->query($product_sql) === false) return false;
+    // Payment Methods
+    $payment_method_sql = "CREATE TABLE IF NOT EXISTS `payment_method`
+                   (
+                   id INT AUTO_INCREMENT PRIMARY KEY,
+                   name VARCHAR(100) NOT NULL,
+                   status TINYINT(1) NOT NULL DEFAULT 1
+                   )";
+    if ($mysqli->query($payment_method_sql) === false) return false;
     //Promotion
     $promotion_sql = "CREATE TABLE IF NOT EXISTS `promotions`
                    (
@@ -139,14 +162,7 @@ function create_table($mysqli)
                    FOREIGN KEY (staff_id) REFERENCES users(id) ON DELETE CASCADE
                    )";
     if ($mysqli->query($appointment_sql) === false) return false;
-    // Payment Methods
-    $payment_method_sql = "CREATE TABLE IF NOT EXISTS `payment_method`
-                   (
-                   id INT AUTO_INCREMENT PRIMARY KEY,
-                   name VARCHAR(100) NOT NULL,
-                   status TINYINT(1) NOT NULL DEFAULT 1
-                   )";
-    if ($mysqli->query($payment_method_sql) === false) return false;
+
     // Payments
     $payment_sql = "CREATE TABLE IF NOT EXISTS `payments`
                    (

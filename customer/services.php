@@ -3,12 +3,43 @@ require '../require/check_auth.php';
 checkAuth('customer');
 require '../layouts/header.php';
 
-$sql = "SELECT * FROM `services`";
+// Fetch categories for dropdown
+$categories = selectData("service_categories", $mysqli, "", "*");
+
+// Filter by category
+$filter_category = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
+
+$where = "";
+if ($filter_category) {
+    $where = "WHERE category_id = $filter_category";
+}
+
+$sql = "SELECT * FROM `services` $where";
 $result = $mysqli->query($sql);
 ?>
-<div class="content-body">
+
+<div class="content-body" id="service-list">
     <div class="container py-5">
-        <h2 class="text-center mb-5 fw-bold text-gradient-primary">ဝန်ဆောင်မှုများ</h2>
+        <h2 class="text-center mb-4 fw-bold text-gradient-primary">ဝန်ဆောင်မှုများ</h2>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-4">
+                <form method="GET" action="services.php">
+                    <select name="category_id"
+                        class="form-control"
+                        style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); border-radius: 10px; border: 1px solid #ccc; padding: 10px; font-size: 16px;"
+                        onchange="this.form.submit()">
+                        <option value="">-- ဝန်ဆောင်မှု အမျိုးအစား --</option>
+                        <?php while ($cat = $categories->fetch_assoc()): ?>
+                            <option value="<?= $cat['id'] ?>" <?= ($filter_category == $cat['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($cat['name']) ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </form>
+            </div>
+        </div>
+
         <div class="row g-4">
             <?php if ($result && $result->num_rows > 0): ?>
                 <?php while ($service = $result->fetch_assoc()): ?>
@@ -22,7 +53,7 @@ $result = $mysqli->query($sql);
                             <div class="card-body">
                                 <h5 class="card-title fw-bold text-dark mb-3"><?= htmlspecialchars($service['name'] ?? 'Service') ?></h5>
                                 <p class="card-text text-muted mb-4">
-                                    <?= htmlspecialchars($service['description'] ?? ''); ?>
+                                    <?= htmlspecialchars($service['description'] ?? '') ?>
                                 </p>
                             </div>
                             <div class="card-footer bg-transparent border-0 pt-0">

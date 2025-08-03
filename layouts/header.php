@@ -196,6 +196,14 @@ require_once '../require/common_function.php';
                     <?php } else if ($_SESSION['role'] == "admin") { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
+                                <i class="fa-solid fa-user"></i><span class="nav-text">Dashabord</span>
+                            </a>
+                            <ul aria-expanded="true" class="pannel" style="display: none;">
+                                <li><a href="../admin/dashboard.php">Dashboard</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-click">
+                            <a class="has-arrow arrow">
                                 <i class="fa-solid fa-user"></i><span class="nav-text">အသုံးပြုသူများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
