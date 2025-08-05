@@ -12,12 +12,17 @@ $promotions = $mysqli->query($promotions_sql);
 	<div class="container glass d-flex justify-content-around">
 		<div class="card col-md-4 mb-3" style="background-color: pink;">
 			<div class="card-body">
+				<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><i class="fas fa-hand-sparkles"></i></div>
+					<!-- <div class="icon d-flex mb-3"><span class="fa-solid fa-hand-sparkles"></span></div> -->
+					<div class="icon d-flex justify-content-center align-items-center mb-3" style="width: 60px; height: 60px; background: #fce4ec; border-radius: 50%;">
+						<i class="fas fa-hand-sparkles fa-2x" style="color: #e91e63;"></i>
+					</div>
 					<div class="media-body">
 						<h3 class="heading">လက်သည်း</h3>
-						<p class="mb-4 text-dark text-center">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
-							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</p>
+						<h3 class="mb-4 text-dark text-center">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
+							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</h3>
 					</div>
 				</div>
 			</div>
@@ -29,8 +34,8 @@ $promotions = $mysqli->query($promotions_sql);
 					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
 					<div class="media-body">
 						<h3 class="heading">ဆံပင်ပုံစံ</h3>
-						<p class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ဖြတ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
-							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</p>
+						<h3 class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ညှပ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
+							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</h3>
 					</div>
 				</div>
 			</div>
