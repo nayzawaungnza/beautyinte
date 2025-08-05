@@ -20,7 +20,7 @@ $result = $mysqli->query($sql);
 
 <div class="content-body" id="service-list">
     <div class="container py-5">
-        <h2 class="text-center mb-4 fw-bold text-gradient-primary">ဝန်ဆောင်မှုများ</h2>
+        <h2 class="text-center mb-4 fw-bold text-gradient-primary">ဝန်ဆောင်မှုအမျိုးအစားများ</h2>
 
         <div class="row justify-content-center mb-5">
             <div class="col-md-4">
@@ -29,7 +29,7 @@ $result = $mysqli->query($sql);
                         class="form-control"
                         style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); border-radius: 10px; border: 1px solid #ccc; padding: 10px; font-size: 16px;"
                         onchange="this.form.submit()">
-                        <option value="">-- ဝန်ဆောင်မှု အမျိုးအစား --</option>
+                        <option value="">-- ဝန်ဆောင်မှု အမျိုးအစားရွေးချယ်ရန် --</option>
                         <?php while ($cat = $categories->fetch_assoc()): ?>
                             <option value="<?= $cat['id'] ?>" <?= ($filter_category == $cat['id']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($cat['name']) ?>

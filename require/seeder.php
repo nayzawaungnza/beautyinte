@@ -24,44 +24,44 @@ function seed_users($mysqli)
     }
 }
 
-function seed_service_categories($mysqli)
-{
-    for ($i = 1; $i <= 10; $i++) {
-        insert($mysqli, "INSERT INTO service_categories (name) VALUES ('Service Category $i')");
-    }
-}
+// function seed_service_categories($mysqli)
+// {
+//     for ($i = 1; $i <= 10; $i++) {
+//         insert($mysqli, "INSERT INTO service_categories (name) VALUES ('Service Category $i')");
+//     }
+// }
 
-function seed_product_categories($mysqli)
-{
-    for ($i = 1; $i <= 10; $i++) {
-        $desc = "Description for product category $i";
-        insert($mysqli, "INSERT INTO product_categories (name) VALUES ('Product Category $i')");
-    }
-}
+// function seed_product_categories($mysqli)
+// {
+//     for ($i = 1; $i <= 10; $i++) {
+//         $desc = "Description for product category $i";
+//         insert($mysqli, "INSERT INTO product_categories (name) VALUES ('Product Category $i')");
+//     }
+// }
 
-function seed_services($mysqli)
-{
-    for ($i = 1; $i <= 10; $i++) {
-        $name = "Service $i";
-        $desc = "Service description $i";
-        $price = rand(50, 200);
-        $category_id = rand(1, 10);
-        insert($mysqli, "INSERT INTO services (name, description, price, category_id) 
-                         VALUES ('$name', '$desc', $price, $category_id)");
-    }
-}
+// function seed_services($mysqli)
+// {
+//     for ($i = 1; $i <= 10; $i++) {
+//         $name = "Service $i";
+//         $desc = "Service description $i";
+//         $price = rand(50, 200);
+//         $category_id = rand(1, 10);
+//         insert($mysqli, "INSERT INTO services (name, description, price, category_id) 
+//                          VALUES ('$name', '$desc', $price, $category_id)");
+//     }
+// }
 
-function seed_products($mysqli)
-{
-    for ($i = 1; $i <= 10; $i++) {
-        $name = "Product $i";
-        $desc = "Product description $i";
-        $price = rand(20, 100);
-        $category_id = rand(1, 10);
-        insert($mysqli, "INSERT INTO products (name, description, price, img, category_id) 
-                         VALUES ('$name', '$desc', $price, 'img$i.jpg', $category_id)");
-    }
-}
+// function seed_products($mysqli)
+// {
+//     for ($i = 1; $i <= 10; $i++) {
+//         $name = "Product $i";
+//         $desc = "Product description $i";
+//         $price = rand(20, 100);
+//         $category_id = rand(1, 10);
+//         insert($mysqli, "INSERT INTO products (name, description, price, img, category_id) 
+//                          VALUES ('$name', '$desc', $price, 'img$i.jpg', $category_id)");
+//     }
+// }
 
 function seed_payment_methods($mysqli)
 {
@@ -70,18 +70,18 @@ function seed_payment_methods($mysqli)
     }
 }
 
-function seed_promotions($mysqli)
-{
-    for ($i = 1; $i <= 10; $i++) {
-        $name = "Promo $i";
-        $percent = rand(5, 30);
-        $desc = "Promotion description $i";
-        $start = date('Y-m-d');
-        $end = date('Y-m-d', strtotime("+$i days"));
-        insert($mysqli, "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) 
-                         VALUES ('$name', $percent, '$desc', '$start', '$end')");
-    }
-}
+// function seed_promotions($mysqli)
+// {
+//     for ($i = 1; $i <= 10; $i++) {
+//         $name = "Promo $i";
+//         $percent = rand(5, 30);
+//         $desc = "Promotion description $i";
+//         $start = date('Y-m-d');
+//         $end = date('Y-m-d', strtotime("+$i days"));
+//         insert($mysqli, "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) 
+//                          VALUES ('$name', $percent, '$desc', '$start', '$end')");
+//     }
+// }
 
 function seed_product_sales($mysqli)
 {
@@ -136,12 +136,12 @@ function seed_payments($mysqli)
 
 // Run all seeders
 seed_users($mysqli);
-seed_service_categories($mysqli);
-seed_product_categories($mysqli);
-seed_services($mysqli);
-seed_products($mysqli);
+// seed_service_categories($mysqli);
+// seed_product_categories($mysqli);
+// seed_services($mysqli);
+// seed_products($mysqli);
 seed_payment_methods($mysqli);
-seed_promotions($mysqli);
+// seed_promotions($mysqli);
 seed_product_sales($mysqli);
 seed_product_qty($mysqli);
 seed_appointments($mysqli);

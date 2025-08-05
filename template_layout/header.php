@@ -44,7 +44,7 @@ session_start();
                         <div class="icon">
                             <a href="index.html" class="logo">
                                 <span class="flaticon-flower"></span>
-                                <h1 class="text-white font-extrabold">အလှပြင်ဆိုင် စီမံခန့်ခွဲမှု စနစ်</h1>
+                                <h1 class="text-white font-extrabold">အလှပြင်ဆိုင် အချိန်ချိန်းဆိုမှုစနစ်</h1>
                             </a>
                         </div>
                         <h2 class="mb-4 text-light" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h2>

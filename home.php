@@ -13,10 +13,10 @@ $promotions = $mysqli->query($promotions_sql);
 		<div class="card col-md-4 mb-3" style="background-color: pink;">
 			<div class="card-body">
 				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-cosmetics"></span></div>
+					<div class="icon d-flex mb-3"><i class="fas fa-hand-sparkles"></i></div>
 					<div class="media-body">
 						<h3 class="heading">လက်သည်း</h3>
-						<p class="mb-4 text-dark">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
+						<p class="mb-4 text-dark text-center">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
 							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</p>
 					</div>
 				</div>

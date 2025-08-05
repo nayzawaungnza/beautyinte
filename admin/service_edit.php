@@ -27,9 +27,9 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     if (empty($name)) {
         $error = true;
         $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
-    } else if (strlen($name) >= 100) {
+    } else if (strlen($name) >= 1000) {
         $error = true;
-        $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
+        $name_err = "အမည်သည် စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
     }
     //Price
 

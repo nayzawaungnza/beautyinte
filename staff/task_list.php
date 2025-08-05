@@ -65,13 +65,13 @@ $appointments = $mysqli->query($sql);
                                             <td>
                                                 <?php
                                                 if ($row['status'] == 0) {
-                                                    echo "<span class='badge bg-warning'>Pending</span>";
+                                                    echo "<span class='badge bg-warning'>စောင့်နေသည်</span>";
                                                 } elseif ($row['status'] == 3) {
-                                                    echo "<span class='badge bg-info'>Accepted</span>";
+                                                    echo "<span class='badge bg-info'>လက်ခံသည်</span>";
                                                 } elseif ($row['status'] == 1) {
-                                                    echo "<span class='badge bg-success'>Complete</span>";
+                                                    echo "<span class='badge bg-success'>ပြီးဆုံးသည်</span>";
                                                 } elseif ($row['status'] == 2) {
-                                                    echo "<span class='badge bg-danger'>Rejected</span>";
+                                                    echo "<span class='badge bg-danger'>ငြင်းပယ်သည်</span>";
                                                 } else {
                                                     echo "<span class='badge bg-secondary'>Unknown</span>";
                                                 }

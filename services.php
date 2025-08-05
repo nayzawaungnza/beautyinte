@@ -22,7 +22,7 @@ $service_res = $mysqli->query("SELECT * FROM services $where");
 <section id="beauty-pricing" style="padding: 60px 0; background: linear-gradient(to right, #fdfbfb, #ebedee); font-family: 'Segoe UI', sans-serif;">
   <div class="container" style="max-width: 1140px; margin: auto;">
     <div style="text-align: center; margin-bottom: 30px;">
-      <h5 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">ဝန်ဆောင်မှုများ</h5>
+      <h5 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">ဝန်ဆောင်မှု အမျိုးအစားများ</h5>
     </div>
 
     <div class="text-left mb-4 w-50">
@@ -30,7 +30,7 @@ $service_res = $mysqli->query("SELECT * FROM services $where");
         <select name="category_id" class="form-control"
           style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); border-radius: 10px; border: 1px solid #ccc; padding: 10px; font-size: 16px;"
           onchange="this.form.action='services.php#beauty-pricing'; this.form.submit();">
-          <option value="">-- ဝန်ဆောင်မှု အမျိုးအစား --</option>
+          <option value="">-- ဝန်ဆောင်မှု အမျိုးအစားရွေးချယ်ရန် --</option>
           <?php while ($cat = $categories->fetch_assoc()) { ?>
             <option value="<?= $cat['id'] ?>" <?= ($filter_category == $cat['id']) ? 'selected' : '' ?>>
               <?= $cat['name'] ?>

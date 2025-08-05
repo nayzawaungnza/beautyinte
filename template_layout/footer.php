@@ -6,8 +6,8 @@
 
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                     <h5 class="text-light ">Find Us</h5>
-                    <li class="ftco-animate"><a href=""><span class="icon-telegram"></span></a></li>
-                    <li class="ftco-animate"><a href="https://www.facebook.com/share/16XoxEUBNR/"><span class="icon-facebook"></span></a></li>
+                    <li class="ftco-animate"><a href="#"><span class="icon-telegram"></span></a></li>
+                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@
             <div class="col-md-4">
 
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                    <h5 class="text-light ">ABOUT</h5>
+                    <h5 class="text-light ">အကြောင်းအရာ</h5>
                     <h6 class="text-light ">လာရောက်ရန်ဖိတ်ခေါ်ပါသည်။ Beauty Salon တွင် အကောင်းဆုံး ဆံပင်၊ လက်သည်းအလှပြုပြင်ခြင်း ဝန်ဆောင်မှုများကိုခံယူနိုင်ပါသည်။</h6>
                 </ul>
             </div>

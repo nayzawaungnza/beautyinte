@@ -74,10 +74,10 @@ $result = $mysqli->query($sql);
                                             <?php
                                             // Updated status definitions according to requirements
                                             $status_badge = [
-                                                0 => ['class' => 'badge bg-warning', 'text' => 'Pending'],
-                                                1 => ['class' => 'badge bg-success', 'text' => 'Completed'],
-                                                2 => ['class' => 'badge bg-danger', 'text' => 'Rejected'],
-                                                3 => ['class' => 'badge bg-info', 'text' => 'Accepted']
+                                                0 => ['class' => 'badge bg-warning', 'text' => 'စောင့်နေသည်'],
+                                                1 => ['class' => 'badge bg-success', 'text' => 'ပြီးဆုံးသည်'],
+                                                2 => ['class' => 'badge bg-danger', 'text' => 'ငြင်းပယ်သည်'],
+                                                3 => ['class' => 'badge bg-info', 'text' => 'လက်ခံသည်']
                                             ];
                                             ?>
                                             <span class="<?= $status_badge[$appointment['status']]['class'] ?>">

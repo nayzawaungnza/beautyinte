@@ -52,9 +52,9 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     if (empty($desc)) {
         $error = true;
         $desc_err = "ကျေးဇူးပြု၍ ဖော်ပြချက်ထည့်ပါ။";
-    } else if (strlen($desc) > 100) {
+    } else if (strlen($desc) > 1000) {
         $error = true;
-        $desc_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
+        $desc_err = "ဖော်ပြချက်သည် စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
     }
 
     // quantity

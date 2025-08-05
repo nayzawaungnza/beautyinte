@@ -23,7 +23,7 @@ $product_res = $mysqli->query("SELECT * FROM products $where");
 	<div class="container">
 		<div class="row justify-content-center mb-4 pb-3">
 			<div class="col-md-7 heading-section ftco-animate text-center">
-				<h2 class="mb-4">ဆိုင်ရှိရောင်းရန် ပစ္စည်းများ</h2>
+				<h2 class="mb-4">ဆိုင်ရှိရောင်းရန် ပစ္စည်းအမျိုးအစားများ</h2>
 			</div>
 		</div>
 

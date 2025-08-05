@@ -28,7 +28,7 @@ ORDER BY u.name;
 $staff_res = $mysqli->query($staff_sql);
 // Form variables
 $staff_id = $appointment_date = $appointment_time = $comment = $request = '';
-$staff_id_err = $appointment_date_err = $appointment_time_err = $general_err = '';
+$staff_id_err = $appointment_date_err = $appointment_time_err = $general_err =  $comment_err = $request_err =  '';
 $error = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -56,6 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = true;
         $appointment_date_err = 'ရွေးချယ်ထားသောရက်သည် သက်တမ်းကုန်သွားပြီးပါပြီ။';
     }
+
+    if (empty($comment)) {
+        $error = true;
+        $comment_err = "ကျေးဇူးပြု၍ မှတ်စုထည့်ပါ။";
+    } else if (strlen($comment) > 1000) {
+        $error = true;
+        $comment_err = "မှတ်စုသည်  စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
+    }
+
+    if (empty($request)) {
+        $error = true;
+        $request_err = "ကျေးဇူးပြု၍ တောင်းဆိုချက်ထည့်ပါ။";
+    } else if (strlen($request) > 1000) {
+        $error = true;
+        $request_err = "တောင်းဆိုချက်သည်  စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
+    }
+
     if (empty($appointment_time)) {
         $error = true;
         $appointment_time_err = 'ကျေးဇူးပြုပြီး ချိန်းဆိုချိန်ကို ထည့်သွင်းပါ။';
@@ -82,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conflict_result = $mysqli->query($conflict_sql);
         if ($conflict_result && $conflict_result->num_rows > 0) {
             $error = true;
-            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။';
+            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။ယခုလက်ရှိအချိန်၏နောက်တစ်နာရီကြာမှ အချိန်ချိန်းဆိုမှုထပ်မံပြုလုပ်နိုင်ပါသည်။';
         }
     }
     if (!$error) {
@@ -134,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <form method="POST" class="needs-validation" novalidate>
                             <div class="mb-4">
-                                <label for="staff_id" class="form-label fw-bold">Select Staff</label>
+                                <label for="staff_id" class="form-label fw-bold">ဝန်ထမ်းရွေးချယ်ရန်</label>
                                 <select name="staff_id" id="staff_id" class="form-select <?= $staff_id_err ? 'is-invalid' : '' ?>" required>
                                     <option value="" selected disabled>ဝန်ဆောင်မှုပေးမည့် ဝန်ထမ်းကို ရွေးပါ</option>
                                     <?php if ($staff_res && $staff_res->num_rows > 0):
@@ -172,29 +189,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
 
                             <div class="mb-4">
-                                <label for="comment" class="form-label fw-bold">မှတ်စု (လိုအပ်ပါက)</label>
+                                <label for="comment" class="form-label fw-bold">မှတ်စု</label>
                                 <textarea name="comment" id="comment" class="form-control" rows="2"><?= htmlspecialchars($comment) ?></textarea>
-                                <!-- <small class="text-muted">Any special notes for your appointment</small> -->
+                                <small class="text-danger"><?= $comment_err ?></small>
                             </div>
 
                             <div class="mb-4">
-                                <label for="request" class="form-label fw-bold">အထူးတောင်းဆိုချက်(လိုအပ်ပါက)</label>
+                                <label for="request" class="form-label fw-bold">အထူးတောင်းဆိုချက်</label>
                                 <textarea name="request" id="request" class="form-control" rows="2"><?= htmlspecialchars($request) ?></textarea>
-                                <!-- <small class="text-muted">Any special requirements you may have</small> -->
-                            </div>
+                                <small class="text-danger"><?= $request_err ?></small>
+                                <br><br>
+                                <div class="d-grid d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary btn-lg py-3">
+                                        <i class="fas fa-calendar-check me-2"></i> ချိန်းဆိုမှု အတည်ပြုရန်
+                                    </button>
 
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg py-3">
-                                    <i class="fas fa-calendar-check me-2"></i> ချိန်းဆိုမှု အတည်ပြုရန်
-                                </button>
-                            </div>
+
+                                    <button type=" submit" class="btn btn-primary btn-lg py-3">
+                                        <i class="fas fa-calendar-check me-2"></i> <a href="services.php"> ချိန်းဆိုမှု အတည်မပြုရန် </a>
+                                    </button>
+
+                                </div>
                         </form>
                     </div>
                 </div>
 
-                <div class="mt-4 text-center">
-                    <p class="text-muted">အကူအညီလိုပါသလား? <a href="#" class="text-primary">ပံ့ပိုးမှုအဖွဲ့ကို ဆက်သွယ်ပါ</a></p>
-                </div>
+
             </div>
         </div>
     </div>
@@ -231,11 +251,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         transition: all 0.3s ease;
     }
 
-    .btn-primary:hover {
-        background-color: #3a41b5;
+    /* .btn-primary:hover {
+        background-color: #4e54c8;
         border-color: #3a41b5;
         transform: translateY(-2px);
-    }
+    } */
 
     .invalid-feedback {
         display: block;
