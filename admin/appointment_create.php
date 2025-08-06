@@ -6,8 +6,8 @@ require '../require/common.php';
 require '../layouts/header.php';
 
 $error = false;
-$customer_id_error = $service_id_error = $staff_id_error = $appointment_date_err = $appointment_time_err = $status_err = $request_err = '';
-$customer_id = $service_id = $staff_id = $appointment_date = $appointment_time = $status = $comment = $request = '';
+$customer_id_error = $service_id_error = $staff_id_error = $appointment_date_err = $appointment_time_err = $status_err = $comment_err = $request_err = '';
+$customer_id = $service_id = $staff_id = $staff_id_err = $appointment_date = $appointment_time = $status = $comment = $request = '';
 $general_error = '';
 date_default_timezone_set('Asia/Yangon');
 $customerIdUrl = isset($_GET['id']) ? $_GET['id'] : '';
@@ -36,6 +36,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = true;
         $staff_id_error = "ကျေးဇူးပြုပြီး ဝန်ထမ်းတစ်ဦးကို ရွေးချယ်ပါ။";
     }
+    if (empty($comment)) {
+        $error = true;
+        $comment_err = "ကျေးဇူးပြု၍ မှတ်စုထည့်ပါ။";
+    } else if (strlen($comment) > 1000) {
+        $error = true;
+        $comment_err = "မှတ်စုသည်  စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
+    }
+
+    if (empty($request)) {
+        $error = true;
+        $request_err = "ကျေးဇူးပြု၍ တောင်းဆိုချက်ထည့်ပါ။";
+    } else if (strlen($request) > 1000) {
+        $error = true;
+        $request_err = "တောင်းဆိုချက်သည်  စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
+    }
+
     if (empty($appointment_date)) {
         $error = true;
         $appointment_date_err = "ကျေးဇူးပြုပြီး ချိန်းဆိုမည့်ရက်ကို ထည့်သွင်းပါ။";
@@ -63,12 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$error) {
         $conflict_sql = "SELECT id FROM appointments WHERE staff_id = '$staff_id' AND appointment_date = '$appointment_date' AND appointment_time = '$appointment_time' AND (status = 0 OR status = 3)";
         $conflict_result = $mysqli->query($conflict_sql);
-
         if ($conflict_result && $conflict_result->num_rows > 0) {
             $error = true;
-            $staff_id_error = "ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။";
+            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။ယခုလက်ရှိအချိန်၏နောက်တစ်နာရီကြာမှ အချိန်ချိန်းဆိုမှုထပ်မံပြုလုပ်နိုင်ပါသည်။';
         }
     }
+
 
     if (!$error) {
         $sql = "INSERT INTO appointments (customer_id, service_id, staff_id, appointment_date, appointment_time, status, comment, request) VALUES ('$customerIdUrl', '$service_id', '$staff_id', '$appointment_date', '$appointment_time', '0', '$comment', '$request')";
@@ -80,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 <div class="content-body">
@@ -118,6 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php if ($staff_id_error): ?><div class="invalid-feedback"><?= $staff_id_error ?></div><?php endif; ?>
                             </div>
 
+
+
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
                                     <label for="appointment_date" class="form-label fw-bold">ချိန်းဆိုရက်</label>
@@ -132,13 +151,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
 
                             <div class="mb-4">
-                                <label for="comment" class="form-label fw-bold">မှတ်စု (လိုအပ်ပါက)</label>
+                                <label for="comment" class="form-label fw-bold">မှတ်စု</label>
                                 <textarea name="comment" class="form-control" rows="2"><?= htmlspecialchars($comment) ?></textarea>
+                                <small class="text-danger"><?= $comment_err ?></small>
                             </div>
 
                             <div class="mb-4">
-                                <label for="request" class="form-label fw-bold">အထူးတောင်းဆိုချက်(လိုအပ်ပါက)</label>
+                                <label for="request" class="form-label fw-bold">အထူးတောင်းဆိုချက်</label>
                                 <textarea name="request" class="form-control" rows="2"><?= htmlspecialchars($request) ?></textarea>
+                                <small class="text-danger"><?= $request_err ?></small>
                             </div>
 
                             <div class="d-grid">
@@ -148,9 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <div class="mt-4 text-center">
-                    <p class="text-muted">အကူအညီလိုပါသလား? <a href="#" class="text-primary">ပံ့ပိုးမှုအဖွဲ့ကို ဆက်သွယ်ပါ</a></p>
-                </div>
+
             </div>
         </div>
     </div>

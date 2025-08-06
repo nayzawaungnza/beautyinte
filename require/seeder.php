@@ -63,12 +63,12 @@ function seed_users($mysqli)
 //     }
 // }
 
-function seed_payment_methods($mysqli)
-{
-    for ($i = 1; $i <= 10; $i++) {
-        insert($mysqli, "INSERT INTO payment_method (name, status) VALUES ('Method $i', 1)");
-    }
-}
+// function seed_payment_methods($mysqli)
+// {
+//     for ($i = 1; $i <= 10; $i++) {
+//         insert($mysqli, "INSERT INTO payment_method (name, status) VALUES ('Method $i', 1)");
+//     }
+// }
 
 // function seed_promotions($mysqli)
 // {

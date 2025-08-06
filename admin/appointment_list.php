@@ -102,13 +102,13 @@ require '../layouts/header.php';
                                             <td><?= htmlspecialchars($row['app_time']) ?></td>
                                             <td><?php
                                                 if ($row['status'] == 0) {
-                                                    echo "<span class='badge bg-warning text-dark'>Pending</span>";
+                                                    echo "<span class='badge bg-warning text-dark'>စောင့်နေသည်</span>";
                                                 } elseif ($row['status'] == 1) {
-                                                    echo "<span class='badge bg-success text-dark'>Complete</span>";
+                                                    echo "<span class='badge bg-success text-dark'>ပြီးဆုံးသည်</span>";
                                                 } elseif ($row['status'] == 3) {
-                                                    echo "<span class='badge bg-primary text-dark'>Accept</span>";
+                                                    echo "<span class='badge bg-primary text-dark'>လက်ခံသည်</span>";
                                                 } else {
-                                                    echo "<span class='badge bg-danger text-dark'>Reject</span>";
+                                                    echo "<span class='badge bg-danger text-dark'>ငြင်းပယ်သည်</span>";
                                                 }
                                                 ?></td>
                                             <td><?= htmlspecialchars($row['comment']) ?></td>
@@ -116,8 +116,7 @@ require '../layouts/header.php';
                                             <td>
                                                 <div>
                                                     <?php if ($row['status'] == 0) {  ?>
-                                                        <a href="./appointment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
-
+                                                        <a href="./appointment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2 mb-2">ပြင်ဆင်ရန်</a>
                                                         <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
                                                     <?php } else if ($row['status'] == 3) { ?>
 

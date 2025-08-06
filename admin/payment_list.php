@@ -88,7 +88,7 @@ require '../layouts/header.php';
                                             <td><?= $i++ ?></td>
                                             <td><?= htmlspecialchars($row['customer_name']) ?></td>
                                             <td><?= htmlspecialchars($row['service_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['amount']) ?></td>
+                                            <td><?= htmlspecialchars($row['amount']) ?> ကျပ်</td>
                                             <td><?= htmlspecialchars($row['payment_method_name']) ?></td>
                                             <td><?= htmlspecialchars($row['payment_date']) ?></td>
                                             <td>

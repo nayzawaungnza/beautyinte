@@ -63,8 +63,8 @@ require '../layouts/header.php';
                             <thead>
                                 <tr class="text-center">
                                     <th class="">စဉ်</th>
-                                    <th class="">ပရိုဖိုင်</th>
-                                    <th class="">အမည်</th>
+                                    <th class="">ဝန်ဆောင်မှုပုံ</th>
+                                    <th class="">ဝန်ဆောင်မှုအမည်</th>
                                     <th class="">စျေးနှုန်း</th>
                                     <th class="">အကြောင်းအရာ ဖော်ပြချက်</th>
                                     <th class="">လုပ်ဆောင်မှု</th>
@@ -87,7 +87,7 @@ require '../layouts/header.php';
 
 
                                             <td>
-                                                <a href="./service_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                <a href="./service_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2 mb-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
                                             </td>
                                         </tr>

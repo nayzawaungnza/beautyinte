@@ -4,6 +4,7 @@ checkAuth('admin');
 require "../require/common_function.php";
 require '../require/db.php';
 require '../require/common.php';
+
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 $res = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity
@@ -29,6 +30,7 @@ if ($delete_id !== '') {
         header("Location: $url");
     }
 }
+
 require '../layouts/header.php';
 ?>
 <div class="content-body py-3">
@@ -91,9 +93,9 @@ require '../layouts/header.php';
                                             <td><?= $row['quantity'] ?></td>
                                             <td>
                                                 <div>
-                                                    <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>" class="btn btn-sm btn-primary mx-2">အသေးစိတ်</a>
-                                                    <a href="./product_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                    <a href="./product_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2 mb-2">ပြင်ဆင်ရန်</a>
                                                     <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
+                                                    <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>" class="btn btn-sm btn-primary mx-2">အသေးစိတ်</a>
                                                 </div>
                                             </td>
                                         </tr>
