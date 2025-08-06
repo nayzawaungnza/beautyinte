@@ -69,8 +69,8 @@ require '../layouts/header.php';
                             <thead>
                                 <tr class="text-center">
                                     <th>စဉ်</th>
-                                    <th>ပရိုဖိုင်</th>
-                                    <th>အမည်</th>
+                                    <th>ဝန်ဆောင်မှုပုံ</th>
+                                    <th>ဝန်ဆောင်မှုအမည်</th>
                                     <th>အမျိုးအစား</th>
                                     <th>စျေးနှုန်း</th>
                                     <th>အကြောင်းအရာ ဖော်ပြချက်</th>

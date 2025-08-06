@@ -4,10 +4,13 @@ checkAuth('admin');
 require '../layouts/header.php';
 
 // Stats
+$total_users = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'staff'")->fetch_assoc()['count'];
 $total_customers = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'customer'")->fetch_assoc()['count'];
 $total_appointments = $mysqli->query("SELECT COUNT(*) as count FROM appointments")->fetch_assoc()['count'];
 $total_products = $mysqli->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
 $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->fetch_assoc()['count'];
+$total_services = $mysqli->query("SELECT COUNT(*) as count FROM services")->fetch_assoc()['count'];
+
 
 // Bar chart data - Monthly appointments this year
 $year = date('Y');
@@ -29,6 +32,21 @@ while ($row = $result->fetch_assoc()) {
     <div class="container-fluid">
         <div class="row mt-4">
             <!-- Dashboard Cards -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card dashboard-card gradient-green shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ဝန်ထမ်းများ</div>
+                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_users ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-friends fa-3x icon-glow"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-green shadow h-100 py-2">
                     <div class="card-body">
@@ -64,7 +82,7 @@ while ($row = $result->fetch_assoc()) {
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">အရောင်း</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ရောင်းမည့်ပစ္စည်း</div>
                                 <div class="h3 mb-0 font-weight-bold text-white"><?= $total_products ?></div>
                             </div>
                             <div class="col-auto">
@@ -81,6 +99,21 @@ while ($row = $result->fetch_assoc()) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ပရိုမိုးရှင်း</div>
                                 <div class="h3 mb-0 font-weight-bold text-white"><?= $total_promotions  ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-gift fa-3x icon-glow"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card dashboard-card gradient-red shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ဝန်ဆောင်မှုများ</div>
+                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_services  ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-gift fa-3x icon-glow"></i>

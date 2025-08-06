@@ -146,7 +146,7 @@ require_once '../require/common_function.php';
                     </button>
                     <span class="brand-title d-flex align-items-center">
                         <img src="../images/logo.jpg" alt="logo" style="width: 40px; border-radius: 8px; margin-right: 10px;">
-                        <h4 class="mb-0">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</h4>
+                        <h4 class="mb-0">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး စီမံခန့်ခွဲမှုစနစ်</h4>
                     </span>
                 </div>
                 <div class="d-flex align-items-center">
@@ -196,15 +196,15 @@ require_once '../require/common_function.php';
                     <?php } else if ($_SESSION['role'] == "admin") { ?>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="fa-solid fa-user"></i><span class="nav-text">Dashabord</span>
+                                <i class="fa-solid fa-user"></i><span class="nav-text">ပင်မစာမျက်နှာ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/dashboard.php">Dashboard</a></li>
+                                <li><a href="../admin/dashboard.php">varchat</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
-                                <i class="fa-solid fa-user"></i><span class="nav-text">အသုံးပြုသူများ</span>
+                                <i class="fa-solid fa-user"></i><span class="nav-text">ဝန်ထမ်းများ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/user_list.php">စာရင်း</a></li>
