@@ -1,18 +1,19 @@
 <?php
 require '../require/check_auth.php';
 checkAuth('admin');
-require '../require/db.php';
-require '../require/common.php';
-$success = isset($_GET['success']) ? $_GET['success'] : '';
-$error = isset($_GET['error']) ? $_GET['error'] : '';
 
+require '../layouts/header.php';
 
-$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$success = $_GET['success'] ?? '';
+$error = $_GET['error'] ?? '';
+$search = trim($_GET['search'] ?? '');
+
 $sql = "SELECT * FROM `payment_method`";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE name LIKE '%$search_escaped%'";
+    $sql .= " WHERE name LIKE '%$search_escaped%' OR user_acc LIKE '%$search_escaped%' OR ph_no LIKE '%$search_escaped%'";
 }
+$sql .= " ORDER BY id DESC";
 $methods = $mysqli->query($sql);
 
 // Handle delete
@@ -27,20 +28,17 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
         exit;
     }
 }
-
-$methods = $mysqli->query("SELECT * FROM payment_method ORDER BY id DESC");
-require '../layouts/header.php';
 ?>
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>ငွေပေး‌ချေမှုနည်းလမ်းစာရင်း</h3>
-            <a href="payment_method_create.php" class="btn btn-primary">ငွေပေး‌ချေမှုနည်းလမ်းထပ်ထည့်ရန်</a>
+            <a href="payment_method_create.php" class="btn btn-primary">ထပ်ထည့်ရန်</a>
         </div>
 
         <div class="col-12 mb-3">
             <form method="GET" class="form-inline d-flex justify-content-end">
-                <input type="text" name="search" class="form-control mr-2" placeholder="Search by name " value="<?= htmlspecialchars($search) ?>">
+                <input type="text" name="search" class="form-control mr-2" placeholder="Search name, acc, phone" value="<?= htmlspecialchars($search) ?>">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
@@ -51,13 +49,17 @@ require '../layouts/header.php';
         <?php if ($error) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
         <?php } ?>
+
         <div class="card">
             <div class="card-body">
-                <table class="table table-hover table-sm">
+                <table class="table table-hover table-sm align-middle">
                     <thead>
                         <tr>
                             <th>စဥ်</th>
-                            <th>အမည်</th>
+                            <th>ပုံ</th>
+                            <th>နည်းလမ်းအမည်</th>
+                            <th>အကောင့်</th>
+                            <th>ဖုန်း</th>
                             <th>အခြေအနေ</th>
                             <th>လုပ်ဆောင်မှု</th>
                         </tr>
@@ -68,8 +70,16 @@ require '../layouts/header.php';
                             while ($row = $methods->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?= $i++ ?></td>
+                                    <td>
+                                        <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
+                                            alt="img" style="width: 50px; height: 50px;" class="rounded">
+                                    </td>
                                     <td><?= htmlspecialchars($row['name']) ?></td>
-                                    <td><?= $row['status'] ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-secondary">Inactive</span>' ?></td>
+                                    <td><?= htmlspecialchars($row['user_acc']) ?></td>
+                                    <td><?= htmlspecialchars($row['ph_no']) ?></td>
+                                    <td>
+                                        <?= $row['status'] ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-secondary">Inactive</span>' ?>
+                                    </td>
                                     <td>
                                         <a href="payment_method_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>
                                         <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>
@@ -78,7 +88,7 @@ require '../layouts/header.php';
                             <?php }
                         } else { ?>
                             <tr>
-                                <td colspan="4" class="text-center">ငွေပေး‌ချေမှုနည်းလမ်းများမရှိပါ</td>
+                                <td colspan="7" class="text-center">ငွေပေး‌ချေမှုနည်းလမ်းများ မတွေ့ရှိပါ။</td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -87,6 +97,8 @@ require '../layouts/header.php';
         </div>
     </div>
 </div>
+
+<!-- SweetAlert for Delete Confirmation -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -95,7 +107,7 @@ require '../layouts/header.php';
                 e.preventDefault();
                 var id = this.getAttribute('data-id');
                 Swal.fire({
-                    title: 'ဖျက်မည်ဆိုတာသေချာပြီလား',
+                    title: 'ဖျက်မည်လား?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -111,4 +123,5 @@ require '../layouts/header.php';
         });
     });
 </script>
+
 <?php require '../layouts/footer.php'; ?>

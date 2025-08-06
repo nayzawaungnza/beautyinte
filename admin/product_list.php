@@ -6,13 +6,31 @@ require '../require/db.php';
 require '../require/common.php';
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity
- FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
+$res = "SELECT 
+    products.id,
+    products.name,
+    products.description,
+    products.img,
+    products.price,
+    product_qty.qty AS quantity,
+    product_categories.name AS category_name
+FROM product_qty
+INNER JOIN products ON products.id = product_qty.product_id
+LEFT JOIN product_categories ON products.category_id = product_categories.id";
 $products = $mysqli->query($res);
 
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$sql = "SELECT products.id,products.name, products.description,products.img, products.price,product_qty.qty AS quantity
-FROM `product_qty` INNER JOIN products ON products.id = product_qty.product_id";
+$sql = "SELECT 
+    products.id,
+    products.name,
+    products.description,
+    products.img,
+    products.price,
+    product_qty.qty AS quantity,
+    product_categories.name AS category_name
+FROM product_qty
+INNER JOIN products ON products.id = product_qty.product_id
+LEFT JOIN product_categories ON products.category_id = product_categories.id";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
     $sql .= " WHERE products.name LIKE '%$search_escaped%'";
@@ -74,6 +92,7 @@ require '../layouts/header.php';
                                     <th class="">အကြောင်းအရာဖော်ပြချက်</th>
                                     <th class="">စျေးနှုန်း</th>
                                     <th class="">ပစ္စည်းအရေအတွက်</th>
+                                    <th class="">အမျိုးအစား</th>
                                     <th class="">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
@@ -89,6 +108,7 @@ require '../layouts/header.php';
                                             <td><?= $row['description'] ?></td>
                                             <td><?= $row['price'] ?>ကျပ်</td>
                                             <td><?= $row['quantity'] ?></td>
+                                            <td><?= $row['category_name'] ?? 'မသတ်မှတ်ရသေးပါ' ?></td>
                                             <td>
                                                 <div>
                                                     <a href="<?= $admin_base_url . 'product_details.php?id=' . $row['id'] ?>" class="btn btn-sm btn-primary mx-2">အသေးစိတ်</a>

@@ -4,32 +4,13 @@ checkAuth('admin');
 require '../layouts/header.php';
 
 $error = false;
-$name_err =
-    $email_err =
-    $password_err =
-    $role_err   =
-    $phone_err =
-    $gender_err =
-    $name =
-    $email =
-    $password =
-    $role =
-    $phone =
-    $gender = '';
+$name_err = $email_err = $password_err = $role_err = $phone_err = $gender_err = '';
+$position_err = $salary_err = '';
 
-$image_err = '';
+$name = $email = $password = $role = $phone = $gender = $position = '';
+$salary = null;
 $image = '';
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT users.id, users.name, users.email, users.password,users.role,users.phone,users.gender FROM  `users` WHERE users.id = '$id'";
-    $oldData = $mysqli->query($sql)->fetch_assoc();
-    $name = $oldData['name'];
-    $email = $oldData['email'];
-    $password = $oldData['password'];
-    $role = $oldData['role'];
-    $phone = $oldData['phone'];
-}
+$image_err = '';
 
 if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $name = $_POST['name'];
@@ -38,73 +19,91 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     $role = $_POST['role'];
     $phone = $_POST['phone'];
     $gender = $_POST['gender'];
+    $position = $_POST['position'];
+    $salary = $_POST['salary'];
 
-
-
-    //Name
+    // Name validation
     if (empty($name)) {
         $error = true;
         $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
-    } else if (strlen($name) < 5) {
+    } elseif (strlen($name) < 5) {
         $error = true;
         $name_err = "အမည်သည် အနည်းဆုံး စာလုံး ၅ လုံး ပြည့်မီရပါမည်။";
-    } else if (strlen($name) >= 100) {
+    } elseif (strlen($name) >= 100) {
         $error = true;
         $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
-    //Email
-    $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
-    if (strlen($email) === 0) {
+    // Email validation
+    $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+    if (empty($email)) {
         $error = true;
         $email_err = "ကျေးဇူးပြု၍ သင့်အီးမေးလ်ကိုဖြည့်ပါ။";
-    } else if (strlen($email) < 10) {
+    } elseif (strlen($email) < 10) {
         $error = true;
         $email_err = "အီးမေးလ်သည် ၁၀ ထက်များရပါမည်။";
-    } else if (strlen($email) > 30) {
+    } elseif (strlen($email) > 30) {
         $error = true;
-        $email_err = "အီးမေးလ်သည်  ၃၀ ထက်နည်းရပါမည်။";
-    } else if (!preg_match($email_pattern, $email)) {
+        $email_err = "အီးမေးလ်သည် ၃၀ ထက်နည်းရပါမည်။";
+    } elseif (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "အီးမေးလ် ဖော်မတ်မှားယွင်းနေပါသည်။";
     }
-    //Password
-    if (strlen($password) === 0) {
+
+    // Password validation
+    if (empty($password)) {
         $error = true;
         $password_err = "ကျေးဇူးပြု၍ လျှို့ဝှက်နံပါတ် ဖြည့်ပါ။";
-    } else if (strlen($password) < 8) {
+    } elseif (strlen($password) < 8) {
         $error = true;
         $password_err = "လျှို့ဝှက်နံပါတ်သည် အနည်းဆုံး ၈ လုံး ရှိရပါမည်။";
-    } else if (strlen($password) > 30) {
+    } elseif (strlen($password) > 30) {
         $error = true;
         $password_err = "လျှို့ဝှက်နံပါတ်သည် စာလုံး ၃၀ ထက်နည်းရပါမည်။";
     } else {
         $byScriptPassword = md5($password);
     }
-    //role
-    if (strlen($role) === 0 || $role === '') {
+
+    // Role validation
+    if (empty($role)) {
         $error = true;
         $role_err = "ကျေးဇူးပြု၍ အခန်းကဏ္ဍ ရွေးချယ်ပါ။";
     }
-    //phone
+
+    // Phone validation
     if (empty($phone)) {
         $error = true;
         $phone_err = "ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ။";
-    } else if (strlen($phone) < 11) {
+    } elseif (strlen($phone) < 11) {
         $error = true;
         $phone_err = "ဖုန်းနံပါတ်သည် အနည်းဆုံး ဂဏန်း ၁၁ လုံး ရှိရပါမည်။";
     }
-    //gender
-    if ($gender === '') {
+
+    // Gender validation
+    if (empty($gender)) {
         $error = true;
         $gender_err = "ကျေးဇူးပြု၍ လိင် ရွေးချယ်ပါ။";
     }
 
-    // Image
-    if (isset($_FILES['image'])) {
+    // Position (optional, but let's trim and validate length)
+    if (!empty($position) && strlen($position) > 200) {
+        $error = true;
+        $position_err = "ရာထူးအမည်သည် စာလုံး 200 ထက်မပိုရပါ။";
+    }
+
+    // Salary (optional but must be integer if provided)
+    if (!empty($salary)) {
+        if (!is_numeric($salary)) {
+            $error = true;
+            $salary_err = "လစာသည် ဂဏန်းဖြစ်ရပါမည်။";
+        }
+    }
+
+    // Image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $target_dir = "../uplode/";
         $file_name = basename($_FILES['image']['name']);
-        $target_file =  time() . '_' . $file_name;
+        $target_file = time() . '_' . $file_name;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
         if (in_array($imageFileType, $allowed)) {
@@ -118,23 +117,18 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
             $error = true;
             $image_err = "ဓာတ်ပုံအမျိုးအစား မမှန်ပါ။";
         }
-    } else {
-        $image = '';
     }
 
     if (!$error) {
-        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `phone`, `gender`, `image`)
-     VALUES ('$name','$email','$byScriptPassword','$role','$phone','$gender','$image')";
+        $sql = "INSERT INTO `users` (`name`, `email`, `password`, `role`, `phone`, `gender`, `position`, `salary`, `image`) 
+                VALUES ('$name','$email','$byScriptPassword','$role','$phone','$gender','$position','$salary','$image')";
         $mysqli->query($sql);
         echo "<script>window.location.href= 'http://localhost/Beauty/admin/user_list.php' </script>";
     }
 }
-
-
 ?>
 
 <!-- Content body start -->
-
 <div class="content-body">
     <div class="container mt-3">
         <div class="card">
@@ -142,6 +136,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                 <h3 class="text-center mb-5 text-info">အသုံးပြုသူ အသစ်ဖန်တီးပါ</h3>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="row">
+                        <!-- Name -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name" class="form-label">အမည်</label>
@@ -149,96 +144,99 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <small class="text-danger"><?= $name_err ?></small>
                             </div>
                         </div>
+
+                        <!-- Email -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" class="form-label">အီးမေးလ်</label>
+                                <label class="form-label">အီးမေးလ်</label>
                                 <input type="text" name="email" class="form-control" value="<?= $email ?>">
                                 <small class="text-danger"><?= $email_err ?></small>
                             </div>
                         </div>
+
+                        <!-- Password -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" class="form-label">စကားဝှက်</label>
+                                <label class="form-label">စကားဝှက်</label>
                                 <input type="password" name="password" class="form-control" value="<?= $password ?>">
                                 <small class="text-danger"><?= $password_err ?></small>
                             </div>
                         </div>
+
+                        <!-- Role -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="role" class="form-label">အခန်းကဏ္ဍ</label>
-                                <select name="role" id="role" class="form-control" value="<?= $role ?>">
-                                    <!-- <option value="">ရွေးချယ်ရန် အခန်းကဏ္ဍ</option> -->
-                                    <option value="admin" <?php echo $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
+                                <label class="form-label">အခန်းကဏ္ဍ</label>
+                                <select name="role" class="form-control">
+                                    <option value="admin" <?= $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
                                     <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
+                                    <option value="customer" <?= $role == 'customer' ? 'selected' : '' ?>>ဖောက်သည်</option>
                                 </select>
-
-                                <?php
-                                if ($role_err) {
-                                ?>
-                                    <small class="text-danger"><?php echo $role_err ?></small>
-                                <?php
-                                }
-                                ?>
+                                <small class="text-danger"><?= $role_err ?></small>
                             </div>
                         </div>
+
+                        <!-- Phone -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>
+                                <label class="form-label">ဖုန်း</label>
                                 <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                                 <small class="text-danger"><?= $phone_err ?></small>
                             </div>
                         </div>
+
+                        <!-- Gender -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">လိင်</label>
-                                <br />
+                                <label class="form-label">လိင်</label><br />
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        ကျား
-                                    </label>
+                                    <input class="form-check-input" type="radio" name="gender" value="male" <?= $gender == 'male' ? 'checked' : '' ?>>
+                                    <label class="form-check-label">ကျား</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        မ
-                                    </label>
+                                    <input class="form-check-input" type="radio" name="gender" value="female" <?= $gender == 'female' ? 'checked' : '' ?>>
+                                    <label class="form-check-label">မ</label>
                                 </div>
-                                <?php
-                                if ($gender_err) {
-                                ?>
-                                    <br />
-                                    <small class="text-danger"><?php echo $gender_err ?></small>
-                                <?php
-                                }
-                                ?>
+                                <small class="text-danger"><?= $gender_err ?></small>
                             </div>
                         </div>
+
+                        <!-- Position -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="image" class="form-label">ပုံထည့်ပါ</label>
-                                <input type="file" name="image" class="form-control">
-                                <small class="text-danger"><?= isset($image_err) ? $image_err : '' ?></small>
+                                <label class="form-label">ရာထူး</label>
+                                <input type="text" name="position" class="form-control" value="<?= $position ?>">
+                                <small class="text-danger"><?= $position_err ?></small>
                             </div>
+                        </div>
 
-                            <div class="my-2">
-                                <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
+                        <!-- Salary -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">လစာ (ကျပ်)</label>
+                                <input type="text" name="salary" class="form-control" value="<?= $salary ?>">
+                                <small class="text-danger"><?= $salary_err ?></small>
                             </div>
+                        </div>
+
+                        <!-- Image -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">ပုံထည့်ပါ</label>
+                                <input type="file" name="image" class="form-control">
+                                <small class="text-danger"><?= $image_err ?></small>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-12 my-3 text-center">
+                            <button class="btn btn-primary" type="submit" name="btn_submit">တင်သွင်းပါ</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- #/ container -->
 </div>
 
-<!-- Content body end -->
-
-
-
-<?php
-
-require '../layouts/footer.php';
-
-?>
+<?php require '../layouts/footer.php'; ?>

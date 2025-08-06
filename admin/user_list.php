@@ -4,38 +4,37 @@ checkAuth('admin');
 require "../require/common_function.php";
 require '../require/db.php';
 require '../require/common.php';
-$success = isset($_GET['success']) ? $_GET['success'] : '';
-$error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = "SELECT * FROM `users` WHERE role != 'customer'";
-$users = $mysqli->query($res);
 
-$search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$sql = "SELECT * FROM `users`  WHERE role != 'customer'";
+$success = $_GET['success'] ?? '';
+$error = $_GET['error'] ?? '';
+$search = trim($_GET['search'] ?? '');
+
+$sql = "SELECT * FROM `users` WHERE role != 'customer'";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE name LIKE '%$search_escaped%' OR email LIKE '%$search_escaped%' OR phone LIKE '%$search_escaped%'  OR role LIKE '%$search_escaped%'";
+    $sql .= " AND (name LIKE '%$search_escaped%' OR email LIKE '%$search_escaped%' OR phone LIKE '%$search_escaped%' OR role LIKE '%$search_escaped%')";
 }
 $users = $mysqli->query($sql);
 
-$delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
+// Handle delete
+$delete_id = $_GET['delete_id'] ?? '';
 if ($delete_id !== '') {
     $res = deleteData('users', $mysqli, "id=$delete_id");
     if ($res) {
-        $url = $admin_base_url . "user_list.php?success=Delete User Success";
-        header("Location: $url");
+        header("Location: {$admin_base_url}user_list.php?success=Delete User Success");
     }
 }
+
 require '../layouts/header.php';
 ?>
+
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3>အသုံးပြုသူ စာရင်း</h3>
-            <div class="">
-                <a href="<?= $admin_base_url . 'user_create.php' ?>" class="btn btn-primary">
-                    အသုံးပြုသူ အသစ်ဖန်တီးရန်
-                </a>
-            </div>
+            <a href="<?= $admin_base_url . 'user_create.php' ?>" class="btn btn-primary">
+                အသုံးပြုသူ အသစ်ဖန်တီးရန်
+            </a>
         </div>
         <div class="col-12 mb-3">
             <form method="get" class="form-inline d-flex justify-content-end">
@@ -43,58 +42,64 @@ require '../layouts/header.php';
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
+
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
-                <?php if ($success !== '') { ?>
-                    <div class="alert alert-success">
-                        <?= $success ?>
-                    </div>
+                <?php if ($success) { ?>
+                    <div class="alert alert-success"><?= $success ?></div>
                 <?php } ?>
-                <?php if ($error !== '') { ?>
-                    <div class="alert alert-danger">
-                        <?= $error ?>
-                    </div>
+                <?php if ($error) { ?>
+                    <div class="alert alert-danger"><?= $error ?></div>
                 <?php } ?>
             </div>
+
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th class="">စဉ်</th>
-                                    <th class="">ပရိုဖိုင်</th>
-                                    <th class="">အမည်</th>
-                                    <th class="">အီးမေးလ်</th>
-                                    <th class="">အခန်းကဏ္ဍ</th>
-                                    <th class="">ဆက်သွယ်ရန်ဖုန်း</th>
-                                    <th class="">လိင်</th>
-                                    <th class="">လုပ်ဆောင်မှု</th>
+                                    <th>စဉ်</th>
+                                    <th>ပရိုဖိုင်</th>
+                                    <th>အမည်</th>
+                                    <th>အီးမေးလ်</th>
+                                    <th>အခန်းကဏ္ဍ</th>
+                                    <th>ဆက်သွယ်ရန်ဖုန်း</th>
+                                    <th>လိင်</th>
+                                    <th>ရာထူး</th>
+                                    <th>လစာ</th>
+                                    <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                if ($users->num_rows > 0) {
+                                <?php if ($users->num_rows > 0) {
                                     $i = 1;
                                     while ($row = $users->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
                                             <td>
                                                 <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
-                                                    alt="Profile Image" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                                    alt="Profile Image"
+                                                    class="img-fluid rounded-circle"
+                                                    style="width: 50px; height: 50px;">
                                             </td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
                                             <td><?= $row['role'] == "admin" ? "အုပ်ချုပ်သူ" : "ဝန်ထမ်း" ?></td>
                                             <td><?= $row['phone'] ?></td>
                                             <td><?= $row['gender'] == "male" ? "ကျား" : "မ" ?></td>
+                                            <td><?= $row['position'] ?: '-' ?></td>
+                                            <td><?= $row['salary'] ? number_format($row['salary']) . " Ks" : '-' ?></td>
                                             <td>
-                                                <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
-                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
+                                                <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပြင်ဆင်ရန်</a>
                                             </td>
                                         </tr>
-                                <?php }
-                                } ?>
+                                    <?php }
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="10" class="text-center">အသုံးပြုသူများ မရှိသေးပါ။</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -102,15 +107,13 @@ require '../layouts/header.php';
             </div>
         </div>
     </div>
-    <!-- #/ container -->
 </div>
-<!--**********************************
-            Content body end
-        ***********************************-->
+
+<!-- Delete confirmation -->
 <script>
     $(document).ready(function() {
         $('.delete_btn').click(function() {
-            const id = $(this).data('id')
+            const id = $(this).data('id');
             Swal.fire({
                 title: 'ဖျက်မည်ဆိုတာသေချာပြီလား',
                 icon: 'warning',
@@ -121,12 +124,11 @@ require '../layouts/header.php';
                 cancelButtonText: 'မဖျက်ပါ'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'user_list.php?delete_id=' + id
+                    window.location.href = 'user_list.php?delete_id=' + id;
                 }
             });
-        })
-    })
+        });
+    });
 </script>
-<?php
-require '../layouts/footer.php';
-?>
+
+<?php require '../layouts/footer.php'; ?>

@@ -41,6 +41,8 @@ function create_table($mysqli)
                 image VARCHAR(200) NULL,
                 description TEXT NULL,
                 phone VARCHAR(50) NOT NULL,
+                position VARCHAR(200) NULL,
+                salary INT NULL,
                 gender ENUM('male','female') NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -101,6 +103,9 @@ function create_table($mysqli)
                    (
                    id INT AUTO_INCREMENT PRIMARY KEY,
                    name VARCHAR(100) NOT NULL,
+                   image VARCHAR(200) NULL,
+                   user_acc VARCHAR(200) NULL,
+                   ph_no VARCHAR(200) NULL,
                    status TINYINT(1) NOT NULL DEFAULT 1
                    )";
     if ($mysqli->query($payment_method_sql) === false) return false;

@@ -18,9 +18,11 @@ function seed_users($mysqli)
         $password = md5("password");
         $role = $roles[array_rand($roles)];
         $phone = "012345678$i";
+        $position = "barber";
+        $salary = "100000";
         $gender = $genders[array_rand($genders)];
-        insert($mysqli, "INSERT INTO users (name, email, password, role, phone, gender) 
-                         VALUES ('$name', '$email', '$password', '$role', '$phone', '$gender')");
+        insert($mysqli, "INSERT INTO users (name, email, password, role, phone, position, salary,gender) 
+                         VALUES ('$name', '$email', '$password', '$role', '$phone', '$position','$salary','$gender')");
     }
 }
 

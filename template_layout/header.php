@@ -33,7 +33,7 @@ session_start();
 </head>
 
 <body>
-    <?php if (basename($_SERVER['PHP_SELF']) != "product.php") { ?>
+    <?php if (basename($_SERVER['PHP_SELF']) == "product.php") { ?>
         <div class="hero-wrap js-fullheight" style="background-image: url('images/salon1.jpg');"
             data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
@@ -71,9 +71,7 @@ session_start();
                     <?php if (!isset($_SESSION['id'])) { ?>
                         <li class="nav-item"><a href="login.php" class="nav-link  text-dark">လော့ဂ်အင်ဝင်ရန်</a></li>
                         <li class="nav-item"><a href="register.php" class="nav-link  text-dark">အကောင့်ဖွင်ရန်</a></li>
-                    <?php } else { ?>
-                        <li class="nav-item"><a href="<?= "http://localhost/Beauty/" . $_SESSION['role'] . "/dashboard.php " ?>" class="nav-link  text-dark">ဒက်ရှ်ဘုတ်</a></li>
-                    <?php } ?>
+                    <?php }  ?>
                 </ul>
             </div>
         </div>
