@@ -71,8 +71,12 @@ require '../layouts/header.php';
                 <?php } ?>
             </div>
             <div class="col-12">
+                <a href="appointment_export.php<?= $search ? '?search=' . urlencode($search) : '' ?>" class="btn btn-success mb-3">
+                    Export to CSV
+                </a>
                 <div class="card">
                     <div class="card-body">
+
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>

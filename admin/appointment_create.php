@@ -1,15 +1,14 @@
 <?php
 require '../require/check_auth.php';
 checkAuth('admin');
-require '../require/db.php';
-require '../require/common.php';
 require '../layouts/header.php';
 
 $error = false;
-$customer_id_error = $service_id_error = $staff_id_error = $appointment_date_err = $appointment_time_err = $status_err = $comment_err = $request_err = '';
-$customer_id = $service_id = $staff_id = $staff_id_err = $appointment_date = $appointment_time = $status = $comment = $request = '';
+$service_id_error = $staff_id_error = $appointment_date_err = $appointment_time_err = $comment_err = $request_err = '';
+$appointment_date = $appointment_time = $status = $comment = $request = '';
 $general_error = '';
 date_default_timezone_set('Asia/Yangon');
+
 $customerIdUrl = isset($_GET['id']) ? $_GET['id'] : '';
 
 $customers = $mysqli->query("SELECT id, name FROM users WHERE id = '$customerIdUrl'");
@@ -17,8 +16,7 @@ $services = $mysqli->query("SELECT id, name, price, description FROM services OR
 $users = $mysqli->query("SELECT id, name FROM users WHERE role = 'staff' ORDER BY name ASC");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $customer_id = $_POST['customer_id'] ?? '';
-    $service_id = $_POST['service_id'] ?? '';
+    $service_id = $_POST['service_id'] ?? [];
     $staff_id = $_POST['staff_id'] ?? '';
     $appointment_date = $_POST['appointment_date'] ?? '';
     $appointment_time = $_POST['appointment_time'] ?? '';
@@ -28,28 +26,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $today = date('Y-m-d');
     $current_time = date('H:i:s');
 
-    if (empty($service_id)) {
+    if (empty($service_id) || !is_array($service_id)) {
         $error = true;
-        $service_id_error = "ကျေးဇူးပြုပြီး ဝန်ဆောင်မှုကို ရွေးချယ်ပါ။";
+        $service_id_error = "ကျေးဇူးပြုပြီး ဝန်ဆောင်မှုတစ်ခု သို့မဟုတ် အများကို ရွေးချယ်ပါ။";
     }
+
     if (empty($staff_id)) {
         $error = true;
         $staff_id_error = "ကျေးဇူးပြုပြီး ဝန်ထမ်းတစ်ဦးကို ရွေးချယ်ပါ။";
     }
+
     if (empty($comment)) {
         $error = true;
         $comment_err = "ကျေးဇူးပြု၍ မှတ်စုထည့်ပါ။";
-    } else if (strlen($comment) > 1000) {
+    } elseif (strlen($comment) > 1000) {
         $error = true;
-        $comment_err = "မှတ်စုသည်  စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
+        $comment_err = "မှတ်စုသည် စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
     }
 
     if (empty($request)) {
         $error = true;
         $request_err = "ကျေးဇူးပြု၍ တောင်းဆိုချက်ထည့်ပါ။";
-    } else if (strlen($request) > 1000) {
+    } elseif (strlen($request) > 1000) {
         $error = true;
-        $request_err = "တောင်းဆိုချက်သည်  စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
+        $request_err = "တောင်းဆိုချက်သည် စာလုံး ၁၀၀၀ ထက်နည်းရပါမည်။";
     }
 
     if (empty($appointment_date)) {
@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = true;
         $appointment_date_err = "ရွေးချယ်ထားသောရက်သည် သက်တမ်းကုန်သွားပြီးပါပြီ။";
     }
+
     if (empty($appointment_time)) {
         $error = true;
         $appointment_time_err = "ကျေးဇူးပြုပြီး ချိန်းဆိုချိန်ကို ထည့်သွင်းပါ။";
@@ -81,22 +82,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conflict_result = $mysqli->query($conflict_sql);
         if ($conflict_result && $conflict_result->num_rows > 0) {
             $error = true;
-            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။ယခုလက်ရှိအချိန်၏နောက်တစ်နာရီကြာမှ အချိန်ချိန်းဆိုမှုထပ်မံပြုလုပ်နိုင်ပါသည်။';
+            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။ ယခုလက်ရှိအချိန်၏နောက်တစ်နာရီကြာမှ အချိန်ချိန်းဆိုမှုထပ်မံပြုလုပ်နိုင်ပါ။';
         }
     }
 
-
     if (!$error) {
-        $sql = "INSERT INTO appointments (customer_id, service_id, staff_id, appointment_date, appointment_time, status, comment, request) VALUES ('$customerIdUrl', '$service_id', '$staff_id', '$appointment_date', '$appointment_time', '0', '$comment', '$request')";
-        if ($mysqli->query($sql)) {
+        $insert_success = false;
+        foreach ($service_id as $sid) {
+            $sid = $mysqli->real_escape_string($sid);
+            $sql = "INSERT INTO `appointments` (
+                        `customer_id`, `service_id`, `staff_id`, `appointment_date`,
+                        `appointment_time`, `status`, `comment`, `request`
+                    ) VALUES (
+                        '$customerIdUrl', '$sid', '$staff_id', '$appointment_date',
+                        '$appointment_time', '0', '$comment', '$request'
+                    )";
+            if ($mysqli->query($sql)) {
+                $insert_success = true;
+            } else {
+                $general_error = 'ချိန်းဆိုမှု တစ်ခု သို့မဟုတ် အများ မအောင်မြင်ပါ။';
+            }
+        }
+
+        if ($insert_success) {
             echo "<script> window.location.href = 'appointment_list.php';</script>";
             exit();
-        } else {
-            $general_error = 'ချိန်းဆိုမှု မအောင်မြင်ပါ။';
         }
     }
 }
-
 ?>
 
 <div class="content-body">
@@ -113,52 +126,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endif; ?>
 
                         <form method="POST">
+                            <!-- Optional: send customer_id via hidden input -->
+                            <input type="hidden" name="customer_id" value="<?= htmlspecialchars($customerIdUrl) ?>">
+
                             <div class="mb-4">
-                                <label for="service_id" class="form-label fw-bold">ဝန်ဆောင်မှု</label>
-                                <select name="service_id" class="form-select <?= $service_id_error ? 'is-invalid' : '' ?>">
-                                    <option value="" selected disabled>ဝန်ဆောင်မှုရွေးချယ်ရန်</option>
+                                <label class="form-label fw-bold">ဝန်ဆောင်မှု</label>
+                                <select name="service_id[]" class="form-select <?= $service_id_error ? 'is-invalid' : '' ?>" multiple>
+                                    <option value="" disabled>ဝန်ဆောင်မှုရွေးချယ်ရန်</option>
                                     <?php while ($s = $services->fetch_assoc()): ?>
-                                        <option value="<?= $s['id'] ?>" <?= ($service_id == $s['id']) ? 'selected' : '' ?>><?= htmlspecialchars($s['name']) ?> (<?= number_format($s['price'], 0) ?> Ks)</option>
+                                        <option value="<?= $s['id'] ?>" <?= (is_array($service_id) && in_array($s['id'], $service_id)) ? 'selected' : '' ?>>
+                                            <?= htmlspecialchars($s['name']) ?> (<?= number_format($s['price'], 0) ?> Ks)
+                                        </option>
                                     <?php endwhile; ?>
                                 </select>
                                 <?php if ($service_id_error): ?><div class="invalid-feedback"><?= $service_id_error ?></div><?php endif; ?>
                             </div>
 
                             <div class="mb-4">
-                                <label for="staff_id" class="form-label fw-bold">ဝန်ထမ်း</label>
+                                <label class="form-label fw-bold">ဝန်ထမ်း</label>
                                 <select name="staff_id" class="form-select <?= $staff_id_error ? 'is-invalid' : '' ?>">
                                     <option value="" selected disabled>ဝန်ထမ်းရွေးချယ်ရန်</option>
                                     <?php while ($u = $users->fetch_assoc()): ?>
-                                        <option value="<?= $u['id'] ?>" <?= ($staff_id == $u['id']) ? 'selected' : '' ?>><?= htmlspecialchars($u['name']) ?></option>
+                                        <option value="<?= $u['id'] ?>" <?= ($staff_id == $u['id']) ? 'selected' : '' ?>>
+                                            <?= htmlspecialchars($u['name']) ?>
+                                        </option>
                                     <?php endwhile; ?>
                                 </select>
                                 <?php if ($staff_id_error): ?><div class="invalid-feedback"><?= $staff_id_error ?></div><?php endif; ?>
                             </div>
 
-
-
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
-                                    <label for="appointment_date" class="form-label fw-bold">ချိန်းဆိုရက်</label>
+                                    <label class="form-label fw-bold">ချိန်းဆိုရက်</label>
                                     <input type="date" name="appointment_date" class="form-control <?= $appointment_date_err ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($appointment_date) ?>">
                                     <?php if ($appointment_date_err): ?><div class="invalid-feedback"><?= $appointment_date_err ?></div><?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="appointment_time" class="form-label fw-bold">ချိန်းဆိုချိန်</label>
+                                    <label class="form-label fw-bold">ချိန်းဆိုချိန်</label>
                                     <input type="time" name="appointment_time" class="form-control <?= $appointment_time_err ? 'is-invalid' : '' ?>" value="<?= htmlspecialchars($appointment_time) ?>">
                                     <?php if ($appointment_time_err): ?><div class="invalid-feedback"><?= $appointment_time_err ?></div><?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label for="comment" class="form-label fw-bold">မှတ်စု</label>
-                                <textarea name="comment" class="form-control" rows="2"><?= htmlspecialchars($comment) ?></textarea>
+                                <label class="form-label fw-bold">မှတ်စု</label>
+                                <textarea name="comment" class="form-control"><?= htmlspecialchars($comment) ?></textarea>
                                 <small class="text-danger"><?= $comment_err ?></small>
                             </div>
 
                             <div class="mb-4">
-                                <label for="request" class="form-label fw-bold">အထူးတောင်းဆိုချက်</label>
-                                <textarea name="request" class="form-control" rows="2"><?= htmlspecialchars($request) ?></textarea>
+                                <label class="form-label fw-bold">အထူးတောင်းဆိုချက်</label>
+                                <textarea name="request" class="form-control"><?= htmlspecialchars($request) ?></textarea>
                                 <small class="text-danger"><?= $request_err ?></small>
                             </div>
 
@@ -168,8 +186,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
