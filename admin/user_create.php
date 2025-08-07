@@ -133,7 +133,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3 class="text-center mb-5 text-info">အသုံးပြုသူ အသစ်ဖန်တီးပါ</h3>
+                <h3 class="text-center mb-5 text-info">ဝန်ထမ်း အသစ်ဖန်တီးပါ</h3>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Name -->

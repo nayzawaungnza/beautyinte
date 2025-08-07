@@ -31,9 +31,9 @@ require '../layouts/header.php';
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
-            <h3>အသုံးပြုသူ စာရင်း</h3>
+            <h3>ဝန်ထမ်းများ စာရင်း</h3>
             <a href="<?= $admin_base_url . 'user_create.php' ?>" class="btn btn-primary">
-                အသုံးပြုသူ အသစ်ဖန်တီးရန်
+                ဝန်ထမ်းများ အသစ်ဖန်တီးရန်
             </a>
         </div>
         <div class="col-12 mb-3">
@@ -63,7 +63,7 @@ require '../layouts/header.php';
                                     <th>ပရိုဖိုင်</th>
                                     <th>အမည်</th>
                                     <th>အီးမေးလ်</th>
-                                    <th>အခန်းကဏ္ဍ</th>
+                                    <!-- <th>အခန်းကဏ္ဍ</th> -->
                                     <th>ဆက်သွယ်ရန်ဖုန်း</th>
                                     <th>လိင်</th>
                                     <th>ရာထူး</th>
@@ -85,11 +85,11 @@ require '../layouts/header.php';
                                             </td>
                                             <td><?= $row['name'] ?></td>
                                             <td><?= $row['email'] ?></td>
-                                            <td><?= $row['role'] == "admin" ? "အုပ်ချုပ်သူ" : "ဝန်ထမ်း" ?></td>
+                                            <!-- <td><?= $row['role'] == "admin" ? "အုပ်ချုပ်သူ" : "ဝန်ထမ်း" ?></td> -->
                                             <td><?= $row['phone'] ?></td>
                                             <td><?= $row['gender'] == "male" ? "ကျား" : "မ" ?></td>
                                             <td><?= $row['position'] ?: '-' ?></td>
-                                            <td><?= $row['salary'] ? number_format($row['salary']) . " Ks" : '-' ?></td>
+                                            <td><?= $row['salary'] ? number_format($row['salary']) . " ကျပ်" : '-' ?></td>
                                             <td>
                                                 <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပြင်ဆင်ရန်</a>
                                             </td>
@@ -97,7 +97,7 @@ require '../layouts/header.php';
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="10" class="text-center">အသုံးပြုသူများ မရှိသေးပါ။</td>
+                                        <td colspan="10" class="text-center">ဝန်ထမ်းများ မရှိသေးပါ။</td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

@@ -22,7 +22,6 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
     $res = $mysqli->query("DELETE FROM payment_method WHERE id = $delete_id");
     if ($res) {
         header('Location: payment_method_list.php?success=Payment method deleted successfully');
-        exit;
     } else {
         header('Location: payment_method_list.php?error=Failed to delete payment method');
         exit;
@@ -78,7 +77,7 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
                                     <td><?= htmlspecialchars($row['user_acc']) ?></td>
                                     <td><?= htmlspecialchars($row['ph_no']) ?></td>
                                     <td>
-                                        <?= $row['status'] ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-secondary">Inactive</span>' ?>
+                                        <?= $row['status'] ? '<span class="badge bg-success text-dark ">အသုံးပြုနေသည်</span>' : '<span class="badge bg-danger text-dark">အသုံးပြု၍မရပါ</span>' ?>
                                     </td>
                                     <td>
                                         <a href="payment_method_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>

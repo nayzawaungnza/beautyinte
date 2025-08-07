@@ -94,7 +94,7 @@ require '../layouts/header.php';
                                             <td class="text-right"><?= number_format($row['price']) ?> ကျပ်</td>
                                             <td><?= htmlspecialchars($row['description']) ?></td>
                                             <td>
-                                                <a href="./service_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပြင်ဆင်ရန်</a>
+                                                <a href="./service_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2 mb-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
                                             </td>
                                         </tr>

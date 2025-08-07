@@ -13,7 +13,7 @@ $error = false;
 $error_message = '';
 $appointment_id_error = $amount_error = $payment_method_error = $payment_date_error = '';
 $appointment_id = $amount = $payment_method = $payment_date = '';
-
+$user_acc = $ph_no = '';
 // Check if appointment ID is passed via GET
 $filter_appointment_id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : '';
 
@@ -173,6 +173,15 @@ require '../layouts/header.php';
                                 <?php if ($error && $payment_method_id_error) { ?>
                                     <span class="text-danger"><?= $payment_method_id_error ?></span>
                                 <?php } ?>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="user_acc">အသုံးပြုသူအကောင့်</label>
+                                <input type="text" name="user_acc" class="form-control" id="user_acc" value="<?= htmlspecialchars($user_acc) ?>">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="ph_no">ဖုန်းနံပါတ်</label>
+                                <input type="text" name="ph_no" class="form-control" id="ph_no" value="<?= htmlspecialchars($ph_no) ?>">
                             </div>
                             <input type="hidden" name="form_sub" value="1" />
                             <input type="hidden" name="form_token" value="<?= $_SESSION['payment_form_token'] ?>" />

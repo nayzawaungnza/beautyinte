@@ -16,13 +16,15 @@ $promotions = $mysqli->query($promotions_sql);
 
 				<div class="media d-block text-center block-6 services">
 					<!-- <div class="icon d-flex mb-3"><span class="fa-solid fa-hand-sparkles"></span></div> -->
-					<div class="icon d-flex justify-content-center align-items-center mb-3" style="width: 60px; height: 60px; background: #fce4ec; border-radius: 50%;">
+					<!-- <div class="icon d-flex justify-content-center align-items-center mb-3" style="width: 60px; height: 60px; background: #fce4ec; border-radius: 50%;">
 						<i class="fas fa-hand-sparkles fa-2x" style="color: #e91e63;"></i>
-					</div>
+					</div> -->
 					<div class="media-body">
-						<h3 class="heading">လက်သည်း</h3>
-						<h3 class="mb-4 text-dark text-center">လက်သည်းအလှပြင်ဝန်ဆောင်မှုများဖြင့် လက်သည်းပုံစံကို ချောမွှတ်အလှဆင်ကာ သဘာဝအလှကို ပိုမိုတောက်ပအောင်ဖော်ထုတ်ပေးပါသည်။
-							လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာ အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကို ဖန်တီးနိုင်ပါသည်။ ခန္ဓာကိုယ်အလှပြင်မှုတွင် လက်သည်းသည်လည်း အရေးပါသော အစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့် စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကိုမြှင့်တင်ပေးပါသည်။</h3>
+						<h3 class="heading">လက်သည်းပိုင်း</h3>
+						<h3 class="text-justify text-dark" style="text-align: justify; text-justify: inter-word;">
+							လက်သည်းအလှပြင်ခြင်းသည် မိမိတို့ရဲ့မျက်နှာပင်သာမကဘဲ တစ်ကိုယ်ရေးသန့်ရှင်းမှုနှင့် ကိုယ်တိုင်ဂရုစိုက်မှု (self-care) ကိုလည်း အထူးဖော်ပြနိုင်သော အစိတ်အပိုင်းတစ်ခုဖြစ်သည်။ လက်သည်းအရောင်များ၊ ဒီဇိုင်းအနုပညာများနှင့် ဂျယ်လ်နည်းပညာများကို အသုံးပြုခြင်းဖြင့် စတိုင်ကျသောအလှတရားကိုဖန်တီးနိုင်ပါသည်။ခန္ဓာကိုယ်အလှပြင်မှုတွင်လက်သည်းသည်လည်းအရေးပါသောအစိတ်အပိုင်းတစ်ခုဖြစ်သဖြင့်စနစ်တကျပြင်ဆင်ခြင်းသည် ယုံကြည်မှုကို မြှင့်တင်ပေးပါသည်။
+						</h3>
+
 					</div>
 				</div>
 			</div>
@@ -31,11 +33,11 @@ $promotions = $mysqli->query($promotions_sql);
 		<div class="card col-md-4 mb-3" style="background-color: pink;">
 			<div class="card-body">
 				<div class="media d-block text-center block-6 services">
-					<div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div>
+					<!-- <div class="icon d-flex mb-3"><span class="flaticon-curl"></span></div> -->
 					<div class="media-body">
 						<h3 class="heading">ဆံပင်ပုံစံ</h3>
-						<h3 class="mb-4 text-dark">အလှပြင်ဆိုင်အတွင်းရှိ ဆံပင်အလှပြင်ဝန်ဆောင်မှုတွင် ဖောက်သည်၏ ကိုယ်ရည်ကိုယ်သွေးနှင့် စိတ်ကြိုက်အလိုအတန်ပြုလုပ်နိုင်ရန်အတွက် ဆံပင်ညှပ်ခြင်း၊ အရောင်ဆိုးခြင်းနှင့် ပုံစံဖန်တီးခြင်းများ ပါဝင်သည်။
-							ပရော်ဖက်ရှင်နယ် တူးလ်များနှင့် နည်းပညာများကို အသုံးပြု၍ သပ်ရပ်လှပသော ပုံသဏ္ဌာန်ကို ဖန်တီးပေးခြင်းဖြစ်ပါသည်။</h3>
+						<h3 class="text-justify text-dark" style="text-align: justify; text-justify: inter-word;">
+							ဆံပင်သည်လူတစ်ဦးချင်းစီ၏ပင်ကိုယ်ပုံစံနှင့်ယုံကြည်မှုကိုဖော်ပြသောအရေးကြီးဆုံးအပိုင်းဖြစ်သည်။ဆံပင်အမျိုးအစားနှင့်ဖောက်သည်တစ်ဦးချင်းစီ၏အသားအရေ၊မျက်နှာပုံစံနှင့်ကိုက်ညီအောင်အကြံဉာဏ်ပေးခြင်းဖြင့်ဝန်ဆောင်မှုပေးထားပါသည်။ပုံမှန်နေထိုင်မှုထဲကနေပင်ကိုယ်ပုံစံကိုထူးခြားအောင်ပြောင်းလဲဖို့S&Hဆံပင်ဆိုင်ကနေထိ‌ရောက်စွာပြောင်းလဲပေးနိုင်ပါသည်။ </h3>
 					</div>
 				</div>
 			</div>
@@ -50,7 +52,7 @@ $promotions = $mysqli->query($promotions_sql);
 		<div class="row justify-content-center mb-5 pb-3">
 			<div class="col-md-7 heading-section ftco-animate text-center">
 				<h2 class="mb-6">အလှအပပညာရှင်များ</h2>
-				<p class="mb-4 text-light">ကျွန်ုပ်တို့၏ အလှအပအထူးကျွမ်းကျင်သူများသည် သင့်သဘာဝအလှကို မြှင့်တင်ပေးရန်နှင့် သင့်ယုံကြည်မှုကို တိုးတက်စေရန်အတွက် ကိုယ်ပိုင်လိုအပ်ချက်များနှင့် ကိုက်ညီသော အလှပြင်ဝန်ဆောင်မှုများကို ပေးစွမ်းနိုင်သော ကျွမ်းကျင်သော ပညာရှင်များဖြစ်ပါသည်။</p>
+				<p class="mb-4 text-light">S&H ဝန်ထမ်းအဖွဲ့သည် သင့်အလှအပကို ယုံကြည်စိတ်ချစွာအပ်လို့ရသော ပရော်ဖက်ရှင်နယ် လူမှုဝန်ထမ်းအဖွဲ့တစ်စုဖြစ်ပါသည်။ သူတို့၏ အတွေ့အကြုံ၊ ကျွမ်းကျင်မှုနှင့် ဖောက်သည်အပေါ်ပြုမူသော သဘောထားကောင်းမှုကြောင့် သင်၏အလှအပကို တန်ဖိုးရှိအောင် ဖန်တီးပေးနိုင်မည်ဖြစ်သည်။</p>
 			</div>
 		</div>
 		<div class="row">
@@ -61,7 +63,10 @@ $promotions = $mysqli->query($promotions_sql);
 						<div class="staff" style="border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s; background: #fff;">
 							<div class="img mb-4" style="background-image: url('./uplode/<?= $data['image'] ?>'); background-size: cover; background-position: center; height: 200px; border-bottom: 1px solid #eee;"></div>
 							<div class="info text-center" style="padding: 15px 10px;">
-								<h3 style="margin-bottom: 10px; font-size: 20px; color: #333; font-weight: bold;"> <a href="teacher-single.html" style="text-decoration: none; color: inherit;"><?= $data['name'] ?></a> </h3> <strong class="position mb-2" style="display: block; color: #6c757d; font-weight: 600; font-size: 14px;"><?= $data['role'] ?></strong>
+								<h3 style="margin-bottom: 10px; font-size: 20px; color: #333; font-weight: bold;"> <a href="teacher-single.html" style="text-decoration: none; color: inherit;"><?= $data['name'] ?></a> </h3>
+								<h3 style="margin-bottom: 10px; font-size: 20px; color: #333; font-weight: bold;"> <a href="teacher-single.html" style="text-decoration: none; color: inherit;"><?= $data['position'] ?></a> </h3>
+								<h3 style="margin-bottom: 10px; font-size: 20px; color: #333; font-weight: bold;"> <a href="teacher-single.html" style="text-decoration: none; color: inherit;"><?= $data['salary'] ?></a> ကျပ် </h3>
+
 								<div class="text mt-2" style="font-size: 14px; color: #555;">
 									<p><?= $data['description'] ?></p>
 								</div>

@@ -103,7 +103,7 @@ function create_table($mysqli)
                    (
                    id INT AUTO_INCREMENT PRIMARY KEY,
                    name VARCHAR(100) NOT NULL,
-                   image VARCHAR(200) NULL,
+                   image VARCHAR(255) NULL,
                    user_acc VARCHAR(200) NULL,
                    ph_no VARCHAR(200) NULL,
                    status TINYINT(1) NOT NULL DEFAULT 1

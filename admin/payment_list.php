@@ -8,11 +8,28 @@ $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 
 // Fetch all payments with appointment, customer, and service info
-$sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
- p.amount, p.payment_date, pm.name as payment_method_name FROM payments p
-  INNER JOIN appointments a ON p.appointment_id = a.id
-   INNER JOIN users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
-   INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
+// $sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
+//  p.amount, p.payment_date, pm.name as payment_method_name FROM payments p
+//   INNER JOIN appointments a ON p.appointment_id = a.id
+//    INNER JOIN users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
+//    INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
+$sql = "SELECT 
+    p.id, 
+    a.id AS appointment_id, 
+    c.name AS customer_name, 
+    s.name AS service_name,
+    p.amount, 
+    p.payment_date, 
+    pm.name AS payment_method_name,
+    pm.user_acc, 
+    pm.ph_no
+FROM payments p
+INNER JOIN appointments a ON p.appointment_id = a.id
+INNER JOIN users c ON a.customer_id = c.id
+INNER JOIN services s ON a.service_id = s.id
+INNER JOIN payment_method pm ON p.payment_method_id = pm.id
+ORDER BY p.id DESC";
+
 $payments = $mysqli->query($sql);
 
 
@@ -75,6 +92,8 @@ require '../layouts/header.php';
                                     <th>ဝန်ဆောင်မှုအမည်</th>
                                     <th>ငွေပမာဏ</th>
                                     <th>ငွေပေးချေမှုနည်းလမ်း</th>
+                                    <th>အကောင့်</th>
+                                    <th>ဖုန်း</th>
                                     <th>ငွေပေးချေသည့်ရက်စွဲ</th>
                                     <th>လုပ်ဆောင်မှု</th>
                                 </tr>
@@ -90,6 +109,8 @@ require '../layouts/header.php';
                                             <td><?= htmlspecialchars($row['service_name']) ?></td>
                                             <td><?= htmlspecialchars($row['amount']) ?> ကျပ်</td>
                                             <td><?= htmlspecialchars($row['payment_method_name']) ?></td>
+                                            <td><?= isset($row["user_acc"]) ? htmlspecialchars($row["user_acc"]) : '' ?></td>
+                                            <td><?= isset($row["ph_no"]) ? htmlspecialchars($row["ph_no"]) : '' ?></td>
                                             <td><?= htmlspecialchars($row['payment_date']) ?></td>
                                             <td>
                                                 <a href="payment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>

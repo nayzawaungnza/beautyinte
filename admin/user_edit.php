@@ -62,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
     }
 
     // Role
-    if (empty($role)) {
-        $error = true;
-        $role_err = "ကျေးဇူးပြု၍ အခန်းကဏ္ဍကို ရွေးချယ်ပါ။";
-    }
+    // if (empty($role)) {
+    //     $error = true;
+    //     $role_err = "ကျေးဇူးပြု၍ အခန်းကဏ္ဍကို ရွေးချယ်ပါ။";
+    // }
 
     // Phone
     if (empty($phone)) {
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
                         <small class="text-danger"><?= $email_err ?></small>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="form-label">အခန်းကဏ္ဍ</label>
                         <select name="role" class="form-control">
                             <option value="">ရွေးချယ်ရန် အခန်းကဏ္ဍ</option>
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
                             <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
                         </select>
                         <small class="text-danger"><?= $role_err ?></small>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>

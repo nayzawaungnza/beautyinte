@@ -44,6 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$error) {
         $stmt = $mysqli->prepare("INSERT INTO payment_method (name, image, user_acc, ph_no, status) VALUES (?, ?, ?, ?, ?)");
+
+
+
         $stmt->bind_param("ssssi", $name, $image_name, $user_acc, $ph_no, $status);
         if ($stmt->execute()) {
             echo "<script>window.location.href= 'payment_method_list.php?success=အသုံးပြုသူ ပြင်ခြင်း အောင်မြင်ပါသည်'</script>";
@@ -71,12 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group mb-3">
-                        <label for="name">နည်းလမ်းအမည် <span class="text-danger">*</span></label>
+                        <label for="name">နည်းလမ်းအမည် <span class="text-danger"></span></label>
                         <input type="text" name="name" class="form-control" id="name" required value="<?= htmlspecialchars($name) ?>">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="image">ပုံ Upload</label>
+                        <label for="image">ပုံ</label>
                         <input type="file" name="image" id="image" class="form-control" accept="image/*">
                     </div>
 
@@ -92,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" name="status" value="1" id="status" <?= $status ? 'checked' : '' ?>>
-                        <label class="form-check-label" for="status">Active</label>
+                        <label class="form-check-label" for="status">အသုံးပြုနေသည်</label>
                     </div>
 
                     <button type="submit" class="btn btn-primary">သိမ်းဆည်းမည်</button>
