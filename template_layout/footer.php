@@ -5,7 +5,7 @@
             <div class="col-md-4">
 
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                    <h5 class="text-light ">Find Us</h5>
+                    <h5 class="text-light text-center">လူမှုကွန်ရက်</h5>
                     <li class="ftco-animate"><a href="#"><span class="icon-telegram"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>

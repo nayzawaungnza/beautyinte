@@ -161,7 +161,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Image Upload -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">ပုံဖိုင်</label>
+                                <label class="form-label">ပုံ</label>
                                 <input type="file" name="file_name" class="form-control">
                                 <small class="text-danger"><?= $file_err ?></small>
                             </div>

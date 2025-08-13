@@ -56,14 +56,14 @@ session_start();
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar sticky-top" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand  text-dark" href="/Beauty/home.php">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</a>
+            <a class="navbar-brand  text-dark" style="font-size:20px; margin-left:5px;" href="/Beauty/home.php">S&H အမျိုးသမီးသီးသန့် အလှပြုပြင်ရေး</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto" style="font-size:14px; font-weight:bold;">
                     <li class="nav-item"><a href="home.php" class="nav-link text-dark">ပင်မစာမျက်နှာ</a></li>
                     <li class="nav-item"><a href="product.php" class="nav-link text-dark">ရောင်းရန်ပစ္စည်းများ</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link  text-dark">အကြောင်းအရာ</a></li>

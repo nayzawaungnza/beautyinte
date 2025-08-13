@@ -36,7 +36,8 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
 
     // Email validation
     $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    if (empty($email)) {
+
+    if (strlen($email) === 0) {
         $error = true;
         $email_err = "ကျေးဇူးပြု၍ သင့်အီးမေးလ်ကိုဖြည့်ပါ။";
     } elseif (strlen($email) < 10) {
@@ -44,22 +45,31 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         $email_err = "အီးမေးလ်သည် ၁၀ ထက်များရပါမည်။";
     } elseif (strlen($email) > 30) {
         $error = true;
-        $email_err = "အီးမေးလ်သည် ၃၀ ထက်နည်းရပါမည်။";
+        $email_err = "အီးမေးလ်သည်  ၃၀ ထက်နည်းရပါမည်။";
     } elseif (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "အီးမေးလ် ဖော်မတ်မှားယွင်းနေပါသည်။";
     }
 
     // Password validation
-    if (empty($password)) {
+    if (strlen($password) === 0) {
         $error = true;
         $password_err = "ကျေးဇူးပြု၍ လျှို့ဝှက်နံပါတ် ဖြည့်ပါ။";
-    } elseif (strlen($password) < 8) {
+    } elseif (strlen($password) !== 8) {
         $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်သည် အနည်းဆုံး ၈ လုံး ရှိရပါမည်။";
-    } elseif (strlen($password) > 30) {
+        $password_err = "လျှို့ဝှက်နံပါတ်သည် အတိုင်းအတာ ၈ လုံး ရှိရပါမည်။";
+    } elseif (!preg_match('/[A-Z]/', $password)) {
         $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်သည် စာလုံး ၃၀ ထက်နည်းရပါမည်။";
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အကြီးစာလုံး တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif (!preg_match('/[a-z]/', $password)) {
+        $error = true;
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အသေးစာလုံး တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif (!preg_match('/[0-9]/', $password)) {
+        $error = true;
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် ဂဏန်း တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif (!preg_match('/[\W_]/', $password)) { // Special characters or underscore
+        $error = true;
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အထူးသင်္ကေတ တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
     } else {
         $byScriptPassword = md5($password);
     }
@@ -74,9 +84,9 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     if (empty($phone)) {
         $error = true;
         $phone_err = "ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ။";
-    } elseif (strlen($phone) < 11) {
+    } elseif (!preg_match('/^09\d{9}$/', $phone)) {
         $error = true;
-        $phone_err = "ဖုန်းနံပါတ်သည် အနည်းဆုံး ဂဏန်း ၁၁ လုံး ရှိရပါမည်။";
+        $phone_err = "ဖုန်းနံပါတ်သည် 09 ဖြင့်စ၍ ဂဏန်း ၁၁ လုံး အတိအကျ ရှိရပါမည်။";
     }
 
     // Gender validation
@@ -204,7 +214,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Position -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">ရာထူး</label>
+                                <label class="form-label">လုပ်ငန်းကျွမ်းကျင်မှု</label>
                                 <input type="text" name="position" class="form-control" value="<?= $position ?>">
                                 <small class="text-danger"><?= $position_err ?></small>
                             </div>

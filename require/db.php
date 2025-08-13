@@ -177,6 +177,8 @@ function create_table($mysqli)
                    amount INT NOT NULL,
                    payment_method_id INT NOT NULL,
                    payment_date DATE NULL,
+                   user_account VARCHAR(200) NULL,
+                   phone_number VARCHAR(50) NULL,
                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,

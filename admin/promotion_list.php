@@ -14,7 +14,7 @@ if ($search !== '') {
     $sql .= " WHERE package_name LIKE '%$search_escaped%' OR start_date LIKE '%$search_escaped%' OR end_date LIKE '%$search_escaped%' 
     OR percentage LIKE '%$search_escaped%'";
 }
-$promotions= $mysqli->query($sql);
+$promotions = $mysqli->query($sql);
 
 
 // Handle delete
@@ -39,7 +39,7 @@ require '../layouts/header.php';
             <a href="promotion_create.php" class="btn btn-primary">ပရိုမိုးရှင်းထပ်ထည့်ရန်</a>
         </div>
 
-         <div class="col-12 mb-3">
+        <div class="col-12 mb-3">
             <form method="get" class="form-inline d-flex justify-content-end">
                 <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or date" value="<?= htmlspecialchars($search) ?>">
                 <button type="submit" class="btn btn-primary">Search</button>
@@ -68,7 +68,7 @@ require '../layouts/header.php';
                     </thead>
                     <tbody>
                         <?php if ($promotions && $promotions->num_rows > 0) {
-                             $i = 1;
+                            $i = 1;
                             while ($row = $promotions->fetch_assoc()) { ?>
                                 <tr>
                                     <td><?= $i++ ?></td>
@@ -78,7 +78,7 @@ require '../layouts/header.php';
                                     <td><?= htmlspecialchars($row['start_date']) ?></td>
                                     <td><?= htmlspecialchars($row['end_date']) ?></td>
                                     <td>
-                                        <a href="promotion_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>
+                                        <a href="promotion_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info mb-2">ပြင်ဆင်ရန်</a>
                                         <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>
                                     </td>
                                 </tr>

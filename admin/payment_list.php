@@ -4,20 +4,19 @@ checkAuth('admin');
 require "../require/common_function.php";
 require '../require/db.php';
 require '../require/common.php';
+
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 
-// Fetch all payments with appointment, customer, and service info
-// $sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
-//  p.amount, p.payment_date, pm.name as payment_method_name FROM payments p
-//   INNER JOIN appointments a ON p.appointment_id = a.id
-//    INNER JOIN users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
-//    INNER JOIN payment_method pm ON p.payment_method_id = pm.id ORDER BY p.id DESC";
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+// Base SQL with selected_service_names included
 $sql = "SELECT 
     p.id, 
     a.id AS appointment_id, 
+    a.appointment_date,
+    a.selected_service_names,
     c.name AS customer_name, 
-    s.name AS service_name,
     p.amount, 
     p.payment_date, 
     pm.name AS payment_method_name,
@@ -26,41 +25,45 @@ $sql = "SELECT
 FROM payments p
 INNER JOIN appointments a ON p.appointment_id = a.id
 INNER JOIN users c ON a.customer_id = c.id
-INNER JOIN services s ON a.service_id = s.id
-INNER JOIN payment_method pm ON p.payment_method_id = pm.id
-ORDER BY p.id DESC";
+INNER JOIN payment_method pm ON p.payment_method_id = pm.id";
 
-$payments = $mysqli->query($sql);
-
-
-$search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$sql = "SELECT p.id, a.id as appointment_id, c.name as customer_name, s.name as service_name,
- p.amount, p.payment_date , pm.name as payment_method_name FROM payments p
-  INNER JOIN appointments a ON p.appointment_id = a.id
-   INNER JOIN users c ON a.customer_id = c.id INNER JOIN services s ON a.service_id = s.id 
-   INNER JOIN payment_method pm ON p.payment_method_id = pm.id";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE c.name LIKE '%$search_escaped%' OR p.payment_date LIKE '%$search_escaped%'
-     OR pm.name LIKE '%$search_escaped%'";
+    $sql .= " WHERE c.name LIKE '%$search_escaped%' 
+              OR p.payment_date LIKE '%$search_escaped%' 
+              OR a.selected_service_names LIKE '%$search_escaped%'
+              OR pm.name LIKE '%$search_escaped%'";
 }
+
+$sql .= " ORDER BY p.id DESC";
+
 $payments = $mysqli->query($sql);
+
 // Handle delete
-$delete_id = isset($_GET['delete_id']) ? $_GET['delete_id'] : '';
-if ($delete_id !== '') {
+$delete_id = isset($_GET['delete_id']) ? intval($_GET['delete_id']) : 0;
+if ($delete_id > 0) {
     $res = $mysqli->query("DELETE FROM payments WHERE id = $delete_id");
     if ($res) {
         $url = $admin_base_url . "payment_list.php?success=Delete Payment Success";
         header("Location: $url");
         exit;
+    } else {
+        $error = "Delete operation failed: " . $mysqli->error;
     }
 }
+
 require '../layouts/header.php';
 ?>
+
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
             <h3 class="text-center mb-2 text-info">ငွေပေး‌ချေမှု စာရင်း</h3>
+            <div>
+                <a href="<?= $admin_base_url ?>payment_create.php" class="btn btn-primary">
+                    ငွေပေးချေမှု အသစ်ဖန်တီးရန်
+                </a>
+            </div>
         </div>
         <div class="col-12 mb-3">
             <form method="GET" class="form-inline d-flex justify-content-end">
@@ -72,12 +75,12 @@ require '../layouts/header.php';
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
                 <?php if ($success !== '') { ?>
                     <div class="alert alert-success">
-                        <?= $success ?>
+                        <?= htmlspecialchars($success) ?>
                     </div>
                 <?php } ?>
                 <?php if ($error !== '') { ?>
                     <div class="alert alert-danger">
-                        <?= $error ?>
+                        <?= htmlspecialchars($error) ?>
                     </div>
                 <?php } ?>
             </div>
@@ -106,20 +109,25 @@ require '../layouts/header.php';
                                         <tr>
                                             <td><?= $i++ ?></td>
                                             <td><?= htmlspecialchars($row['customer_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['service_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['amount']) ?> ကျပ်</td>
+                                            <td><?= htmlspecialchars($row['selected_service_names']) ?></td>
+                                            <td><?= number_format($row['amount']) ?> ကျပ်</td>
                                             <td><?= htmlspecialchars($row['payment_method_name']) ?></td>
-                                            <td><?= isset($row["user_acc"]) ? htmlspecialchars($row["user_acc"]) : '' ?></td>
-                                            <td><?= isset($row["ph_no"]) ? htmlspecialchars($row["ph_no"]) : '' ?></td>
-                                            <td><?= htmlspecialchars($row['payment_date']) ?></td>
+                                            <td><?= htmlspecialchars($row['user_acc'] ?? '') ?></td>
+                                            <td><?= htmlspecialchars($row['ph_no'] ?? '') ?></td>
+                                            <td><?= htmlspecialchars($row['appointment_date']) ?></td>
                                             <td>
-                                                <a href="payment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
+                                                <a href="payment_voucher.php?id=<?= urlencode($row['id']) ?>" class="btn btn-sm btn-info" target="_blank" title="ဘောင်ချာ">
+                                                    📄
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-danger delete_btn" data-id="<?= htmlspecialchars($row['id']) ?>" title="ဖျက်ရန်">
+                                                    🗑
+                                                </button>
                                             </td>
                                         </tr>
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="7" class="text-center">ငွေပေးချေမှုများ မရှိသေးပါ</td>
+                                        <td colspan="9" class="text-center">ငွေပေးချေမှုများ မရှိသေးပါ</td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -131,13 +139,12 @@ require '../layouts/header.php';
     </div>
     <!-- #/ container -->
 </div>
-<!--**********************************
-            Content body end
-        ***********************************-->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
         $('.delete_btn').click(function() {
-            const id = $(this).data('id')
+            const id = $(this).data('id');
             Swal.fire({
                 title: 'ဖျက်မည်ဆိုတာသေချာပြီလား',
                 icon: 'warning',
@@ -148,12 +155,13 @@ require '../layouts/header.php';
                 cancelButtonText: 'မဖျက်ပါ'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'payment_list.php?delete_id=' + id
+                    window.location.href = 'payment_list.php?delete_id=' + id;
                 }
             });
-        })
-    })
+        });
+    });
 </script>
+
 <?php
 require '../layouts/footer.php';
 ?>

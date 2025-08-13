@@ -1,5 +1,5 @@
 <?php
-require './template_layout/header.php';
+require './template_layout/pheader.php';
 require './require/db.php';
 require "./require/common.php";
 require './require/common_function.php';

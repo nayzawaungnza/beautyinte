@@ -190,17 +190,15 @@ require_once '../require/common_function.php';
                                 <i class="fas fa-tasks"></i><span class="nav-text">ဝန်ထမ်းတာဝန်များ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../staff/task_list.php">စာရင်း</a></li>
+                                <li><a href="../staff/task.php">စာရင်း</a></li>
                             </ul>
                         </li>
                     <?php } else if ($_SESSION['role'] == "admin") { ?>
                         <li class="sidebar-click">
-                            <a class="has-arrow arrow">
+                            <a href="../admin/dashboard.php" class="has-arrow arrow">
                                 <i class="fa-solid fa-user"></i><span class="nav-text">ပင်မစာမျက်နှာ</span>
                             </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/dashboard.php">varchat</a></li>
-                            </ul>
+
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
@@ -212,13 +210,9 @@ require_once '../require/common_function.php';
                             </ul>
                         </li>
                         <li class="sidebar-click">
-                            <a class="has-arrow arrow">
+                            <a href="../admin/customer_list.php" class="has-arrow arrow">
                                 <i class="fa-solid fa-circle-user"></i><span class="nav-text">ဖောက်သည်</span>
                             </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/customer_list.php">စာရင်း</a></li>
-                                <li><a href="../admin/customer_create.php">ဖန်တီးမည်</a></li>
-                            </ul>
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
@@ -248,20 +242,14 @@ require_once '../require/common_function.php';
                             </ul>
                         </li>
                         <li class="sidebar-click">
-                            <a class="has-arrow arrow">
+                            <a href="../admin/app_list.php" class="has-arrow arrow">
                                 <i class="fa-regular fa-calendar-check"></i><span class="nav-text">အချိန်ချိန်းဆိုမှုစာရင်း</span>
                             </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/appointment_list.php">စာရင်း</a></li>
-                            </ul>
                         </li>
                         <li class="sidebar-click">
-                            <a class="has-arrow arrow">
-                                <i class="fa-solid fa-credit-card"></i><span class="nav-text">ငွေပေးချေမှု</span>
+                            <a href="../admin/payment_list.php" class="has-arrow arrow">
+                                <i class="fa-solid fa-credit-card"></i><span class="nav-text">ငွေပေးချေမှုစာရင်း</span>
                             </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/payment_list.php">စာရင်း</a></li>
-                            </ul>
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
@@ -283,12 +271,9 @@ require_once '../require/common_function.php';
                         </li>
                     <?php } else { ?>
                         <li class="sidebar-click">
-                            <a class="has-arrow arrow">
-                                <i class="fas fa-tasks"></i><span class="nav-text">ဒက်ရှ်ဘုတ်</span>
-                            </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../customer/dashboard.php">ချိန်းဆိုမှုစာရင်း</a></li>
-                                <li><a href="../customer/services.php">ဝန်ဆောင်မှုများ</a></li>
+                            <ul aria-expanded="true" class="pannel">
+                                <li><a href="../customer/dash.php"><i class="fa-solid fa-arrow-right"></i>ချိန်းဆိုမှုစာရင်း</a></li>
+                                <li><a href="../customer/ser.php"><i class="fa-solid fa-arrow-right"></i>ဝန်ဆောင်မှုများ</a></li>
                             </ul>
                         </li>
                     <?php } ?>

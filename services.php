@@ -22,7 +22,7 @@ $service_res = $mysqli->query("SELECT * FROM services $where");
 <section id="beauty-pricing" style="padding: 60px 0; background: linear-gradient(to right, #fdfbfb, #ebedee); font-family: 'Segoe UI', sans-serif;">
   <div class="container" style="max-width: 1140px; margin: auto;">
     <div style="text-align: center; margin-bottom: 30px;">
-      <h5 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 15px;">ဝန်ဆောင်မှု အမျိုးအစားများ</h5>
+      <h5 style="font-size: 2rem; color: #af4964ff; margin-bottom: 15px;">ဝန်ဆောင်မှုအမျိုးအစားများ</h5>
     </div>
 
     <div class="text-left mb-4 w-50">

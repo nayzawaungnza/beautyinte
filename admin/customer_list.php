@@ -4,30 +4,41 @@ checkAuth('admin');
 require "../require/common_function.php";
 require '../require/db.php';
 require '../require/common.php';
+
 $success = isset($_GET['success']) ? $_GET['success'] : '';
 $error = isset($_GET['error']) ? $_GET['error'] : '';
-$res = selectData('users', $mysqli, "WHERE `role` = 'customer'", "*", "ORDER BY created_at ASC");
 
+// Get search term
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+// Build SQL query correctly with AND for search filter
 $sql = "SELECT * FROM `users` WHERE role = 'customer'";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
-    $sql .= " WHERE name LIKE '%$search_escaped%' OR phone LIKE '%$search_escaped%'";
+    $sql .= " AND (name LIKE '%$search_escaped%' OR phone LIKE '%$search_escaped%')";
 }
+
+$sql .= " ORDER BY created_at ASC";
+
+// Execute the query
 $res = $mysqli->query($sql);
 
-
-
-$delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
-if ($delete_id !== '') {
-    $res = deleteData('users', $mysqli, "id=$delete_id");
-    if ($res) {
-        $url = $admin_base_url . "customer_list.php?success=Delete customer Success";
+// Delete customer if delete_id is provided
+$delete_id = isset($_GET['delete_id']) ? intval($_GET['delete_id']) : 0;
+if ($delete_id > 0) {
+    $delete_res = deleteData('users', $mysqli, "id=$delete_id");
+    if ($delete_res) {
+        $url = $admin_base_url . "customer_list.php?success=" . urlencode("Delete customer Success");
         header("Location: $url");
+        exit();
+    } else {
+        $error = "Delete failed!";
     }
 }
+
 require '../layouts/header.php';
 ?>
+
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
@@ -42,48 +53,45 @@ require '../layouts/header.php';
 
         <div class="row">
             <div class="col-md-4 offset-md-8 col-sm-6 offset-sm-6">
-                <?php if ($success !== '') { ?>
-                    <div class="alert alert-success">
-                        <?= $success ?>
-                    </div>
-                <?php } ?>
-                <?php if ($error !== '') { ?>
-                    <div class="alert alert-danger">
-                        <?= $error ?>
-                    </div>
-                <?php } ?>
+                <?php if ($success !== ''): ?>
+                    <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+                <?php endif; ?>
+                <?php if ($error !== ''): ?>
+                    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
             </div>
+
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="">စဉ်</th>
-                                    <th class="">အမည်</th>
-                                    <th class="">ဆက်သွယ်ရန်ဖုန်း</th>
-                                    <th class="">လုပ်ဆောင်မှု</th>
-
+                                    <th>စဉ်</th>
+                                    <th>အမည်</th>
+                                    <th>ဆက်သွယ်ရန်ဖုန်း</th>
+                                    <th>လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($res->num_rows > 0) {
-                                    $i = 1;
-                                    while ($row = $res->fetch_assoc()) { ?>
+                                <?php if ($res && $res->num_rows > 0): ?>
+                                    <?php $i = 1; ?>
+                                    <?php while ($row = $res->fetch_assoc()): ?>
                                         <tr class="text-center">
                                             <td><?= $i++ ?></td>
-                                            <td><?= $row['name'] ?></td>
-                                            <td><?= $row['phone'] ?></td>
-
-
+                                            <td><?= htmlspecialchars($row['name']) ?></td>
+                                            <td><?= htmlspecialchars($row['phone']) ?></td>
                                             <td>
-                                                <a href="./customer_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success edit_btn mx-2">ပြင်ဆင်ရန်</a>
-                                                <a href="./appointment_create.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary appointment_btn mx-2">အချိန်ချိန်းဆိုမှုစာရင်း</a>
-                                                <button data-id=" <?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
+                                                <a href="./customer_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပြင်ဆင်ရန်</a>
+                                                <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>
                                             </td>
                                         </tr>
-                                <?php }
-                                } ?>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="4" class="text-center">ဖောက်သည် မတွေ့ပါ</td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -91,15 +99,16 @@ require '../layouts/header.php';
             </div>
         </div>
     </div>
-    <!-- #/ container -->
 </div>
-<!--**********************************
-            Content body end
-        ***********************************-->
+
+<!-- SweetAlert2 and jQuery scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('.delete_btn').click(function() {
-            const id = $(this).data('id')
+            const id = $(this).data('id');
             Swal.fire({
                 title: 'ဖျက်မည်ဆိုတာသေချာပြီလား',
                 icon: 'warning',
@@ -110,12 +119,13 @@ require '../layouts/header.php';
                 cancelButtonText: 'မဖျက်ပါ'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'customer_list.php?delete_id=' + id
+                    window.location.href = 'customer_list.php?delete_id=' + id + <?= json_encode($search !== '' ? '&search=' . urlencode($search) : '') ?>;
                 }
             });
-        })
-    })
+        });
+    });
 </script>
+
 <?php
 require '../layouts/footer.php';
 ?>

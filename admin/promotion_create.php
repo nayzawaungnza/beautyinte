@@ -5,11 +5,11 @@ require '../require/db.php';
 require '../require/common.php';
 
 $error = false;
-$discount_err = 
-$description_err  = 
-$title_err =
-$start_date_err = 
-$error_message = '';
+$discount_err =
+    $description_err  =
+    $title_err =
+    $start_date_err =
+    $error_message = '';
 $title = $description = $discount_percent = $start_date = $end_date = $status = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,16 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($title === '' || $discount_percent <= 0 || $start_date === '' || $end_date === '') {
         $error = true;
         $error_message = 'ကျေးဇူးပြု၍ လိုအပ်သောအချက်များအားလုံးဖြည့်ပြီး မှန်ကန်သောလျှော့ဈေးကိုထည့်ပါ။';
-    } 
+    }
     if ($start_date > $end_date) {
         $error = true;
         $start_date_err = 'Start date cannot be later than end date.';
     }
     if ($discount_percent < 1 || $discount_percent > 50) {
         $error = true;
-       $discount_err = 'Discount percentage must be between 1 and 50.';
+        $discount_err = 'Discount percentage must be between 1 and 50.';
     }
-    
+
     if (empty($title)) {
         $error = true;
         $title_err = "Please add title.";
@@ -47,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($description)) {
         $error = true;
         $description_err  = "Please add description";
-    } else if (strlen($description) > 100) {
+    } else if (strlen($description) > 1000) {
         $error = true;
-        $description_err = 'Description must be less than 100 characters.';
+        $description_err = 'Description must be less than 1000 characters.';
     }
-    if(!$error) {
+    if (!$error) {
         $sql = "INSERT INTO promotions (package_name, percentage, description, start_date, end_date) VALUES ('$title', '$discount_percent', '$description','$start_date', '$end_date')";
         $result = $mysqli->query($sql);
         if ($result) {
@@ -62,13 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_message = 'ပရိုမိုးရှင်းဖန်တီးရန် မအောင်မြင်ပါ။';
         }
     }
-
 }
 require '../layouts/header.php';
 ?>
 <div class="content-body">
     <div class="container-fluid mt-3">
-        
+
         <?php if ($error && $error_message) { ?>
             <div class="alert alert-danger"><?= htmlspecialchars($error_message) ?></div>
         <?php } ?>
@@ -94,11 +93,11 @@ require '../layouts/header.php';
                     <div class="form-group mb-2">
                         <label for="start_date">ပရိုမိုးရှင်း စသည့်ရက်<span class="text-danger"></span></label>
                         <input type="date" name="start_date" id="start_date" class="form-control" value="<?= htmlspecialchars($start_date) ?>">
-                         <small class="text-danger"><?= $start_date_err ?></small>
+                        <small class="text-danger"><?= $start_date_err ?></small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="end_date">ပရိုမိုးရှင်း ပြီးဆုံးသည့်ရက်<span class="text-danger"></span></label>
-                        <input type="date" name="end_date" id="end_date" class="form-control" value="<?= htmlspecialchars($end_date) ?>" >
+                        <input type="date" name="end_date" id="end_date" class="form-control" value="<?= htmlspecialchars($end_date) ?>">
                     </div>
                     <button type="submit" class="btn btn-primary">ပရိုမိုးရှင်း အသစ်ဖန်တီးရန်</button>
                 </form>

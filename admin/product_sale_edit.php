@@ -37,7 +37,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         $sql = "UPDATE product_sales SET qty='$qty', total_price='$total_price', sale_date='$sale_date' WHERE id=$id";
         $result = $mysqli->query($sql);
         if ($result) {
-            echo "<script>window.location.href = 'product_sale_list.php?success=Product Sale Updated';</script>";
+            echo "<script>window.location.href = 'product_sale_list.php?success=အသစ်ပြင်ခြင်းအောင်မြင်ပါသည်။';</script>";
             exit;
         } else {
             $error = true;
@@ -49,7 +49,7 @@ require '../layouts/header.php';
 ?>
 <div class="content-body">
     <div class="container-fluid mt-3">
-       
+
         <div class="d-flex justify-content-center">
             <div class="col-md-6 col-sm-10 col-12">
                 <?php if ($error && $sale_date_error) { ?>
@@ -59,7 +59,7 @@ require '../layouts/header.php';
                 <?php } ?>
                 <div class="card">
                     <div class="card-body">
-                         <h3 class="text-center mb-5 text-info">ပစ္စည်းအရောင်းများ ပြင်ဆင်ရန်</h3>
+                        <h3 class="text-center mb-5 text-info">ပစ္စည်းအရောင်းများ ပြင်ဆင်ရန်</h3>
                         <form action="" method="POST">
                             <div class="form-group mb-2">
                                 <label class="form-label">ပစ္စည်းများ</label>

@@ -52,7 +52,7 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                     exit();
                 }
                 if ($_SESSION['role'] == "customer" && $data['role'] == "customer") {
-                    header("Location: $customer_base_url" . 'services.php');
+                    header("Location: $customer_base_url" . 'ser.php');
                     exit();
                 }
                 header("Location: $admin_base_url" . 'dashboard.php');

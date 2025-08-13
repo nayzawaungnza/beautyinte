@@ -87,7 +87,7 @@ require '../layouts/header.php';
                                     <th>ချိန်းဆိုသည့် ရက်စွဲ</th>
                                     <th>ချိန်းဆိုသည့် အချိန်</th>
                                     <th>အခြေအနေ</th>
-                                    <th>မှတ်ချက်</th>
+
                                     <th>တောင်းဆိုမှု</th>
                                     <th>လုပ်ဆောင်မှု</th>
                                 </tr>
@@ -115,7 +115,7 @@ require '../layouts/header.php';
                                                     echo "<span class='badge bg-danger text-dark'>ငြင်းပယ်သည်</span>";
                                                 }
                                                 ?></td>
-                                            <td><?= htmlspecialchars($row['comment']) ?></td>
+
                                             <td><?= htmlspecialchars($row['request']) ?></td>
                                             <td>
                                                 <div>

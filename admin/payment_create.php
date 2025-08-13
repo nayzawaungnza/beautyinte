@@ -44,6 +44,8 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
         $appointment_id = $mysqli->real_escape_string($_POST['appointment_id']);
         $amount = $mysqli->real_escape_string($_POST['amount']);
         $payment_method_id = isset($_POST['payment_method_id']) ? $mysqli->real_escape_string($_POST['payment_method_id']) : '';
+        $user_acc = isset($_POST['user_acc']) ? $mysqli->real_escape_string($_POST['user_acc']) : '';
+        $ph_no = isset($_POST['ph_no']) ? $mysqli->real_escape_string($_POST['ph_no']) : '';
         $payment_date = date("Y-m-d");
         // Validation
         if ($appointment_id === '' || !is_numeric($appointment_id)) {
@@ -68,13 +70,17 @@ if (isset($_POST['form_sub']) && $_POST['form_sub'] == '1') {
                 $error = true;
                 $error_message = "ဤချိန်းဆိုမှုအတွက် ငွေပေးချေမှု ရှိပြီးဖြစ်ပါသည်။";
             } else {
-                $sql = "INSERT INTO payments (appointment_id, amount, payment_method_id, payment_date) VALUES ('$appointment_id', '$amount', '$payment_method_id', '$payment_date')";
+                $sql = "INSERT INTO payments (appointment_id, amount, payment_method_id, payment_date, user_account, phone_number) VALUES ('$appointment_id', '$amount', '$payment_method_id', '$payment_date', '$user_acc', '$ph_no')";
                 $result = $mysqli->query($sql);
                 if ($result) {
                     // Generate new token to prevent resubmission
                     $_SESSION['payment_form_token'] = uniqid();
 
-                    $url = $admin_base_url . 'payment_list.php?success=Payment created successfully';
+                    // Get the inserted payment ID
+                    $payment_id = $mysqli->insert_id;
+
+                    // Redirect to voucher page
+                    $url = $admin_base_url . 'payment_voucher.php?id=' . $payment_id;
                     header("Location: $url");
                     exit;
                 } else {
@@ -185,7 +191,7 @@ require '../layouts/header.php';
                             </div>
                             <input type="hidden" name="form_sub" value="1" />
                             <input type="hidden" name="form_token" value="<?= $_SESSION['payment_form_token'] ?>" />
-                            <button type="submit" class="btn btn-primary w-100">အသစ်ထပ်တိုးရန်</button>
+                            <button type="submit" class="btn btn-primary w-100">‌ငွေပေးချေမည်</button>
                         </form>
                     </div>
                 </div>

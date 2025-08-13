@@ -1,6 +1,7 @@
 <?php
 require_once('./require/db.php');
 require './require/common.php';
+
 $error = false;
 $name_err =
     $email_err =
@@ -15,100 +16,115 @@ $name_err =
     $confirm_password =
     $confirm_password_err = '';
 
-if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
-    // Removed debug code
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $phone = $_POST['phone'];
-    $gender = $_POST['gender'];
+if (isset($_POST['btn_submit'])) {
+    // Use null coalescing to safely get POST values
+    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+    $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
-    $sql = "SELECT * FROM `users` WHERE `email`= '$email'";
+    // Check if email already exists
+    $sql = "SELECT * FROM `users` WHERE `email`= '" . $mysqli->real_escape_string($email) . "'";
     $result = $mysqli->query($sql);
 
-    if ($result->num_rows > 0) {
+    if ($result && $result->num_rows > 0) {
         $error = true;
-        $email_err = "This email is already registered.";
+        $email_err = "အီးမေးလ်သည် အသုံးပြုထားပြီး ဖြစ်သည်။";
     }
-    //Name
+
+    // Name validation
     if (empty($name)) {
         $error = true;
         $name_err = "ကျေးဇူးပြု၍ အမည်ထည့်ပါ။";
-    } else if (strlen($name) < 5) {
+    } elseif (strlen($name) < 5) {
         $error = true;
         $name_err = "အမည်သည် အနည်းဆုံး စာလုံး ၅ လုံး ပြည့်မီရပါမည်။";
-    } else if (strlen($name) >= 100) {
+    } elseif (strlen($name) >= 100) {
         $error = true;
         $name_err = "အမည်သည် စာလုံး ၁၀၀ ထက်နည်းရပါမည်။";
     }
-    //Email
+
+    // Email validation
     $email_pattern = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 
     if (strlen($email) === 0) {
         $error = true;
         $email_err = "ကျေးဇူးပြု၍ သင့်အီးမေးလ်ကိုဖြည့်ပါ။";
-    } else if (strlen($email) < 10) {
+    } elseif (strlen($email) < 10) {
         $error = true;
         $email_err = "အီးမေးလ်သည် ၁၀ ထက်များရပါမည်။";
-    } else if (strlen($email) > 30) {
+    } elseif (strlen($email) > 30) {
         $error = true;
         $email_err = "အီးမေးလ်သည်  ၃၀ ထက်နည်းရပါမည်။";
-    } else if (!preg_match($email_pattern, $email)) {
+    } elseif (!preg_match($email_pattern, $email)) {
         $error = true;
         $email_err = "အီးမေးလ် ဖော်မတ်မှားယွင်းနေပါသည်။";
     }
-    //Password
+
+    // Password validation
     if (strlen($password) === 0) {
         $error = true;
         $password_err = "ကျေးဇူးပြု၍ လျှို့ဝှက်နံပါတ် ဖြည့်ပါ။";
-    } else if (strlen($password) < 8) {
+    } elseif (strlen($password) !== 8) {
         $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်သည် အနည်းဆုံး ၈ လုံး ရှိရပါမည်။";
-    } else if (strlen($password) > 30) {
+        $password_err = "လျှို့ဝှက်နံပါတ်သည် အတိုင်းအတာ ၈ လုံး ရှိရပါမည်။";
+    } elseif (!preg_match('/[A-Z]/', $password)) {
         $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်သည် စာလုံး ၃၀ ထက်နည်းရပါမည်။";
-    } else if ($password != $confirm_password) {
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အကြီးစာလုံး တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif (!preg_match('/[a-z]/', $password)) {
+        $error = true;
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အသေးစာလုံး တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif (!preg_match('/[0-9]/', $password)) {
+        $error = true;
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် ဂဏန်း တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif (!preg_match('/[\W_]/', $password)) { // Special characters or underscore
+        $error = true;
+        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အထူးသင်္ကေတ တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
+    } elseif ($password !== $confirm_password) {
         $error = true;
         $password_err = $confirm_password_err = "အတည်ပြုစကားဝှက် မကိုက်ညီပါ။";
     } else {
         $byScriptPassword = md5($password);
     }
 
-    //phone
+    // Phone validation
     if (empty($phone)) {
         $error = true;
         $phone_err = "ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ။";
-    } else if (strlen($phone) < 11) {
+    } elseif (!preg_match('/^09\d{9}$/', $phone)) {
         $error = true;
-        $phone_err = "ဖုန်းနံပါတ်သည် အနည်းဆုံး ဂဏန်း ၁၁ လုံး ရှိရပါမည်။";
+        $phone_err = "ဖုန်းနံပါတ်သည် 09 ဖြင့်စ၍ ဂဏန်း ၁၁ လုံး အတိအကျ ရှိရပါမည်။";
     }
-    //gender
+
+    // Gender validation
     if ($gender === '') {
         $error = true;
         $gender_err = "ကျေးဇူးပြု၍ လိင် ရွေးချယ်ပါ။";
     }
 
-
     if (!$error) {
-        $sql = "INSERT INTO `users`(`name`, `email`, `password`, `role`, `phone`, `gender`)
-     VALUES ('$name','$email','$byScriptPassword','customer','$phone','$gender')";
-        $mysqli->query($sql);
+        $stmt = $mysqli->prepare("INSERT INTO `users` (`name`, `email`, `password`, `role`, `phone`, `gender`) VALUES (?, ?, ?, 'customer', ?, ?)");
+        $stmt->bind_param('sssss', $name, $email, $byScriptPassword, $phone, $gender);
+        $stmt->execute();
+        $stmt->close();
+
         echo "<script>window.location.href= 'http://localhost/Beauty/login.php' </script>";
+        exit();
     }
 }
-
-
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Register | Beauty Salon</title>
-    <link href="./dashCss/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./dashCss/style.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
             min-height: 100vh;
@@ -166,7 +182,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <label for="name" class="form-label">အမည်</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                    <input type="text" name="name" class="form-control" id="name" value="<?= htmlspecialchars($name) ?>">
+                                    <input type="text" name="name" class="form-control" id="name" value="<?= htmlspecialchars($name) ?>" />
                                 </div>
                                 <small class="text-danger"> <?= $name_err ?> </small>
                             </div>
@@ -176,7 +192,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <label for="email" class="form-label">အီးမေးလ်</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                    <input type="email" name="email" class="form-control" id="email" value="<?= htmlspecialchars($email) ?>">
+                                    <input type="email" name="email" class="form-control" id="email" value="<?= htmlspecialchars($email) ?>" />
                                 </div>
                                 <small class="text-danger"> <?= $email_err ?> </small>
                             </div>
@@ -186,7 +202,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <label for="password" class="form-label">စကားဝှက်</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                    <input type="password" name="password" class="form-control" id="password" value="<?= htmlspecialchars($password) ?>">
+                                    <input type="password" name="password" class="form-control" id="password" value="<?= htmlspecialchars($password) ?>" />
                                 </div>
                                 <small class="text-danger"> <?= $password_err ?> </small>
                             </div>
@@ -196,7 +212,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <label for="confirm_password" class="form-label">အတည်ပြုစကားဝှက်</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                                    <input type="password" name="confirm_password" class="form-control" id="confirm_password" value="<?= htmlspecialchars($confirm_password) ?>">
+                                    <input type="password" name="confirm_password" class="form-control" id="confirm_password" value="<?= htmlspecialchars($confirm_password) ?>" />
                                 </div>
                                 <small class="text-danger"> <?= $confirm_password_err ?> </small>
                             </div>
@@ -206,7 +222,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                                 <label for="phone" class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                                    <input type="text" name="phone" class="form-control" id="phone" value="<?= htmlspecialchars($phone) ?>">
+                                    <input type="text" name="phone" class="form-control" id="phone" value="<?= htmlspecialchars($phone) ?>" />
                                 </div>
                                 <small class="text-danger"> <?= $phone_err ?> </small>
                             </div>
@@ -215,11 +231,11 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                             <label class="form-label">လိင်</label>
                             <div class="d-flex gap-3 mb-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" <?= $gender === 'male' ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" <?= $gender === 'male' ? 'checked' : '' ?> />
                                     <label class="form-check-label" for="genderMale">ကျား</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female" <?= $gender === 'female' ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female" <?= $gender === 'female' ? 'checked' : '' ?> />
                                     <label class="form-check-label" for="genderFemale">မ</label>
                                 </div>
                             </div>
@@ -237,7 +253,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
         </div>
     </div>
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <script src="./dashJs/common.min.js"></script>
     <script src="./dashJs/custom.min.js"></script>
     <script src="./dashJs/settings.js"></script>

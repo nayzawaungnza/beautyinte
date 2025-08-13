@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <h3 class="text-center mb-5 text-info">အသုံးပြုသူစာရင်း အသစ်ပြင်ခြင်း</h3>
+                <h3 class="text-center mb-5 text-info">ဝန်ထမ်းစာရင်း အသစ်ပြင်ခြင်း</h3>
                 <form method="POST">
                     <div class="form-group">
                         <label class="form-label">အမည်</label>
@@ -124,15 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
                         <small class="text-danger"><?= $email_err ?></small>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label class="form-label">အခန်းကဏ္ဍ</label>
-                        <select name="role" class="form-control">
-                            <option value="">ရွေးချယ်ရန် အခန်းကဏ္ဍ</option>
-                            <option value="admin" <?= $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
-                            <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
-                        </select>
-                        <small class="text-danger"><?= $role_err ?></small>
-                    </div> -->
 
                     <div class="form-group">
                         <label class="form-label">ဆက်သွယ်ရန်ဖုန်း</label>

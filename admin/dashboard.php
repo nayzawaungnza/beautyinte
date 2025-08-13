@@ -3,6 +3,27 @@ require '../require/check_auth.php';
 checkAuth('admin');
 require '../layouts/header.php';
 
+$august_sales = [
+    'days' => [],
+    'qtys' => []
+];
+
+// SQL query August 2025 အတွက် ရက်အလိုက် qty total တွေကိုယူမယ်
+$query = "
+    SELECT DAY(sale_date) AS day, SUM(qty) AS total_qty
+    FROM product_sales
+    WHERE MONTH(sale_date) = 8 AND YEAR(sale_date) = 2025
+    GROUP BY day
+    ORDER BY day
+";
+
+$result = $mysqli->query($query);
+
+while ($row = $result->fetch_assoc()) {
+    $august_sales['days'][] = (int)$row['day'];
+    $august_sales['qtys'][] = (int)$row['total_qty'];
+}
+
 // Stats
 $total_users = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'staff'")->fetch_assoc()['count'];
 $total_customers = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'customer'")->fetch_assoc()['count'];
@@ -16,10 +37,10 @@ $total_services = $mysqli->query("SELECT COUNT(*) as count FROM services")->fetc
 $year = date('Y');
 $monthly_data = array_fill(1, 12, 0);
 
-$query = "SELECT MONTH(appointment_date) AS month, COUNT(*) AS count 
-          FROM appointments 
-          WHERE YEAR(appointment_date) = $year 
-          GROUP BY MONTH(appointment_date)";
+$query = "SELECT MONTH(appointment_date) AS month, COUNT(*) AS count
+FROM appointments
+WHERE YEAR(appointment_date) = $year
+GROUP BY MONTH(appointment_date)";
 $result = $mysqli->query($query);
 
 while ($row = $result->fetch_assoc()) {
@@ -124,17 +145,21 @@ while ($row = $result->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Bar Chart Section -->
-        <div class="row mt-5">
+        <!-- Chart Section -->
+        <div class="row">
             <div class="col-12">
-                <div class="card shadow border-0">
+                <div class="card shadow border-0" style="width:900px; margin: auto;">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold text-dark mb-4">ယခုနှစ်အတွက် လတိုင်း Appointment အရေအတွက်</h5>
-                        <canvas id="appointmentChart" height="120"></canvas>
+                        <h5 class="card-title fw-bold text-dark mb-4">
+                            ၂၀၂၅ သြဂုတ်လ Appointment အရေအတွက် (ရက်အလိုက်)
+                        </h5>
+                        <canvas id="appointmentChart" height="200"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+
+
 
         <style>
             .dashboard-card {
@@ -175,49 +200,65 @@ while ($row = $result->fetch_assoc()) {
         <!-- Chart.js CDN -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <!-- Chart Script -->
         <script>
+            const days = <?= json_encode($august_sales['days'] ?? []) ?>;
+            const qtys = <?= json_encode($august_sales['qtys'] ?? []) ?>;
+
+            // Aug 1-31 ရက် အကုန်ရှိအောင် 0 values ထည့်ဖို့ (optional)
+            const fullDays = Array.from({
+                length: 31
+            }, (_, i) => i + 1);
+            const fullQtys = fullDays.map(day => {
+                const idx = days.indexOf(day);
+                return idx !== -1 ? qtys[idx] : 0;
+            });
+
             const ctx = document.getElementById('appointmentChart').getContext('2d');
-            const appointmentChart = new Chart(ctx, {
+            new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: [
-                        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                    ],
+                    labels: fullDays.map(d => `Aug ${d}`),
                     datasets: [{
-                        label: 'Appointment Count',
-                        data: <?= json_encode(array_values($monthly_data)) ?>,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        borderRadius: 6
+                        label: 'Product Sales Quantity (August 2025)',
+                        data: fullQtys,
+                        backgroundColor: '#4bc0c0',
+                        borderColor: '#333',
+                        borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
-                    },
                     plugins: {
                         legend: {
                             display: false
                         },
                         tooltip: {
-                            mode: 'index',
-                            intersect: false
+                            callbacks: {
+                                label: ctx => `${ctx.label}: ${ctx.parsed.y}`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Quantity Sold'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
                         }
                     }
                 }
             });
         </script>
+
     </div>
 </div>
-<!-- Content body end -->
+<!--Content body end-- >
 
 <?php require '../layouts/footer.php'; ?>
