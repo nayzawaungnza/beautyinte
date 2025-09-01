@@ -73,14 +73,14 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>နံပါတ်</th>
-                                    <th>ပရိုဖိုင်</th>
-                                    <th>အမည်</th>
-                                    <th>အီးမေးလ်</th>
-                                    <th>အခန်းကဏ္ဍ</th>
-                                    <th>ဆက်သွယ်ရန်ဖုန်း</th>
-                                    <th>လိင်</th>
-                                    <th>လုပ်ဆောင်မှု</th>
+                                    <th style="color:black">နံပါတ်</th>
+                                    <th style="color:black">ပရိုဖိုင်</th>
+                                    <th style="color:black">အမည်</th>
+                                    <th style="color:black">အီးမေးလ်</th>
+                                    <th style="color:black">အခန်းကဏ္ဍ</th>
+                                    <th style="color:black">ဆက်သွယ်ရန်ဖုန်း</th>
+                                    <th style="color:black">လိင်</th>
+                                    <th style="color:black">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,15 +88,15 @@ require '../layouts/header.php';
                                     <?php $i = 1; ?>
                                     <?php while ($row = $res->fetch_assoc()): ?>
                                         <tr>
-                                            <td><?= $i++ ?></td>
+                                            <td style="color:black"><?= $i++ ?></td>
                                             <td>
                                                 <img src="<?= $row['image'] ? '../uplode/' . htmlspecialchars($row['image']) : '../uplode/default.png' ?>" alt="Profile Image" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                                             </td>
-                                            <td><?= htmlspecialchars($row['name']) ?></td>
-                                            <td><?= htmlspecialchars($row['email']) ?></td>
-                                            <td><?= htmlspecialchars($row['role']) ?></td>
-                                            <td><?= htmlspecialchars($row['phone']) ?></td>
-                                            <td><?= $row['gender'] === "male" ? "ကျား" : "မ" ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['email']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['role']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['phone']) ?></td>
+                                            <td style="color:black"><?= $row['gender'] === "male" ? "ကျား" : "မ" ?></td>
                                             <td>
                                                 <a href="./user_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>

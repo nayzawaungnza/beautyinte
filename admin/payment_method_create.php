@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->bind_param("ssssi", $name, $image_name, $user_acc, $ph_no, $status);
         if ($stmt->execute()) {
-            echo "<script>window.location.href= 'payment_method_list.php?success=အသုံးပြုသူ ပြင်ခြင်း အောင်မြင်ပါသည်'</script>";
+            echo "<script>window.location.href= 'payment_method_list.php?success=ငွေပေးချေမှုနည်းလမ်းအသစ်ထည့်ခြင်းအောင်မြင်ပါသည်'</script>";
             exit;
         } else {
             $error = true;
@@ -74,22 +74,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
                     <div class="form-group mb-3">
-                        <label for="name">နည်းလမ်းအမည် <span class="text-danger"></span></label>
+                        <label for="name" style="color:black">နည်းလမ်းအမည် <span class="text-danger"></span></label>
                         <input type="text" name="name" class="form-control" id="name" required value="<?= htmlspecialchars($name) ?>">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="image">ပုံ</label>
+                        <label for="image" style="color:black">ပုံ</label>
                         <input type="file" name="image" id="image" class="form-control" accept="image/*">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="user_acc">အသုံးပြုသူအကောင့်</label>
+                        <label for="user_acc" style="color:black">အသုံးပြုသူအကောင့်</label>
                         <input type="text" name="user_acc" class="form-control" id="user_acc" value="<?= htmlspecialchars($user_acc) ?>">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="ph_no">ဖုန်းနံပါတ်</label>
+                        <label for="ph_no" style="color:black">ဖုန်းနံပါတ်</label>
                         <input type="text" name="ph_no" class="form-control" id="ph_no" value="<?= htmlspecialchars($ph_no) ?>">
                     </div>
 

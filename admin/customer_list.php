@@ -67,10 +67,10 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr class="text-center">
-                                    <th>စဉ်</th>
-                                    <th>အမည်</th>
-                                    <th>ဆက်သွယ်ရန်ဖုန်း</th>
-                                    <th>လုပ်ဆောင်မှု</th>
+                                    <th style="color:black">စဉ်</th>
+                                    <th style="color:black">အမည်</th>
+                                    <th style="color:black">ဆက်သွယ်ရန်ဖုန်း</th>
+                                    <th style="color:black">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,9 +78,9 @@ require '../layouts/header.php';
                                     <?php $i = 1; ?>
                                     <?php while ($row = $res->fetch_assoc()): ?>
                                         <tr class="text-center">
-                                            <td><?= $i++ ?></td>
-                                            <td><?= htmlspecialchars($row['name']) ?></td>
-                                            <td><?= htmlspecialchars($row['phone']) ?></td>
+                                            <td style="color:black"><?= $i++ ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['phone']) ?></td>
                                             <td>
                                                 <a href="./customer_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>

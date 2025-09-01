@@ -21,7 +21,6 @@ function getStatusTextEnglish($status)
     }
 }
 
-// Service name translation map (မြန်မာ -> English)
 function translateServiceName($serviceNames)
 {
     $services = array_map('trim', explode(',', $serviceNames));
@@ -54,9 +53,7 @@ function translateServiceName($serviceNames)
         "လက်သည်း(အတုကပ်)" => "Press on Nail",
         "လက်သည်း(3D ပုံစံ)" => "3D Nail Design",
         "လက်သည်း(အဖြူအစရာနှင့်elegantရောင်ခြယ်ခြင်း)" => "Elegant Nail Design",
-        // လိုအပ်သမျှ service name တွေ ထပ်ထည့်ပါ
     ];
-
     $translated = [];
     foreach ($services as $service) {
         $translated[] = $map[$service] ?? $service;
@@ -64,7 +61,6 @@ function translateServiceName($serviceNames)
     return implode(', ', $translated);
 }
 
-// Staff name translation map (မြန်မာ -> English)
 function translateStaffName($staffName)
 {
     $map = [
@@ -76,12 +72,10 @@ function translateStaffName($staffName)
         "စုစု" => "Su Su",
         "နိုနို" => "No No",
         "ဖြူဖြူ" => "Phyu Phyu",
-        // လိုအပ်သမျှ staff name တွေ ထပ်ထည့်ပါ
     ];
     return $map[$staffName] ?? $staffName;
 }
 
-// Customer name translation map (မြန်မာ -> English)
 function translateCustomerName($customerName)
 {
     $map = [
@@ -95,20 +89,19 @@ function translateCustomerName($customerName)
         "ဖူးဖူး" => "Phue Phue",
         "သဲသဲ" => "Thae Thae",
         "ထွေးရီ" => "Htwe Yee",
-        // လိုအပ်သမျှ customer name တွေ ထပ်ထည့်ပါ
+        "ဝေဝေ" => "Wai Wai",
+        "လှလှ" => "Hla Hla",
+        "ချောစု" => "Chaw Su",
     ];
     return $map[$customerName] ?? $customerName;
 }
 
-// FPDF သည် ISO-8859-1 (Latin-1) စနစ်ဖြင့် render လုပ်သဖြင့် English အတွက် OK.
-// မတော်တဆ Non-Latin char တွေဝင်လာခဲ့ရင် ? သို့မဟုတ် translit ဖြစ်အောင် convert
 function toLatin1($s)
 {
     $t = @iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', (string)$s);
     return $t !== false ? $t : preg_replace('/[^\x20-\x7E]/', '?', (string)$s);
 }
 
-// စာကြောင်းအရှည်ကြီးတွေကို စာလုံးအရေအတွက်နဲ့ ဖြတ်ထားမယ့် helper
 function fit($s, $maxChars)
 {
     $s = trim((string)$s);
@@ -116,51 +109,54 @@ function fit($s, $maxChars)
     return mb_substr($s, 0, $maxChars - 1, 'UTF-8') . '…';
 }
 
-// --- Filter --- //
+// --- Filter: Only appointments created today ---
+$today = date('Y-m-d');
+$where = " WHERE DATE(appointments.created_at) = '$today' ";
+
+// Optional search
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$where = '';
 if ($search !== '') {
     $esc = $mysqli->real_escape_string($search);
-    $where = " WHERE customers.name LIKE '%$esc%'
-               OR staff.name LIKE '%$esc%'
-               OR appointments.appointment_date LIKE '%$esc%'
-               OR appointments.selected_service_names LIKE '%$esc%'";
+    $where .= " AND (customers.name LIKE '%$esc%'
+                   OR staff.name LIKE '%$esc%'
+                   OR appointments.selected_service_names LIKE '%$esc%')";
 }
 
-// --- Query (UI နဲ့တူစေ) --- //
-$sql = "SELECT payments.id AS payment_id,
-               appointments.id,
-               customers.name AS customer_name,
-               staff.name AS staff_name,
-               appointments.appointment_date AS app_date,
-               appointments.appointment_time AS app_time,
-               appointments.status,
-               appointments.selected_service_names
+// --- Query appointments ---
+$sql = "SELECT appointments.id, customers.name AS customer_name, staff.name AS staff_name,
+        appointments.created_at AS app_date, appointments.appointment_time AS app_time,
+        appointments.status, appointments.selected_service_names
         FROM appointments
         INNER JOIN users AS customers ON customers.id = appointments.customer_id
         INNER JOIN users AS staff ON staff.id = appointments.staff_id
-        LEFT JOIN payments ON appointments.id = payments.appointment_id
         $where
         ORDER BY appointments.id DESC";
+
 $res = $mysqli->query($sql);
 
-// --- PDF Start --- //
+// --- Query payments for today ---
+$paymentSql = "SELECT appointment_id, amount FROM payments WHERE DATE(created_at) = '$today'";
+$paymentsRes = $mysqli->query($paymentSql);
+$paymentsArr = [];
+$totalAmount = 0;
+if ($paymentsRes && $paymentsRes->num_rows > 0) {
+    while ($p = $paymentsRes->fetch_assoc()) {
+        $paymentsArr[$p['appointment_id']][] = $p['amount'];
+        $totalAmount += $p['amount'];
+    }
+}
+
+// --- PDF Generation ---
 $pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
-
-// Title
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(0, 10, toLatin1('Appointments Report'), 0, 1, 'C');
+$pdf->Cell(0, 16, toLatin1("Today's Appointments Report"), 0, 1, 'C');
 $pdf->Ln(2);
 
 // Table Header
 $pdf->SetFont('Arial', 'B', 10);
-$w = [10, 36, 52, 28, 22, 16, 20, 0];
-$fixed_total = array_sum(array_slice($w, 0, 7));
-$w[7] = 190 - $fixed_total;
-if ($w[7] < 10) $w[7] = 10;
-
-$headers = ['No', 'Customer Name', 'Services', 'Staff', 'Date', 'Time', 'Status'];
+$w = [10, 36, 52, 28, 22, 16, 20, 20];
+$headers = ['No', 'Customer Name', 'Services', 'Staff', 'Date', 'Time', 'Status', 'Amount'];
 foreach ($headers as $i => $h) {
     $pdf->Cell($w[$i], 8, toLatin1($h), 1, 0, 'C');
 }
@@ -169,28 +165,35 @@ $pdf->Ln();
 // Table Body
 $pdf->SetFont('Arial', '', 9);
 $i = 1;
-
 if ($res && $res->num_rows > 0) {
     while ($row = $res->fetch_assoc()) {
+        $dateOnly = date('Y-m-d', strtotime($row['app_date']));
+        $appointmentId = $row['id'];
+        $amountText = '';
+        if (isset($paymentsArr[$appointmentId])) {
+            $amountText = implode(',', $paymentsArr[$appointmentId]);
+        }
         $cells = [
             $i++,
-            fit(translateCustomerName($row['customer_name']), 28),           // Customer name translate
-            fit(translateServiceName($row['selected_service_names']), 60),   // Service names translate
-            fit(translateStaffName($row['staff_name']), 22),                 // Staff name translate
-            $row['app_date'],
+            fit(translateCustomerName($row['customer_name']), 20),
+            fit(translateServiceName($row['selected_service_names']), 60),
+            fit(translateStaffName($row['staff_name']), 22),
+            $dateOnly,
             $row['app_time'],
             getStatusTextEnglish($row['status']),
+            $amountText
         ];
-
         foreach ($cells as $idx => $val) {
             $pdf->Cell($w[$idx], 7, toLatin1((string)$val), 1);
         }
         $pdf->Ln();
     }
+    // Total amount row
+    $pdf->Cell(array_sum($w) - $w[7], 7, toLatin1('Total Amount'), 1, 0, 'R');
+    $pdf->Cell($w[7], 7, toLatin1($totalAmount), 1, 1, 'C');
 } else {
-    $pdf->Cell(0, 10, toLatin1('No appointments found.'), 1, 1, 'C');
+    $pdf->Cell(0, 10, toLatin1('No appointments created today.'), 1, 1, 'C');
 }
 
-// Download
-$pdf->Output('D', 'appointments.pdf');
+$pdf->Output('D', 'appointments_today.pdf');
 exit;

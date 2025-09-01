@@ -2,12 +2,33 @@
 require '../require/check_auth.php';
 checkAuth('admin');
 
+// Database connection
+require '../require/db.php'; // ဒီဖိုင်ထဲမှာ $mysqli connection ရှိရမယ်
+
+// Start output buffering to avoid "headers already sent" error
+ob_start();
+
+// Handle delete
+if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
+    $delete_id = intval($_GET['delete_id']);
+    $res = $mysqli->query("DELETE FROM payment_method WHERE id = $delete_id");
+    if ($res) {
+        header('Location: payment_method_list.php?success=ငွေပေးချေမှုနည်းလမ်းဖျက်ခြင်းအောင်မြင်ပါသည်');
+        exit;
+    } else {
+        header('Location: payment_method_list.php?error=Failed to delete payment method');
+        exit;
+    }
+}
+
 require '../layouts/header.php';
 
+// Get success/error messages and search term
 $success = $_GET['success'] ?? '';
 $error = $_GET['error'] ?? '';
 $search = trim($_GET['search'] ?? '');
 
+// Fetch payment methods
 $sql = "SELECT * FROM `payment_method`";
 if ($search !== '') {
     $search_escaped = $mysqli->real_escape_string($search);
@@ -15,19 +36,8 @@ if ($search !== '') {
 }
 $sql .= " ORDER BY id DESC";
 $methods = $mysqli->query($sql);
-
-// Handle delete
-if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
-    $delete_id = intval($_GET['delete_id']);
-    $res = $mysqli->query("DELETE FROM payment_method WHERE id = $delete_id");
-    if ($res) {
-        header('Location: payment_method_list.php?success=Payment method deleted successfully');
-    } else {
-        header('Location: payment_method_list.php?error=Failed to delete payment method');
-        exit;
-    }
-}
 ?>
+
 <div class="content-body py-3">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3">
@@ -54,13 +64,13 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
                 <table class="table table-hover table-sm align-middle">
                     <thead>
                         <tr>
-                            <th>စဥ်</th>
-                            <th>ပုံ</th>
-                            <th>နည်းလမ်းအမည်</th>
-                            <th>အကောင့်</th>
-                            <th>ဖုန်း</th>
-                            <th>အခြေအနေ</th>
-                            <th>လုပ်ဆောင်မှု</th>
+                            <th style="color:black">စဥ်</th>
+                            <th style="color:black">ပုံ</th>
+                            <th style="color:black">နည်းလမ်းအမည်</th>
+                            <th style="color:black">အကောင့်</th>
+                            <th style="color:black">ဖုန်း</th>
+                            <th style="color:black">အခြေအနေ</th>
+                            <th style="color:black">လုပ်ဆောင်မှု</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,18 +78,18 @@ if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
                             $i = 1;
                             while ($row = $methods->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?= $i++ ?></td>
+                                    <td style="color:black"><?= $i++ ?></td>
                                     <td>
                                         <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
                                             alt="img" style="width: 50px; height: 50px;" class="rounded">
                                     </td>
-                                    <td><?= htmlspecialchars($row['name']) ?></td>
-                                    <td><?= htmlspecialchars($row['user_acc']) ?></td>
-                                    <td><?= htmlspecialchars($row['ph_no']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['name']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['user_acc']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['ph_no']) ?></td>
                                     <td>
-                                        <?= $row['status'] ? '<span class="badge bg-success text-dark ">အသုံးပြုနေသည်</span>' : '<span class="badge bg-danger text-dark">အသုံးပြု၍မရပါ</span>' ?>
+                                        <?= $row['status'] ? '<span class="badge bg-success text-dark">အသုံးပြုနေသည်</span>' : '<span class="badge bg-danger text-dark">အသုံးပြု၍မရပါ</span>' ?>
                                     </td>
-                                    <td>
+                                    <td style="color:black">
                                         <a href="payment_method_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info">ပြင်ဆင်ရန်</a>
                                         <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>
                                     </td>

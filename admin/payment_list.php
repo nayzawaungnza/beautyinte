@@ -90,15 +90,15 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>စဉ်</th>
-                                    <th>ဖောက်သည်အမည်</th>
-                                    <th>ဝန်ဆောင်မှုအမည်</th>
-                                    <th>ငွေပမာဏ</th>
-                                    <th>ငွေပေးချေမှုနည်းလမ်း</th>
-                                    <th>အကောင့်</th>
-                                    <th>ဖုန်း</th>
-                                    <th>ငွေပေးချေသည့်ရက်စွဲ</th>
-                                    <th>လုပ်ဆောင်မှု</th>
+                                    <th style="color:black">စဉ်</th>
+                                    <th style="color:black">ဖောက်သည်အမည်</th>
+                                    <th style="color:black">ဝန်ဆောင်မှုအမည်</th>
+                                    <th style="color:black">ငွေပမာဏ</th>
+                                    <th style="color:black">ငွေပေးချေမှုနည်းလမ်း</th>
+                                    <th style="color:black">အကောင့်</th>
+                                    <th style="color:black">ဖုန်း</th>
+                                    <th style="color:black">ငွေပေးချေသည့်ရက်စွဲ</th>
+                                    <th style="color:black">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,14 +107,14 @@ require '../layouts/header.php';
                                     $i = 1;
                                     while ($row = $payments->fetch_assoc()) { ?>
                                         <tr>
-                                            <td><?= $i++ ?></td>
-                                            <td><?= htmlspecialchars($row['customer_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['selected_service_names']) ?></td>
-                                            <td><?= number_format($row['amount']) ?> ကျပ်</td>
-                                            <td><?= htmlspecialchars($row['payment_method_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['user_acc'] ?? '') ?></td>
-                                            <td><?= htmlspecialchars($row['ph_no'] ?? '') ?></td>
-                                            <td><?= htmlspecialchars($row['appointment_date']) ?></td>
+                                            <td style="color:black"><?= $i++ ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['customer_name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['selected_service_names']) ?></td>
+                                            <td style="color:black"><?= number_format($row['amount']) ?> ကျပ်</td>
+                                            <td style="color:black"><?= htmlspecialchars($row['payment_method_name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['user_acc'] ?? '') ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['ph_no'] ?? '') ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['appointment_date']) ?></td>
                                             <td>
                                                 <a href="payment_voucher.php?id=<?= urlencode($row['id']) ?>" class="btn btn-sm btn-info" target="_blank" title="ဘောင်ချာ">
                                                     📄

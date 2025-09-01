@@ -57,13 +57,13 @@ require '../layouts/header.php';
                 <table class="table table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>စဥ်</th>
-                            <th>ခေါင်းစဉ်</th>
-                            <th>အကြောင်းအရာ</th>
-                            <th>လျှော့စျေး</th>
-                            <th>ပရိုမိုးရှင်းစသည့်ရက်</th>
-                            <th>ပရိုမိုးရှင်းဆုံးသည့်ရက်</th>
-                            <th>လုပ်ဆောင်မှု</th>
+                            <th style="color:black">စဥ်</th>
+                            <th style="color:black">ခေါင်းစဉ်</th>
+                            <th style="color:black">အကြောင်းအရာ</th>
+                            <th style="color:black">လျှော့စျေး</th>
+                            <th style="color:black">ပရိုမိုးရှင်းစသည့်ရက်</th>
+                            <th style="color:black">ပရိုမိုးရှင်းဆုံးသည့်ရက်</th>
+                            <th style="color:black">လုပ်ဆောင်မှု</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,12 +71,12 @@ require '../layouts/header.php';
                             $i = 1;
                             while ($row = $promotions->fetch_assoc()) { ?>
                                 <tr>
-                                    <td><?= $i++ ?></td>
-                                    <td><?= htmlspecialchars($row['package_name']) ?></td>
-                                    <td><?= htmlspecialchars($row['description']) ?></td>
-                                    <td><?= htmlspecialchars($row['percentage']) ?></td>
-                                    <td><?= htmlspecialchars($row['start_date']) ?></td>
-                                    <td><?= htmlspecialchars($row['end_date']) ?></td>
+                                    <td style="color:black"><?= $i++ ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['package_name']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['description']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['percentage']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['start_date']) ?></td>
+                                    <td style="color:black"><?= htmlspecialchars($row['end_date']) ?></td>
                                     <td>
                                         <a href="promotion_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info mb-2">ပြင်ဆင်ရန်</a>
                                         <a href="#" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete-btn">ဖျက်ရန်</a>

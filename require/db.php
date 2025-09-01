@@ -60,14 +60,14 @@ function create_table($mysqli)
     if ($mysqli->query($service_categories) === false) return false;
 
     //product caregory
-    $product_category =  "CREATE TABLE IF NOT EXISTS `product_categories` (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        name VARCHAR(100) NOT NULL,
-                        description TEXT NULL,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )";
-    if ($mysqli->query($product_category) === false) return false;
+    // $product_category =  "CREATE TABLE IF NOT EXISTS `product_categories` (
+    //                     id INT AUTO_INCREMENT PRIMARY KEY,
+    //                     name VARCHAR(100) NOT NULL,
+    //                     description TEXT NULL,
+    //                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    //                 )";
+    // if ($mysqli->query($product_category) === false) return false;
 
     //Services
     $service_sql = "CREATE TABLE IF NOT EXISTS `services`
@@ -85,19 +85,20 @@ function create_table($mysqli)
     if ($mysqli->query($service_sql) === false) return false;
 
     //Products
-    $product_sql = "CREATE TABLE IF NOT EXISTS `products`
-                (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                category_id INT NULL,
-                name VARCHAR(100) NOT NULL,
-                description TEXT NULL,
-                price INT NOT NULL,
-                img TEXT NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (category_id) REFERENCES product_categories(id) ON DELETE SET NULL
-                )";
-    if ($mysqli->query($product_sql) === false) return false;
+    // $product_sql = "CREATE TABLE IF NOT EXISTS `products`
+    //             (
+    //             id INT AUTO_INCREMENT PRIMARY KEY,
+    //             category_id INT NULL,
+    //             name VARCHAR(100) NOT NULL,
+    //             description TEXT NULL,
+    //             price INT NOT NULL,
+    //             img TEXT NOT NULL,
+    //             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //             FOREIGN KEY (category_id) REFERENCES product_categories(id) ON DELETE SET NULL
+    //             )";
+    // if ($mysqli->query($product_sql) === false) return false;
+
     // Payment Methods
     $payment_method_sql = "CREATE TABLE IF NOT EXISTS `payment_method`
                    (
@@ -121,33 +122,33 @@ function create_table($mysqli)
                    )";
     if ($mysqli->query($promotion_sql) === false) return false;
     //Product sales
-    $product_sales_sql = "CREATE TABLE IF NOT EXISTS `product_sales`
-                     ( 
-                     id INT AUTO_INCREMENT PRIMARY KEY,
-                     product_id INT NOT NULL,
-                     promotion_id INT NULL,
-                     payment_method_id INT NOT NULL, 
-                     qty INT NOT NULL,
-                     total_price INT NOT NULL,
-                     sale_date DATE NULL,
-                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
-                     FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
-                    FOREIGN KEY (payment_method_id) REFERENCES payment_method(id) ON DELETE RESTRICT
-                     )";
-    if ($mysqli->query($product_sales_sql) === false) return false;
-    //Product quantity
-    $product_qty_sql = "CREATE TABLE IF NOT EXISTS `product_qty`
-                  ( 
-                   id INT AUTO_INCREMENT PRIMARY KEY,
-                   product_id INT NOT NULL,
-                   qty INT NOT NULL,
-                   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
-                   )";
-    if ($mysqli->query($product_qty_sql) === false) return false;
+    // $product_sales_sql = "CREATE TABLE IF NOT EXISTS `product_sales`
+    //                  ( 
+    //                  id INT AUTO_INCREMENT PRIMARY KEY,
+    //                  product_id INT NOT NULL,
+    //                  promotion_id INT NULL,
+    //                  payment_method_id INT NOT NULL, 
+    //                  qty INT NOT NULL,
+    //                  total_price INT NOT NULL,
+    //                  sale_date DATE NULL,
+    //                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //                  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //                  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    //                  FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE,
+    //                 FOREIGN KEY (payment_method_id) REFERENCES payment_method(id) ON DELETE RESTRICT
+    //                  )";
+    // if ($mysqli->query($product_sales_sql) === false) return false;
+    // //Product quantity
+    // $product_qty_sql = "CREATE TABLE IF NOT EXISTS `product_qty`
+    //               ( 
+    //                id INT AUTO_INCREMENT PRIMARY KEY,
+    //                product_id INT NOT NULL,
+    //                qty INT NOT NULL,
+    //                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //                FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+    //                )";
+    // if ($mysqli->query($product_qty_sql) === false) return false;
     //Appointment
     $appointment_sql = "CREATE TABLE IF NOT EXISTS `appointments`
                    (

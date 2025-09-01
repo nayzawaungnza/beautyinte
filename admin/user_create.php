@@ -58,18 +58,6 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
     } elseif (strlen($password) !== 8) {
         $error = true;
         $password_err = "လျှို့ဝှက်နံပါတ်သည် အတိုင်းအတာ ၈ လုံး ရှိရပါမည်။";
-    } elseif (!preg_match('/[A-Z]/', $password)) {
-        $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အကြီးစာလုံး တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
-    } elseif (!preg_match('/[a-z]/', $password)) {
-        $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အသေးစာလုံး တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
-    } elseif (!preg_match('/[0-9]/', $password)) {
-        $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်တွင် ဂဏန်း တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
-    } elseif (!preg_match('/[\W_]/', $password)) { // Special characters or underscore
-        $error = true;
-        $password_err = "လျှို့ဝှက်နံပါတ်တွင် အထူးသင်္ကေတ တစ်လုံး အနည်းဆုံး ပါဝင်ရပါမည်။";
     } else {
         $byScriptPassword = md5($password);
     }
@@ -149,7 +137,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Name -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" class="form-label">အမည်</label>
+                                <label for="name" class="form-label" style="color:black">အမည်</label>
                                 <input type="text" name="name" class="form-control" value="<?= $name ?>">
                                 <small class="text-danger"><?= $name_err ?></small>
                             </div>
@@ -158,7 +146,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Email -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">အီးမေးလ်</label>
+                                <label class="form-label" style="color:black">အီးမေးလ်</label>
                                 <input type="text" name="email" class="form-control" value="<?= $email ?>">
                                 <small class="text-danger"><?= $email_err ?></small>
                             </div>
@@ -167,7 +155,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Password -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">စကားဝှက်</label>
+                                <label class="form-label" style="color:black">စကားဝှက်</label>
                                 <input type="password" name="password" class="form-control" value="<?= $password ?>">
                                 <small class="text-danger"><?= $password_err ?></small>
                             </div>
@@ -176,7 +164,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Role -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">အခန်းကဏ္ဍ</label>
+                                <label class="form-label" style="color:black">အခန်းကဏ္ဍ</label>
                                 <select name="role" class="form-control">
                                     <option value="admin" <?= $role == 'admin' ? 'selected' : '' ?>>အုပ်ချုပ်သူ</option>
                                     <option value="staff" <?= $role == 'staff' ? 'selected' : '' ?>>ဝန်ထမ်း</option>
@@ -189,7 +177,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Phone -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">ဖုန်း</label>
+                                <label class="form-label" style="color:black">ဖုန်း</label>
                                 <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                                 <small class="text-danger"><?= $phone_err ?></small>
                             </div>
@@ -198,7 +186,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Gender -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">လိင်</label><br />
+                                <label class="form-label" style="color:black">လိင်</label><br />
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="gender" value="male" <?= $gender == 'male' ? 'checked' : '' ?>>
                                     <label class="form-check-label">ကျား</label>
@@ -214,7 +202,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Position -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">လုပ်ငန်းကျွမ်းကျင်မှု</label>
+                                <label class="form-label" style="color:black">လုပ်ငန်းကျွမ်းကျင်မှု</label>
                                 <input type="text" name="position" class="form-control" value="<?= $position ?>">
                                 <small class="text-danger"><?= $position_err ?></small>
                             </div>
@@ -223,7 +211,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Salary -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">လစာ (ကျပ်)</label>
+                                <label class="form-label" style="color:black">လစာ (ကျပ်)</label>
                                 <input type="text" name="salary" class="form-control" value="<?= $salary ?>">
                                 <small class="text-danger"><?= $salary_err ?></small>
                             </div>
@@ -232,7 +220,7 @@ if (isset($_POST['name']) && isset($_POST['btn_submit'])) {
                         <!-- Image -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">ပုံထည့်ပါ</label>
+                                <label class="form-label" style="color:black">ပုံထည့်ပါ</label>
                                 <input type="file" name="image" class="form-control">
                                 <small class="text-danger"><?= $image_err ?></small>
                             </div>

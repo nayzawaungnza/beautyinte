@@ -231,7 +231,7 @@ if (isset($_POST['btn_submit'])) {
                             <label class="form-label">လိင်</label>
                             <div class="d-flex gap-3 mb-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" <?= $gender === 'male' ? 'checked' : '' ?> />
+                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" <?= $gender === 'male' ? 'checked' : '' ?> disabled />
                                     <label class="form-check-label" for="genderMale">ကျား</label>
                                 </div>
                                 <div class="form-check">

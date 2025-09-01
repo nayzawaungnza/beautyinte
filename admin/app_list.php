@@ -96,15 +96,15 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>စဉ်</th>
-                                    <th>ဖောက်သည်အမည်</th>
-                                    <th>ဝန်ဆောင်မှု အမည်</th>
-                                    <th>ဝန်ထမ်း အမည်</th>
-                                    <th>ချိန်းဆိုသည့် ရက်စွဲ</th>
-                                    <th>ချိန်းဆိုသည့် အချိန်</th>
-                                    <th>အခြေအနေ</th>
-                                    <th>တောင်းဆိုမှု</th>
-                                    <th>လုပ်ဆောင်မှု</th>
+                                    <th style="color:black">စဉ်</th>
+                                    <th style="color:black">ဖောက်သည်အမည်</th>
+                                    <th style="color:black">ဝန်ဆောင်မှု အမည်</th>
+                                    <th style="color:black">ဝန်ထမ်း အမည်</th>
+                                    <th style="color:black">ချိန်းဆိုသည့် ရက်စွဲ</th>
+                                    <th style="color:black">ချိန်းဆိုသည့် အချိန်</th>
+                                    <th style="color:black">အခြေအနေ</th>
+                                    <th style="color:black">တောင်းဆိုမှု</th>
+                                    <th style="color:black">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -113,18 +113,18 @@ require '../layouts/header.php';
                                     $i = 1;
                                     while ($row = $appointments->fetch_assoc()) { ?>
                                         <tr>
-                                            <td><?= $i++ ?></td>
-                                            <td><?= htmlspecialchars($row['customer_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['selected_service_names']) ?></td>
-                                            <td><?= htmlspecialchars($row['staff_name']) ?></td>
-                                            <td><?= htmlspecialchars($row['app_date']) ?></td>
-                                            <td><?= htmlspecialchars($row['app_time']) ?></td>
-                                            <td><?= getStatusTextMyanmar($row['status']) ?></td>
-                                            <td><?= htmlspecialchars($row['request']) ?></td>
+                                            <td style="color:black"><?= $i++ ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['customer_name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['selected_service_names']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['staff_name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['app_date']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['app_time']) ?></td>
+                                            <td style="color:black"><?= getStatusTextMyanmar($row['status']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['request']) ?></td>
                                             <td>
                                                 <div>
                                                     <?php if ($row['status'] == 0) { ?>
-                                                        <a href="./appointment_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2 mb-2">ပြင်ဆင်ရန်</a>
+
                                                         <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn mx-2">ဖျက်ရန်</button>
                                                     <?php } elseif ($row['status'] == 1) { ?>
                                                         <?php if ($row['payment_id']) { ?>

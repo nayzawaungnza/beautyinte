@@ -4,8 +4,8 @@ checkAuth('admin');
 require '../layouts/header.php';
 
 $error = false;
-$name = $price = $description = $category_id = '';
-$name_err = $price_err = $description_err = $category_err = '';
+$name = $price = $description = $category_id = $time = '';
+$name_err = $price_err = $description_err = $category_err = $time_err = '';
 
 // Fetch categories
 $category_result = $mysqli->query("SELECT id, name FROM service_categories");
@@ -13,7 +13,7 @@ $category_result = $mysqli->query("SELECT id, name FROM service_categories");
 // Fetch service data for editing
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
-    $stmt = $mysqli->prepare("SELECT id, name, price, description, category_id FROM services WHERE id = ?");
+    $stmt = $mysqli->prepare("SELECT id, name, price, time, description, category_id FROM services WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -23,6 +23,7 @@ if (isset($_GET['id'])) {
     if ($oldData) {
         $name = $oldData['name'];
         $price = $oldData['price'];
+        $time = $oldData['time']; // ✅ fetch time
         $description = $oldData['description'];
         $category_id = $oldData['category_id'];
     } else {
@@ -35,6 +36,7 @@ if (isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
     $name = trim($_POST['name']);
     $price = trim($_POST['price']);
+    $time = trim($_POST['time']);  // ✅ handle time
     $description = trim($_POST['description']);
     $category_id = trim($_POST['category_id']);
 
@@ -59,6 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
         $price_err = "ဈေးနှုန်းသည် ၁,၀၀၀,၀၀၀ ကျပ်အောက်ဖြစ်ရပါမည်။";
     }
 
+    // Validate time
+    if (empty($time)) {
+        $error = true;
+        $time_err = "ကျေးဇူးပြု၍ ကြာချိန် ထည့်ပါ။";
+    }
+
     // Validate description
     if (empty($description)) {
         $error = true;
@@ -76,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
 
     // If valid, update
     if (!$error) {
-        $stmt = $mysqli->prepare("UPDATE services SET name = ?, price = ?, description = ?, category_id = ? WHERE id = ?");
-        $stmt->bind_param("sdsii", $name, $price, $description, $category_id, $id);
+        $stmt = $mysqli->prepare("UPDATE services SET name = ?, price = ?, time = ?, description = ?, category_id = ? WHERE id = ?");
+        $stmt->bind_param("sdissi", $name, $price, $time, $description, $category_id, $id);
         $stmt->execute();
         $stmt->close();
 
@@ -104,6 +112,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_submit'])) {
                         <label for="price">စျေးနှုန်း</label>
                         <input type="text" name="price" class="form-control" value="<?= htmlspecialchars($price) ?>">
                         <small class="text-danger"><?= $price_err ?></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">ကြာချိန်</label>
+                        <input type="text" name="time" class="form-control" value="<?= htmlspecialchars($time) ?>">
+                        <small class="text-danger"><?= $time_err ?></small>
                     </div>
 
                     <div class="form-group">

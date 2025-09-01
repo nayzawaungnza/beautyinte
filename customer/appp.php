@@ -7,7 +7,7 @@ $customer_id = $_SESSION['id'];
 
 // Fetch all services
 $services = [];
-$service_res = $mysqli->query("SELECT id, name, price, description FROM services");
+$service_res = $mysqli->query("SELECT id, name, price,time, description FROM services");
 if ($service_res && $service_res->num_rows > 0) {
     while ($row = $service_res->fetch_assoc()) {
         $services[] = $row;
@@ -90,15 +90,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Check staff schedule conflict
-    if (!$error) {
-        $conflict_sql = "SELECT id FROM appointments WHERE staff_id = '$staff_id' AND appointment_date = '$appointment_date' AND appointment_time = '$appointment_time' AND (status = 0 OR status = 3)";
-        $conflict_result = $mysqli->query($conflict_sql);
-        if ($conflict_result && $conflict_result->num_rows > 0) {
-            $error = true;
-            $staff_id_err = 'ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။ ယခုလက်ရှိအချိန်၏နောက်တစ်နာရီကြာမှ အချိန်ချိန်းဆိုမှုထပ်မံပြုလုပ်နိုင်ပါ။';
+    // Check staff schedule conflict for exact match and status = 3
+    $staff_id_err = '';
+    $total_time = 0;
+
+    $conflict_sql = "
+SELECT selected_service_ids
+FROM appointments
+WHERE staff_id = '$staff_id'
+  AND appointment_date = '$appointment_date'
+  AND appointment_time = '$appointment_time'
+  AND status = 3
+";
+
+    $conflict_result = $mysqli->query($conflict_sql);
+
+    if ($conflict_result && $conflict_result->num_rows > 0) {
+        $row = $conflict_result->fetch_assoc();
+        $service_ids = $row['selected_service_ids']; // eg: "2,3,5"
+
+        if (!empty($service_ids)) {
+            $ids = array_map('intval', explode(',', $service_ids));
+            $ids_list = implode(',', $ids);
+
+            // SUM time from services table
+            $time_sql = "SELECT SUM(time) AS total_time FROM services WHERE id IN ($ids_list)";
+            $time_result = $mysqli->query($time_sql);
+            if ($time_result && $time_result->num_rows > 0) {
+                $time_row = $time_result->fetch_assoc();
+                $total_time = (int)$time_row['total_time']; // minutes
+            }
         }
+
+        // Show only total minutes
+        $staff_id_err = "ဤဝန်ထမ်းသည် လုပ်ဆောင်ရန်အလုပ်ရှိပြီးဖြစ်ပါသည်။ အချိန်ချိန်းဆိုမှုကို $total_time မိနစ် အပြီးမှ ပြုလုပ်နိုင်ပါသည်။";
+        $error = true;
     }
+
+
 
     // ✅ INSERT appointment with selected_service_ids & names
     if (!$error) {
@@ -137,11 +166,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $success_msg = '';
 
         if ($mysqli->query($sql)) {
-            $inserted_id = $mysqli->insert_id; // အခု newly inserted row ID
+            $inserted_id = $mysqli->insert_id;
 
-            // ဒီ ID ကို အသုံးပြုပြီး data ပြန်ယူမယ်
             $res = $mysqli->query("SELECT * FROM appointments WHERE id = '$inserted_id'");
-
             if ($res && $row = $res->fetch_assoc()) {
                 $appointment_data = $row;
             }
@@ -150,9 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 ?>
-
 
 <div class="content-body">
     <div class="container py-5">
@@ -164,128 +189,199 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <?php if (!empty($success_msg) && !empty($appointment_data)): ?>
                         <script>
-                            // JS alert box
                             alert("<?= addslashes($success_msg) ?>");
-
-                            // Optional: Console log appointment data
-                            console.log("Appointment Details: ", <?= json_encode($appointment_data) ?>);
-
-                            // Redirect to dashboard
                             window.location.href = "dash.php";
                         </script>
                     <?php endif; ?>
 
-
                     <form method="POST" class="needs-validation" novalidate>
-                        <!-- Add this inside your <form> tag -->
                         <input type="hidden" name="service_ids" id="selectedServices">
+                        <input type="hidden" name="customer_id" id="customerId" value="<?= htmlspecialchars($customer_id) ?>">
                         <input type="hidden" name="selected_service_ids" id="selectedServiceIds" value="<?= htmlspecialchars($_POST['selected_service_ids'] ?? '') ?>">
                         <input type="hidden" name="selected_service_names" id="selectedServiceNames" value="<?= htmlspecialchars($_POST['selected_service_names'] ?? '') ?>">
 
-                        <div>
-                            <div class="card-body p-4">
-                                <label class="mb-2 fw-bold">ဝန်ဆောင်မှု ရွေးချယ်ရန်:</label>
-
-                                <!-- Selected Names Display Input -->
-                                <input type="text" id="selectedNames" class="form-control mb-3" readonly placeholder="">
-
-                                <!-- Scrollable service card list -->
-                                <div id="serviceList" style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 6px;">
-                                    <?php if (!empty($services)): ?>
-                                        <?php foreach ($services as $service): ?>
-                                            <div class="service-card service-summary mb-3 p-2 bg-light rounded"
-                                                data-id="<?= htmlspecialchars($service['id']) ?>"
-                                                data-name="<?= htmlspecialchars($service['name']) ?>"
-                                                style="cursor: pointer; border: 2px solid transparent;">
-                                                <div class="d-flex justify-content-between align-items-center w-100">
-                                                    <div>
-                                                        <strong><?= htmlspecialchars($service['name']) ?></strong>
-                                                        <?php if (!empty($service['description'])): ?>
-                                                            <small class="text-muted d-block"><?= htmlspecialchars($service['description']) ?></small>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                    <span class="badge bg-success"><?= number_format($service['price'], 0) ?> Ks</span>
+                        <div class="card-body p-4">
+                            <label class="mb-2 fw-bold">ဝန်ဆောင်မှု ရွေးချယ်ရန်:</label>
+                            <input type="text" id="selectedNames" class="form-control mb-3" readonly placeholder="">
+                            <div id="serviceList" style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 6px;">
+                                <?php if (!empty($services)): ?>
+                                    <?php foreach ($services as $service): ?>
+                                        <div class="service-card service-summary mb-3 p-2 bg-light rounded"
+                                            data-id="<?= htmlspecialchars($service['id']) ?>"
+                                            data-name="<?= htmlspecialchars($service['name']) ?>"
+                                            style="cursor: pointer; border: 2px solid transparent;">
+                                            <div class="d-flex justify-content-between align-items-center w-100">
+                                                <div>
+                                                    <strong><?= htmlspecialchars($service['name']) ?></strong>
+                                                    <?php if (!empty($service['description'])): ?>
+                                                        <small class="text-muted d-block"><?= htmlspecialchars($service['description']) ?></small>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($service['time'])): ?>
+                                                        <small class="text-primary d-block">⏱ <?= htmlspecialchars($service['time']) ?> mins</small>
+                                                    <?php endif; ?>
                                                 </div>
+                                                <span class="badge bg-success"><?= number_format($service['price'], 0) ?> Ks</span>
                                             </div>
-                                        <?php endforeach; ?>
-                                </div>
+                                        </div>
+                                    <?php endforeach; ?>
                             </div>
                         </div>
+                    <?php else: ?>
+                        <div class="alert alert-danger text-center">ရွေးချယ်ထားသော ဝန်ဆောင်မှုကို မတွေ့ပါ</div>
+                    <?php endif; ?>
 
-                        <div>
-                        <?php else: ?>
-                            <div class="alert alert-danger text-center">ရွေးချယ်ထားသော ဝန်ဆောင်မှုကို မတွေ့ပါ</div>
+                    <?php if ($general_err): ?>
+                        <div class="alert alert-danger"><?= $general_err ?></div>
+                    <?php endif; ?>
+
+                    <div class="mb-4">
+                        <label for="staff_id" class="form-label fw-bold" style="margin-left:20px;">ဝန်ထမ်းရွေးချယ်ရန် - </label>
+                        <select name="staff_id" id="staff_id" style="padding:10px" class="form-select <?= $staff_id_err ? 'is-invalid' : '' ?>" required>
+                            <option value="" selected disabled>ဝန်ဆောင်မှုပေးမည့် ဝန်ထမ်းကို ရွေးပါ</option>
+                            <?php if ($staff_res && $staff_res->num_rows > 0):
+                                while ($row = $staff_res->fetch_assoc()): ?>
+                                    <option value="<?= $row['id'] ?>" <?= ($staff_id == $row['id']) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($row['name']) ?>
+                                    </option>
+                            <?php endwhile;
+                            endif; ?>
+                        </select>
+                        <?php if ($staff_id_err): ?>
+                            <div class="invalid-feedback"><?= $staff_id_err ?></div>
                         <?php endif; ?>
+                    </div>
 
-                        <?php if ($general_err): ?>
-                            <div class="alert alert-danger"><?= $general_err ?></div>
+                    <div class="col-6">
+                        <label for="appointment_date" class="form-label fw-bold" style="margin-left:20px;">ချိန်းဆိုရက်</label>
+                        <input type="text" style="margin-left:13px; width:450px;" name="appointment_date" id="appointment_date"
+                            class="form-control <?= $appointment_date_err ? 'is-invalid' : '' ?>"
+                            value="<?= htmlspecialchars($appointment_date) ?>" required>
+                        <?php if ($appointment_date_err): ?>
+                            <div class="invalid-feedback"><?= $appointment_date_err ?></div>
                         <?php endif; ?>
+                    </div>
+                    <br>
 
+                    <input type="hidden" id="staff_id" value="<?= $staff_id ?>">
 
-                        <div class="mb-4">
-                            <label for="staff_id" class="form-label fw-bold" style="margin-left:20px;">ဝန်ထမ်းရွေးချယ်ရန် - </label>
-                            <select name="staff_id" id="staff_id" style="padding:10px" class="form-select <?= $staff_id_err ? 'is-invalid' : '' ?>" required>
-                                <option value="" selected disabled>ဝန်ဆောင်မှုပေးမည့် ဝန်ထမ်းကို ရွေးပါ</option>
-                                <?php if ($staff_res && $staff_res->num_rows > 0):
-                                    while ($row = $staff_res->fetch_assoc()): ?>
-                                        <option value="<?= $row['id'] ?>" <?= ($staff_id == $row['id']) ? 'selected' : '' ?>>
-                                            <?= htmlspecialchars($row['name']) ?>
-                                        </option>
-                                <?php endwhile;
-                                endif; ?>
-                            </select>
-                            <?php if ($staff_id_err): ?>
-                                <div class="invalid-feedback"><?= $staff_id_err ?></div>
-                            <?php endif; ?>
+                    <div class="col-6">
+                        <label for="appointment_time" class="form-label fw-bold" style="margin-left:20px;">ချိန်းဆိုချိန်</label>
+                        <input type="time" style="margin-left:13px; width:450px;" name="appointment_time" id="appointment_time"
+                            class="form-control <?= $appointment_time_err ? 'is-invalid' : '' ?>"
+                            value="<?= htmlspecialchars($appointment_time) ?>" required>
+                        <?php if ($appointment_time_err): ?>
+                            <div class="invalid-feedback"><?= $appointment_time_err ?></div>
+                        <?php endif; ?>
+                    </div>
+
+                    <br>
+
+                    <div class="mb-4">
+                        <label for="request" class="form-label fw-bold" style="margin-left:20px;">တောင်းဆိုချက်</label>
+                        <textarea name="request" id="request" class="form-control" rows="2" style="margin-left:23px; width:470px;"><?= htmlspecialchars($request) ?></textarea>
+                        <small class="text-danger"><?= $request_err ?></small>
+                        <br><br>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary" style="margin-left:20px; padding:16px;">
+                                <i class="fas fa-calendar-check me-2"></i> ချိန်းဆိုမှု အတည်ပြုရန်
+                            </button>
+                            <a href="ser.php" class="btn btn-primary" style="margin-right:20px; padding:16px;">
+                                <i class="fas fa-times-circle me-2"></i> ချိန်းဆိုမှု အတည်မပြုရန်
+                            </a>
                         </div>
-
-
-                        <div class="col-6">
-                            <label for="appointment_date" class="form-label fw-bold" style="margin-left:20px;">ချိန်းဆိုရက်</label>
-                            <input type="date" style="margin-left:13px; width:450px;" name="appointment_date" id="appointment_date"
-                                class="form-control <?= $appointment_date_err ? 'is-invalid' : '' ?>"
-                                value="<?= htmlspecialchars($appointment_date) ?>" required>
-                            <?php if ($appointment_date_err): ?>
-                                <div class="invalid-feedback"><?= $appointment_date_err ?></div>
-                            <?php endif; ?>
-                        </div>
-                        <br>
-                        <div class="col-6">
-                            <label for="appointment_time" class="form-label fw-bold" style="margin-left:20px;">ချိန်းဆိုချိန်</label>
-                            <input type="time" style="margin-left:13px; width:450px;" name="appointment_time" id="appointment_time"
-                                class="form-control <?= $appointment_time_err ? 'is-invalid' : '' ?>"
-                                value="<?= htmlspecialchars($appointment_time) ?>" required>
-                            <?php if ($appointment_time_err): ?>
-                                <div class="invalid-feedback"><?= $appointment_time_err ?></div>
-                            <?php endif; ?>
-                        </div>
-                        <br>
-
-                        <div class="mb-4">
-                            <label for="request" class="form-label fw-bold" style="margin-left:20px;">တောင်းဆိုချက်</label>
-                            <textarea name="request" id="request" class="form-control" rows="2" style="margin-left:23px; width:470px;"><?= htmlspecialchars($request) ?></textarea>
-                            <small class="text-danger"><?= $request_err ?></small>
-                            <br><br>
-                            <div class="d-grid d-flex justify-content-between">
-                                <button type="submit" class="btn btn-primary" style="margin-left:20px; padding:16px;">
-                                    <i class="fas fa-calendar-check me-2"></i> ချိန်းဆိုမှု အတည်ပြုရန်
-                                </button>
-
-
-                                <button type="submit" class="btn btn-primary" style="margin-right:20px; padding:16px;">
-                                    <a href="ser.php" style="text-decoration:none;color:#f8f9fa;"> <i class="fas fa-calendar-check me-2"></i> ချိန်းဆိုမှု အတည်မပြုရန် </a>
-                                </button>
-
-                            </div>
+                    </div>
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
-</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const appointmentInput = document.getElementById('appointment_time');
+        const staffId = Number(document.getElementById('staff_id').value); // convert to number
+
+        // staff-specific unavailable times
+        const unavailableTimes = {
+            30: ["09:00", "09:30", "10:00"],
+            19: ["14:00", "14:30"]
+        };
+
+        function checkUnavailable() {
+            let time = appointmentInput.value;
+            if (!time) return;
+
+            // ensure time format HH:MM
+            if (time.length === 4) time = "0" + time; // e.g., 9:00 → 09:00
+
+            if (unavailableTimes[staffId]?.includes(time)) {
+                appointmentInput.setCustomValidity("This time is unavailable for the selected staff.");
+                appointmentInput.style.backgroundColor = "#ce2020ff"; // red background
+            } else {
+                appointmentInput.setCustomValidity("");
+                appointmentInput.style.backgroundColor = ""; // normal background
+            }
+        }
+
+        appointmentInput.addEventListener('input', checkUnavailable);
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let fp;
+
+        function initFlatpickr(staffId) {
+            let highlightDates = [];
+            if (staffId == 2) {
+                highlightDates = ["2025-09-08", "2025-09-13", "2025-09-18"];
+            } else if (staffId == 19) {
+                highlightDates = ["2025-09-01", "2025-09-06", "2025-09-23"];
+            } else if (staffId == 17) {
+                highlightDates = ["2025-09-03", "2025-09-07", "2025-09-25"];
+            } else if (staffId == 36) {
+                highlightDates = ["2025-09-05", "2025-09-09", "2025-09-22"];
+            } else if (staffId == 29) {
+                highlightDates = ["2025-09-02", "2025-09-28", "2025-09-10"];
+            } else if (staffId == 30) {
+                highlightDates = ["2025-09-11", "2025-09-24", "2025-09-17"];
+            } else if (staffId == 31) {
+                highlightDates = ["2025-09-07", "2025-09-23", "2025-09-25"];
+            } else if (staffId == 67) {
+                highlightDates = ["2025-09-12", "2025-09-02", "2025-09-22"];
+            }
+            if (fp) {
+                fp.destroy(); // re-init when staff changes
+            }
+
+            fp = flatpickr("#appointment_date", {
+                dateFormat: "Y-m-d",
+                onDayCreate: function(dObj, dStr, fp, dayElem) {
+                    const dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                    if (highlightDates.includes(dateStr)) {
+                        dayElem.style.backgroundColor = "red"; // အနီနဲ့ပြ
+                        dayElem.style.color = "white"; // စာကိုအဖြူ
+                        dayElem.style.borderRadius = "50%"; // စက်ဝိုင်းပုံစံ
+                        dayElem.style.opacity = "0.6"; // Disabled လို မျက်နှာဖုံး
+                        dayElem.style.pointerEvents = "none"; // Click မရအောင်
+                    }
+                }
+            });
+        }
+
+
+        const staffSelect = document.getElementById("staff_id");
+        initFlatpickr(staffSelect.value); // init at page load
+
+        staffSelect.addEventListener("change", function() {
+            initFlatpickr(this.value);
+        });
+    });
+</script>
 
 <style>
     .service-summary {
@@ -318,36 +414,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         transition: all 0.3s ease;
     }
 
-    /* .btn-primary:hover {
-        background-color: #4e54c8;
-        border-color: #3a41b5;
-        transform: translateY(-2px);
-    } */
-
     .invalid-feedback {
         display: block;
     }
 </style>
-
-<script>
-    // Client-side validation example
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
-
 
 <script>
     const selectedIds = [];
@@ -355,40 +425,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     const selectedIdsInput = document.getElementById('selectedServiceIds');
     const selectedNamesInput = document.getElementById('selectedServiceNames');
     const serviceCards = document.querySelectorAll('.service-card');
-    const selectedOutput = document.getElementById('selectedOutput');
-
     serviceCards.forEach(card => {
         card.addEventListener('click', () => {
             const id = card.getAttribute('data-id');
             const name = card.getAttribute('data-name');
             const index = selectedIds.indexOf(id);
-
             if (index > -1) {
-                // Already selected – remove
                 selectedIds.splice(index, 1);
                 selectedNames.splice(index, 1);
                 card.style.borderColor = 'transparent';
                 card.classList.remove('bg-primary', 'text-dark');
             } else {
-                // Not selected – add
                 selectedIds.push(id);
                 selectedNames.push(name);
                 card.style.borderColor = '#0d6efd';
                 card.classList.add('bg-primary', 'text-dark');
             }
-
-            // Update inputs
             selectedIdsInput.value = selectedIds.join(',');
             selectedNamesInput.value = selectedNames.join(', ');
             document.getElementById('selectedNames').value = selectedNames.join(', ');
-
-            // ✅ Update UI instead of console
-            selectedOutput.innerText =
-                'ရွေးချယ်ထားသော ဝန်ဆောင်မှု ID များ: ' + selectedIds.join(', ') +
-                '\nဝန်ဆောင်မှုအမည်များ: ' + selectedNames.join(', ');
         });
     });
 </script>
-
 
 <?php require '../layouts/footer.php'; ?>

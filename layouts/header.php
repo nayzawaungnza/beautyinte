@@ -190,7 +190,7 @@ require_once '../require/common_function.php';
                                 <i class="fas fa-tasks"></i><span class="nav-text">ဝန်ထမ်းတာဝန်များ</span>
                             </a>
                             <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../staff/task.php">စာရင်း</a></li>
+                                <li><a href="../staff/task_list1.php">စာရင်း</a></li>
                             </ul>
                         </li>
                     <?php } else if ($_SESSION['role'] == "admin") { ?>
@@ -224,13 +224,9 @@ require_once '../require/common_function.php';
                             </ul>
                         </li>
                         <li class="sidebar-click">
-                            <a class="has-arrow arrow">
-                                <i class="fa-solid fa-boxes-packing"></i><span class="nav-text">ရောင်းရန်ပစ္စည်းများ</span>
+                            <a href="../staff/task.php" class="has-arrow arrow">
+                                <i class="fa-solid fa-list"></i><span class="nav-text">စာရင်းများ</span>
                             </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/product_list.php">စာရင်း</a></li>
-                                <li><a href="../admin/product_create.php">ဖန်တီးမည်</a></li>
-                            </ul>
                         </li>
                         <li class="sidebar-click">
                             <a class="has-arrow arrow">
@@ -258,15 +254,6 @@ require_once '../require/common_function.php';
                             <ul aria-expanded="true" class="pannel" style="display: none;">
                                 <li><a href="../admin/promotion_list.php">စာရင်း</a></li>
                                 <li><a href="../admin/promotion_create.php">ဖန်တီးမည်</a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-click">
-                            <a class="has-arrow arrow">
-                                <i class="fa-solid fa-coins"></i><span class="nav-text">ပစ္စည်းအရောင်း</span>
-                            </a>
-                            <ul aria-expanded="true" class="pannel" style="display: none;">
-                                <li><a href="../admin/product_sale_list.php">စာရင်း</a></li>
-                                <li><a href="../admin/product_sale_create.php">ဖန်တီးမည်</a></li>
                             </ul>
                         </li>
                     <?php } else { ?>

@@ -26,7 +26,7 @@ $delete_id = isset($_GET['delete_id']) ?  $_GET['delete_id'] : '';
 if ($delete_id !== '') {
     $res = deleteData('services', $mysqli, "id=$delete_id");
     if ($res) {
-        $url = $admin_base_url . "service_list.php?success=Delete service Success";
+        $url = $admin_base_url . "service_list.php?success=ဝန်ဆောင်မှုကိုအောင်မြင်စွာဖျက်လိုက်ပါသည်";
         header("Location: $url");
     }
 }
@@ -68,13 +68,14 @@ require '../layouts/header.php';
                         <table class="table table-hover table-sm">
                             <thead>
                                 <tr class="text-center">
-                                    <th>စဉ်</th>
-                                    <th>ဝန်ဆောင်မှုပုံ</th>
-                                    <th>ဝန်ဆောင်မှုအမည်</th>
-                                    <th>အမျိုးအစား</th>
-                                    <th>စျေးနှုန်း</th>
-                                    <th>အကြောင်းအရာ ဖော်ပြချက်</th>
-                                    <th>လုပ်ဆောင်မှု</th>
+                                    <th style="color:black">စဉ်</th>
+                                    <th style="color:black">ဝန်ဆောင်မှုပုံ</th>
+                                    <th style="color:black">ဝန်ဆောင်မှုအမည်</th>
+                                    <th style="color:black">အမျိုးအစား</th>
+                                    <th style="color:black">စျေးနှုန်း</th>
+                                    <th style="color:black">ကြာချိန်</th>
+                                    <th style="color:black">အကြောင်းအရာ ဖော်ပြချက်</th>
+                                    <th style="color:black">လုပ်ဆောင်မှု</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,17 +83,18 @@ require '../layouts/header.php';
                                     $i = 1;
                                     while ($row = $res->fetch_assoc()): ?>
                                         <tr class="text-center">
-                                            <td><?= $i++ ?></td>
+                                            <td style="color:black"><?= $i++ ?></td>
                                             <td>
                                                 <img src="<?= $row['image'] ? '../uplode/' . $row['image'] : '../uplode/default.png' ?>"
                                                     alt="Profile Image"
                                                     class="img-fluid rounded-circle"
                                                     style="width: 50px; height: 50px;">
                                             </td>
-                                            <td><?= htmlspecialchars($row['name']) ?></td>
-                                            <td><?= htmlspecialchars($row['category_name'] ?? 'မသတ်မှတ်ရသေးပါ') ?></td>
-                                            <td class="text-right"><?= number_format($row['price']) ?> ကျပ်</td>
-                                            <td><?= htmlspecialchars($row['description']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['name']) ?></td>
+                                            <td style="color:black"><?= htmlspecialchars($row['category_name'] ?? 'မသတ်မှတ်ရသေးပါ') ?></td>
+                                            <td style="color:black"><?= number_format($row['price']) ?> ကျပ်</td>
+                                            <td style="color:black"><?= number_format($row['time']) ?> မိနစ်</td>
+                                            <td style="color:black"><?= htmlspecialchars($row['description']) ?></td>
                                             <td>
                                                 <a href="./service_edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-success mx-2 mb-2">ပြင်ဆင်ရန်</a>
                                                 <button data-id="<?= $row['id'] ?>" class="btn btn-sm btn-danger delete_btn">ဖျက်ရန်</button>

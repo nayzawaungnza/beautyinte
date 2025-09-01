@@ -28,24 +28,12 @@ while ($row = $result->fetch_assoc()) {
 $total_users = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'staff'")->fetch_assoc()['count'];
 $total_customers = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE role = 'customer'")->fetch_assoc()['count'];
 $total_appointments = $mysqli->query("SELECT COUNT(*) as count FROM appointments")->fetch_assoc()['count'];
-$total_products = $mysqli->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
 $total_promotions = $mysqli->query("SELECT COUNT(*) as count FROM promotions")->fetch_assoc()['count'];
 $total_services = $mysqli->query("SELECT COUNT(*) as count FROM services")->fetch_assoc()['count'];
 
-
-// Bar chart data - Monthly appointments this year
-$year = date('Y');
-$monthly_data = array_fill(1, 12, 0);
-
-$query = "SELECT MONTH(appointment_date) AS month, COUNT(*) AS count
-FROM appointments
-WHERE YEAR(appointment_date) = $year
-GROUP BY MONTH(appointment_date)";
-$result = $mysqli->query($query);
-
-while ($row = $result->fetch_assoc()) {
-    $monthly_data[(int)$row['month']] = (int)$row['count'];
-}
+// Summary chart data
+$summary_labels = ['ဝန်ထမ်းများ',  'အချိန်ချိန်းဆိုမှု'];
+$summary_data = [$total_users,  $total_appointments];
 ?>
 
 <!-- Content body start -->
@@ -68,13 +56,15 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
             </div>
+
+            <!-- Customer -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-green shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ဖောက်သည်</div>
-                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_customers  ?></div>
+                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_customers ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-user-friends fa-3x icon-glow"></i>
@@ -83,13 +73,15 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
             </div>
+
+            <!-- Appointments -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-blue shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-2">အချိန်ချိန်းဆိုမှု</div>
-                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_appointments  ?></div>
+                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_appointments ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar-check fa-3x icon-glow"></i>
@@ -98,28 +90,17 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card dashboard-card gradient-orange shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ရောင်းမည့်ပစ္စည်း</div>
-                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_products ?></div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-coins fa-3x icon-glow"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+            <!-- Promotions -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-red shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ပရိုမိုးရှင်း</div>
-                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_promotions  ?></div>
+                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_promotions ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-gift fa-3x icon-glow"></i>
@@ -128,13 +109,15 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                 </div>
             </div>
+
+            <!-- Services -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card dashboard-card gradient-red shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-2">ဝန်ဆောင်မှုများ</div>
-                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_services  ?></div>
+                                <div class="h3 mb-0 font-weight-bold text-white"><?= $total_services ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-gift fa-3x icon-glow"></i>
@@ -145,15 +128,15 @@ while ($row = $result->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Chart Section -->
-        <div class="row">
+        <!-- Totals Bar Chart -->
+        <div class="row mb-5">
             <div class="col-12">
-                <div class="card shadow border-0" style="width:900px; margin: auto;">
+                <div class="card shadow border-0" style="max-width:900px; margin:auto;">
                     <div class="card-body">
                         <h5 class="card-title fw-bold text-dark mb-4">
-                            ၂၀၂၅ သြဂုတ်လ Appointment အရေအတွက် (ရက်အလိုက်)
+                            စုစုပေါင်း အချက်အလက်များ
                         </h5>
-                        <canvas id="appointmentChart" height="200"></canvas>
+                        <canvas id="totalsChart" height="70" width="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -201,27 +184,26 @@ while ($row = $result->fetch_assoc()) {
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
-            const days = <?= json_encode($august_sales['days'] ?? []) ?>;
-            const qtys = <?= json_encode($august_sales['qtys'] ?? []) ?>;
+            const labels = ['ဝန်ထမ်း', 'ဖောက်သည်', 'ချိန်းဆိုမှု', 'ပရိုမိုးရှင်း', 'ဝန်ဆောင်မှု'];
+            const data = [
+                <?= $total_users ?>,
+                <?= $total_customers ?>,
+                <?= $total_appointments ?>,
+                <?= $total_promotions ?>,
+                <?= $total_services ?>
+            ];
 
-            // Aug 1-31 ရက် အကုန်ရှိအောင် 0 values ထည့်ဖို့ (optional)
-            const fullDays = Array.from({
-                length: 31
-            }, (_, i) => i + 1);
-            const fullQtys = fullDays.map(day => {
-                const idx = days.indexOf(day);
-                return idx !== -1 ? qtys[idx] : 0;
-            });
-
-            const ctx = document.getElementById('appointmentChart').getContext('2d');
-            new Chart(ctx, {
+            const ctxTotals = document.getElementById('totalsChart').getContext('2d');
+            new Chart(ctxTotals, {
                 type: 'bar',
                 data: {
-                    labels: fullDays.map(d => `Aug ${d}`),
+                    labels: labels,
                     datasets: [{
-                        label: 'Product Sales Quantity (August 2025)',
-                        data: fullQtys,
-                        backgroundColor: '#4bc0c0',
+                        label: 'Total Counts',
+                        data: data,
+                        backgroundColor: [
+                            '#4bc0c0', '#ff6384', '#36a2eb', '#ffcd56', '#9966ff', '#ff9f40'
+                        ],
                         borderColor: '#333',
                         borderWidth: 1
                     }]
@@ -243,22 +225,21 @@ while ($row = $result->fetch_assoc()) {
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Quantity Sold'
+                                text: ''
                             }
                         },
                         x: {
                             title: {
                                 display: true,
-                                text: 'Date'
+                                text: ''
                             }
                         }
                     }
                 }
             });
         </script>
-
     </div>
 </div>
-<!--Content body end-- >
+!--Content body end-- >
 
 <?php require '../layouts/footer.php'; ?>
